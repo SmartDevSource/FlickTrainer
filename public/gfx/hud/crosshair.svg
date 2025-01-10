@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="54.660313mm"
+   height="54.773067mm"
+   pagecolor="#000000"
+   viewBox="0 0 54.660313 54.773067"
+   version="1.1"
+   id="svg1"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Calque 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-5.0924107,-4.5832702)">
+    <path
+       style="fill:#00ff00;stroke:#333333;stroke-width:0.4;stroke-linecap:round;stroke-dasharray:none;paint-order:stroke fill markers"
+       d="M 5.2924338,35.813321 H 24.753129 V 28.362605 H 5.2932918 Z"
+       id="path1-4"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#00ff00;stroke:#333333;stroke-width:0.4;stroke-linecap:round;stroke-dasharray:none;paint-order:stroke fill markers"
+       d="M 40.092028,35.837788 H 59.552723 V 28.387072 H 40.092886 Z"
+       id="path1-4-5"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#00ff00;stroke:#333333;stroke-width:0.4;stroke-linecap:round;stroke-dasharray:none;paint-order:stroke fill markers"
+       d="m 28.610631,4.783293 v 19.460696 h 7.450716 V 4.784151 Z"
+       id="path1-4-5-3"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       style="fill:#00ff00;stroke:#333333;stroke-width:0.4;stroke-linecap:round;stroke-dasharray:none;paint-order:stroke fill markers"
+       d="m 28.592621,39.695643 v 19.460695 h 7.450716 V 39.696501 Z"
+       id="path1-4-5-3-9"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="crosshair.svg"
+       inkscape:export-xdpi="5.4699998"
+       inkscape:export-ydpi="5.4699998" />
+  </g>
+</svg>
