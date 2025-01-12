@@ -1,14 +1,19 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { ImageObject, Target } from '@/types'
+import { ImageObject, Target, Vector2 } from '@/types'
 import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
-import { getRandomTarget, updateTarget } from '@/utils'
+import { getRandomTarget, updateTarget, drawTarget } from '@/utils'
 
-const Canvas = ({params}: {params: {map_name: string, spot_name: string}}) => {
+interface Params {
+    map_name: string,
+    spot_name: string
+}
+
+const Canvas = ({params}: {params: Params}) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
-    const [mapImage] = useState({
+    const [mapSpotImage] = useState({
         background: {
             path: `/gfx/maps/${params.map_name}/${params.spot_name}.png`,
             img: new Image(),
@@ -22,13 +27,13 @@ const Canvas = ({params}: {params: {map_name: string, spot_name: string}}) => {
     const [isLoading, setIsLoading] = useState<Boolean>(true)
     const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null)
 
-    const screenOffset = useRef({x: 0, y: 0})
     const isFullScreen = useRef(false)
     const sensitivity = useRef(2.4)
 
-    const mapData = mapsData[params.map_name]
-    const target = useRef<Target>(getRandomTarget(mapData.targets))
-    console.log("target current :", target.current)
+    const currentSpot = mapsData[params.map_name][params.spot_name]
+    const target = useRef<Target>(getRandomTarget(currentSpot.targets))
+
+    const screenOffset = useRef<Vector2>(currentSpot.initial_offset)
 
     const initialWindowSize = {w: 1024, h: 768}
     const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
@@ -51,7 +56,7 @@ const Canvas = ({params}: {params: {map_name: string, spot_name: string}}) => {
                 image_object.img.onerror = () => reject(`Failed to load image ${image_object.path}`)
             })
         }
-        const imagePromises = Object.values({...images, ...mapImage}).map(loadImage)
+        const imagePromises = Object.values({...images, ...mapSpotImage}).map(loadImage)
 
         Promise.all(imagePromises)
         .then(() => {
@@ -95,20 +100,20 @@ const Canvas = ({params}: {params: {map_name: string, spot_name: string}}) => {
         if (ctx && canvasRef.current){
             ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
             target.current = updateTarget(target.current)
+
             ctx.drawImage(
-                mapImage.background.img, 
+                mapSpotImage.background.img, 
                 screenOffset.current.x, 
                 screenOffset.current.y
             )
-            ctx.fillStyle = 'red'
-            ctx.fillRect(
-                target.current.from.x + screenOffset.current.x,
-                target.current.from.y + screenOffset.current.y,
-                50,
-                50
+            drawTarget(
+                target.current,
+                screenOffset.current,
+                ctx,
+                images[target.current.character]
             )
             ctx.drawImage(
-                mapImage.layer.img,
+                mapSpotImage.layer.img,
                 screenOffset.current.x,
                 screenOffset.current.y
             )

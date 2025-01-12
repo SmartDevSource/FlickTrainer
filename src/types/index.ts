@@ -1,4 +1,4 @@
-interface Vector {
+export interface Vector2 {
     x: number,
     y: number
 }
@@ -9,11 +9,12 @@ export interface ImageObject {
 }
 
 export interface Target {
-    team: string,
-    from: Vector,
-    to: Vector,
+    character: string,
+    current_frame: number,
+    come_from: string,
+    from: Vector2,
+    to: Vector2,
     idle: boolean,
-    crouched: boolean,
     distance: number,
-    speed: number
+    speed: number,
 }

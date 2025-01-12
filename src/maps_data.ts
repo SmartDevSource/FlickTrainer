@@ -1,21 +1,33 @@
-import { Target } from "./types"
+import { Target, Vector2 } from "./types"
 
 type MapsData = {
-    [key: string]: { targets: Target[]}
+    [mapName: string]: { 
+        [spotName: string]: {
+            targets: Target[],
+            initial_offset: Vector2
+        }
+    }
 }
 
 export const mapsData: MapsData = {
     vertigo: {
-        targets: [
-            {
-                team: 'terro',
-                from: {x: 750, y: 500},
-                to: {x: 940, y: 500},
-                idle: false,
-                crouched: false,
-                distance: 100,
-                speed: 1
+        ctspawn_to_mid: {
+            targets: [
+                {
+                    character: 'terrorist_crouch_left_to_right',
+                    current_frame: 4,
+                    come_from: 'left',
+                    from: {x: 880, y: 545},
+                    to: {x: 912, y: 545},
+                    idle: false,
+                    distance: 8.5,
+                    speed: 3,
+                }
+            ] as Target[],
+            initial_offset: {
+                x: -420,
+                y: -150
             }
-        ] as Target[]
+        },
     }
 }
