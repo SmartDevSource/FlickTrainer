@@ -18,7 +18,7 @@ export const mapsData: MapsData = {
                     current_frame: 4,
                     come_from: 'left',
                     from: {x: 880, y: 545},
-                    to: {x: 912, y: 545},
+                    to: {x: 915, y: 545},
                     idle: false,
                     distance: 8.5,
                     speed: 3,

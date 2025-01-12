@@ -7,7 +7,8 @@ import { getRandomTarget, updateTarget, drawTarget } from '@/utils'
 
 interface Params {
     map_name: string,
-    spot_name: string
+    spot_name: string,
+    difficulty: string
 }
 
 const Canvas = ({params}: {params: Params}) => {
@@ -99,7 +100,7 @@ const Canvas = ({params}: {params: Params}) => {
     const draw = () => {
         if (ctx && canvasRef.current){
             ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
-            target.current = updateTarget(target.current)
+            target.current = updateTarget(target.current, params.difficulty)
 
             ctx.drawImage(
                 mapSpotImage.background.img, 

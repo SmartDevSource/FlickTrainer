@@ -5,17 +5,22 @@ const character_size: Vector2 = {
     y: 500
 }
 
-const character_frames: number = 4
-const speed_anim: number = 100
-
 let last_update = Date.now()
+
+const getReactionTime = (difficulty: string) => {
+    switch(difficulty){
+        case 'easy': return 1000
+        case 'middle': return 500
+        case 'hard': return 200
+    }
+}
 
 export const getRandomTarget = (targets: Target[]) => {
     const rndIndex = Math.floor(Math.random() * targets.length)
     return targets[rndIndex]
 }
 
-export const updateTarget = (target: Target) => {
+export const updateTarget = (target: Target, difficulty: string) => {
     if (!target.idle){
         const current_time = Date.now()
         const delta_time = (current_time - last_update) / 1000
@@ -36,11 +41,17 @@ export const updateTarget = (target: Target) => {
             case 'left':
                 if (target.from.x > target.to.x){
                     target.idle = true
+                    setTimeout(()=>{
+                        alert("Boom !")
+                    }, getReactionTime(difficulty))
                 }
             break
             case 'right':
                 if (target.from.x < target.to.x){
                     target.idle = true
+                    setTimeout(()=>{
+                        alert("Boom !")
+                    }, getReactionTime(difficulty))
                 }
             break
         }
