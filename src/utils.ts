@@ -41,9 +41,9 @@ export const updateTarget = (target: Target, difficulty: string) => {
             case 'left':
                 if (target.from.x > target.to.x){
                     target.idle = true
-                    setTimeout(()=>{
-                        alert("Boom !")
-                    }, getReactionTime(difficulty))
+                    // setTimeout(()=>{
+                    //     alert("Boom !")
+                    // }, getReactionTime(difficulty))
                 }
             break
             case 'right':
@@ -60,7 +60,6 @@ export const updateTarget = (target: Target, difficulty: string) => {
 }
 
 export const drawTarget = (target: Target, screenOffset: Vector2, ctx: CanvasRenderingContext2D, image: ImageObject) => {
-    // console.log("current_frame", target.current_frame)
     ctx.drawImage(
         image.img,
         target.current_frame * character_size.x,

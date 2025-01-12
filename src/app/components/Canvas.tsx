@@ -12,6 +12,9 @@ interface Params {
 }
 
 const Canvas = ({params}: {params: Params}) => {
+    const testDistance = useRef(1)
+    const testPosition = useRef<Vector2>({x: 0, y: 0})
+
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
     const [mapSpotImage] = useState({
@@ -114,6 +117,17 @@ const Canvas = ({params}: {params: Params}) => {
                 images[target.current.character]
             )
             ctx.drawImage(
+                images.terrorist_crouch_left_to_right.img,
+                4 * 430,
+                0,
+                430,
+                500,
+                testPosition.current.x + screenOffset.current.x,
+                testPosition.current.y + screenOffset.current.y,
+                430 / testDistance.current,
+                500 / testDistance.current
+            )
+            ctx.drawImage(
                 mapSpotImage.layer.img,
                 screenOffset.current.x,
                 screenOffset.current.y
@@ -126,6 +140,7 @@ const Canvas = ({params}: {params: Params}) => {
             ctx.fillStyle = 'white'
             ctx.font = 'bold 20px serif'
             ctx.fillText(`Off x : ${screenOffset.current.x} | Off y : ${screenOffset.current.y}`, 20, 50)
+            ctx.fillText(`Distance x : ${testDistance.current} | Position (x : ${testPosition.current.x}, y: ${testPosition.current.y})`, 20, 100)
             requestAnimationFrame(draw)
         }
     }
@@ -136,8 +151,15 @@ const Canvas = ({params}: {params: Params}) => {
             initCanvas()
         }
         const handleKeydown = (event:KeyboardEvent) => {
-            switch(event.key){
+            console.log(event.key)
 
+            switch(event.key){
+                case 'ArrowLeft': testPosition.current.x -= 5; break
+                case 'ArrowRight': testPosition.current.x += 5; break
+                case 'ArrowUp': testPosition.current.y -= 5; break
+                case 'ArrowDown': testPosition.current.y += 5; break
+                case '+': testDistance.current -= .1; break
+                case '-': testDistance.current += .1; break
             }
         }
         
