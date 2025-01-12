@@ -2,22 +2,19 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { ImageObject, Target } from '@/types'
 import { mapsData } from '@/maps_data'
+import { images } from '@/images_data'
 import { getRandomTarget, updateTarget } from '@/utils'
 
 const Canvas = ({params}: {params: {map_name: string, spot_name: string}}) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
-    const [images] = useState({
-        crosshair: {
-            path: `/gfx/hud/crosshair.png`,
-            img: new Image(),
-        },
+    const [mapImage] = useState({
         background: {
             path: `/gfx/maps/${params.map_name}/${params.spot_name}.png`,
             img: new Image(),
         },
-        background_layers: {
-            path: `/gfx/maps/${params.map_name}/${params.spot_name}_layers.png`,
+        layer: {
+            path: `/gfx/maps/${params.map_name}/${params.spot_name}_layer.png`,
             img: new Image(),
         }
     })
@@ -54,7 +51,7 @@ const Canvas = ({params}: {params: {map_name: string, spot_name: string}}) => {
                 image_object.img.onerror = () => reject(`Failed to load image ${image_object.path}`)
             })
         }
-        const imagePromises = Object.values(images).map(loadImage)
+        const imagePromises = Object.values({...images, ...mapImage}).map(loadImage)
 
         Promise.all(imagePromises)
         .then(() => {
@@ -99,7 +96,7 @@ const Canvas = ({params}: {params: {map_name: string, spot_name: string}}) => {
             ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
             target.current = updateTarget(target.current)
             ctx.drawImage(
-                images.background.img, 
+                mapImage.background.img, 
                 screenOffset.current.x, 
                 screenOffset.current.y
             )
@@ -111,7 +108,7 @@ const Canvas = ({params}: {params: {map_name: string, spot_name: string}}) => {
                 50
             )
             ctx.drawImage(
-                images.background_layers.img, 
+                mapImage.layer.img,
                 screenOffset.current.x,
                 screenOffset.current.y
             )
