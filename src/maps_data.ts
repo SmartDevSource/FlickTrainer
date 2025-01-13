@@ -30,7 +30,7 @@ export const mapsData: MapsData = {
                     distance: 10.3,
                 },
                 {
-                    character: 'terrorist_crouch',
+                    character: 'terrorist_crouch_darken',
                     come_from: 'left',
                     from: {x: 880, y: 500},
                     to: {x: 925, y: 500},
@@ -38,7 +38,7 @@ export const mapsData: MapsData = {
                     distance: 14,
                 },
                 {
-                    character: 'terrorist_standup',
+                    character: 'terrorist_standup_darken',
                     come_from: 'left',
                     from: {x: 900, y: 498},
                     to: {x: 922, y: 498},
@@ -54,7 +54,7 @@ export const mapsData: MapsData = {
                     distance: 8.5,
                 },
                 {
-                    character: 'terrorist_standup',
+                    character: 'terrorist_standup_darken',
                     come_from: 'left',
                     from: {x: 900, y: 545},
                     to: {x: 918, y: 545},
@@ -80,18 +80,18 @@ export const mapsData: MapsData = {
                 {
                     character: 'terrorist_standup',
                     come_from: 'right',
-                    from: {x: 980, y: 535},
-                    to: {x: 930, y: 535},
-                    idle: false,
-                    distance: 3.2,
-                },
-                {
-                    character: 'terrorist_standup',
-                    come_from: 'right',
                     from: {x: 1000, y: 538},
                     to: {x: 955, y: 538},
                     idle: false,
                     distance: 6.5,
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'right',
+                    from: {x: 980, y: 535},
+                    to: {x: 930, y: 535},
+                    idle: false,
+                    distance: 3.2,
                 },
             ] as Target[],
             initial_offset: {

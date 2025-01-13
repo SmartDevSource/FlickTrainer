@@ -34,18 +34,18 @@ export const updateTarget = (target: Target, difficulty: string) => {
                 if (target.from.x > target.to.x){
                     target.from.x = target.to.x
                     target.idle = true
-                    // setTimeout(()=>{
-                    //     alert("Boom !")
-                    // }, getReactionTime(difficulty))
+                    setTimeout(()=>{
+                        alert("Boom !")
+                    }, getReactionTime(difficulty))
                 }
             break
             case 'right':
                 if (target.from.x < target.to.x){
                     target.from.x = target.to.x
                     target.idle = true
-                    // setTimeout(()=>{
-                    //     alert("Boom !")
-                    // }, getReactionTime(difficulty))
+                    setTimeout(()=>{
+                        alert("Boom !")
+                    }, getReactionTime(difficulty))
                 }
             break
         }
