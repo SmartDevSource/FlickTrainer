@@ -34,10 +34,10 @@ const Canvas = ({params}: {params: Params}) => {
     const isFullScreen = useRef(false)
     const sensitivity = useRef(2.4)
 
-    const currentSpot = mapsData[params.map_name][params.spot_name]
-    const target = useRef<Target>(getRandomTarget([...currentSpot.targets]))
+    const currentSpot = structuredClone(mapsData[params.map_name][params.spot_name])
+    const target = useRef<Target>(getRandomTarget(structuredClone(currentSpot.targets)))
 
-    const screenOffset = useRef<Vector2>(currentSpot.initial_offset)
+    const screenOffset = useRef<Vector2>(structuredClone(currentSpot.initial_offset))
 
     const initialWindowSize = {w: 1024, h: 768}
     const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
@@ -105,7 +105,6 @@ const Canvas = ({params}: {params: Params}) => {
             ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
             
             updateTarget(target.current, params.difficulty)
-            console.log("carazeaz", currentSpot.targets)
 
             ctx.drawImage(
                 mapSpotImage.background.img, 
@@ -166,7 +165,7 @@ const Canvas = ({params}: {params: Params}) => {
                 case 'ArrowDown': testPosition.current.y += 5; break
                 case '+': testDistance.current -= .1; break
                 case '-': testDistance.current += .1; break
-                case ' ': target.current = getRandomTarget([...currentSpot.targets]); break
+                case ' ': target.current = getRandomTarget(structuredClone(currentSpot.targets)); break
             }
         }
         

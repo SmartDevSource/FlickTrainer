@@ -1,7 +1,7 @@
 import { ImageObject, Target, Vector2 } from "./types"
 
 let last_update = Date.now()
-const speedMove: number = 3
+const speedMove: number = 100
 
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
@@ -14,13 +14,13 @@ const getReactionTime = (difficulty: string) => {
 export const getRandomTarget = (targets: Target[]) => {
     const rndIndex = Math.floor(Math.random() * targets.length)
     console.log("Random index target :", rndIndex)
-    console.log(targets[0])
-    return {...targets[0]}
+    return targets[rndIndex]
 }
 
 export const updateTarget = (target: Target, difficulty: string) => {
     const current_time = Date.now()
     const delta_time = (current_time - last_update) / 1000
+    last_update = Date.now()
 
     if (!target.idle){
         if (target.from.x < target.to.x){
