@@ -5,12 +5,20 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/hud/crosshair.png`,
         img: new Image(),
     },
-    terrorist_crouch_left_to_right: {
-        path: `/gfx/characters/terrorist/crouch_left_to_right.png`,
+    terrorist_crouch: {
+        path: `/gfx/characters/terrorist_crouch.png`,
         img: new Image(),
     },
-    ct_crouch_left_to_right: {
-        path: `/gfx/characters/ct/crouch_left_to_right.png`,
+    terrorist_standup: {
+        path: `/gfx/characters/terrorist_standup.png`,
+        img: new Image(),
+    },
+    ct_crouch: {
+        path: `/gfx/characters/ct_crouch.png`,
+        img: new Image(),
+    },
+    ct_standup: {
+        path: `/gfx/characters/ct_standup.png`,
         img: new Image(),
     },
 }

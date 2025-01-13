@@ -35,7 +35,7 @@ const Canvas = ({params}: {params: Params}) => {
     const sensitivity = useRef(2.4)
 
     const currentSpot = mapsData[params.map_name][params.spot_name]
-    const target = useRef<Target>(getRandomTarget(currentSpot.targets))
+    const target = useRef<Target>(getRandomTarget([...currentSpot.targets]))
 
     const screenOffset = useRef<Vector2>(currentSpot.initial_offset)
 
@@ -103,7 +103,9 @@ const Canvas = ({params}: {params: Params}) => {
     const draw = () => {
         if (ctx && canvasRef.current){
             ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
-            target.current = updateTarget(target.current, params.difficulty)
+            
+            updateTarget(target.current, params.difficulty)
+            console.log("carazeaz", currentSpot.targets)
 
             ctx.drawImage(
                 mapSpotImage.background.img, 
@@ -116,17 +118,17 @@ const Canvas = ({params}: {params: Params}) => {
                 ctx,
                 images[target.current.character]
             )
-            ctx.drawImage(
-                images.terrorist_crouch_left_to_right.img,
-                4 * 430,
-                0,
-                430,
-                500,
-                testPosition.current.x + screenOffset.current.x,
-                testPosition.current.y + screenOffset.current.y,
-                430 / testDistance.current,
-                500 / testDistance.current
-            )
+            // ctx.drawImage(
+            //     images.terrorist_crouch.img,
+            //     0,
+            //     0,
+            //     images.terrorist_crouch.img.width,
+            //     images.terrorist_crouch.img.height,
+            //     testPosition.current.x + screenOffset.current.x,
+            //     testPosition.current.y + screenOffset.current.y,
+            //     images.terrorist_crouch.img.width / testDistance.current,
+            //     images.terrorist_crouch.img.height / testDistance.current
+            // )
             ctx.drawImage(
                 mapSpotImage.layer.img,
                 screenOffset.current.x,
@@ -140,13 +142,17 @@ const Canvas = ({params}: {params: Params}) => {
             ctx.fillStyle = 'white'
             ctx.font = 'bold 20px serif'
             ctx.fillText(`Off x : ${screenOffset.current.x} | Off y : ${screenOffset.current.y}`, 20, 50)
-            ctx.fillText(`Distance x : ${testDistance.current} | Position (x : ${testPosition.current.x}, y: ${testPosition.current.y})`, 20, 100)
+            ctx.fillText(`Distance x : ${testDistance.current} |
+                Position (x : ${testPosition.current.x}, y: ${testPosition.current.y})`,
+                20, 
+                100
+            )
             requestAnimationFrame(draw)
         }
     }
 
     useEffect(()=>{
-        if (canvasRef?.current){
+        if (canvasRef.current){
             console.log("Canvas Loaded")
             initCanvas()
         }
@@ -160,6 +166,7 @@ const Canvas = ({params}: {params: Params}) => {
                 case 'ArrowDown': testPosition.current.y += 5; break
                 case '+': testDistance.current -= .1; break
                 case '-': testDistance.current += .1; break
+                case ' ': target.current = getRandomTarget([...currentSpot.targets]); break
             }
         }
         

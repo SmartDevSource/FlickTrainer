@@ -10,7 +10,6 @@ export interface ImageObject {
 
 export interface Target {
     character: string,
-    current_frame: number,
     come_from: string,
     from: Vector2,
     to: Vector2,
