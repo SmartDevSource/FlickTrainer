@@ -3,7 +3,7 @@ import { ImageObject, Target, Vector2 } from "./types"
 let last_update = Date.now()
 const speedMove: number = 100
 const headOffset: number = 55
-const verticalOffset = {standup: .4, crouch: 2}
+const verticalOffset: {standup: number, crouch: number} = {standup: .4, crouch: 2}
 
 export const getHeadCoordinates = (target: Target, screenOffset: Vector2, image: ImageObject) => {
     return {

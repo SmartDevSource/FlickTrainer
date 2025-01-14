@@ -203,13 +203,17 @@ const Canvas = ({params}: {params: Params}) => {
                     screenOffset.current,
                     images[target.current.character]
                 )
-                const mouse = {
-                    x: (initialWindowSize.w / 2) - (images.crosshair.img.width / 2),
-                    y: (initialWindowSize.h / 2) - (images.crosshair.img.height / 2)
+                const mouseCenterPosition = {
+                    x: (initialWindowSize.w / 2),
+                    y: (initialWindowSize.h / 2)
                 }
-                console.table(headCoordinates)
-                console.log(`Mouse (x, y) : ${mouse.x} | ${mouse.y}`)
-                
+                if (mouseCenterPosition.x >= headCoordinates.position.x && 
+                    mouseCenterPosition.x <= headCoordinates.position.x + headCoordinates.scale.w &&
+                    mouseCenterPosition.y >= headCoordinates.position.y && 
+                    mouseCenterPosition.y <= headCoordinates.position.y + headCoordinates.scale.h)
+                {
+                    console.log('On head !')
+                }
             }
         }
 
