@@ -1,4 +1,4 @@
-import { ImageObject, Target, Vector2 } from "./types"
+import { ImageObject, Statistics, Target, Vector2 } from "./types"
 
 let last_update = Date.now()
 const speedMove: number = 100
@@ -9,12 +9,12 @@ export const getHeadCoordinates = (target: Target, screenOffset: Vector2, image:
     return {
         position: {
             x: (target.from.x + screenOffset.x) +
-                (((image.img.width / 2) -
-                ((headOffset + (headOffset / 2)) / 2)) /
-                (target.distance + 2)),
-            y:  (target.from.y + screenOffset.y) +
-                (target.character.includes('crouch') ? verticalOffset.crouch : verticalOffset.standup) *
-                (headOffset / target.distance),
+               (((image.img.width / 2) -
+               ((headOffset + (headOffset / 2)) / 2)) /
+               (target.distance + 2)),
+            y: (target.from.y + screenOffset.y) +
+               (target.character.includes('crouch') ? verticalOffset.crouch : verticalOffset.standup) *
+               (headOffset / target.distance),
         },
         scale: {
             w: headOffset / (target.distance + 2),
@@ -93,4 +93,24 @@ export const drawTarget = (target: Target, screenOffset: Vector2, ctx: CanvasRen
         headCoordinates.scale.w,
         headCoordinates.scale.h    
     )
+}
+
+export const drawStatistics = (statistics: Statistics, ctx: CanvasRenderingContext2D) => {
+    const kd = 2
+    const killsDeathBoxLength = (statistics.kills.toString().length * 15) + (statistics.deaths.toString().length * 15)
+    const kdBoxLength = kd.toString().length * 13
+    ctx.fillStyle = 'white'
+    ctx.font = 'bold 20px Play-Bold'
+    ctx.fillStyle = 'rgba(255, 255, 255, .3)'
+    ctx.fillRect(10, 31, 210 + killsDeathBoxLength, 25)
+    ctx.fillStyle = 'rgb(255, 255, 255)'
+    ctx.strokeStyle = 'rgb(150, 150, 150)'
+    ctx.strokeRect(10, 31, 210 + killsDeathBoxLength, 25)
+    ctx.fillText(`Kills : ${statistics.kills}  -  Deaths : ${statistics.deaths}`, 30, 50)
+    ctx.strokeStyle = 'rgb(150, 150, 150)'
+    ctx.fillStyle = 'rgba(255, 255, 255, .3)'
+    ctx.fillRect(870, 31, 80 + kdBoxLength, 25)
+    ctx.strokeRect(870, 31, 80 + kdBoxLength, 25)
+    ctx.fillStyle = 'rgb(255, 255, 255)'
+    ctx.fillText(`KD : ${kd}`, 890, 50)
 }

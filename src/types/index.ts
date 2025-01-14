@@ -17,3 +17,14 @@ export interface Target {
     distance: number,
     speed: number,
 }
+
+export interface CanvasParams {
+    map_name: string,
+    spot_name: string,
+    difficulty: string
+}
+
+export interface Statistics {
+    kills: number,
+    deaths: number
+}

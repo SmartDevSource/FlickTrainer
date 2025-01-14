@@ -1,21 +1,16 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { ImageObject, Target, Vector2 } from '@/types'
+import { ImageObject, Target, Vector2, CanvasParams, Statistics } from '@/types'
 import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
-import { getRandomTarget, updateTarget, drawTarget, getHeadCoordinates } from '@/utils'
+import { getRandomTarget, updateTarget, drawTarget, drawStatistics, getHeadCoordinates } from '@/utils'
 
-interface Params {
-    map_name: string,
-    spot_name: string,
-    difficulty: string
-}
-
-const Canvas = ({params}: {params: Params}) => {
+const Canvas = ({params}: {params: CanvasParams}) => {
     const testDistance = useRef(1)
     const testPosition = useRef<Vector2>({x: 0, y: 0})
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
+    const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null)
 
     const [mapSpotImage] = useState({
         background: {
@@ -29,10 +24,9 @@ const Canvas = ({params}: {params: Params}) => {
     })
 
     const [isLoading, setIsLoading] = useState<Boolean>(true)
-    const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null)
-
     const isFullScreen = useRef(false)
-    const sensitivity = useRef(2.4)
+    const sensitivity = useRef(1)
+    const statistics = useRef<Statistics>({kills: 0, deaths: 0})
 
     const currentSpot = structuredClone(mapsData[params.map_name][params.spot_name])
     const target = useRef<Target>(getRandomTarget(structuredClone(currentSpot.targets)))
@@ -77,13 +71,13 @@ const Canvas = ({params}: {params: Params}) => {
             return
         }
         canvasRef.current?.requestFullscreen()
-            .then(() => {
-                resizeCanvas()
-                isFullScreen.current = true
-            })
-            .catch(err => {
-                console.error('Error while toggling in fullscreen mode :', err)
-            })
+        .then(() => {
+            resizeCanvas()
+            isFullScreen.current = true
+        })
+        .catch(err => {
+            console.error('Error while toggling in fullscreen mode :', err)
+        })
     }
 
     const resizeCanvas = () => {
@@ -138,14 +132,12 @@ const Canvas = ({params}: {params: Params}) => {
                 (initialWindowSize.w / 2) - (images.crosshair.img.width / 2),
                 (initialWindowSize.h / 2) - (images.crosshair.img.height / 2)
             )
-            ctx.fillStyle = 'white'
-            ctx.font = 'bold 20px serif'
-            ctx.fillText(`Off x : ${screenOffset.current.x} | Off y : ${screenOffset.current.y}`, 20, 50)
-            ctx.fillText(`Distance x : ${testDistance.current} |
-                Position (x : ${testPosition.current.x}, y: ${testPosition.current.y})`,
-                20,
-                100
-            )
+            drawStatistics(statistics.current, ctx)
+            // ctx.fillText(`Off x : ${screenOffset.current.x} | Off y : ${screenOffset.current.y}`, 20, 50)
+            // ctx.fillText(`Distance x : ${testDistance.current} | Position (x : ${testPosition.current.x}, y: ${testPosition.current.y})`,
+            //     20,
+            //     100
+            // )
             requestAnimationFrame(draw)
         }
     }
@@ -156,8 +148,6 @@ const Canvas = ({params}: {params: Params}) => {
             initCanvas()
         }
         const handleKeydown = (event:KeyboardEvent) => {
-            console.log(event.key)
-
             switch(event.key){
                 case 'ArrowLeft': testPosition.current.x -= 5; break
                 case 'ArrowRight': testPosition.current.x += 5; break
@@ -166,6 +156,11 @@ const Canvas = ({params}: {params: Params}) => {
                 case '+': testDistance.current -= .1; break
                 case '-': testDistance.current += .1; break
                 case ' ': target.current = getRandomTarget(structuredClone(currentSpot.targets)); break
+                case 'Alt': case 'Meta':
+                    if (document.fullscreenElement){
+                        document.exitFullscreen().then(() => console.log("exited"))
+                    }
+                break
             }
         }
         
@@ -184,8 +179,8 @@ const Canvas = ({params}: {params: Params}) => {
             if (isFullScreen.current){
                 const prevOffset = screenOffset.current
                 const newOffset = {
-                    x: prevOffset.x - (event.movementX * sensitivity.current),
-                    y: prevOffset.y - (event.movementY * sensitivity.current)
+                    x: prevOffset.x - (event.movementX * (sensitivity.current - (sensitivity.current / 2))),
+                    y: prevOffset.y - (event.movementY * (sensitivity.current - (sensitivity.current / 2)))
                 }
                 if (newOffset.x < screenBoundaries.left && newOffset.x > screenBoundaries.right){
                     screenOffset.current.x = newOffset.x
@@ -197,22 +192,24 @@ const Canvas = ({params}: {params: Params}) => {
         }
 
         const handleMouseDown = (event: MouseEvent) => {
-            if (target?.current && screenOffset?.current && images[target?.current?.character]){
-                const headCoordinates = getHeadCoordinates(
-                    target.current,
-                    screenOffset.current,
-                    images[target.current.character]
-                )
-                const mouseCenterPosition = {
-                    x: (initialWindowSize.w / 2),
-                    y: (initialWindowSize.h / 2)
-                }
-                if (mouseCenterPosition.x >= headCoordinates.position.x && 
-                    mouseCenterPosition.x <= headCoordinates.position.x + headCoordinates.scale.w &&
-                    mouseCenterPosition.y >= headCoordinates.position.y && 
-                    mouseCenterPosition.y <= headCoordinates.position.y + headCoordinates.scale.h)
-                {
-                    console.log('On head !')
+            if (event.button === 0){
+                if (target?.current && screenOffset?.current && images[target?.current?.character]){
+                    const headCoordinates = getHeadCoordinates(
+                        target.current,
+                        screenOffset.current,
+                        images[target.current.character]
+                    )
+                    const mouseCenterPosition = {
+                        x: (initialWindowSize.w / 2),
+                        y: (initialWindowSize.h / 2)
+                    }
+                    if (mouseCenterPosition.x >= headCoordinates.position.x &&
+                        mouseCenterPosition.x <= headCoordinates.position.x + headCoordinates.scale.w &&
+                        mouseCenterPosition.y >= headCoordinates.position.y &&
+                        mouseCenterPosition.y <= headCoordinates.position.y + headCoordinates.scale.h)
+                    {
+                        console.log('HEADSHOT !')
+                    }
                 }
             }
         }
