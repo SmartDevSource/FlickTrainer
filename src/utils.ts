@@ -2,6 +2,26 @@ import { ImageObject, Target, Vector2 } from "./types"
 
 let last_update = Date.now()
 const speedMove: number = 100
+const headOffset: number = 55
+const verticalOffset = {standup: .4, crouch: 2}
+
+export const getHeadCoordinates = (target: Target, screenOffset: Vector2, image: ImageObject) => {
+    return {
+        position: {
+            x: (target.from.x + screenOffset.x) +
+                (((image.img.width / 2) -
+                ((headOffset + (headOffset / 2)) / 2)) /
+                (target.distance + 2)),
+            y:  (target.from.y + screenOffset.y) +
+                (target.character.includes('crouch') ? verticalOffset.crouch : verticalOffset.standup) *
+                (headOffset / target.distance),
+        },
+        scale: {
+            w: headOffset / (target.distance + 2),
+            h: headOffset / target.distance + 5
+        }
+    }
+}
 
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
@@ -34,18 +54,18 @@ export const updateTarget = (target: Target, difficulty: string) => {
                 if (target.from.x > target.to.x){
                     target.from.x = target.to.x
                     target.idle = true
-                    setTimeout(()=>{
-                        alert("Boom !")
-                    }, getReactionTime(difficulty))
+                    // setTimeout(()=>{
+                    //     alert("Boom !")
+                    // }, getReactionTime(difficulty))
                 }
             break
             case 'right':
                 if (target.from.x < target.to.x){
                     target.from.x = target.to.x
                     target.idle = true
-                    setTimeout(()=>{
-                        alert("Boom !")
-                    }, getReactionTime(difficulty))
+                    // setTimeout(()=>{
+                    //     alert("Boom !")
+                    // }, getReactionTime(difficulty))
                 }
             break
         }
@@ -54,6 +74,7 @@ export const updateTarget = (target: Target, difficulty: string) => {
 }
 
 export const drawTarget = (target: Target, screenOffset: Vector2, ctx: CanvasRenderingContext2D, image: ImageObject) => {
+    const headCoordinates = getHeadCoordinates(target, screenOffset, image)
     ctx.drawImage(
         image.img,
         0,
@@ -64,5 +85,12 @@ export const drawTarget = (target: Target, screenOffset: Vector2, ctx: CanvasRen
         target.from.y + screenOffset.y,
         image.img.width / (target.distance + 2),
         image.img.height / target.distance
+    )
+    ctx.fillStyle = 'rgba(255, 0, 0, .5)'
+    ctx.fillRect(
+        headCoordinates.position.x,
+        headCoordinates.position.y,
+        headCoordinates.scale.w,
+        headCoordinates.scale.h    
     )
 }

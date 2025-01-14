@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { ImageObject, Target, Vector2 } from '@/types'
 import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
-import { getRandomTarget, updateTarget, drawTarget } from '@/utils'
+import { getRandomTarget, updateTarget, drawTarget, getHeadCoordinates } from '@/utils'
 
 interface Params {
     map_name: string,
@@ -143,7 +143,7 @@ const Canvas = ({params}: {params: Params}) => {
             ctx.fillText(`Off x : ${screenOffset.current.x} | Off y : ${screenOffset.current.y}`, 20, 50)
             ctx.fillText(`Distance x : ${testDistance.current} |
                 Position (x : ${testPosition.current.x}, y: ${testPosition.current.y})`,
-                20, 
+                20,
                 100
             )
             requestAnimationFrame(draw)
@@ -197,7 +197,20 @@ const Canvas = ({params}: {params: Params}) => {
         }
 
         const handleMouseDown = (event: MouseEvent) => {
-
+            if (target?.current && screenOffset?.current && images[target?.current?.character]){
+                const headCoordinates = getHeadCoordinates(
+                    target.current,
+                    screenOffset.current,
+                    images[target.current.character]
+                )
+                const mouse = {
+                    x: (initialWindowSize.w / 2) - (images.crosshair.img.width / 2),
+                    y: (initialWindowSize.h / 2) - (images.crosshair.img.height / 2)
+                }
+                console.table(headCoordinates)
+                console.log(`Mouse (x, y) : ${mouse.x} | ${mouse.y}`)
+                
+            }
         }
 
         window.addEventListener('keydown', handleKeydown)
