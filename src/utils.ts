@@ -26,8 +26,8 @@ export const getHeadCoordinates = (target: Target, screenOffset: Vector2, image:
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
         case 'easy': return 1000
-        case 'middle': return 500
-        case 'hard': return 200
+        case 'medium': return 500
+        case 'hard': return 220
     }
 }
 
@@ -86,17 +86,18 @@ export const drawTarget = (target: Target, screenOffset: Vector2, ctx: CanvasRen
         image.img.width / (target.distance + 2),
         image.img.height / target.distance
     )
-    ctx.fillStyle = 'rgba(255, 0, 0, .5)'
-    ctx.fillRect(
-        headCoordinates.position.x,
-        headCoordinates.position.y,
-        headCoordinates.scale.w,
-        headCoordinates.scale.h    
-    )
+    // ctx.fillStyle = 'rgba(255, 0, 0, .5)'
+    // ctx.fillRect(
+    //     headCoordinates.position.x,
+    //     headCoordinates.position.y,
+    //     headCoordinates.scale.w,
+    //     headCoordinates.scale.h    
+    // )
 }
 
 export const drawStatistics = (statistics: Statistics, ctx: CanvasRenderingContext2D) => {
-    const kd = 2
+    // ADD DELAY REACTION TIME (MS)
+    const kd = (statistics.kills / (statistics.deaths === 0 ? 1 : statistics.deaths)).toFixed(2)
     const killsDeathBoxLength = (statistics.kills.toString().length * 15) + (statistics.deaths.toString().length * 15)
     const kdBoxLength = kd.toString().length * 13
     ctx.fillStyle = 'white'
