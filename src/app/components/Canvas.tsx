@@ -5,23 +5,13 @@ import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
 import { getRandomTarget, updateTimers, updateTarget, drawTarget, 
-        drawWeapon, drawStatistics, getHeadCoordinates, delta_time } from '@/utils'
+        drawWeapon, drawStatistics, getHeadCoordinates, screenBoundaries } from '@/utils'
+import { initRecoil, updateRecoil } from '@/recoil_system'
 
 const Canvas = ({params}: {params: CanvasParams}) => {
     const testDistance = useRef(1)
     const testPosition = useRef<Vector2>({x: 0, y: 0})
     const isFiring = useRef<boolean>(false)
-    const recoilSettings = useRef<RecoilSettings>({
-        start_position: {x: 0, y: 0},
-        end_position: {x: 0, y: 0},
-        current_offset: {x: 0, y: 0},
-        offset_step: {x: 1, y: 3},
-        offset_max: {x: 4, y: 18},
-        x_direction: 'left',
-        reverse: false,
-        is_running: false,
-        speed: 150
-    })
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null)
@@ -44,15 +34,10 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const currentSpot = structuredClone(mapsData[params.map_name][params.spot_name])
     const target = useRef<Target>(getRandomTarget(structuredClone(currentSpot.targets)))
 
+    const initialWindowSize = {w: 1024, h: 768}
     const screenOffset = useRef<Vector2>(structuredClone(currentSpot.initial_offset))
 
-    const initialWindowSize = {w: 1024, h: 768}
-    const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
-
-    const updateFiringState = (state: boolean) => {
-        isFiring.current = state
-        console.log(isFiring.current)
-    }
+    const updateFiringState = (state: boolean) => isFiring.current = state
 
     const initCanvas = () => {
         if (canvasRef?.current){
@@ -131,7 +116,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
             
             updateTimers()
-            updateRecoil()
+            updateRecoil(screenOffset.current)
             updateTarget(target.current, params.difficulty)
 
             ctx.drawImage(
@@ -183,72 +168,6 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         }
     }
 
-    const setRecoil = () => {
-        recoilSettings.current.start_position = {
-            x: screenOffset.current.x,
-            y: screenOffset.current.y
-        }
-        recoilSettings.current.end_position = {
-            x: screenOffset.current.x + recoilSettings.current.offset_max.x,
-            y: screenOffset.current.y + recoilSettings.current.offset_max.y
-        }
-        recoilSettings.current.is_running = true
-        const rndDirection = Math.round(Math.random() * 1)
-        recoilSettings.current.x_direction = rndDirection === 0 ? 'left': 'right'
-        console.log("rnddirection :", rndDirection)
-    }
-
-    const updateRecoil = () => {
-        if (recoilSettings.current.is_running){
-            if (!recoilSettings.current.reverse){
-                if (recoilSettings.current.current_offset.y < recoilSettings.current.offset_max.y){
-                    recoilSettings.current.current_offset.y += recoilSettings.current.offset_step.y
-                    switch(recoilSettings.current.x_direction){
-                        case 'left':
-                            if (recoilSettings.current.current_offset.x > -recoilSettings.current.offset_max.x){
-                                recoilSettings.current.current_offset.x += recoilSettings.current.offset_step.x
-                            }
-                        break
-                        case 'right':
-                            if (recoilSettings.current.current_offset.x < recoilSettings.current.offset_max.x){
-                                recoilSettings.current.current_offset.x -= recoilSettings.current.offset_step.x
-                            }
-                        break
-                    }
-                    screenOffset.current.x += recoilSettings.current.current_offset.x
-                    screenOffset.current.y += recoilSettings.current.current_offset.y
-                } else {
-                    recoilSettings.current.reverse = true
-                }
-            }
-            if (recoilSettings.current.reverse){
-                if (recoilSettings.current.current_offset.y > 0){
-                    recoilSettings.current.current_offset.y -= recoilSettings.current.offset_step.y
-                    switch(recoilSettings.current.x_direction){
-                        case 'left':
-                            if (recoilSettings.current.current_offset.x < -recoilSettings.current.offset_max.x){
-                                recoilSettings.current.current_offset.x -= recoilSettings.current.offset_step.x
-                            }
-                        break
-                        case 'right':
-                            if (recoilSettings.current.current_offset.x > recoilSettings.current.offset_max.x){
-                                recoilSettings.current.current_offset.x += recoilSettings.current.offset_step.x
-                            }
-                        break
-                    }
-                    screenOffset.current.x -= recoilSettings.current.current_offset.x
-                    screenOffset.current.y -= recoilSettings.current.current_offset.y
-                } else {
-                    recoilSettings.current.reverse = false
-                    recoilSettings.current.current_offset = {x: 0, y: 0}
-                    recoilSettings.current.is_running = false
-                }
-            }
-            // screenOffset.current.y += delta_time * recoilSettings.current.speed
-            // console.log(" recoilSettings.current.current_offset.y", recoilSettings.current.current_offset.y)
-        }
-    }
-
     useEffect(()=>{
         if (canvasRef.current){
             initCanvas()
@@ -293,6 +212,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 if (newOffset.y < screenBoundaries.top && newOffset.y > screenBoundaries.bottom){
                     screenOffset.current.y = newOffset.y
                 }
+                console.table(screenOffset.current)
             }
         }
 
@@ -303,7 +223,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                     isFiring.current = true
                     audios.deagleshot.audio.currentTime = 0
                     audios.deagleshot.audio.play()
-                    setRecoil()
+                    initRecoil(screenOffset.current)
                     if (target?.current && screenOffset?.current && images[target?.current?.character]){
                         const headCoordinates = getHeadCoordinates(
                             target.current,

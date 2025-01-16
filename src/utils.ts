@@ -13,6 +13,8 @@ const headOffset: number = 55
 const verticalOffset: {standup: number, crouch: number} = {standup: .4, crouch: 2}
 const weapon_frames_count: number = 20
 
+export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
+
 export const getHeadCoordinates = (target: Target, screenOffset: Vector2, image: ImageObject) => {
     return {
         position: {
