@@ -202,7 +202,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             if (!recoilSettings.current.reverse){
                 
             }
-            screenOffset.current.y += delta_time * recoilSettings.current.speed
+            // screenOffset.current.y += delta_time * recoilSettings.current.speed
             console.log(delta_time)
         }
     }
