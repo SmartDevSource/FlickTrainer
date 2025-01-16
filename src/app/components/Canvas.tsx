@@ -1,16 +1,26 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { ImageObject, Target, Vector2, CanvasParams, Statistics, AudioObject } from '@/types'
+import { ImageObject, Target, Vector2, CanvasParams, Statistics, AudioObject, RecoilSettings } from '@/types'
 import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
 import { getRandomTarget, updateTimers, updateTarget, drawTarget, 
-        drawWeapon, drawStatistics, getHeadCoordinates } from '@/utils'
+        drawWeapon, drawStatistics, getHeadCoordinates, delta_time } from '@/utils'
 
 const Canvas = ({params}: {params: CanvasParams}) => {
     const testDistance = useRef(1)
     const testPosition = useRef<Vector2>({x: 0, y: 0})
     const isFiring = useRef<boolean>(false)
+    const recoilSettings = useRef<RecoilSettings>({
+        start_position: {x: 0, y: 0},
+        current_position: {x: 0, y: 0},
+        end_position: {x: 0, y: 0},
+        y_offset: 5,
+        x_offset: 5,
+        x_direction: 'left',
+        reverse: false,
+        speed: 150
+    })
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null)
@@ -28,7 +38,6 @@ const Canvas = ({params}: {params: CanvasParams}) => {
 
     const [isLoading, setIsLoading] = useState<Boolean>(true)
     const isFullScreen = useRef(false)
-    const sensitivity = useRef(1)
     const statistics = useRef<Statistics>({kills: 0, deaths: 0})
 
     const currentSpot = structuredClone(mapsData[params.map_name][params.spot_name])
@@ -121,6 +130,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
             
             updateTimers()
+            updateRecoil()
             updateTarget(target.current, params.difficulty)
 
             ctx.drawImage(
@@ -172,6 +182,31 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         }
     }
 
+    const setRecoil = () => {
+        recoilSettings.current.start_position = {
+            x: screenOffset.current.x,
+            y: screenOffset.current.y
+        }
+        recoilSettings.current.current_position = {
+            x: screenOffset.current.x,
+            y: screenOffset.current.y
+        }
+        recoilSettings.current.end_position = {
+            x: screenOffset.current.x + recoilSettings.current.x_offset,
+            y: screenOffset.current.y + recoilSettings.current.y_offset
+        }
+    }
+
+    const updateRecoil = () => {
+        if (isFiring.current){
+            if (!recoilSettings.current.reverse){
+                
+            }
+            screenOffset.current.y += delta_time * recoilSettings.current.speed
+            console.log(delta_time)
+        }
+    }
+
     useEffect(()=>{
         if (canvasRef.current){
             console.log("Canvas Loaded")
@@ -209,8 +244,8 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             if (isFullScreen.current){
                 const prevOffset = screenOffset.current
                 const newOffset = {
-                    x: prevOffset.x - (event.movementX * (sensitivity.current - (sensitivity.current / 2))),
-                    y: prevOffset.y - (event.movementY * (sensitivity.current - (sensitivity.current / 2)))
+                    x: prevOffset.x - (event.movementX * (params.mouse_sensitivity - (params.mouse_sensitivity / 2))),
+                    y: prevOffset.y - (event.movementY * (params.mouse_sensitivity - (params.mouse_sensitivity / 2)))
                 }
                 if (newOffset.x < screenBoundaries.left && newOffset.x > screenBoundaries.right){
                     screenOffset.current.x = newOffset.x
@@ -222,11 +257,13 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         }
 
         const handleMouseDown = (event: MouseEvent) => {
+            // FIRING //
             if (event.button === 0 && isFullScreen.current){
                 if (!isFiring.current){
                     isFiring.current = true
                     audios.deagleshot.audio.currentTime = 0
                     audios.deagleshot.audio.play()
+                    setRecoil()
 
                     if (target?.current && screenOffset?.current && images[target?.current?.character]){
                         const headCoordinates = getHeadCoordinates(

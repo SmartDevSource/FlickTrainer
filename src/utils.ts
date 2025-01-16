@@ -1,7 +1,7 @@
 import { ImageObject, Statistics, Target, Vector2 } from "./types"
 
 let last_update: number = Date.now()
-let delta_time: number = 0
+export let delta_time: number = 0
 
 let current_weapon_frame: number = 0
 let last_weapon_update: number = 0

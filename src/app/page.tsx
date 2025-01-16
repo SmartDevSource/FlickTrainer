@@ -8,7 +8,8 @@ export default function Home() {
         params={{
           map_name: 'vertigo',
           spot_name: 'ctspawn_to_mid',
-          difficulty: 'hard'
+          difficulty: 'hard',
+          mouse_sensitivity: 1
         }}
       />
     </div>

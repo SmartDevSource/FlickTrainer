@@ -27,10 +27,22 @@ export interface Target {
 export interface CanvasParams {
     map_name: string,
     spot_name: string,
-    difficulty: string
+    difficulty: string,
+    mouse_sensitivity: number
 }
 
 export interface Statistics {
     kills: number,
     deaths: number
+}
+
+export interface RecoilSettings {
+    start_position: {x: number, y: number},
+    current_position: {x: number, y: number},
+    end_position: {x: number, y: number},
+    y_offset: number,
+    x_offset: number,
+    x_direction: string,
+    reverse: boolean,
+    speed: number
 }
