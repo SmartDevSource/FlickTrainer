@@ -13,12 +13,13 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const isFiring = useRef<boolean>(false)
     const recoilSettings = useRef<RecoilSettings>({
         start_position: {x: 0, y: 0},
-        current_position: {x: 0, y: 0},
         end_position: {x: 0, y: 0},
-        y_offset: 5,
-        x_offset: 5,
+        current_offset: {x: 0, y: 0},
+        offset_step: {x: 1, y: 3},
+        offset_max: {x: 4, y: 18},
         x_direction: 'left',
         reverse: false,
+        is_running: false,
         speed: 150
     })
 
@@ -187,29 +188,69 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             x: screenOffset.current.x,
             y: screenOffset.current.y
         }
-        recoilSettings.current.current_position = {
-            x: screenOffset.current.x,
-            y: screenOffset.current.y
-        }
         recoilSettings.current.end_position = {
-            x: screenOffset.current.x + recoilSettings.current.x_offset,
-            y: screenOffset.current.y + recoilSettings.current.y_offset
+            x: screenOffset.current.x + recoilSettings.current.offset_max.x,
+            y: screenOffset.current.y + recoilSettings.current.offset_max.y
         }
+        recoilSettings.current.is_running = true
+        const rndDirection = Math.round(Math.random() * 1)
+        recoilSettings.current.x_direction = rndDirection === 0 ? 'left': 'right'
+        console.log("rnddirection :", rndDirection)
     }
 
     const updateRecoil = () => {
-        if (isFiring.current){
+        if (recoilSettings.current.is_running){
             if (!recoilSettings.current.reverse){
-                
+                if (recoilSettings.current.current_offset.y < recoilSettings.current.offset_max.y){
+                    recoilSettings.current.current_offset.y += recoilSettings.current.offset_step.y
+                    switch(recoilSettings.current.x_direction){
+                        case 'left':
+                            if (recoilSettings.current.current_offset.x > -recoilSettings.current.offset_max.x){
+                                recoilSettings.current.current_offset.x += recoilSettings.current.offset_step.x
+                            }
+                        break
+                        case 'right':
+                            if (recoilSettings.current.current_offset.x < recoilSettings.current.offset_max.x){
+                                recoilSettings.current.current_offset.x -= recoilSettings.current.offset_step.x
+                            }
+                        break
+                    }
+                    screenOffset.current.x += recoilSettings.current.current_offset.x
+                    screenOffset.current.y += recoilSettings.current.current_offset.y
+                } else {
+                    recoilSettings.current.reverse = true
+                }
+            }
+            if (recoilSettings.current.reverse){
+                if (recoilSettings.current.current_offset.y > 0){
+                    recoilSettings.current.current_offset.y -= recoilSettings.current.offset_step.y
+                    switch(recoilSettings.current.x_direction){
+                        case 'left':
+                            if (recoilSettings.current.current_offset.x < -recoilSettings.current.offset_max.x){
+                                recoilSettings.current.current_offset.x -= recoilSettings.current.offset_step.x
+                            }
+                        break
+                        case 'right':
+                            if (recoilSettings.current.current_offset.x > recoilSettings.current.offset_max.x){
+                                recoilSettings.current.current_offset.x += recoilSettings.current.offset_step.x
+                            }
+                        break
+                    }
+                    screenOffset.current.x -= recoilSettings.current.current_offset.x
+                    screenOffset.current.y -= recoilSettings.current.current_offset.y
+                } else {
+                    recoilSettings.current.reverse = false
+                    recoilSettings.current.current_offset = {x: 0, y: 0}
+                    recoilSettings.current.is_running = false
+                }
             }
             // screenOffset.current.y += delta_time * recoilSettings.current.speed
-            console.log(delta_time)
+            // console.log(" recoilSettings.current.current_offset.y", recoilSettings.current.current_offset.y)
         }
     }
 
     useEffect(()=>{
         if (canvasRef.current){
-            console.log("Canvas Loaded")
             initCanvas()
         }
         const handleKeydown = (event:KeyboardEvent) => {
@@ -231,7 +272,6 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         
         const handleFullscreenChange = () => {
             if (document.fullscreenElement !== canvasRef.current){
-                console.log("fullscreen mode exited")
                 if (canvasRef.current){
                     canvasRef.current.width = initialWindowSize.w
                     canvasRef.current.height = initialWindowSize.h
@@ -264,7 +304,6 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                     audios.deagleshot.audio.currentTime = 0
                     audios.deagleshot.audio.play()
                     setRecoil()
-
                     if (target?.current && screenOffset?.current && images[target?.current?.character]){
                         const headCoordinates = getHeadCoordinates(
                             target.current,

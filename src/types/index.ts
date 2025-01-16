@@ -38,11 +38,12 @@ export interface Statistics {
 
 export interface RecoilSettings {
     start_position: {x: number, y: number},
-    current_position: {x: number, y: number},
     end_position: {x: number, y: number},
-    y_offset: number,
-    x_offset: number,
+    current_offset: {x: number, y: number},
+    offset_step: {x: number, y: number},
+    offset_max: {x: number, y:number},
     x_direction: string,
     reverse: boolean,
-    speed: number
+    speed: number,
+    is_running: boolean
 }
