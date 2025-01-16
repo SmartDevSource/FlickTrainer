@@ -38,6 +38,9 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const screenOffset = useRef<Vector2>(structuredClone(currentSpot.initial_offset))
 
     const updateFiringState = (state: boolean) => isFiring.current = state
+    const generateTarget = () => {
+        target.current = getRandomTarget(structuredClone(currentSpot.targets))
+    }
 
     const initCanvas = () => {
         if (canvasRef?.current){
@@ -180,7 +183,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 case 'ArrowDown': testPosition.current.y += 5; break
                 case '+': testDistance.current -= .1; break
                 case '-': testDistance.current += .1; break
-                case ' ': target.current = getRandomTarget(structuredClone(currentSpot.targets)); break
+                // case ' ': generateTarget(); break
                 case 'Alt': case 'Meta':
                     if (document.fullscreenElement){
                         document.exitFullscreen().then(() => console.log("exited"))
@@ -241,6 +244,8 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                         {
                             audios.headshot.audio.currentTime = 0
                             audios.headshot.audio.play()
+                            statistics.current.kills++
+                            generateTarget()
                         }
                     }
                 }
