@@ -109,10 +109,10 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
         0,
         frame_width,
         weapon_img.img.height,
-        550,
-        50,
-        frame_width,
-        weapon_img.img.height
+        600,
+        150,
+        frame_width - 150,
+        weapon_img.img.height - 150
     )
     if (current_weapon_frame == 2){
         ctx.drawImage(
