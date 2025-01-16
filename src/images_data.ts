@@ -5,6 +5,14 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/hud/crosshair.png`,
         img: new Image(),
     },
+    deagle: {
+        path: `/gfx/hud/deagle.png`,
+        img: new Image(),
+    },
+    shotflame: {
+        path: `/gfx/hud/shotflame.png`,
+        img: new Image(),
+    },
     terrorist_crouch: {
         path: `/gfx/characters/terrorist_crouch.png`,
         img: new Image(),

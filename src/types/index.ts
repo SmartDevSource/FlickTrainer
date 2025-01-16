@@ -8,6 +8,12 @@ export interface ImageObject {
     img: HTMLImageElement,
 }
 
+export interface AudioObject {
+    path: string,
+    volume: number,
+    audio: HTMLAudioElement,
+}
+
 export interface Target {
     character: string,
     come_from: string,

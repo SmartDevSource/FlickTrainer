@@ -1,13 +1,16 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { ImageObject, Target, Vector2, CanvasParams, Statistics } from '@/types'
+import { ImageObject, Target, Vector2, CanvasParams, Statistics, AudioObject } from '@/types'
 import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
-import { getRandomTarget, updateTarget, drawTarget, drawStatistics, getHeadCoordinates } from '@/utils'
+import { audios } from '@/audio_data'
+import { getRandomTarget, updateTimers, updateTarget, drawTarget, 
+        drawWeapon, drawStatistics, getHeadCoordinates } from '@/utils'
 
 const Canvas = ({params}: {params: CanvasParams}) => {
     const testDistance = useRef(1)
     const testPosition = useRef<Vector2>({x: 0, y: 0})
+    const isFiring = useRef<boolean>(false)
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null)
@@ -36,6 +39,11 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const initialWindowSize = {w: 1024, h: 768}
     const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
 
+    const updateFiringState = (state: boolean) => {
+        isFiring.current = state
+        console.log(isFiring.current)
+    }
+
     const initCanvas = () => {
         if (canvasRef?.current){
             canvasRef.current.width = initialWindowSize.w
@@ -44,7 +52,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         }
     }
 
-    const loadImages = () => {
+    const loadResources = () => {
         const loadImage = (image_object: ImageObject): Promise<ImageObject> => {
             return new Promise((resolve, reject) => {
                 image_object.img.src = `${image_object.path}`
@@ -54,15 +62,29 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 image_object.img.onerror = () => reject(`Failed to load image ${image_object.path}`)
             })
         }
-        const imagePromises = Object.values({...images, ...mapSpotImage}).map(loadImage)
+        const loadAudio = (audio_object: AudioObject): Promise<AudioObject> => {
+            return new Promise((resolve, reject) => {
+                audio_object.audio.src = audio_object.path
+                audio_object.audio.volume = audio_object.volume
+                audio_object.audio.addEventListener('canplaythrough', () => {
+                    resolve(audio_object)
+                })
+                audio_object.audio.addEventListener('error', () => {
+                    reject(`Failed to load audio ${audio_object.path}`)
+                })
+            })
+        }
 
-        Promise.all(imagePromises)
+        const imagePromises = Object.values({...images, ...mapSpotImage}).map(loadImage)
+        const audioPromises = Object.values(audios).map(loadAudio)
+
+        Promise.all([imagePromises, audioPromises])
         .then(() => {
+            console.log('All resources loaded')
             setIsLoading(false)
-            console.log('All images loaded')
         })
         .catch(err => {
-            console.error('Error while loading all images :', err)
+            console.error('Error while loading resources :', err)
         })
     }
 
@@ -98,6 +120,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         if (ctx && canvasRef.current){
             ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
             
+            updateTimers()
             updateTarget(target.current, params.difficulty)
 
             ctx.drawImage(
@@ -126,6 +149,13 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 mapSpotImage.layer.img,
                 screenOffset.current.x,
                 screenOffset.current.y
+            )
+            drawWeapon(
+                ctx,
+                images.deagle,
+                images.shotflame,
+                isFiring.current,
+                updateFiringState
             )
             ctx.drawImage(
                 images.crosshair.img,
@@ -192,23 +222,30 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         }
 
         const handleMouseDown = (event: MouseEvent) => {
-            if (event.button === 0){
-                if (target?.current && screenOffset?.current && images[target?.current?.character]){
-                    const headCoordinates = getHeadCoordinates(
-                        target.current,
-                        screenOffset.current,
-                        images[target.current.character]
-                    )
-                    const mouseCenterPosition = {
-                        x: (initialWindowSize.w / 2),
-                        y: (initialWindowSize.h / 2)
-                    }
-                    if (mouseCenterPosition.x >= headCoordinates.position.x &&
-                        mouseCenterPosition.x <= headCoordinates.position.x + headCoordinates.scale.w &&
-                        mouseCenterPosition.y >= headCoordinates.position.y &&
-                        mouseCenterPosition.y <= headCoordinates.position.y + headCoordinates.scale.h)
-                    {
-                        console.log('HEADSHOT !')
+            if (event.button === 0 && isFullScreen.current){
+                if (!isFiring.current){
+                    isFiring.current = true
+                    audios.deagleshot.audio.currentTime = 0
+                    audios.deagleshot.audio.play()
+
+                    if (target?.current && screenOffset?.current && images[target?.current?.character]){
+                        const headCoordinates = getHeadCoordinates(
+                            target.current,
+                            screenOffset.current,
+                            images[target.current.character]
+                        )
+                        const mouseCenterPosition = {
+                            x: (initialWindowSize.w / 2),
+                            y: (initialWindowSize.h / 2)
+                        }
+                        if (mouseCenterPosition.x >= headCoordinates.position.x &&
+                            mouseCenterPosition.x <= headCoordinates.position.x + headCoordinates.scale.w &&
+                            mouseCenterPosition.y >= headCoordinates.position.y &&
+                            mouseCenterPosition.y <= headCoordinates.position.y + headCoordinates.scale.h)
+                        {
+                            audios.headshot.audio.currentTime = 0
+                            audios.headshot.audio.play()
+                        }
                     }
                 }
             }
@@ -227,7 +264,11 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         }
     }, [])
 
-    useEffect(()=>{ if (ctx) loadImages()}, [ctx])
+    useEffect(()=>{ 
+        if (ctx) {
+            loadResources()
+        }
+    }, [ctx])
     useEffect(()=>{ if (!isLoading) draw()}, [isLoading])
 
     return (

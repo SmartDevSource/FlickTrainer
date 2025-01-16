@@ -1,9 +1,17 @@
 import { ImageObject, Statistics, Target, Vector2 } from "./types"
 
-let last_update = Date.now()
+let last_update: number = Date.now()
+let delta_time: number = 0
+
+let current_weapon_frame: number = 0
+let last_weapon_update: number = 0
+let weapon_update_delay: number = .07
+
 const speedMove: number = 100
+const speedShot: number = 7.4
 const headOffset: number = 55
 const verticalOffset: {standup: number, crouch: number} = {standup: .4, crouch: 2}
+const weapon_frames_count: number = 20
 
 export const getHeadCoordinates = (target: Target, screenOffset: Vector2, image: ImageObject) => {
     return {
@@ -37,11 +45,12 @@ export const getRandomTarget = (targets: Target[]) => {
     return targets[rndIndex]
 }
 
-export const updateTarget = (target: Target, difficulty: string) => {
-    const current_time = Date.now()
-    const delta_time = (current_time - last_update) / 1000
+export const updateTimers = () => {
+    delta_time = (Date.now() - last_update) / 1000
     last_update = Date.now()
+}
 
+export const updateTarget = (target: Target, difficulty: string) => {
     if (!target.idle){
         if (target.from.x < target.to.x){
             target.from.x += (speedMove * delta_time)
@@ -73,8 +82,52 @@ export const updateTarget = (target: Target, difficulty: string) => {
     return target
 }
 
+export const drawWeapon = (ctx: CanvasRenderingContext2D, 
+                            weapon_img: ImageObject,
+                            flame_img: ImageObject,
+                            isFiring: boolean, 
+                            updateFiringState: (state: boolean) => void) => 
+{
+    if (isFiring && current_weapon_frame < weapon_frames_count - 1){
+        last_weapon_update += delta_time * speedShot
+
+        if (last_weapon_update > weapon_update_delay){
+            last_weapon_update = 0
+            current_weapon_frame++
+            if (current_weapon_frame >= weapon_frames_count - 1){
+                updateFiringState(false)
+                current_weapon_frame = 0
+            }
+        }
+    }
+    const frame_width = weapon_img.img.width / weapon_frames_count
+    ctx.drawImage(
+        weapon_img.img,
+        current_weapon_frame * frame_width,
+        0,
+        frame_width,
+        weapon_img.img.height,
+        550,
+        50,
+        frame_width,
+        weapon_img.img.height
+    )
+    if (current_weapon_frame == 2){
+        ctx.drawImage(
+            flame_img.img,
+            0,
+            0,
+            flame_img.img.width,
+            flame_img.img.height,
+            470,
+            320,
+            flame_img.img.width / 2,
+            flame_img.img.height / 2
+        )
+    }
+}
+
 export const drawTarget = (target: Target, screenOffset: Vector2, ctx: CanvasRenderingContext2D, image: ImageObject) => {
-    const headCoordinates = getHeadCoordinates(target, screenOffset, image)
     ctx.drawImage(
         image.img,
         0,
@@ -86,6 +139,8 @@ export const drawTarget = (target: Target, screenOffset: Vector2, ctx: CanvasRen
         image.img.width / (target.distance + 2),
         image.img.height / target.distance
     )
+
+    // const headCoordinates = getHeadCoordinates(target, screenOffset, image)
     // ctx.fillStyle = 'rgba(255, 0, 0, .5)'
     // ctx.fillRect(
     //     headCoordinates.position.x,
