@@ -13,7 +13,7 @@ export const audios: {[key: string]: AudioObject} = {
     },
     player_death: {
         path: `/audio/player_death.mp3`,
-        volume: .5,
+        volume: .3,
         audio: new Audio()
     }
 }

@@ -9,7 +9,7 @@ export let shotTimeout: ReturnType<typeof setTimeout> | null = null
 
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
-        case 'easy': return 1000
+        case 'easy': return 1000 /// 1000
         case 'medium': return 750
         case 'hard': return 500
     }
