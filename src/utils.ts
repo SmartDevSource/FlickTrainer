@@ -7,7 +7,6 @@ let current_weapon_frame: number = 0
 let last_weapon_update: number = 0
 let weapon_update_delay: number = .07
 
-const speedMove: number = 100
 const speedShot: number = 7.4
 const headOffset: number = 55
 const verticalOffset: {standup: number, crouch: number} = {standup: .4, crouch: 2}
@@ -55,9 +54,9 @@ export const updateTimers = () => {
 export const updateTarget = (target: Target, difficulty: string) => {
     if (!target.idle){
         if (target.from.x < target.to.x){
-            target.from.x += (speedMove * delta_time)
+            target.from.x += (target.speed * delta_time)
         } else if (target.from.x > target.to.x){
-            target.from.x -= (speedMove * delta_time)
+            target.from.x -= (target.speed * delta_time)
         }
 
         switch(target.come_from){

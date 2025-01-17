@@ -133,17 +133,17 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 ctx,
                 images[target.current.character]
             )
-            // ctx.drawImage(
-            //     images.terrorist_crouch.img,
-            //     0,
-            //     0,
-            //     images.terrorist_crouch.img.width,
-            //     images.terrorist_crouch.img.height,
-            //     testPosition.current.x + screenOffset.current.x,
-            //     testPosition.current.y + screenOffset.current.y,
-            //     images.terrorist_crouch.img.width / testDistance.current,
-            //     images.terrorist_crouch.img.height / testDistance.current
-            // )
+            ctx.drawImage(
+                images.terrorist_standup.img,
+                0,
+                0,
+                images.terrorist_crouch.img.width,
+                images.terrorist_crouch.img.height,
+                testPosition.current.x + screenOffset.current.x,
+                testPosition.current.y + screenOffset.current.y,
+                images.terrorist_crouch.img.width / testDistance.current,
+                images.terrorist_crouch.img.height / testDistance.current
+            )
             ctx.drawImage(
                 mapSpotImage.layer.img,
                 screenOffset.current.x,
@@ -162,11 +162,11 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 (initialWindowSize.h / 2) - (images.crosshair.img.height / 2)
             )
             drawStatistics(statistics.current, ctx)
-            // ctx.fillText(`Off x : ${screenOffset.current.x} | Off y : ${screenOffset.current.y}`, 20, 50)
-            // ctx.fillText(`Distance x : ${testDistance.current} | Position (x : ${testPosition.current.x}, y: ${testPosition.current.y})`,
-            //     20,
-            //     100
-            // )
+            ctx.fillText(`Off x : ${screenOffset.current.x} | Off y : ${screenOffset.current.y}`, 20, 50)
+            ctx.fillText(`Distance x : ${testDistance.current} | Position (x : ${testPosition.current.x}, y: ${testPosition.current.y})`,
+                20,
+                100
+            )
             requestAnimationFrame(draw)
         }
     }
@@ -183,7 +183,6 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 case 'ArrowDown': testPosition.current.y += 5; break
                 case '+': testDistance.current -= .1; break
                 case '-': testDistance.current += .1; break
-                // case ' ': generateTarget(); break
                 case 'Alt': case 'Meta':
                     if (document.fullscreenElement){
                         document.exitFullscreen().then(() => console.log("exited"))
