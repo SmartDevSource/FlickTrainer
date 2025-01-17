@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { ImageObject, Target, Vector2, CanvasParams, Statistics, AudioObject } from '@/types'
+import { Target, Vector2, CanvasParams, Statistics } from '@/types'
 import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
@@ -50,40 +50,6 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             setCtx(canvasRef.current.getContext('2d'))
         }
     }
-
-    // const loadResources = () => {
-    //     const loadImage = (image_object: ImageObject): Promise<ImageObject> => {
-    //         return new Promise((resolve, reject) => {
-    //             image_object.img.src = `${image_object.path}`
-    //             image_object.img.onload = () => resolve(image_object)
-    //             image_object.img.onerror = () => reject(`Failed to load image ${image_object.path}`)
-    //         })
-    //     }
-    //     const loadAudio = (audio_object: AudioObject): Promise<AudioObject> => {
-    //         return new Promise((resolve, reject) => {
-    //             audio_object.audio.src = audio_object.path
-    //             audio_object.audio.volume = audio_object.volume
-    //             audio_object.audio.addEventListener('canplaythrough', () => {
-    //                 resolve(audio_object)
-    //             })
-    //             audio_object.audio.addEventListener('error', () => {
-    //                 reject(`Failed to load audio ${audio_object.path}`)
-    //             })
-    //         })
-    //     }
-
-    //     const imagePromises = Object.values({...images, ...mapSpotImage}).map(loadImage)
-    //     const audioPromises = Object.values(audios).map(loadAudio)
-
-    //     Promise.all([imagePromises, audioPromises])
-    //     .then(() => {
-    //         console.log('All resources loaded')
-    //         setIsLoading(false)
-    //     })
-    //     .catch(err => {
-    //         console.error('Error while loading resources :', err)
-    //     })
-    // }
 
     const toggleFullScreen = () => {
         if (document.fullscreenElement === canvasRef.current){
