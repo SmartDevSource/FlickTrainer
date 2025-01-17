@@ -5,6 +5,7 @@ const timer: {last_update: number, delta_time: number} = {last_update: Date.now(
 const verticalOffset: {standup: number, crouch: number} = {standup: .4, crouch: 2}
 
 export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
+let shotTimeout: ReturnType<typeof setTimeout> | null = null
 
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
@@ -16,8 +17,7 @@ const getReactionTime = (difficulty: string) => {
 
 const shotPlayer = (target: Target) => {
     if (target.idle){
-        console.log("Target.idle :", target.idle)
-        console.log("Boum je te tire dessus !")
+        alert(target.idle)
     }
 }
 
@@ -41,6 +41,10 @@ export const getHeadCoordinates = (target: Target, screenOffset: Vector2, image:
 
 export const getRandomTarget = (targets: Target[]) => {
     const rndIndex = Math.floor(Math.random() * targets.length)
+    if (shotTimeout){
+        clearTimeout(shotTimeout)
+
+    }
     console.log("Random index target :", rndIndex)
     return targets[6]
 }
@@ -49,7 +53,6 @@ export const updateTarget = (target: Target, difficulty: string) => {
     timer.delta_time = (Date.now() - timer.last_update) / 1000
     timer.last_update = Date.now()
 
-    console.log("CURRENT TARGET IDLE :", target.idle)
     if (!target.idle){
         if (target.from.x < target.to.x){
             target.from.x += (target.speed * timer.delta_time)
@@ -62,7 +65,7 @@ export const updateTarget = (target: Target, difficulty: string) => {
                 if (target.from.x > target.to.x){
                     target.from.x = target.to.x
                     target.idle = true
-                    setTimeout(()=>{
+                    shotTimeout = setTimeout(()=>{
                         shotPlayer(target)
                     }, getReactionTime(difficulty))
                 }
@@ -71,7 +74,7 @@ export const updateTarget = (target: Target, difficulty: string) => {
                 if (target.from.x < target.to.x){
                     target.from.x = target.to.x
                     target.idle = true
-                    setTimeout(()=>{
+                    shotTimeout = setTimeout(()=>{
                         shotPlayer(target)
                     }, getReactionTime(difficulty))
                 }
