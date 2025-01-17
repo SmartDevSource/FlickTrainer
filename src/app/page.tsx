@@ -7,8 +7,8 @@ export default function Home() {
       <Canvas
         params={{
           map_name: 'vertigo',
-          spot_name: 'ctspawn_to_short',
-          difficulty: 'easy',
+          spot_name: 'ctspawn_to_mid',
+          difficulty: 'hard',
           mouse_sensitivity: 1
         }}
       />

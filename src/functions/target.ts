@@ -10,14 +10,14 @@ let shotTimeout: ReturnType<typeof setTimeout> | null = null
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
         case 'easy': return 1000
-        case 'medium': return 500
-        case 'hard': return 220
+        case 'medium': return 750
+        case 'hard': return 500
     }
 }
 
 const shotPlayer = (target: Target) => {
     if (target.idle){
-        alert(target.idle)
+        // alert(target.idle)
     }
 }
 
@@ -46,7 +46,7 @@ export const getRandomTarget = (targets: Target[]) => {
 
     }
     console.log("Random index target :", rndIndex)
-    return targets[6]
+    return targets[rndIndex]
 }
 
 export const updateTarget = (target: Target, difficulty: string) => {
