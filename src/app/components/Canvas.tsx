@@ -4,8 +4,8 @@ import { Target, Vector2, CanvasParams, Statistics } from '@/types'
 import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
-import { getRandomTarget, updateTarget, getHeadCoordinates, screenBoundaries } from '@/functions/target'
-import { drawTarget, drawWeapon, drawStatistics } from '@/functions/draw'
+import { getRandomTarget, updateTarget, getHeadCoordinates, screenBoundaries, shotTimeout } from '@/functions/target'
+import { drawTarget, drawWeapon, drawStatistics, drawPlayerDeath, initialWindowSize } from '@/functions/draw'
 import { initRecoil, updateRecoil } from '@/functions/recoil'
 import { loadResources } from '@/functions/utils'
 
@@ -13,6 +13,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const testDistance = useRef(1)
     const testPosition = useRef<Vector2>({x: 0, y: 0})
     const isFiring = useRef<boolean>(false)
+    const isPlayerDead = useRef<boolean>(false)
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null)
@@ -35,12 +36,25 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const currentSpot = structuredClone(mapsData[params.map_name][params.spot_name])
     const target = useRef<Target>(getRandomTarget(structuredClone(currentSpot.targets)))
 
-    const initialWindowSize = {w: 1024, h: 768}
     const screenOffset = useRef<Vector2>(structuredClone(currentSpot.initial_offset))
 
-    const updateFiringState = (state: boolean) => isFiring.current = state
+    const updateFiringState = (state: boolean) => {
+        isFiring.current = state
+    }
+    const updatePlayerDeath = (state: boolean) => {
+        isPlayerDead.current = state
+        statistics.current.deaths++
+        audios.player_death.audio.currentTime = 0
+        audios.player_death.audio.play()
+        setTimeout(() => { respawnPlayer()}, 1000)
+    }
     const generateTarget = () => {
         target.current = getRandomTarget(structuredClone(currentSpot.targets))
+    }
+    const respawnPlayer = () => {
+        isPlayerDead.current = false
+        generateTarget()
+        screenOffset.current = currentSpot.initial_offset
     }
 
     const initCanvas = () => {
@@ -59,10 +73,24 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         .then(() => {
             resizeCanvas()
             isFullScreen.current = true
+            generateTarget()
         })
         .catch(err => {
             console.error('Error while toggling in fullscreen mode :', err)
         })
+    }
+
+    const handleExitFullScreen = () => {
+        if (document.fullscreenElement){
+            if (document.pointerLockElement){
+                document.exitPointerLock()
+            }
+            document.exitFullscreen().then(() => {
+                if (shotTimeout){
+                    clearTimeout(shotTimeout)
+                }
+            }
+        )}
     }
 
     const resizeCanvas = () => {
@@ -84,12 +112,17 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
             
             updateRecoil(screenOffset.current)
-            updateTarget(target.current, params.difficulty)
 
             ctx.drawImage(
-                mapSpotImage.background.img, 
-                screenOffset.current.x, 
+                mapSpotImage.background.img,
+                screenOffset.current.x,
                 screenOffset.current.y
+            )
+            updateTarget(
+                target.current,
+                params.difficulty,
+                isFullScreen.current,
+                updatePlayerDeath
             )
             drawTarget(
                 target.current,
@@ -125,8 +158,14 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 (initialWindowSize.w / 2) - (images.crosshair.img.width / 2),
                 (initialWindowSize.h / 2) - (images.crosshair.img.height / 2)
             )
+            if (isPlayerDead.current){
+                drawPlayerDeath(ctx)
+            }
             drawStatistics(statistics.current, ctx)
-            ctx.fillText(`Off x : ${screenOffset.current.x} | Off y : ${screenOffset.current.y}`, 20, 80)
+            ctx.fillText(`Off x : ${screenOffset.current.x} | Off y : ${screenOffset.current.y}`,
+                20, 
+                80
+            )
             ctx.fillText(`Distance x : ${testDistance.current} | Position (x : ${testPosition.current.x}, y: ${testPosition.current.y})`,
                 20,
                 100
@@ -147,26 +186,28 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 case 'ArrowDown': testPosition.current.y += 5; break
                 case '+': testDistance.current -= .1; break
                 case '-': testDistance.current += .1; break
-                case 'Alt': case 'Meta':
-                    if (document.fullscreenElement){
-                        document.exitFullscreen().then(() => console.log("exited"))
-                    }
-                break
+                case 'Alt': case 'Meta': handleExitFullScreen(); break
             }
         }
         
         const handleFullscreenChange = () => {
             if (document.fullscreenElement !== canvasRef.current){
+                if (document.pointerLockElement){
+                    document.exitPointerLock()
+                }
                 if (canvasRef.current){
                     canvasRef.current.width = initialWindowSize.w
                     canvasRef.current.height = initialWindowSize.h
                     isFullScreen.current = false
+                    if (shotTimeout){
+                        clearTimeout(shotTimeout)
+                    }
                 }
             }
         }
 
         const handleMouseMove = (event: MouseEvent) => {
-            if (isFullScreen.current){
+            if (isFullScreen.current && !isPlayerDead.current){
                 const prevOffset = screenOffset.current
                 const newOffset = {
                     x: prevOffset.x - (event.movementX * (params.mouse_sensitivity - (params.mouse_sensitivity / 2))),
@@ -183,7 +224,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
 
         const handleMouseDown = (event: MouseEvent) => {
             // FIRING //
-            if (event.button === 0 && isFullScreen.current){
+            if (event.button === 0 && isFullScreen.current && !isPlayerDead.current){
                 if (!isFiring.current){
                     isFiring.current = true
                     audios.deagleshot.audio.currentTime = 0

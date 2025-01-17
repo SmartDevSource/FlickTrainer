@@ -1,11 +1,11 @@
-import { ImageObject, Target, Vector2 } from "@/types"
+import { ImageObject, Target, Vector2, Timer } from "@/types"
 
 const headOffset: number = 55
-const timer: {last_update: number, delta_time: number} = {last_update: Date.now(), delta_time: 0}
+const timer: Timer = {last_update: Date.now(), delta_time: 0}
 const verticalOffset: {standup: number, crouch: number} = {standup: .4, crouch: 2}
 
 export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
-let shotTimeout: ReturnType<typeof setTimeout> | null = null
+export let shotTimeout: ReturnType<typeof setTimeout> | null = null
 
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
@@ -15,9 +15,9 @@ const getReactionTime = (difficulty: string) => {
     }
 }
 
-const shotPlayer = (target: Target) => {
+const shotPlayer = (target: Target, updatePlayerDeath: (state: boolean) => void) => {
     if (target.idle){
-        // alert(target.idle)
+        updatePlayerDeath(true)
     }
 }
 
@@ -43,17 +43,16 @@ export const getRandomTarget = (targets: Target[]) => {
     const rndIndex = Math.floor(Math.random() * targets.length)
     if (shotTimeout){
         clearTimeout(shotTimeout)
-
     }
     console.log("Random index target :", rndIndex)
     return targets[rndIndex]
 }
 
-export const updateTarget = (target: Target, difficulty: string) => {
+export const updateTarget = (target: Target, difficulty: string, isFullscreen: boolean, updatePlayerDeath: (state: boolean) => void) => {
     timer.delta_time = (Date.now() - timer.last_update) / 1000
     timer.last_update = Date.now()
 
-    if (!target.idle){
+    if (!target.idle && isFullscreen){
         if (target.from.x < target.to.x){
             target.from.x += (target.speed * timer.delta_time)
         } else if (target.from.x > target.to.x){
@@ -66,7 +65,7 @@ export const updateTarget = (target: Target, difficulty: string) => {
                     target.from.x = target.to.x
                     target.idle = true
                     shotTimeout = setTimeout(()=>{
-                        shotPlayer(target)
+                        shotPlayer(target, updatePlayerDeath)
                     }, getReactionTime(difficulty))
                 }
             break
@@ -75,7 +74,7 @@ export const updateTarget = (target: Target, difficulty: string) => {
                     target.from.x = target.to.x
                     target.idle = true
                     shotTimeout = setTimeout(()=>{
-                        shotPlayer(target)
+                        shotPlayer(target, updatePlayerDeath)
                     }, getReactionTime(difficulty))
                 }
             break

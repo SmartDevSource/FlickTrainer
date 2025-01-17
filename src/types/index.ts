@@ -1,3 +1,8 @@
+export interface Timer {
+    last_update: number, 
+    delta_time: number
+}
+
 export interface Vector2 {
     x: number,
     y: number

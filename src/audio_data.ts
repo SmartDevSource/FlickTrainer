@@ -11,4 +11,9 @@ export const audios: {[key: string]: AudioObject} = {
         volume: 1,
         audio: new Audio(),
     },
+    player_death: {
+        path: `/audio/player_death.mp3`,
+        volume: .5,
+        audio: new Audio()
+    }
 }

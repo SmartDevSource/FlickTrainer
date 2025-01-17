@@ -1,6 +1,7 @@
-import { ImageObject, Statistics, Target, Vector2 } from "@/types"
+import { ImageObject, Statistics, Target, Vector2, Timer } from "@/types"
 
-const timer: {last_update: number, delta_time: number} = {last_update: Date.now(), delta_time: 0}
+const timer: Timer = {last_update: Date.now(), delta_time: 0}
+
 const weaponAnim: {
     current_frame: number,
     last_update: number,
@@ -14,7 +15,15 @@ const weaponAnim: {
     speed_shot_animation: 7.4,
     frames_count: 20
 }
+const deathAnim: {
+    opacity: number,
+    update_delay: number
+} = {
+    opacity: 0,
+    update_delay: 5
+}
 
+export const initialWindowSize = {w: 1024, h: 768}
 export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
 
 export const drawWeapon = (ctx: CanvasRenderingContext2D, 
@@ -97,4 +106,15 @@ export const drawStatistics = (statistics: Statistics, ctx: CanvasRenderingConte
     ctx.strokeRect(870, 31, 80 + kdBoxLength, 25)
     ctx.fillStyle = 'rgb(255, 255, 255)'
     ctx.fillText(`KD : ${kd}`, 890, 50)
+}
+
+export const drawPlayerDeath = (ctx: CanvasRenderingContext2D) => {
+    if (deathAnim.opacity < 1){
+        deathAnim.opacity += timer.delta_time * deathAnim.update_delay
+        if (deathAnim.opacity > 1){
+            deathAnim.opacity = 1
+        }
+    }
+    ctx.fillStyle = `rgba(0, 0, 0, ${deathAnim.opacity})`
+    ctx.fillRect(0, 0, initialWindowSize.w, initialWindowSize.h)
 }
