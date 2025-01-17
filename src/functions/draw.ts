@@ -1,13 +1,19 @@
 import { ImageObject, Statistics, Target, Vector2 } from "@/types"
 
-let lastUpdate: number = Date.now()
-let deltaTime: number = 0
-let currentWeaponFrame: number = 0
-let lastWeaponUpdate: number = 0
-let weaponUpdateDelay: number = .07
-
-const speedShotAnimation: number = 7.4
-const weaponFramesCount: number = 20
+const timer: {last_update: number, delta_time: number} = {last_update: Date.now(), delta_time: 0}
+const weaponAnim: {
+    current_frame: number,
+    last_update: number,
+    update_delay: number,
+    speed_shot_animation: number,
+    frames_count: number
+} = {
+    current_frame: 0,
+    last_update: 0,
+    update_delay: .07,
+    speed_shot_animation: 7.4,
+    frames_count: 20
+}
 
 export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
 
@@ -17,24 +23,24 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
                             isFiring: boolean, 
                             updateFiringState: (state: boolean) => void) => 
 {
-    deltaTime = (Date.now() - lastUpdate) / 1000
-    lastUpdate = Date.now()
+    timer.delta_time = (Date.now() - timer.last_update) / 1000
+    timer.last_update = Date.now()
 
-    if (isFiring && currentWeaponFrame < weaponFramesCount - 1){
-        lastWeaponUpdate += deltaTime * speedShotAnimation
-        if (lastWeaponUpdate > weaponUpdateDelay){
-            lastWeaponUpdate = 0
-            currentWeaponFrame++
-            if (currentWeaponFrame >= weaponFramesCount - 1){
+    if (isFiring && weaponAnim.current_frame < weaponAnim.frames_count - 1){
+        weaponAnim.last_update += timer.delta_time * weaponAnim.speed_shot_animation
+        if (weaponAnim.last_update > weaponAnim.update_delay){
+            weaponAnim.last_update = 0
+            weaponAnim.current_frame++
+            if (weaponAnim.current_frame >= weaponAnim.frames_count - 1){
                 updateFiringState(false)
-                currentWeaponFrame = 0
+                weaponAnim.current_frame = 0
             }
         }
     }
-    const frame_width = weaponImg.img.width / weaponFramesCount
+    const frame_width = weaponImg.img.width / weaponAnim.frames_count
     ctx.drawImage(
         weaponImg.img,
-        currentWeaponFrame * frame_width,
+        weaponAnim.current_frame * frame_width,
         0,
         frame_width,
         weaponImg.img.height,
@@ -43,7 +49,7 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
         frame_width - 150,
         weaponImg.img.height - 150
     )
-    if (currentWeaponFrame == 2){
+    if (weaponAnim.current_frame == 2){
         ctx.drawImage(
             flameImg.img,
             0,

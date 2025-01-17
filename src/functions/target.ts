@@ -1,9 +1,7 @@
 import { ImageObject, Target, Vector2 } from "@/types"
 
-let lastUpdate: number = Date.now()
-let deltaTime: number = 0
-
 const headOffset: number = 55
+const timer: {last_update: number, delta_time: number} = {last_update: Date.now(), delta_time: 0}
 const verticalOffset: {standup: number, crouch: number} = {standup: .4, crouch: 2}
 
 export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
@@ -13,6 +11,13 @@ const getReactionTime = (difficulty: string) => {
         case 'easy': return 1000
         case 'medium': return 500
         case 'hard': return 220
+    }
+}
+
+const shotPlayer = (target: Target) => {
+    if (target.idle){
+        console.log("Target.idle :", target.idle)
+        console.log("Boum je te tire dessus !")
     }
 }
 
@@ -37,18 +42,19 @@ export const getHeadCoordinates = (target: Target, screenOffset: Vector2, image:
 export const getRandomTarget = (targets: Target[]) => {
     const rndIndex = Math.floor(Math.random() * targets.length)
     console.log("Random index target :", rndIndex)
-    return targets[rndIndex]
+    return targets[6]
 }
 
 export const updateTarget = (target: Target, difficulty: string) => {
-    deltaTime = (Date.now() - lastUpdate) / 1000
-    lastUpdate = Date.now()
+    timer.delta_time = (Date.now() - timer.last_update) / 1000
+    timer.last_update = Date.now()
 
+    console.log("CURRENT TARGET IDLE :", target.idle)
     if (!target.idle){
         if (target.from.x < target.to.x){
-            target.from.x += (target.speed * deltaTime)
+            target.from.x += (target.speed * timer.delta_time)
         } else if (target.from.x > target.to.x){
-            target.from.x -= (target.speed * deltaTime)
+            target.from.x -= (target.speed * timer.delta_time)
         }
 
         switch(target.come_from){
@@ -56,18 +62,18 @@ export const updateTarget = (target: Target, difficulty: string) => {
                 if (target.from.x > target.to.x){
                     target.from.x = target.to.x
                     target.idle = true
-                    // setTimeout(()=>{
-                    //     alert("Boom !")
-                    // }, getReactionTime(difficulty))
+                    setTimeout(()=>{
+                        shotPlayer(target)
+                    }, getReactionTime(difficulty))
                 }
             break
             case 'right':
                 if (target.from.x < target.to.x){
                     target.from.x = target.to.x
                     target.idle = true
-                    // setTimeout(()=>{
-                    //     alert("Boom !")
-                    // }, getReactionTime(difficulty))
+                    setTimeout(()=>{
+                        shotPlayer(target)
+                    }, getReactionTime(difficulty))
                 }
             break
         }

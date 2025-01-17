@@ -213,7 +213,6 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 if (newOffset.y < screenBoundaries.top && newOffset.y > screenBoundaries.bottom){
                     screenOffset.current.y = newOffset.y
                 }
-                console.table(screenOffset.current)
             }
         }
 
