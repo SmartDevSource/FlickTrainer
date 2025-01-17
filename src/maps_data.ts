@@ -165,6 +165,60 @@ export const mapsData: MapsData = {
                     distance: 6.09,
                     speed: 60
                 },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 805, y: 555},
+                    to: {x: 840, y: 555},
+                    idle: false,
+                    distance: 6.09,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 872, y: 555},
+                    to: {x: 880, y: 555},
+                    idle: false,
+                    distance: 11.59,
+                    speed: 30
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'left',
+                    from: {x: 890, y: 550},
+                    to: {x: 895, y: 550},
+                    idle: false,
+                    distance: 12.79,
+                    speed: 15
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'right',
+                    from: {x: 960, y: 550},
+                    to: {x: 947, y: 550},
+                    idle: false,
+                    distance: 8.29,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'right',
+                    from: {x: 975, y: 552},
+                    to: {x: 955, y: 552},
+                    idle: false,
+                    distance: 13.39,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'right',
+                    from: {x: 1040, y: 555},
+                    to: {x: 1020 , y: 555},
+                    idle: false,
+                    distance: 6.09,
+                    speed: 60
+                },
             ] as Target[],
             initial_offset: {
                 x: -420,

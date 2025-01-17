@@ -1,12 +1,12 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { ImageObject, Target, Vector2, CanvasParams, Statistics, AudioObject, RecoilSettings } from '@/types'
+import { ImageObject, Target, Vector2, CanvasParams, Statistics, AudioObject } from '@/types'
 import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
-import { getRandomTarget, updateTimers, updateTarget, drawTarget, 
-        drawWeapon, drawStatistics, getHeadCoordinates, screenBoundaries } from '@/utils'
-import { initRecoil, updateRecoil } from '@/recoil_system'
+import { getRandomTarget, updateTarget, getHeadCoordinates, screenBoundaries } from '@/functions/target'
+import { drawTarget, drawWeapon, drawStatistics } from '@/functions/draw'
+import { initRecoil, updateRecoil } from '@/functions/recoil'
 
 const Canvas = ({params}: {params: CanvasParams}) => {
     const testDistance = useRef(1)
@@ -118,7 +118,6 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         if (ctx && canvasRef.current){
             ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
             
-            updateTimers()
             updateRecoil(screenOffset.current)
             updateTarget(target.current, params.difficulty)
 
@@ -162,7 +161,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 (initialWindowSize.h / 2) - (images.crosshair.img.height / 2)
             )
             drawStatistics(statistics.current, ctx)
-            ctx.fillText(`Off x : ${screenOffset.current.x} | Off y : ${screenOffset.current.y}`, 20, 50)
+            ctx.fillText(`Off x : ${screenOffset.current.x} | Off y : ${screenOffset.current.y}`, 20, 80)
             ctx.fillText(`Distance x : ${testDistance.current} | Position (x : ${testPosition.current.x}, y: ${testPosition.current.y})`,
                 20,
                 100
@@ -264,12 +263,15 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         }
     }, [])
 
-    useEffect(()=>{ 
+    useEffect(() => { 
         if (ctx) {
             loadResources()
         }
     }, [ctx])
-    useEffect(()=>{ if (!isLoading) draw()}, [isLoading])
+
+    useEffect(() => {
+        if (!isLoading) draw()
+    }, [isLoading])
 
     return (
         <canvas

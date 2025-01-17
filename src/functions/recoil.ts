@@ -1,5 +1,5 @@
-import { RecoilSettings, Vector2 } from "./types"
-import { screenBoundaries } from "./utils"
+import { RecoilSettings, Vector2 } from "@/types"
+import { screenBoundaries } from "./target"
 
 const recoilSettings: RecoilSettings = {
         start_position: {x: 0, y: 0},
