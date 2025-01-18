@@ -1,4 +1,7 @@
-import Navbar from '@/app/components/Navbar'
+'use client'
+import { Navbar } from '@/app/components/Navbar'
+import { SettingsModal } from '@/app/components/SettingsModal'
+import { useEffect, useState } from 'react'
 
 const maps = [
     { logo: 'dust2_logo.jpg' },
@@ -11,9 +14,17 @@ const maps = [
 ]
 
 export default function Settings() {
+    const [selectedMap, setSelectedMap] = useState<string>('')
+
     return (
         <>
             <Navbar/>
+            {selectedMap &&
+                <SettingsModal 
+                    onClose={() => setSelectedMap('')}
+                    selectedMap={selectedMap}
+                />
+            }
             <h1 className='text-center text-white text-4xl m-8'>
                 Sélectionnez votre map
             </h1>
@@ -26,6 +37,7 @@ export default function Settings() {
                                 shadow-[0px_0px_10px_1px_rgba(255,255,255,1)]
                                 hover:scale-125 transition duration-200
                                 cursor-pointer"
+                            onClick={()=>setSelectedMap(current_map.logo.split('_')[0])}
                             >
                             <img
                                 src={`/web/images/${current_map.logo}`}

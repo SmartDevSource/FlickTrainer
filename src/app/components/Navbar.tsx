@@ -1,6 +1,6 @@
 import Link from "next/link"
 
-export default function Navbar() {
+export const Navbar = () => {
     return (
       <div className="w-full bg-gray-800 text-white py-4 shadow-md z-50 ">
             <div className="flex justify-between px-6">
