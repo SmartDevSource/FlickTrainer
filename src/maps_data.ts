@@ -294,10 +294,10 @@ export const mapsData: MapsData = {
                     character: 'terrorist_standup',
                     come_from: 'right',
                     from: {x: 850, y: 600},
-                    to: {x: 770, y: 600},
+                    to: {x: 780, y: 600},
                     idle: false,
                     distance: 3.5,
-                    speed: 120
+                    speed: 130
                 },
             ] as Target[],
             initial_offset: {
