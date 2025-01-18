@@ -97,11 +97,11 @@ export const mapsData: MapsData = {
                 {
                     character: 'terrorist_standup_darken',
                     come_from: 'right',
-                    from: {x: 980, y: 535},
-                    to: {x: 930, y: 535},
+                    from: {x: 970, y: 535},
+                    to: {x: 935, y: 535},
                     idle: false,
                     distance: 3.2,
-                    speed: 100
+                    speed: 130
                 },
             ] as Target[],
             initial_offset: {
