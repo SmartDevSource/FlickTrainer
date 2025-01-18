@@ -3,7 +3,7 @@ import Link from "next/link"
 
 const Home = () => {
   return (
-    <div className="relative bg-gray-900 overflow-hidden">
+    <div className="relative bg-gray-900 overflow-hidden animate-fadeIn">
       <div className="absolute inset-0">
         <Image
           src="/web/images/cs2_bg.jpg"
@@ -27,7 +27,7 @@ const Home = () => {
         </p>
 
         <div className="mt-8 flex flex-wrap justify-center gap-4">
-            <Link href="/training" 
+            <Link href="/settings" 
                   className="inline-flex items-center px-6 py-3 text-lg font-medium
                             text-white bg-orange-500 rounded-md shadow-md 
                             hover:shadow-[0px_0px_25px_3px_rgba(255,255,255,0.8)] 
