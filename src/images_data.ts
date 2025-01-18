@@ -1,10 +1,6 @@
 import { ImageObject } from "./types"
 
 export const images: {[key: string]: ImageObject} = {
-    dust2_logo: {
-        path: `/web/images/dust2_logo.png`,
-        img: new Image(),
-    },
     crosshair: {
         path: `/gfx/hud/crosshair.png`,
         img: new Image(),
