@@ -10,7 +10,7 @@ export let shotTimeout: ReturnType<typeof setTimeout> | null = null
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
         case 'easy': return 1000 /// 1000
-        case 'medium': return 750
+        case 'medium': return 750000000
         case 'hard': return 500
     }
 }
@@ -27,7 +27,7 @@ export const getHeadCoordinates = (target: Target, screenOffset: Vector2, image:
             x: (target.from.x + screenOffset.x) +
                (((image.img.width / 2) -
                ((headOffset + (headOffset / 2)) / 2)) /
-               (target.distance + 2)),
+               (target.distance + 3)),
             y: (target.from.y + screenOffset.y) +
                (target.character.includes('crouch') ? verticalOffset.crouch : verticalOffset.standup) *
                (headOffset / target.distance),
@@ -58,6 +58,9 @@ export const updateTarget = (target: Target, difficulty: string, isFullscreen: b
         } else if (target.from.x > target.to.x){
             target.from.x -= (target.speed * timer.delta_time)
         }
+        if (target.from.y > target.to.y){
+            target.from.y -= (target.speed * timer.delta_time)
+        }
 
         switch(target.come_from){
             case 'left':
@@ -72,6 +75,15 @@ export const updateTarget = (target: Target, difficulty: string, isFullscreen: b
             case 'right':
                 if (target.from.x < target.to.x){
                     target.from.x = target.to.x
+                    target.idle = true
+                    shotTimeout = setTimeout(()=>{
+                        shotPlayer(target, updatePlayerDeath)
+                    }, getReactionTime(difficulty))
+                }
+            break
+            case 'down':
+                if (target.from.y < target.to.y){
+                    target.from.y = target.to.y
                     target.idle = true
                     shotTimeout = setTimeout(()=>{
                         shotPlayer(target, updatePlayerDeath)

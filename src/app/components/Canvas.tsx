@@ -131,7 +131,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 images[target.current.character]
             )
             ctx.drawImage(
-                images.terrorist_standup.img,
+                images.terrorist_standup_darken.img,
                 0,
                 0,
                 images.terrorist_crouch.img.width,
@@ -153,6 +153,18 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 isFiring.current,
                 updateFiringState
             )
+            // const headCoordinates = getHeadCoordinates(
+            //     target.current,
+            //     screenOffset.current,
+            //     images[target.current.character]
+            // )
+            // ctx.fillStyle = 'rgba(255, 0, 0, .5)'
+            // ctx.fillRect(
+            //     headCoordinates.position.x,
+            //     headCoordinates.position.y,
+            //     headCoordinates.scale.w,
+            //     headCoordinates.scale.h
+            // )
             ctx.drawImage(
                 images.crosshair.img,
                 (initialWindowSize.w / 2) - (images.crosshair.img.width / 2),
