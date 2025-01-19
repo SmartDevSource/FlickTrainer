@@ -8,17 +8,21 @@ interface SettingsParams {
 }
 
 const circuits = [
-    "circuit_1",
-    "circuit_2",
-    "circuit_3",
+    "ct_circuit",
+    "terrorist_circuit",
 ]
 
 export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) => {
     const [selectedMode, setSelectedMode] = useState<'circuit' | 'spot'>('circuit')
     const [gamePathType, setGamePathType] = useState<string>('')
     const [showImageModal, setShowImageModal] = useState<string>('')
-    const [selectedCircuit, setSelectedCircuit] = useState<string>('')
+    const [selectedCircuit, setSelectedCircuit] = useState<string>('ct_circuit')
     const [selectedSpot, setSelectedSpot] = useState<string>('')
+
+    const normalizeCircuitName = (circuit_name: string) => {
+        const firstWord = circuit_name.split('_')[0]
+        return firstWord.charAt(0).toUpperCase() + firstWord.slice(1)
+    }
 
     const handleClose = () => {
         onClose()
@@ -42,13 +46,17 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
     useEffect(()=>{
         switch(selectedMode){
             case 'circuit':
-                setSelectedCircuit('circuit_1')
+                // setSelectedCircuit('ct_circuit')
             break
             case 'spot':
-                setSelectedCircuit('spot_1')
+                // setSelectedCircuit('spot_1')
             break
         }
     }, [selectedMode])
+
+    useEffect(()=>{
+        console.log(selectedCircuit)
+    }, [selectedCircuit])
 
     return (
         <div
@@ -125,7 +133,7 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
                                             bg-gray-400 rounded-lg  hover:bg-gray-300 min-w-16"
                                     onClick={() => handleGamePathType(true)}
                                 >
-                                    ...
+                                    {selectedMode === 'circuit' ? normalizeCircuitName(selectedCircuit) : '...'}
                                 </button>
                             </div>
                         </div>
@@ -151,12 +159,15 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
                     }
                     {gamePathType === 'circuit' &&
                     <div className="flex justify-center p-3">
-                        <div className="grid grid-cols-3 gap-8 bg-transparent">
+                        <div className="grid grid-cols-2 gap-8 bg-transparent">
                             {circuits.map((circuit, index) => (
                                 <div
                                     key={`circuit${index}`}
                                     className="flex justify-center items-center flex-col"
                                 >
+                                    <p className="text-white">
+                                        {normalizeCircuitName(circuit)}
+                                    </p>
                                     <img
                                         src={`/web/images/map_circuits/${selectedMap}/${circuit}.png`}
                                         className={`max-h-[150px] object-contain rounded-lg select-none cursor-pointer 
@@ -182,7 +193,7 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
                     }
                     {gamePathType &&
                     <div className="flex items-center justify-end p-4 md:p-5 border-t">
-                        <button
+                        {/* <button
                             type="button"
                             className="py-2.5 px-5 ms-3 text-sm text-white focus:outline-none
                                     bg-red-500 rounded-lg  hover:bg-red-400 flex items-center justify-center"
@@ -191,11 +202,12 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
                             </svg>
-                        </button>
+                        </button> */}
                         <button
                             type="button"
                             className="py-2.5 px-5 ms-3 text-sm text-gray-600 focus:outline-none
                                     bg-green-400 rounded-lg  hover:bg-green-300 min-w-24"
+                            onClick={() => handleGamePathType(false)}
                         >
                             Valider
                         </button>

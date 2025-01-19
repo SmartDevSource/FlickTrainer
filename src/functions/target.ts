@@ -7,7 +7,7 @@ const verticalOffset: {standup: number, crouch: number} = {standup: .4, crouch: 
 export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
 export let shotTimeout: ReturnType<typeof setTimeout> | null = null
 
-const xScaleOffset:number = 1.5
+const xScaleOffset: number = 1.5
 
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
