@@ -7,6 +7,19 @@ interface SettingsParams {
     selectedMap: string
 }
 
+interface Spot {
+    [key:string]: string[]
+}
+
+const spots: Spot = {
+    vertigo: [
+        'ctspawn_to_mid',
+        'ctspawn_to_short',
+        'ctspawn_to_b',
+        'connector_to_mid'
+    ],
+}
+
 const circuits = [
     "ct_circuit",
     "terrorist_circuit",
@@ -17,11 +30,16 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
     const [gamePathType, setGamePathType] = useState<string>('')
     const [showImageModal, setShowImageModal] = useState<string>('')
     const [selectedCircuit, setSelectedCircuit] = useState<string>('ct_circuit')
-    const [selectedSpot, setSelectedSpot] = useState<string>('')
+    const [selectedSpot, setSelectedSpot] = useState<string>(spots[selectedMap][0])
+    const [selectedDifficulty, setSelectedDifficulty] = useState<string>('easy')
 
     const normalizeCircuitName = (circuit_name: string) => {
         const firstWord = circuit_name.split('_')[0]
         return firstWord.charAt(0).toUpperCase() + firstWord.slice(1)
+    }
+
+    const normalizeSpotName = (spot_name: string) => {
+        return spot_name.split('_').join(' ').toUpperCase()
     }
 
     const handleClose = () => {
@@ -43,20 +61,13 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
         }
     }
 
-    useEffect(()=>{
-        switch(selectedMode){
-            case 'circuit':
-                // setSelectedCircuit('ct_circuit')
-            break
-            case 'spot':
-                // setSelectedCircuit('spot_1')
-            break
-        }
-    }, [selectedMode])
+    const handleDifficultySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedDifficulty(e.target.value)
+    }
 
     useEffect(()=>{
-        console.log(selectedCircuit)
-    }, [selectedCircuit])
+        console.log("Selected Difficulty :", selectedDifficulty)
+    }, [selectedDifficulty])
 
     return (
         <div
@@ -66,8 +77,10 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
                 <ImageModal
                     onClose={() => setShowImageModal('')}
                     image_path={showImageModal}
+                    selectedMap={selectedMap}
                 />
             }
+
             <div className="relative p-4 w-full max-w-2xl">
                 <div className="relative bg-gray-700 rounded-lg shadow dark:bg-gray-700">
                     <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
@@ -99,7 +112,7 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
                         </button>
                     </div>
 
-                    {!gamePathType && 
+                    {!gamePathType &&
                     <>
                         <div className="flex flex-col">
                             <div className="p-4 flex flex-row justify-between items-center">
@@ -125,7 +138,7 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
                             </div>
                             <div className="p-4 flex flex-row justify-between items-center">
                                 <p className="text-base leading-relaxed text-white">
-                                    Sélection du {selectedMode} 
+                                    Sélection du {selectedMode}
                                 </p>
                                 <button
                                     type="button"
@@ -133,8 +146,32 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
                                             bg-gray-400 rounded-lg  hover:bg-gray-300 min-w-16"
                                     onClick={() => handleGamePathType(true)}
                                 >
-                                    {selectedMode === 'circuit' ? normalizeCircuitName(selectedCircuit) : '...'}
+                                    {
+                                        selectedMode === 'circuit' ?
+                                        normalizeCircuitName(selectedCircuit) :
+                                        normalizeSpotName(selectedSpot)
+                                    }
                                 </button>
+                            </div>
+
+                            <div className="p-4 flex flex-row justify-between items-center">
+                                <p className="text-base leading-relaxed text-white">
+                                    Difficulté
+                                </p>
+                                <form className="max-w-sm">
+                                    <select
+                                        id="difficulty"
+                                        className="bg-gray-50 border border-gray-300
+                                            text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                                            focus:border-blue-500 block w-full p-2.5"
+                                        onChange={handleDifficultySelect}
+                                    >
+                                        <option value="easy">Facile</option>
+                                        <option value="medium">Moyen</option>
+                                        <option value="hard">Difficile</option>
+                                        <option value="faceit_peek">Faceit Peek</option>
+                                    </select>
+                                </form>
                             </div>
                         </div>
 
@@ -157,6 +194,7 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
                         </div>
                     </>
                     }
+
                     {gamePathType === 'circuit' &&
                     <div className="flex justify-center p-3">
                         <div className="grid grid-cols-2 gap-8 bg-transparent">
@@ -186,11 +224,37 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
                         </div>
                     </div>
                     }
+
                     {gamePathType === 'spot' &&
-                    <>
-                        <h1>Spot !</h1>
-                    </>
+                    <div className="flex justify-center p-3">
+                        <div className="grid grid-cols-2 gap-8 bg-transparent">
+                            {spots[selectedMap].map((spot, index) => (
+                                <div
+                                    key={`spot${index}`}
+                                    className="flex justify-center items-center flex-col"
+                                >
+                                    <p className="text-white">
+                                        {normalizeSpotName(spot)}
+                                    </p>
+                                    <img
+                                        src={`/gfx/maps/${selectedMap}/${spot}.png`}
+                                        className={`max-h-[150px] object-contain rounded-lg select-none cursor-pointer 
+                                            ${selectedSpot === spot ? "p-0.5 bg-white" : ""}`}
+                                        onClick={() => setSelectedSpot(spot)}
+                                    />
+                                    <button
+                                        className="my-2 px-3 text-lg text-gray-700 focus:outline-none
+                                            bg-gray-300 rounded-lg hover:bg-gray-400 w-full"
+                                        onClick={() => setShowImageModal(`/gfx/maps/${selectedMap}/${spot}.png`)}
+                                    >
+                                        Voir
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                     }
+
                     {gamePathType &&
                     <div className="flex items-center justify-end p-4 md:p-5 border-t">
                         {/* <button
