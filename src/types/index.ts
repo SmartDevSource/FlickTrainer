@@ -49,5 +49,6 @@ export interface RecoilSettings {
     offset_max: {x: number, y:number},
     x_direction: string,
     reverse: boolean,
-    is_running: boolean
+    is_running: boolean,
+    speed: number
 }

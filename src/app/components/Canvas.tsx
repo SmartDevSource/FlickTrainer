@@ -165,7 +165,6 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             //     headCoordinates.scale.w,
             //     headCoordinates.scale.h
             // )
-
             ctx.drawImage(
                 images.crosshair.img,
                 (initialWindowSize.w / 2) - (images.crosshair.img.width / 2),

@@ -8,10 +8,11 @@ const recoilSettings: RecoilSettings = {
         end_position: {x: 0, y: 0},
         current_offset: {x: 0, y: 0},
         offset_step: {x: 1, y: 3},
-        offset_max: {x: 4, y: 18},
+        offset_max: {x: 4, y: 14},
         x_direction: '',
         reverse: false,
         is_running: false,
+        speed: 100
 }
 
 export const initRecoil = (screenOffset: Vector2) => {
@@ -34,18 +35,21 @@ export const updateRecoil = (screenOffset: Vector2) => {
     timer.last_update = Date.now()
 
     if (recoilSettings.is_running){
+        const x_step = recoilSettings.offset_step.x * timer.delta_time * recoilSettings.speed
+        const y_step = recoilSettings.offset_step.y * timer.delta_time * recoilSettings.speed
+        
         if (!recoilSettings.reverse){
             if (recoilSettings.current_offset.y < recoilSettings.offset_max.y){
-                recoilSettings.current_offset.y += recoilSettings.offset_step.y
+                recoilSettings.current_offset.y += y_step
                 switch(recoilSettings.x_direction){
                     case 'left':
                         if (recoilSettings.current_offset.x > -recoilSettings.offset_max.x){
-                            recoilSettings.current_offset.x += recoilSettings.offset_step.x
+                            recoilSettings.current_offset.x += x_step
                         }
                     break
                     case 'right':
                         if (recoilSettings.current_offset.x < recoilSettings.offset_max.x){
-                            recoilSettings.current_offset.x -= recoilSettings.offset_step.x
+                            recoilSettings.current_offset.x -= x_step
                         }
                     break
                 }
@@ -66,16 +70,16 @@ export const updateRecoil = (screenOffset: Vector2) => {
         }
         if (recoilSettings.reverse){
             if (recoilSettings.current_offset.y > 0){
-                recoilSettings.current_offset.y -= recoilSettings.offset_step.y
+                recoilSettings.current_offset.y -= y_step
                 switch(recoilSettings.x_direction){
                     case 'left':
                         if (recoilSettings.current_offset.x < -recoilSettings.offset_max.x){
-                            recoilSettings.current_offset.x -= recoilSettings.offset_step.x
+                            recoilSettings.current_offset.x -= x_step
                         }
                     break
                     case 'right':
                         if (recoilSettings.current_offset.x > recoilSettings.offset_max.x){
-                            recoilSettings.current_offset.x += recoilSettings.offset_step.x
+                            recoilSettings.current_offset.x += x_step
                         }
                     break
                 }
