@@ -82,7 +82,7 @@ export const drawTarget = (target: Target, screenOffset: Vector2, ctx: CanvasRen
         targetImg.img.height,
         target.from.x + screenOffset.x,
         target.from.y + screenOffset.y,
-        targetImg.img.width / (target.distance + 3),
+        targetImg.img.width / (target.distance + 1.5),
         targetImg.img.height / target.distance
     )
 }

@@ -131,15 +131,15 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 images[target.current.character]
             )
             ctx.drawImage(
-                images.terrorist_standup_darken.img,
+                images.terrorist_standup.img,
                 0,
                 0,
-                images.terrorist_crouch.img.width,
-                images.terrorist_crouch.img.height,
+                images.terrorist_standup.img.width,
+                images.terrorist_standup.img.height,
                 testPosition.current.x + screenOffset.current.x,
                 testPosition.current.y + screenOffset.current.y,
-                images.terrorist_crouch.img.width / testDistance.current,
-                images.terrorist_crouch.img.height / testDistance.current
+                images.terrorist_standup.img.width / testDistance.current,
+                images.terrorist_standup.img.height / testDistance.current
             )
             ctx.drawImage(
                 mapSpotImage.layer.img,
@@ -165,6 +165,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             //     headCoordinates.scale.w,
             //     headCoordinates.scale.h
             // )
+
             ctx.drawImage(
                 images.crosshair.img,
                 (initialWindowSize.w / 2) - (images.crosshair.img.width / 2),
@@ -178,10 +179,17 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 20, 
                 80
             )
-            ctx.fillText(`Distance x : ${testDistance.current} | Position (x : ${testPosition.current.x}, y: ${testPosition.current.y})`,
+            ctx.fillText(`Distance x : ${testDistance.current} | Position (x : ${testPosition.current.x + 20}, y: ${testPosition.current.y})`,
                 20,
                 100
             )
+            if (!isFullScreen.current){
+                ctx.fillStyle = 'rgba(0, 0, 0, .5)'
+                ctx.fillRect(0, 0, initialWindowSize.w, initialWindowSize.h)
+                ctx.fillStyle = 'white'
+                ctx.font = 'bold 30px Play-Bold'
+                ctx.fillText("Pause", 465, 400)
+            }
             requestAnimationFrame(draw)
         }
     }

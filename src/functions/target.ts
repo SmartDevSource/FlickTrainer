@@ -7,11 +7,14 @@ const verticalOffset: {standup: number, crouch: number} = {standup: .4, crouch: 
 export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
 export let shotTimeout: ReturnType<typeof setTimeout> | null = null
 
+const xScaleOffset:number = 1.5
+
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
-        case 'easy': return 1000 /// 1000
-        case 'medium': return 750000000
-        case 'hard': return 500
+        case 'easy': return 1000
+        case 'medium': return 850
+        case 'hard': return 750
+        case 'faceit_peek': return 500
     }
 }
 
@@ -27,13 +30,13 @@ export const getHeadCoordinates = (target: Target, screenOffset: Vector2, image:
             x: (target.from.x + screenOffset.x) +
                (((image.img.width / 2) -
                ((headOffset + (headOffset / 2)) / 2)) /
-               (target.distance + 3)),
+               (target.distance + xScaleOffset)),
             y: (target.from.y + screenOffset.y) +
                (target.character.includes('crouch') ? verticalOffset.crouch : verticalOffset.standup) *
                (headOffset / target.distance),
         },
         scale: {
-            w: headOffset / (target.distance + 2),
+            w: headOffset / (target.distance + xScaleOffset),
             h: headOffset / target.distance + 5
         }
     }

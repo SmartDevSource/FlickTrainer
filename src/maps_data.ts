@@ -308,76 +308,121 @@ export const mapsData: MapsData = {
         ctspawn_to_b: {
             targets: [
                 {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'down',
-                    from: {x: 815, y: 500},
-                    to: {x: 815, y: 410},
+                    character: 'terrorist_standup_darken',
+                    come_from: 'right',
+                    from: {x: 730, y: 530},
+                    to: {x: 697, y: 530},
                     idle: false,
-                    distance: 5.4,
-                    speed: 200
+                    distance: 5.39,
+                    speed: 100
                 },
                 {
                     character: 'terrorist_crouch_darken',
-                    come_from: 'down',
-                    from: {x: 795, y: 500},
-                    to: {x: 795, y: 410},
+                    come_from: 'right',
+                    from: {x: 730, y: 525},
+                    to: {x: 697, y: 525},
                     idle: false,
-                    distance: 5.4,
-                    speed: 200
+                    distance: 5.39,
+                    speed: 70
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'right',
+                    from: {x: 875, y: 520},
+                    to: {x: 840, y: 520},
+                    idle: false,
+                    distance: 3.3,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'right',
+                    from: {x: 875, y: 522},
+                    to: {x: 840, y: 522},
+                    idle: false,
+                    distance: 3.3,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'left',
+                    from: {x: 1300, y: 565},
+                    to: {x: 1340, y: 565},
+                    idle: false,
+                    distance: 3.4,
+                    speed: 100
                 },
                 {
                     character: 'terrorist_crouch',
                     come_from: 'left',
-                    from: {x: 910, y: 560},
-                    to: {x: 940, y: 560},
+                    from: {x: 1300, y: 565},
+                    to: {x: 1340, y: 565},
                     idle: false,
-                    distance: 6.4,
-                    speed: 50
-                },
-                {
-                    character: 'terrorist_standup',
-                    come_from: 'left',
-                    from: {x: 920, y: 555},
-                    to: {x: 945, y: 555},
-                    idle: false,
-                    distance: 6.29,
-                    speed: 100
-                },
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'left',
-                    from: {x: 920, y: 525},
-                    to: {x: 945, y: 525},
-                    idle: false,
-                    distance: 8.10,
-                    speed: 100
-                },
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'right',
-                    from: {x: 1010, y: 535},
-                    to: {x: 985, y: 535},
-                    idle: false,
-                    distance: 7.59,
-                    speed: 70
+                    distance: 3.4,
+                    speed: 80
                 },
                 {
                     character: 'terrorist_crouch_darken',
                     come_from: 'right',
-                    from: {x: 1010, y: 535},
-                    to: {x: 985, y: 535},
+                    from: {x: 750, y: 525},
+                    to: {x: 695, y: 525},
                     idle: false,
-                    distance: 7.59,
-                    speed: 50
+                    distance: 5.59,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 540, y: 520},
+                    to: {x: 600, y: 520},
+                    idle: false,
+                    distance: 5.1,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 540, y: 520},
+                    to: {x: 600, y: 520},
+                    idle: false,
+                    distance: 5.1,
+                    speed: 80
                 },
                 {
                     character: 'terrorist_standup',
-                    come_from: 'right',
-                    from: {x: 850, y: 600},
-                    to: {x: 780, y: 600},
+                    come_from: 'left',
+                    from: {x: 555, y: 525},
+                    to: {x: 595, y: 525},
                     idle: false,
-                    distance: 3.5,
+                    distance: 4.4,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'left',
+                    from: {x: 530, y: 490},
+                    to: {x: 580, y: 490},
+                    idle: false,
+                    distance: 1.8,
                     speed: 130
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'right',
+                    from: {x: 750, y: 530},
+                    to: {x: 700, y: 530},
+                    idle: false,
+                    distance: 7.79,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'right',
+                    from: {x: 750, y: 530},
+                    to: {x: 700, y: 530},
+                    idle: false,
+                    distance: 7.79,
+                    speed: 80
                 },
             ] as Target[],
             initial_offset: {
