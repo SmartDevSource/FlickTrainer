@@ -6,7 +6,7 @@ export default function Training() {
       <Canvas
         params={{
           map_name: 'vertigo',
-          spot_name: 'ctspawn_to_b',
+          spot_name: 'ctspawn_to_short',
           difficulty: 'easy',
           mouse_sensitivity: .7
         }}

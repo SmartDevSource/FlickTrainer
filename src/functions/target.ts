@@ -11,7 +11,7 @@ const xScaleOffset: number = 1.5
 
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
-        case 'easy': return 1000000
+        case 'easy': return 10000000000
         case 'medium': return 850
         case 'hard': return 750
         case 'faceit_peek': return 500
