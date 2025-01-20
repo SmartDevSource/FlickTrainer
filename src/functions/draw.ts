@@ -110,9 +110,7 @@ export const drawTargetHelper = (
     screenOffset: Vector2,
     testPosition: Vector2,
     testDistance: number,
-    testCharacter: number,
-    testSpeedPosition: number,
-    testSpeedScale: number
+    testCharacter: number
 ) => {
     const currentCharacter = Object.keys(images)[testCharacter]
     ctx.drawImage(
@@ -126,21 +124,35 @@ export const drawTargetHelper = (
         images[currentCharacter].img.width / testDistance,
         images[currentCharacter].img.height / testDistance
     )
-    ctx.fillText(`Off x : ${screenOffset.x} | Off y : ${screenOffset.y}`,
+}
+
+export const drawCoordinates = (
+    ctx: CanvasRenderingContext2D,
+    screenOffset: Vector2,
+    testDistance: number,
+    testPosition: Vector2,
+    testSpeedPosition: number,
+    testSpeedScale: number
+) => {
+    ctx.fillText(`Offset x : ${screenOffset.x.toFixed(2)} | Offset y : ${screenOffset.y.toFixed(2)}`,
         20, 
-        80
+        75
     )
-    ctx.fillText(`Distance x : ${testDistance} | Position (x : ${testPosition.x}, y: ${testPosition.y})`,
+    ctx.fillText(`Distance x : ${testDistance.toFixed(2)} | Position (x : ${testPosition.x}, y: ${testPosition.y})`,
         20,
         100
     )
-    ctx.fillText(`Speed Position : ${testSpeedPosition}`,
+    ctx.fillText(`[a] Toggle Character Type`,
         20,
-        120
+        175
     )
-    ctx.fillText(`Speed Scale : ${testSpeedScale}`,
+    ctx.fillText(`[z] Speed Position : ${testSpeedPosition === 1 ? 'slow' : testSpeedPosition === 10 ? 'medium': 'fast'}`,
         20,
-        140
+        200
+    )
+    ctx.fillText(`[e] Speed Scale : ${testSpeedScale === .01 ? 'slow' : testSpeedScale === .1 ? 'medium' : 'fast'}`,
+        20,
+        225
     )
 }
 

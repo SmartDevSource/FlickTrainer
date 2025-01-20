@@ -5,7 +5,7 @@ import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
 import { getRandomTarget, updateTarget, getHeadCoordinates, screenBoundaries, shotTimeout } from '@/functions/target'
-import { initialWindowSize, drawTarget, drawWeapon, drawStatistics, drawPlayerDeath, drawPauseScreen, drawTargetHelper } from '@/functions/draw'
+import { initialWindowSize, drawTarget, drawWeapon, drawStatistics, drawPlayerDeath, drawPauseScreen, drawTargetHelper, drawCoordinates } from '@/functions/draw'
 import { initRecoil, updateRecoil } from '@/functions/recoil'
 import { loadResources } from '@/functions/utils'
 
@@ -123,7 +123,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             // TARGET //
             updateTarget(target.current, params.difficulty, isFullScreen.current, updatePlayerDeath)
             drawTarget(target.current, screenOffset.current, ctx, images[target.current.character], false)
-            drawTargetHelper(ctx, images, screenOffset.current, testPosition.current, testDistance.current, testCharacter.current, testSpeedPosition.current, testSpeedScale.current)
+            drawTargetHelper(ctx, images, screenOffset.current, testPosition.current, testDistance.current, testCharacter.current)
 
             // MAP BACKGROUND LAYER //
             ctx.drawImage(mapSpotImage.layer.img, screenOffset.current.x, screenOffset.current.y)
@@ -138,10 +138,11 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             )
 
             drawStatistics(statistics.current, ctx)
+            drawCoordinates(ctx, screenOffset.current, testDistance.current, testPosition.current, testSpeedPosition.current, testSpeedScale.current)
 
             if (isPlayerDead.current){
                 drawPlayerDeath(ctx)
-            } 
+            }
 
             if (!isFullScreen.current){
                 drawPauseScreen(ctx)
@@ -177,7 +178,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 break
                 case 'E': case 'e':
                     testSpeedScale.current *= 10
-                    if (testSpeedScale.current > .1){
+                    if (testSpeedScale.current > 1){
                         testSpeedScale.current = .01
                     }
                 break
