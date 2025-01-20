@@ -24,7 +24,8 @@ const deathAnim: {
     update_delay: 5
 }
 
-export const initialWindowSize = {w: 1024, h: 768}
+export const fullscreenCanvasSize = {w: 1024, h: 768}
+export const minimizedCanvasSize = {w: 320, h: 240}
 export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
 
 export const drawWeapon = (ctx: CanvasRenderingContext2D, 
@@ -185,13 +186,18 @@ export const drawPlayerDeath = (ctx: CanvasRenderingContext2D) => {
         }
     }
     ctx.fillStyle = `rgba(0, 0, 0, ${deathAnim.opacity})`
-    ctx.fillRect(0, 0, initialWindowSize.w, initialWindowSize.h)
+    ctx.fillRect(0, 0, fullscreenCanvasSize.w, fullscreenCanvasSize.h)
 }
 
-export const drawPauseScreen = (ctx: CanvasRenderingContext2D) => {
+export const drawPauseScreen = (ctx: CanvasRenderingContext2D, background: ImageObject) => {
+    const scale_x = background.img.width * (ctx.canvas.width / background.img.width)
+    const scale_y = background.img.height * (ctx.canvas.height / background.img.height)
+    const offset_x = (ctx.canvas.width - scale_x) / 2
+    const offset_y = (ctx.canvas.height - scale_y) / 2
+    ctx.drawImage(background.img, offset_x, offset_y, scale_x, scale_y)
     ctx.fillStyle = 'rgba(0, 0, 0, .5)'
-    ctx.fillRect(0, 0, initialWindowSize.w, initialWindowSize.h)
+    ctx.fillRect(0, 0, minimizedCanvasSize.w, minimizedCanvasSize.h)
     ctx.fillStyle = 'white'
     ctx.font = 'bold 30px Play-Bold'
-    ctx.fillText("Pause", 465, 400)
+    ctx.fillText("Pause", 110, 125)
 }

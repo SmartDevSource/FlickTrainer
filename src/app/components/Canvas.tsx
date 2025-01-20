@@ -1,11 +1,27 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { Target, Vector2, CanvasParams, Statistics } from '@/types'
+import { Target, Vector2, CanvasParams, Statistics, ScreenSize } from '@/types'
 import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
-import { getRandomTarget, updateTarget, getHeadCoordinates, screenBoundaries, shotTimeout } from '@/functions/target'
-import { initialWindowSize, drawTarget, drawWeapon, drawStatistics, drawPlayerDeath, drawPauseScreen, drawTargetHelper, drawCoordinates } from '@/functions/draw'
+import { 
+    getRandomTarget,
+    updateTarget,
+    getHeadCoordinates,
+    screenBoundaries,
+    shotTimeout 
+} from '@/functions/target'
+import {
+    fullscreenCanvasSize,
+    minimizedCanvasSize,
+    drawTarget,
+    drawWeapon,
+    drawStatistics,
+    drawPlayerDeath,
+    drawPauseScreen,
+    drawTargetHelper,
+    drawCoordinates 
+} from '@/functions/draw'
 import { initRecoil, updateRecoil } from '@/functions/recoil'
 import { loadResources } from '@/functions/utils'
 
@@ -20,7 +36,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const isPlayerDead = useRef<boolean>(false)
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
-    const [ctx, setCtx] = useState<CanvasRenderingContext2D | null>(null)
+    const ctx = useRef<CanvasRenderingContext2D | null>(null)
 
     const [mapSpotImage] = useState({
         background: {
@@ -63,9 +79,9 @@ const Canvas = ({params}: {params: CanvasParams}) => {
 
     const initCanvas = () => {
         if (canvasRef?.current){
-            canvasRef.current.width = initialWindowSize.w
-            canvasRef.current.height = initialWindowSize.h
-            setCtx(canvasRef.current.getContext('2d'))
+            canvasRef.current.width = minimizedCanvasSize.w
+            canvasRef.current.height = minimizedCanvasSize.h
+            ctx.current = canvasRef.current.getContext('2d')
         }
     }
 
@@ -75,7 +91,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         }
         canvasRef.current?.requestFullscreen()
         .then(() => {
-            resizeCanvas()
+            resizeCanvas('fullscreen')
             isFullScreen.current = true
             generateTarget()
         })
@@ -97,57 +113,26 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         )}
     }
 
-    const resizeCanvas = () => {
-        if (canvasRef.current && ctx){
-            canvasRef.current.requestPointerLock()
+    const resizeCanvas = (type: string) => {
+        if (canvasRef.current && ctx.current){
+            switch(type){
+                case 'fullscreen':
+                    canvasRef.current.requestPointerLock()
 
-            const scale_x = window.innerWidth / initialWindowSize.w
-            const scale_y = window.innerHeight / initialWindowSize.h
+                    const fullscreen_scale_x = window.innerWidth / fullscreenCanvasSize.w
+                    const fullscreen_scale_y = window.innerHeight / fullscreenCanvasSize.h
 
-            canvasRef.current.width = window.innerWidth
-            canvasRef.current.height = window.innerHeight
-
-            ctx.setTransform(scale_x, 0, 0, scale_y, 0, 0)
-        }
-    }
-
-    const draw = () => {
-        if (ctx && canvasRef.current){
-            ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
-            
-            updateRecoil(screenOffset.current)
-
-            // MAP BACKGROUND  //
-            ctx.drawImage(mapSpotImage.background.img, screenOffset.current.x, screenOffset.current.y)
-
-            // TARGET //
-            updateTarget(target.current, params.difficulty, isFullScreen.current, updatePlayerDeath)
-            drawTarget(target.current, screenOffset.current, ctx, images[target.current.character], false)
-            drawTargetHelper(ctx, images, screenOffset.current, testPosition.current, testDistance.current, testCharacter.current)
-
-            // MAP BACKGROUND LAYER //
-            ctx.drawImage(mapSpotImage.layer.img, screenOffset.current.x, screenOffset.current.y)
-
-            drawWeapon(ctx,images.deagle, images.shotflame, isFiring.current, updateFiringState)
-            
-            // CROSSHAIR //
-            ctx.drawImage(
-                images.crosshair.img,
-                (initialWindowSize.w / 2) - (images.crosshair.img.width / 2),
-                (initialWindowSize.h / 2) - (images.crosshair.img.height / 2)
-            )
-
-            drawStatistics(statistics.current, ctx)
-            drawCoordinates(ctx, screenOffset.current, testDistance.current, testPosition.current, testSpeedPosition.current, testSpeedScale.current)
-
-            if (isPlayerDead.current){
-                drawPlayerDeath(ctx)
+                    canvasRef.current.width = window.innerWidth
+                    canvasRef.current.height = window.innerHeight
+        
+                    ctx.current.setTransform(fullscreen_scale_x, 0, 0, fullscreen_scale_y, 0, 0)
+                break
+                case 'windowed':
+                    canvasRef.current.width = minimizedCanvasSize.w
+                    canvasRef.current.height = minimizedCanvasSize.h
+                    screenOffset.current = {...mapsData[params.map_name][params.spot_name].initial_offset}
+                break
             }
-
-            if (!isFullScreen.current){
-                drawPauseScreen(ctx)
-            }
-            requestAnimationFrame(draw)
         }
     }
 
@@ -191,8 +176,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                     document.exitPointerLock()
                 }
                 if (canvasRef.current){
-                    canvasRef.current.width = initialWindowSize.w
-                    canvasRef.current.height = initialWindowSize.h
+                    resizeCanvas('windowed')
                     isFullScreen.current = false
                     if (shotTimeout){
                         clearTimeout(shotTimeout)
@@ -232,8 +216,8 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                             images[target.current.character]
                         )
                         const mouseCenterPosition = {
-                            x: (initialWindowSize.w / 2),
-                            y: (initialWindowSize.h / 2)
+                            x: (fullscreenCanvasSize.w / 2),
+                            y: (fullscreenCanvasSize.h / 2)
                         }
                         if (mouseCenterPosition.x >= headCoordinates.position.x &&
                             mouseCenterPosition.x <= headCoordinates.position.x + headCoordinates.scale.w &&
@@ -279,6 +263,46 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     useEffect(() => {
         if (!isLoading) draw()
     }, [isLoading])
+
+    const draw = () => {
+        if (ctx.current && canvasRef.current){
+            ctx.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
+
+            if (isFullScreen.current){            
+                updateRecoil(screenOffset.current)
+    
+                // MAP BACKGROUND  //
+                ctx.current.drawImage(mapSpotImage.background.img, screenOffset.current.x, screenOffset.current.y)
+    
+                // TARGET //
+                updateTarget(target.current, params.difficulty, isFullScreen.current, updatePlayerDeath)
+                drawTarget(target.current, screenOffset.current, ctx.current, images[target.current.character], false)
+                drawTargetHelper(ctx.current, images, screenOffset.current, testPosition.current, testDistance.current, testCharacter.current)
+    
+                // MAP BACKGROUND LAYER //
+                ctx.current.drawImage(mapSpotImage.layer.img, screenOffset.current.x, screenOffset.current.y)
+    
+                drawWeapon(ctx.current,images.deagle, images.shotflame, isFiring.current, updateFiringState)
+                
+                // CROSSHAIR //
+                ctx.current.drawImage(
+                    images.crosshair.img,
+                    (fullscreenCanvasSize.w / 2) - (images.crosshair.img.width / 2),
+                    (fullscreenCanvasSize.h / 2) - (images.crosshair.img.height / 2)
+                )
+    
+                drawStatistics(statistics.current, ctx.current)
+                drawCoordinates(ctx.current, screenOffset.current, testDistance.current, testPosition.current, testSpeedPosition.current, testSpeedScale.current)
+    
+                if (isPlayerDead.current){
+                    drawPlayerDeath(ctx.current)
+                }
+            } else {
+                drawPauseScreen(ctx.current, mapSpotImage.background)
+            }
+            requestAnimationFrame(draw)
+        }
+    }
 
     return (
         <canvas

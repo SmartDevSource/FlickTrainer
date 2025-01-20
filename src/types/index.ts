@@ -8,6 +8,11 @@ export interface Vector2 {
     y: number
 }
 
+export interface ScreenSize {
+    w: number,
+    h: number
+}
+
 export interface ImageObject {
     path: string,
     img: HTMLImageElement,
