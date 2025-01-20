@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { Target, Vector2, CanvasParams, Statistics } from '@/types'
+import { Target, Vector2, Statistics } from '@/types'
 import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
@@ -25,6 +25,13 @@ import {
 } from '@/functions/draw'
 import { initRecoil, updateRecoil } from '@/functions/recoil'
 import { loadResources } from '@/functions/utils'
+
+interface CanvasParams {
+    map_name: string,
+    spot_name: string,
+    difficulty: string,
+    mouse_sensitivity: number
+}
 
 const Canvas = ({params}: {params: CanvasParams}) => {
     const testDistance = useRef<number>(1)
@@ -88,7 +95,9 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             clearInterval(startInterval.current)
             startInterval.current = null
         }
-
+        if (target.current){
+            target.current = null
+        }
         statistics.current.kills = 0
         statistics.current.deaths = 0
         isReady.current = false
@@ -349,7 +358,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     return (
         <canvas
             ref={canvasRef}
-            className='bg-black m-16'
+            className='bg-black m-16 cursor-crosshair'
             onClick={() => toggleFullScreen()}
         />
     )

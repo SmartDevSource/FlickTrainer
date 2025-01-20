@@ -1,7 +1,6 @@
 'use client'
-import { Navbar } from '@/app/components/Navbar'
 import { SettingsModal } from '@/app/components/SettingsModal'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 const maps = [
     { logo: 'dust2_logo.jpg' },
@@ -13,12 +12,11 @@ const maps = [
     { logo: 'vertigo_logo.jpg' },
 ]
 
-export default function Settings() {
+export const Settings = () => {
     const [selectedMap, setSelectedMap] = useState<string>('')
 
     return (
         <>
-            <Navbar/>
             {selectedMap &&
                 <SettingsModal 
                     onClose={() => setSelectedMap('')}

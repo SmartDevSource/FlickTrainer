@@ -34,13 +34,6 @@ export interface Target {
     speed: number,
 }
 
-export interface CanvasParams {
-    map_name: string,
-    spot_name: string,
-    difficulty: string,
-    mouse_sensitivity: number
-}
-
 export interface Statistics {
     kills: number,
     deaths: number
