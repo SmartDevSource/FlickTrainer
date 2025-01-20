@@ -3,20 +3,21 @@ import { Navbar } from "./Navbar"
 
 interface TrainingParams {
   map_name: string,
+  spot_name: string,
   difficulty: string,
-  game_type: string
+  mouse_sensitivity: number
 }
 
-export const Training = ({params} : {params: TrainingParams}) => {
+export const Training: React.FC<TrainingParams> = ({map_name, spot_name, difficulty, mouse_sensitivity}) => {
   return (
     <>
       <div className="flex justify-center">
         <Canvas
           params={{
-            map_name: 'vertigo',
-            spot_name: 'ctspawn_to_b',
-            difficulty: 'easy',
-            mouse_sensitivity: .7
+            map_name: map_name,
+            spot_name: spot_name,
+            difficulty: difficulty,
+            mouse_sensitivity: mouse_sensitivity
           }}
         />
       </div>

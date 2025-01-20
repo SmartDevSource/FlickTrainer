@@ -7,7 +7,7 @@ import { Navbar } from "./components/Navbar"
 import { Training } from "./components/Training"
 
 const MainPage = () => {
-  const [currentPage, setCurrentPage] = useState<string>('home')
+  const [currentPage, setCurrentPage] = useState<string>('training')
   
   return (
     <>
@@ -20,7 +20,12 @@ const MainPage = () => {
       <Settings/>
     }
     {currentPage === 'training' &&
-      <Training/>
+      <Training
+        map_name = "vertigo"
+        spot_name = "ctspawn_to_b"
+        difficulty = "easy"
+        mouse_sensitivity = {.7}
+      />
     }
     </>
   )
