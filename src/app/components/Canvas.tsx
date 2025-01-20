@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { Target, Vector2, CanvasParams, Statistics, ScreenSize } from '@/types'
+import { Target, Vector2, CanvasParams, Statistics } from '@/types'
 import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
@@ -9,7 +9,8 @@ import {
     updateTarget,
     getHeadCoordinates,
     screenBoundaries,
-    shotTimeout 
+    shotTimeout, 
+    updateTargetTimer
 } from '@/functions/target'
 import {
     fullscreenCanvasSize,
@@ -34,6 +35,9 @@ const Canvas = ({params}: {params: CanvasParams}) => {
 
     const isFiring = useRef<boolean>(false)
     const isPlayerDead = useRef<boolean>(false)
+    const isReady = useRef<boolean>(false)
+    const startTimer = useRef<number>(3)
+    let startInterval = useRef<ReturnType<typeof setInterval>>(null)
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const ctx = useRef<CanvasRenderingContext2D | null>(null)
@@ -54,7 +58,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const statistics = useRef<Statistics>({kills: 0, deaths: 0})
 
     const currentSpot = structuredClone(mapsData[params.map_name][params.spot_name])
-    const target = useRef<Target>(getRandomTarget(structuredClone(currentSpot.targets)))
+    const target = useRef<Target | null>(null)
 
     const screenOffset = useRef<Vector2>(structuredClone(currentSpot.initial_offset))
 
@@ -76,6 +80,36 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         generateTarget()
         screenOffset.current = currentSpot.initial_offset
     }
+    const resetGame = () => {
+        if (shotTimeout){
+            clearTimeout(shotTimeout)
+        }
+        if (startInterval.current){
+            clearInterval(startInterval.current)
+            startInterval.current = null
+        }
+
+        statistics.current.kills = 0
+        statistics.current.deaths = 0
+        isReady.current = false
+        startTimer.current = 3
+    }
+    const initGame = () => {
+        startInterval.current = setInterval(()=>{
+            console.log("starttimer current :", startTimer.current)
+            if (startTimer.current > 1){
+                startTimer.current--
+            } else {
+                isReady.current = true
+                generateTarget()
+
+                if (startInterval.current){
+                    clearInterval(startInterval.current)
+                    startInterval.current = null
+                }
+            }
+        }, 1000)
+    }
 
     const initCanvas = () => {
         if (canvasRef?.current){
@@ -93,7 +127,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         .then(() => {
             resizeCanvas('fullscreen')
             isFullScreen.current = true
-            generateTarget()
+            initGame()
         })
         .catch(err => {
             console.error('Error while toggling in fullscreen mode :', err)
@@ -108,6 +142,9 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             document.exitFullscreen().then(() => {
                 if (shotTimeout){
                     clearTimeout(shotTimeout)
+                }
+                if (startInterval.current){
+                    clearInterval(startInterval.current)
                 }
             }
         )}
@@ -178,9 +215,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 if (canvasRef.current){
                     resizeCanvas('windowed')
                     isFullScreen.current = false
-                    if (shotTimeout){
-                        clearTimeout(shotTimeout)
-                    }
+                    resetGame()
                 }
             }
         }
@@ -267,8 +302,11 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const draw = () => {
         if (ctx.current && canvasRef.current){
             ctx.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
-            updateTarget(target.current, params.difficulty, isFullScreen.current, updatePlayerDeath)
 
+            updateTargetTimer()
+
+            if (target.current)
+                updateTarget(target.current, params.difficulty, isFullScreen.current, updatePlayerDeath)
 
             if (isFullScreen.current){            
                 updateRecoil(screenOffset.current)
@@ -277,7 +315,10 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 ctx.current.drawImage(mapSpotImage.background.img, screenOffset.current.x, screenOffset.current.y)
     
                 // TARGET //
-                drawTarget(target.current, screenOffset.current, ctx.current, images[target.current.character], false)
+                if (target.current)
+                    drawTarget(target.current, screenOffset.current, ctx.current, images[target.current.character], false)
+                
+                // HELPER //
                 drawTargetHelper(ctx.current, images, screenOffset.current, testPosition.current, testDistance.current, testCharacter.current)
     
                 // MAP BACKGROUND LAYER //

@@ -198,6 +198,6 @@ export const drawPauseScreen = (ctx: CanvasRenderingContext2D, background: Image
     ctx.fillStyle = 'rgba(0, 0, 0, .5)'
     ctx.fillRect(0, 0, minimizedCanvasSize.w, minimizedCanvasSize.h)
     ctx.fillStyle = 'white'
-    ctx.font = 'bold 30px Play-Bold'
-    ctx.fillText("Pause", 110, 125)
+    ctx.font = 'bold 38px Play-Bold'
+    ctx.fillText("Go", 130, 130)
 }
