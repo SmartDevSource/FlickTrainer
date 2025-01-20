@@ -166,10 +166,10 @@ export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) 
                                             focus:border-blue-500 block w-full p-2.5"
                                         onChange={handleDifficultySelect}
                                     >
-                                        <option value="easy">Facile</option>
-                                        <option value="medium">Moyen</option>
-                                        <option value="hard">Difficile</option>
-                                        <option value="faceit_peek">Faceit Peek</option>
+                                        <option className="font-bold" value="easy">Facile</option>
+                                        <option className="font-bold" value="medium">Moyen</option>
+                                        <option className="font-bold" value="hard">Difficile</option>
+                                        <option className="font-bold" value="faceit_peek">Faceit Peek</option>
                                     </select>
                                 </form>
                             </div>
