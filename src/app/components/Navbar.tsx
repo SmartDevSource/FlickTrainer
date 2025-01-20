@@ -1,18 +1,28 @@
 import Link from "next/link"
 
-export const Navbar = () => {
+interface NavbarSettings {
+    onLinkClick: (call: string) => void
+}
+
+export const Navbar: React.FC<NavbarSettings> = ({onLinkClick}) => {
     return (
       <div className="w-full bg-gray-800 text-white py-4 shadow-md z-50 ">
             <div className="flex justify-between px-6">
                 <div className="text-xl font-semibold px-3">
-                    <Link href="/" className="hover:text-gray-400 transition-colors duration-300">
+                    <button 
+                        className="hover:text-gray-400 transition-colors duration-300"
+                        onClick={() => onLinkClick('back_to_home')}
+                    >
                         FlickTrainer
-                    </Link>
+                    </button>
                 </div>
                 <div className="flex space-x-6">
-                    <Link href="/" className="hover:text-gray-400 transition-colors duration-300">
+                    <button
+                        className="hover:text-gray-400 transition-colors duration-300"
+                        onClick={() => onLinkClick('user_settings')}
+                    >
                     ⚙️ Paramètres
-                    </Link>
+                    </button>
                     {/* <Link href="/" className="hover:text-gray-400 transition-colors duration-300">
                         Lien
                     </Link> */}
