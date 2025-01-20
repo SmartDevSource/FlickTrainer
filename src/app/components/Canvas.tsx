@@ -21,7 +21,8 @@ import {
     drawPlayerDeath,
     drawPauseScreen,
     drawTargetHelper,
-    drawCoordinates 
+    drawCoordinates,
+    drawStartCounter
 } from '@/functions/draw'
 import { initRecoil, updateRecoil } from '@/functions/recoil'
 import { loadResources } from '@/functions/utils'
@@ -77,15 +78,15 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         statistics.current.deaths++
         audios.player_death.audio.currentTime = 0
         audios.player_death.audio.play()
-        setTimeout(() => { respawnPlayer()}, 1000)
+        setTimeout(() => { respawnPlayer() }, 1000)
     }
     const generateTarget = () => {
         target.current = getRandomTarget(structuredClone(currentSpot.targets))
     }
     const respawnPlayer = () => {
         isPlayerDead.current = false
-        generateTarget()
         screenOffset.current = currentSpot.initial_offset
+        generateTarget()
     }
     const resetGame = () => {
         if (shotTimeout){
@@ -104,13 +105,14 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         startTimer.current = 3
     }
     const initGame = () => {
+        audios.timer.audio.play()
         startInterval.current = setInterval(()=>{
             if (startTimer.current > 1){
                 startTimer.current--
+                audios.timer.audio.play()
             } else {
                 isReady.current = true
                 generateTarget()
-
                 if (startInterval.current){
                     clearInterval(startInterval.current)
                     startInterval.current = null
@@ -243,7 +245,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
 
         const handleMouseDown = (event: MouseEvent) => {
             // FIRING //
-            if (event.button === 0 && isFullScreen.current && !isPlayerDead.current){
+            if (event.button === 0 && isFullScreen.current && !isPlayerDead.current && isReady.current){
                 if (!isFiring.current){
                     isFiring.current = true
                     audios.deagleshot.audio.currentTime = 0
@@ -341,6 +343,10 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 drawStatistics(statistics.current, ctx.current)
                 drawCoordinates(ctx.current, screenOffset.current, testDistance.current, testPosition.current, testSpeedPosition.current, testSpeedScale.current)
     
+                if (!isReady.current){
+                    drawStartCounter(ctx.current, startTimer.current)
+                }
+
                 if (isPlayerDead.current){
                     drawPlayerDeath(ctx.current)
                 }

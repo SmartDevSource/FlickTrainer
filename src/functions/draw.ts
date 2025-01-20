@@ -206,3 +206,13 @@ export const drawPauseScreen = (ctx: CanvasRenderingContext2D, background: Image
     ctx.font = 'bold 38px Play-Bold'
     ctx.fillText("Go", 135, 130)
 }
+
+export const drawStartCounter = (ctx: CanvasRenderingContext2D, startTimer: number) => {
+    ctx.save()
+    ctx.font = 'bold 114px Play-Regular'
+    ctx.lineWidth = 5
+    ctx.strokeStyle = 'black'
+    ctx.strokeText(startTimer.toString(), 475, 410)
+    ctx.fillText(startTimer.toString(), 475, 410)
+    ctx.restore()
+}

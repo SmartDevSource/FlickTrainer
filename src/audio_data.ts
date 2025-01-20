@@ -15,5 +15,10 @@ export const audios: {[key: string]: AudioObject} = {
         path: `/audio/player_death.mp3`,
         volume: .3,
         audio: new Audio()
-    }
+    },
+    timer: {
+        path: `/audio/timer.mp3`,
+        volume: .6,
+        audio: new Audio()
+    },
 }
