@@ -141,7 +141,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
 
             if (isPlayerDead.current){
                 drawPlayerDeath(ctx)
-            }
+            } 
 
             if (!isFullScreen.current){
                 drawPauseScreen(ctx)
