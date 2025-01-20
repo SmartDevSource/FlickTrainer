@@ -1,7 +1,7 @@
 import { RecoilSettings, Vector2, Timer } from "@/types"
 import { screenBoundaries } from "./target"
 
-const timer: Timer = {last_update: Date.now(), delta_time: 0}
+const timer: Timer = {last_update: performance.now(), delta_time: 0}
 
 const recoilSettings: RecoilSettings = {
         start_position: {x: 0, y: 0},
@@ -31,8 +31,9 @@ export const initRecoil = (screenOffset: Vector2) => {
 
 
 export const updateRecoil = (screenOffset: Vector2) => {
-    timer.delta_time = (Date.now() - timer.last_update) / 1000
-    timer.last_update = Date.now()
+    const now = performance.now()
+    timer.delta_time = (now - timer.last_update) / 1000
+    timer.last_update = now
 
     if (recoilSettings.is_running){
         const x_step = recoilSettings.offset_step.x * timer.delta_time * recoilSettings.speed

@@ -105,7 +105,6 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     }
     const initGame = () => {
         startInterval.current = setInterval(()=>{
-            console.log("starttimer current :", startTimer.current)
             if (startTimer.current > 1){
                 startTimer.current--
             } else {
@@ -164,13 +163,10 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             switch(type){
                 case 'fullscreen':
                     canvasRef.current.requestPointerLock()
-
                     const fullscreen_scale_x = window.innerWidth / fullscreenCanvasSize.w
                     const fullscreen_scale_y = window.innerHeight / fullscreenCanvasSize.h
-
                     canvasRef.current.width = window.innerWidth
                     canvasRef.current.height = window.innerHeight
-        
                     ctx.current.setTransform(fullscreen_scale_x, 0, 0, fullscreen_scale_y, 0, 0)
                 break
                 case 'windowed':

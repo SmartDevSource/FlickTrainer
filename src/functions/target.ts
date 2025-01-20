@@ -1,7 +1,7 @@
 import { ImageObject, Target, Vector2, Timer } from "@/types"
 
 const headOffset: number = 55
-const targetTimer: Timer = {last_update: Date.now(), delta_time: 0}
+const targetTimer: Timer = {last_update: performance.now(), delta_time: 0}
 const verticalOffset: {standup: number, crouch: number} = {standup: .4, crouch: 2}
 
 export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
@@ -51,8 +51,9 @@ export const getHeadCoordinates = (target: Target, screenOffset: Vector2, image:
 }
 
 export const updateTargetTimer = () => {
-    targetTimer.delta_time = (Date.now() - targetTimer.last_update) / 1000
-    targetTimer.last_update = Date.now()
+    const now = performance.now()
+    targetTimer.delta_time = (now - targetTimer.last_update) / 1000
+    targetTimer.last_update = now
 }
 
 export const updateTarget = (target: Target, difficulty: string, isFullscreen: boolean, updatePlayerDeath: (state: boolean) => void) => {

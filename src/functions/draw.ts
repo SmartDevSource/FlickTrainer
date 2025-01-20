@@ -1,18 +1,19 @@
 import { ImageObject, Statistics, Target, Vector2, Timer } from "@/types"
 import { getHeadCoordinates } from "./target"
 
-const timer: Timer = {last_update: Date.now(), delta_time: 0}
+const timer: Timer = {last_update: performance.now(), delta_time: 0}
+const framesPerSecond: number = 60
 
 const weaponAnim: {
     current_frame: number,
     last_update: number,
     update_delay: number,
     speed_shot_animation: number,
-    frames_count: number
+    frames_count: number,
 } = {
     current_frame: 0,
     last_update: 0,
-    update_delay: .07,
+    update_delay: .01,
     speed_shot_animation: 7.4,
     frames_count: 20
 }
@@ -24,24 +25,28 @@ const deathAnim: {
     update_delay: 5
 }
 
-export const fullscreenCanvasSize = {w: 1024, h: 768}
 export const minimizedCanvasSize = {w: 320, h: 240}
+export const fullscreenCanvasSize = {w: 1024, h: 768}
 export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
 
-export const drawWeapon = (ctx: CanvasRenderingContext2D, 
+export const drawWeapon = (ctx: CanvasRenderingContext2D,
                             weaponImg: ImageObject,
                             flameImg: ImageObject,
-                            isFiring: boolean, 
-                            updateFiringState: (state: boolean) => void) => 
+                            isFiring: boolean,
+                            updateFiringState: (state: boolean) => void) =>
 {
-    timer.delta_time = (Date.now() - timer.last_update) / 1000
-    timer.last_update = Date.now()
+    const now = performance.now()
+    timer.delta_time = (now - timer.last_update) / 1000
+    timer.last_update = now
 
-    if (isFiring && weaponAnim.current_frame < weaponAnim.frames_count - 1){
-        weaponAnim.last_update += timer.delta_time * weaponAnim.speed_shot_animation
-        if (weaponAnim.last_update > weaponAnim.update_delay){
+    if (isFiring){
+        weaponAnim.last_update += timer.delta_time
+        const currentFrameRate = Math.floor(weaponAnim.last_update * framesPerSecond)
+
+        if (currentFrameRate > 0){
             weaponAnim.last_update = 0
-            weaponAnim.current_frame++
+            weaponAnim.current_frame += currentFrameRate
+
             if (weaponAnim.current_frame >= weaponAnim.frames_count - 1){
                 updateFiringState(false)
                 weaponAnim.current_frame = 0
