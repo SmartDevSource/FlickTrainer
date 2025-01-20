@@ -7,7 +7,15 @@ const verticalOffset: {standup: number, crouch: number} = {standup: .4, crouch: 
 export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
 export let shotTimeout: ReturnType<typeof setTimeout> | null = null
 
-const xScaleOffset: number = 1.5
+export const getRandomTarget = (targets: Target[]) => {
+    const rndIndex = Math.floor(Math.random() * targets.length)
+    if (shotTimeout){
+        clearTimeout(shotTimeout)
+    }
+    console.log("Random index target :", rndIndex)
+    // return targets[targets.length - 1]
+    return targets[rndIndex]
+}
 
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
@@ -30,25 +38,16 @@ export const getHeadCoordinates = (target: Target, screenOffset: Vector2, image:
             x: (target.from.x + screenOffset.x) +
                (((image.img.width / 2) -
                ((headOffset + (headOffset / 2)) / 2)) /
-               (target.distance + xScaleOffset)),
+               (target.distance)),
             y: (target.from.y + screenOffset.y) +
                (target.character.includes('crouch') ? verticalOffset.crouch : verticalOffset.standup) *
                (headOffset / target.distance),
         },
         scale: {
-            w: headOffset / (target.distance + xScaleOffset),
+            w: headOffset / (target.distance),
             h: headOffset / target.distance + 5
         }
     }
-}
-
-export const getRandomTarget = (targets: Target[]) => {
-    const rndIndex = Math.floor(Math.random() * targets.length)
-    if (shotTimeout){
-        clearTimeout(shotTimeout)
-    }
-    console.log("Random index target :", rndIndex)
-    return targets[rndIndex]
 }
 
 export const updateTarget = (target: Target, difficulty: string, isFullscreen: boolean, updatePlayerDeath: (state: boolean) => void) => {

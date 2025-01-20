@@ -5,13 +5,17 @@ import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
 import { getRandomTarget, updateTarget, getHeadCoordinates, screenBoundaries, shotTimeout } from '@/functions/target'
-import { drawTarget, drawWeapon, drawStatistics, drawPlayerDeath, initialWindowSize } from '@/functions/draw'
+import { initialWindowSize, drawTarget, drawWeapon, drawStatistics, drawPlayerDeath, drawPauseScreen, drawTargetHelper } from '@/functions/draw'
 import { initRecoil, updateRecoil } from '@/functions/recoil'
 import { loadResources } from '@/functions/utils'
 
 const Canvas = ({params}: {params: CanvasParams}) => {
-    const testDistance = useRef(1)
+    const testDistance = useRef<number>(1)
+    const testCharacter = useRef<number>(3)
+    const testSpeedPosition = useRef<number>(1)
+    const testSpeedScale = useRef<number>(0.1)
     const testPosition = useRef<Vector2>({x: 0, y: 0})
+
     const isFiring = useRef<boolean>(false)
     const isPlayerDead = useRef<boolean>(false)
 
@@ -113,81 +117,34 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             
             updateRecoil(screenOffset.current)
 
-            ctx.drawImage(
-                mapSpotImage.background.img,
-                screenOffset.current.x,
-                screenOffset.current.y
-            )
-            updateTarget(
-                target.current,
-                params.difficulty,
-                isFullScreen.current,
-                updatePlayerDeath
-            )
-            drawTarget(
-                target.current,
-                screenOffset.current,
-                ctx,
-                images[target.current.character]
-            )
-            ctx.drawImage(
-                images.terrorist_standup.img,
-                0,
-                0,
-                images.terrorist_standup.img.width,
-                images.terrorist_standup.img.height,
-                testPosition.current.x + screenOffset.current.x,
-                testPosition.current.y + screenOffset.current.y,
-                images.terrorist_standup.img.width / testDistance.current,
-                images.terrorist_standup.img.height / testDistance.current
-            )
-            ctx.drawImage(
-                mapSpotImage.layer.img,
-                screenOffset.current.x,
-                screenOffset.current.y
-            )
-            drawWeapon(
-                ctx,
-                images.deagle,
-                images.shotflame,
-                isFiring.current,
-                updateFiringState
-            )
-            // const headCoordinates = getHeadCoordinates(
-            //     target.current,
-            //     screenOffset.current,
-            //     images[target.current.character]
-            // )
-            // ctx.fillStyle = 'rgba(255, 0, 0, .5)'
-            // ctx.fillRect(
-            //     headCoordinates.position.x,
-            //     headCoordinates.position.y,
-            //     headCoordinates.scale.w,
-            //     headCoordinates.scale.h
-            // )
+            // MAP BACKGROUND  //
+            ctx.drawImage(mapSpotImage.background.img, screenOffset.current.x, screenOffset.current.y)
+
+            // TARGET //
+            updateTarget(target.current, params.difficulty, isFullScreen.current, updatePlayerDeath)
+            drawTarget(target.current, screenOffset.current, ctx, images[target.current.character], false)
+            drawTargetHelper(ctx, images, screenOffset.current, testPosition.current, testDistance.current, testCharacter.current, testSpeedPosition.current, testSpeedScale.current)
+
+            // MAP BACKGROUND LAYER //
+            ctx.drawImage(mapSpotImage.layer.img, screenOffset.current.x, screenOffset.current.y)
+
+            drawWeapon(ctx,images.deagle, images.shotflame, isFiring.current, updateFiringState)
+            
+            // CROSSHAIR //
             ctx.drawImage(
                 images.crosshair.img,
                 (initialWindowSize.w / 2) - (images.crosshair.img.width / 2),
                 (initialWindowSize.h / 2) - (images.crosshair.img.height / 2)
             )
+
+            drawStatistics(statistics.current, ctx)
+
             if (isPlayerDead.current){
                 drawPlayerDeath(ctx)
             }
-            drawStatistics(statistics.current, ctx)
-            ctx.fillText(`Off x : ${screenOffset.current.x} | Off y : ${screenOffset.current.y}`,
-                20, 
-                80
-            )
-            ctx.fillText(`Distance x : ${testDistance.current} | Position (x : ${testPosition.current.x + 20}, y: ${testPosition.current.y})`,
-                20,
-                100
-            )
+
             if (!isFullScreen.current){
-                ctx.fillStyle = 'rgba(0, 0, 0, .5)'
-                ctx.fillRect(0, 0, initialWindowSize.w, initialWindowSize.h)
-                ctx.fillStyle = 'white'
-                ctx.font = 'bold 30px Play-Bold'
-                ctx.fillText("Pause", 465, 400)
+                drawPauseScreen(ctx)
             }
             requestAnimationFrame(draw)
         }
@@ -199,13 +156,31 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         }
         const handleKeydown = (event:KeyboardEvent) => {
             switch(event.key){
-                case 'ArrowLeft': testPosition.current.x -= 5; break
-                case 'ArrowRight': testPosition.current.x += 5; break
-                case 'ArrowUp': testPosition.current.y -= 5; break
-                case 'ArrowDown': testPosition.current.y += 5; break
-                case '+': testDistance.current -= .1; break
-                case '-': testDistance.current += .1; break
+                case 'ArrowLeft': testPosition.current.x -= testSpeedPosition.current; break
+                case 'ArrowRight': testPosition.current.x += testSpeedPosition.current; break
+                case 'ArrowUp': testPosition.current.y -= testSpeedPosition.current; break
+                case 'ArrowDown': testPosition.current.y += testSpeedPosition.current; break
+                case '+': testDistance.current -= testSpeedScale.current; break
+                case '-': testDistance.current += testSpeedScale.current; break
                 case 'Alt': case 'Meta': handleExitFullScreen(); break
+                case 'A': case 'a':
+                    testCharacter.current = testCharacter.current >= 9 ?
+                        3
+                        :
+                        testCharacter.current + 2
+                break
+                case 'Z': case 'z':
+                    testSpeedPosition.current *= 10
+                    if (testSpeedPosition.current > 100){
+                        testSpeedPosition.current = 1
+                    }
+                break
+                case 'E': case 'e':
+                    testSpeedScale.current *= 10
+                    if (testSpeedScale.current > .1){
+                        testSpeedScale.current = .01
+                    }
+                break
             }
         }
         

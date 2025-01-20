@@ -16,20 +16,20 @@ export const mapsData: MapsData = {
                 {
                     character: 'terrorist_crouch',
                     come_from: 'left',
-                    from: {x: 900, y: 545},
-                    to: {x: 918, y: 545},
+                    from: {x: 895, y: 545},
+                    to: {x: 915, y: 545},
                     idle: false,
                     distance: 8.5,
-                    speed: 100
+                    speed: 50
                 },
                 {
                     character: 'terrorist_crouch',
                     come_from: 'left',
                     from: {x: 900, y: 547},
-                    to: {x: 920, y: 547},
+                    to: {x: 918, y: 547},
                     idle: false,
                     distance: 10.3,
-                    speed: 100
+                    speed: 50
                 },
                 {
                     character: 'terrorist_crouch_darken',
@@ -70,17 +70,17 @@ export const mapsData: MapsData = {
                 {
                     character: 'terrorist_standup',
                     come_from: 'left',
-                    from: {x: 820, y: 435},
-                    to: {x: 845, y: 435},
+                    from: {x: 815, y: 435},
+                    to: {x: 838, y: 435},
                     idle: false,
                     distance: 7.5,
-                    speed: 100
+                    speed: 80
                 },
                 {
                     character: 'terrorist_crouch',
                     come_from: 'left',
                     from: {x: 800, y: 437},
-                    to: {x: 845, y: 437},
+                    to: {x: 836, y: 437},
                     idle: false,
                     distance: 7.8,
                     speed: 100
@@ -98,7 +98,7 @@ export const mapsData: MapsData = {
                     character: 'terrorist_standup_darken',
                     come_from: 'right',
                     from: {x: 970, y: 535},
-                    to: {x: 935, y: 535},
+                    to: {x: 930, y: 535},
                     idle: false,
                     distance: 3.2,
                     speed: 130
@@ -115,7 +115,7 @@ export const mapsData: MapsData = {
                     character: 'terrorist_standup_darken',
                     come_from: 'left',
                     from: {x: 805, y: 555},
-                    to: {x: 840, y: 555},
+                    to: {x: 832, y: 555},
                     idle: false,
                     distance: 6.09,
                     speed: 100
@@ -169,7 +169,7 @@ export const mapsData: MapsData = {
                     character: 'terrorist_crouch_darken',
                     come_from: 'left',
                     from: {x: 805, y: 555},
-                    to: {x: 840, y: 555},
+                    to: {x: 832, y: 555},
                     idle: false,
                     distance: 6.09,
                     speed: 100
@@ -230,20 +230,20 @@ export const mapsData: MapsData = {
                 {
                     character: 'terrorist_crouch_darken',
                     come_from: 'down',
-                    from: {x: 815, y: 500},
-                    to: {x: 815, y: 410},
+                    from: {x: 800, y: 500},
+                    to: {x: 800, y: 410},
                     idle: false,
-                    distance: 5.4,
-                    speed: 200
+                    distance: 5.6,
+                    speed: 150
                 },
                 {
                     character: 'terrorist_crouch_darken',
                     come_from: 'down',
-                    from: {x: 795, y: 500},
-                    to: {x: 795, y: 410},
+                    from: {x: 788, y: 500},
+                    to: {x: 788, y: 410},
                     idle: false,
-                    distance: 5.4,
-                    speed: 200
+                    distance: 5.6,
+                    speed: 150
                 },
                 {
                     character: 'terrorist_crouch',
@@ -311,7 +311,7 @@ export const mapsData: MapsData = {
                     character: 'terrorist_standup_darken',
                     come_from: 'right',
                     from: {x: 730, y: 530},
-                    to: {x: 697, y: 530},
+                    to: {x: 690, y: 530},
                     idle: false,
                     distance: 5.39,
                     speed: 100
@@ -329,16 +329,16 @@ export const mapsData: MapsData = {
                     character: 'terrorist_standup',
                     come_from: 'right',
                     from: {x: 875, y: 520},
-                    to: {x: 840, y: 520},
+                    to: {x: 820, y: 520},
                     idle: false,
                     distance: 3.3,
-                    speed: 100
+                    speed: 120
                 },
                 {
                     character: 'terrorist_crouch',
                     come_from: 'right',
                     from: {x: 875, y: 522},
-                    to: {x: 840, y: 522},
+                    to: {x: 825, y: 522},
                     idle: false,
                     distance: 3.3,
                     speed: 100
@@ -346,11 +346,11 @@ export const mapsData: MapsData = {
                 {
                     character: 'terrorist_standup',
                     come_from: 'left',
-                    from: {x: 1300, y: 565},
-                    to: {x: 1340, y: 565},
+                    from: {x: 1250, y: 565},
+                    to: {x: 1320, y: 565},
                     idle: false,
                     distance: 3.4,
-                    speed: 100
+                    speed: 120
                 },
                 {
                     character: 'terrorist_crouch',
@@ -392,7 +392,7 @@ export const mapsData: MapsData = {
                     character: 'terrorist_standup',
                     come_from: 'left',
                     from: {x: 555, y: 525},
-                    to: {x: 595, y: 525},
+                    to: {x: 590, y: 525},
                     idle: false,
                     distance: 4.4,
                     speed: 100
@@ -400,11 +400,11 @@ export const mapsData: MapsData = {
                 {
                     character: 'terrorist_standup',
                     come_from: 'left',
-                    from: {x: 530, y: 490},
-                    to: {x: 580, y: 490},
+                    from: {x: 465, y: 490},
+                    to: {x: 565, y: 490},
                     idle: false,
                     distance: 1.8,
-                    speed: 130
+                    speed: 240
                 },
                 {
                     character: 'terrorist_standup_darken',
@@ -422,6 +422,15 @@ export const mapsData: MapsData = {
                     to: {x: 700, y: 530},
                     idle: false,
                     distance: 7.79,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'right',
+                    from: {x: 761, y: 260},
+                    to: {x: 761, y: 260},
+                    idle: false,
+                    distance: 3.8,
                     speed: 80
                 },
             ] as Target[],

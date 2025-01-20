@@ -1,4 +1,5 @@
 import { ImageObject, Statistics, Target, Vector2, Timer } from "@/types"
+import { getHeadCoordinates } from "./target"
 
 const timer: Timer = {last_update: Date.now(), delta_time: 0}
 
@@ -73,7 +74,7 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
     }
 }
 
-export const drawTarget = (target: Target, screenOffset: Vector2, ctx: CanvasRenderingContext2D, targetImg: ImageObject) => {
+export const drawTarget = (target: Target, screenOffset: Vector2, ctx: CanvasRenderingContext2D, targetImg: ImageObject, enableHitbox: boolean) => {
     ctx.drawImage(
         targetImg.img,
         0,
@@ -82,8 +83,64 @@ export const drawTarget = (target: Target, screenOffset: Vector2, ctx: CanvasRen
         targetImg.img.height,
         target.from.x + screenOffset.x,
         target.from.y + screenOffset.y,
-        targetImg.img.width / (target.distance + 1.5),
+        targetImg.img.width / target.distance,
         targetImg.img.height / target.distance
+    )
+    if (enableHitbox){
+        ctx.save()
+        const headCoordinates = getHeadCoordinates(
+            target,
+            screenOffset,
+            targetImg
+        )
+        ctx.fillStyle = 'rgba(255, 0, 0, .5)'
+        ctx.fillRect(
+            headCoordinates.position.x,
+            headCoordinates.position.y,
+            headCoordinates.scale.w,
+            headCoordinates.scale.h
+        )
+        ctx.restore()
+    }
+}
+
+export const drawTargetHelper = (
+    ctx: CanvasRenderingContext2D,
+    images: { [key:string]: ImageObject},
+    screenOffset: Vector2,
+    testPosition: Vector2,
+    testDistance: number,
+    testCharacter: number,
+    testSpeedPosition: number,
+    testSpeedScale: number
+) => {
+    const currentCharacter = Object.keys(images)[testCharacter]
+    ctx.drawImage(
+        images[currentCharacter].img,
+        0,
+        0,
+        images[currentCharacter].img.width,
+        images[currentCharacter].img.height,
+        testPosition.x + screenOffset.x,
+        testPosition.y + screenOffset.y,
+        images[currentCharacter].img.width / testDistance,
+        images[currentCharacter].img.height / testDistance
+    )
+    ctx.fillText(`Off x : ${screenOffset.x} | Off y : ${screenOffset.y}`,
+        20, 
+        80
+    )
+    ctx.fillText(`Distance x : ${testDistance} | Position (x : ${testPosition.x}, y: ${testPosition.y})`,
+        20,
+        100
+    )
+    ctx.fillText(`Speed Position : ${testSpeedPosition}`,
+        20,
+        120
+    )
+    ctx.fillText(`Speed Scale : ${testSpeedScale}`,
+        20,
+        140
     )
 }
 
@@ -117,4 +174,12 @@ export const drawPlayerDeath = (ctx: CanvasRenderingContext2D) => {
     }
     ctx.fillStyle = `rgba(0, 0, 0, ${deathAnim.opacity})`
     ctx.fillRect(0, 0, initialWindowSize.w, initialWindowSize.h)
+}
+
+export const drawPauseScreen = (ctx: CanvasRenderingContext2D) => {
+    ctx.fillStyle = 'rgba(0, 0, 0, .5)'
+    ctx.fillRect(0, 0, initialWindowSize.w, initialWindowSize.h)
+    ctx.fillStyle = 'white'
+    ctx.font = 'bold 30px Play-Bold'
+    ctx.fillText("Pause", 465, 400)
 }
