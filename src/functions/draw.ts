@@ -2,7 +2,7 @@ import { ImageObject, Statistics, Target, Vector2, Timer } from "@/types"
 import { getHeadCoordinates } from "./target"
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
-const framesPerSecond: number = 60
+const framesPerSecond: number = 100
 
 const weaponAnim: {
     current_frame: number,
