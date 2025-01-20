@@ -267,6 +267,8 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const draw = () => {
         if (ctx.current && canvasRef.current){
             ctx.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
+            updateTarget(target.current, params.difficulty, isFullScreen.current, updatePlayerDeath)
+
 
             if (isFullScreen.current){            
                 updateRecoil(screenOffset.current)
@@ -275,7 +277,6 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 ctx.current.drawImage(mapSpotImage.background.img, screenOffset.current.x, screenOffset.current.y)
     
                 // TARGET //
-                updateTarget(target.current, params.difficulty, isFullScreen.current, updatePlayerDeath)
                 drawTarget(target.current, screenOffset.current, ctx.current, images[target.current.character], false)
                 drawTargetHelper(ctx.current, images, screenOffset.current, testPosition.current, testDistance.current, testCharacter.current)
     
