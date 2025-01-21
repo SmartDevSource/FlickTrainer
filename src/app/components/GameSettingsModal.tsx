@@ -116,7 +116,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, selectedMa
                         <div className="flex flex-col">
                             <div className="p-4 flex flex-row justify-between items-center">
                                 <p className="text-base leading-relaxed text-white">
-                                    Mode de jeu 
+                                    Mode de jeu
                                 </p>
                                 <div>
                                     <button

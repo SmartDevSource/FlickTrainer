@@ -9,7 +9,7 @@ import { UserSettingsModal } from "./components/UserSettingsModal"
 
 const MainPage = () => {
   const [currentPage, setCurrentPage] = useState<string>('training')
-  const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
+  const [showUserSettings, setShowUserSettings] = useState<boolean>(true)
 
   const handleNavbarClick = (navbar_data: string) => {
     switch(navbar_data){
@@ -21,6 +21,7 @@ const MainPage = () => {
       break
       default:
         console.log('navbar_data :', navbar_data)
+      break
     }
   }
 
@@ -46,9 +47,9 @@ const MainPage = () => {
     }
     {currentPage === 'training' &&
       <Training
-        map_name = "vertigo"
-        spot_name = "ctspawn_to_b"
-        difficulty = "easy"
+        map_name = 'vertigo'
+        spot_name = 'ctspawn_to_b'
+        difficulty = 'easy'
         mouse_sensitivity = {.7}
       />
     }

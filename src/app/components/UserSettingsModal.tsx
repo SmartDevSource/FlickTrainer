@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 interface UserSettingsParams {
     onClose: () => void,
@@ -6,11 +6,16 @@ interface UserSettingsParams {
 }
 
 export const UserSettingsModal: React.FC<UserSettingsParams> = ({onClose, onSave}) => {
+    const [sensitivity, setSensitivity] = useState<number>(1)
+
     const handleClose = () => {
         onClose()
     }
     const handleSave = () => {
         onSave()
+    }
+    const handleSensitivityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSensitivity(parseFloat(e.currentTarget.value))
     }
 
     return (
@@ -47,6 +52,32 @@ export const UserSettingsModal: React.FC<UserSettingsParams> = ({onClose, onSave
                             </svg>
                         </button>
                     </div>
+                    <div className="flex flex-col">
+                        <div className="p-4 flex flex-row justify-between items-center">
+                            <p className="text-base leading-relaxed text-white">
+                                Sensibilité
+                            </p>
+                            <div className="flex items-center">
+                                <label className="text-base leading-relaxed text-white px-3">
+                                    {sensitivity.toFixed(2)}
+                                </label>
+                                <input
+                                    type="range" 
+                                    className="w-48 accent-orange-400" 
+                                    min={0}
+                                    max={5}
+                                    step={.05}
+                                    value={sensitivity}
+                                    onChange={handleSensitivityChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="p-4 flex flex-row justify-between items-center">
+                            <p className="text-base leading-relaxed text-white">
+                                Viseur
+                            </p>
+                        </div>
+                    </div>
                     <div className="flex items-center justify-end p-4 md:p-5 border-t">
                         <button
                             type="button"
@@ -54,7 +85,7 @@ export const UserSettingsModal: React.FC<UserSettingsParams> = ({onClose, onSave
                                     bg-green-400 rounded-lg  hover:bg-green-300 min-w-24"
                             onClick={handleSave}
                         >
-                            Go
+                            Enregistrer
                         </button>
                         <button
                             type="button"
