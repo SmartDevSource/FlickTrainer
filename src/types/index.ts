@@ -50,3 +50,14 @@ export interface RecoilSettings {
     is_running: boolean,
     speed: number
 }
+
+export interface CrosshairData {
+    gap: number,
+    length: number,
+    thickness: number,
+    outline: number,
+    red: number,
+    green: number,
+    blue: number,
+    opacity: number
+}
