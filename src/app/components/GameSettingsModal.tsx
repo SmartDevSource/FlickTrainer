@@ -24,7 +24,7 @@ const circuits = [
     "terrorist_circuit",
 ]
 
-export const SettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) => {
+export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) => {
     const [selectedMode, setSelectedMode] = useState<'circuit' | 'spot'>('circuit')
     const [gamePathType, setGamePathType] = useState<string>('')
     const [showImageModal, setShowImageModal] = useState<string>('')

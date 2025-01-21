@@ -2,12 +2,14 @@
 import { useState } from "react"
 
 import { Home } from "./components/Home"
-import { Settings } from "./components/Settings"
+import { MapPeek } from "./components/MapPeek"
 import { Navbar } from "./components/Navbar"
 import { Training } from "./components/Training"
+import { UserSettingsModal } from "./components/UserSettingsModal"
 
 const MainPage = () => {
   const [currentPage, setCurrentPage] = useState<string>('training')
+  const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
 
   const handleNavbarClick = (navbar_data: string) => {
     switch(navbar_data){
@@ -15,11 +17,15 @@ const MainPage = () => {
         setCurrentPage('home')
       break
       case 'user_settings':
-        alert("User settings modal")
+        setShowUserSettings(true)
       break
       default:
         console.log('navbar_data :', navbar_data)
     }
+  }
+
+  const handleUserSettingsSave = () => {
+    setShowUserSettings(false)
   }
   
   return (
@@ -29,8 +35,14 @@ const MainPage = () => {
       :
       <Navbar onLinkClick={(navbar_data) => handleNavbarClick(navbar_data)}/>
     }
+    {showUserSettings &&
+      <UserSettingsModal
+        onClose={() => setShowUserSettings(false)}
+        onSave={() => handleUserSettingsSave()}
+      />
+    }
     {currentPage === 'settings' &&
-      <Settings/>
+      <MapPeek/>
     }
     {currentPage === 'training' &&
       <Training

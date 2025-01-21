@@ -7,6 +7,11 @@
   src: url('/fonts/Play-Bold.ttf');
 }
 
+@font-face {
+  font-family: 'Digit';
+  src: url('/fonts/Digit.ttf');
+}
+
 :root {
   --background: #171717;
   --foreground: #171717;

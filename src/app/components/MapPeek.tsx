@@ -1,5 +1,5 @@
 'use client'
-import { SettingsModal } from '@/app/components/SettingsModal'
+import { GameSettingsModal } from '@/app/components/GameSettingsModal'
 import { useState } from 'react'
 
 const maps = [
@@ -12,13 +12,13 @@ const maps = [
     { logo: 'vertigo_logo.jpg' },
 ]
 
-export const Settings = () => {
+export const MapPeek = () => {
     const [selectedMap, setSelectedMap] = useState<string>('')
 
     return (
         <>
             {selectedMap &&
-                <SettingsModal 
+                <GameSettingsModal
                     onClose={() => setSelectedMap('')}
                     selectedMap={selectedMap}
                 />
