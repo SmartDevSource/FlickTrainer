@@ -430,5 +430,22 @@ export const mapsData: MapsData = {
                 y: -150
             }
         },
+        b_to_stairs_1: {
+            targets: [
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'right',
+                    from: {x: 1036, y: 519},
+                    to: {x: 1036, y: 519},
+                    idle: false,
+                    distance: 5.8,
+                    speed: 100
+                },
+            ] as Target[],
+            initial_offset: {
+                x: -420,
+                y: -150
+            }
+        },
     }
 }

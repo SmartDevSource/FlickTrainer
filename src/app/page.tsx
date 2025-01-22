@@ -71,7 +71,7 @@ const MainPage = () => {
     {currentPage === 'training' &&
       <Training
         map_name = 'vertigo'
-        spot_name = 'ctspawn_to_b'
+        spot_name = 'b_to_stairs_1'
         difficulty = 'easy'
       />
     }
