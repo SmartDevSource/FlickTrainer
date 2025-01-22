@@ -264,7 +264,7 @@ export const drawCrosshair = (ctx: CanvasRenderingContext2D, crosshairSettings: 
     // STROKED PART //
     if (crosshairSettings.outline > 0){
         ctx.strokeStyle = `rgba(0, 0, 0, ${crosshairSettings.opacity}`
-        ctx.lineWidth = crosshairSettings.outline
+        ctx.lineWidth = crosshairSettings.outline / crosshairScaleFactor
 
         // CENTRAL DOT //
         if (crosshairSettings.show_dot){
