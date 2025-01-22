@@ -88,7 +88,8 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const respawnPlayer = () => {
         isPlayerDead.current = false
         screenOffset.current = currentSpot.initial_offset
-        generateTarget()
+        if (isReady.current)
+            generateTarget()
     }
     const resetGame = () => {
         if (shotTimeout){
@@ -105,6 +106,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         statistics.current.deaths = 0
         isReady.current = false
         startTimer.current = 3
+        isPlayerDead.current = false
     }
     const initGame = () => {
         audios.timer.audio.play()

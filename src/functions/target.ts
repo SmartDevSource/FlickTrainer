@@ -13,13 +13,12 @@ export const getRandomTarget = (targets: Target[]) => {
         clearTimeout(shotTimeout)
     }
     console.log("Random index target :", rndIndex)
-    // return targets[targets.length - 1]
     return targets[rndIndex]
 }
 
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
-        case 'easy': return 1000000
+        case 'easy': return 500
         case 'medium': return 850
         case 'hard': return 750
         case 'faceit_peek': return 500

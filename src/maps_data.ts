@@ -433,10 +433,118 @@ export const mapsData: MapsData = {
         b_to_stairs_1: {
             targets: [
                 {
+                    character: 'terrorist_crouch',
+                    come_from: 'left',
+                    from: {x: 1170, y: 433},
+                    to: {x: 1202, y: 433},
+                    idle: false,
+                    distance: 3.9,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'left',
+                    from: {x: 1180, y: 518},
+                    to: {x: 1212, y: 518},
+                    idle: false,
+                    distance: 3.8,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'left',
+                    from: {x: 1180, y: 518},
+                    to: {x: 1212, y: 518},
+                    idle: false,
+                    distance: 3.8,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'left',
+                    from: {x: 1280, y: 508},
+                    to: {x: 1317, y: 508},
+                    idle: false,
+                    distance: 5,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'left',
+                    from: {x: 1280, y: 508},
+                    to: {x: 1317, y: 508},
+                    idle: false,
+                    distance: 5,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'left',
+                    from: {x: 840, y: 527},
+                    to: {x: 890, y: 527},
+                    idle: false,
+                    distance: 8.1,
+                    speed: 70
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'left',
+                    from: {x: 840, y: 527},
+                    to: {x: 890, y: 527},
+                    idle: false,
+                    distance: 8.1,
+                    speed: 90
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'down',
+                    from: {x: 850, y: 600},
+                    to: {x: 900, y: 550},
+                    idle: false,
+                    distance: 11.8,
+                    speed: 70
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 870, y: 570},
+                    to: {x: 900, y: 570},
+                    idle: false,
+                    distance: 11.8,
+                    speed: 70
+                },
+                {
                     character: 'terrorist_standup',
                     come_from: 'right',
-                    from: {x: 1036, y: 519},
-                    to: {x: 1036, y: 519},
+                    from: {x: 1050, y: 520},
+                    to: {x: 1020, y: 520},
+                    idle: false,
+                    distance: 4,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'right',
+                    from: {x: 1050, y: 520},
+                    to: {x: 1020, y: 520},
+                    idle: false,
+                    distance: 4,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'right',
+                    from: {x: 1065, y: 527},
+                    to: {x: 1036, y: 527},
+                    idle: false,
+                    distance: 5.8,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'right',
+                    from: {x: 1065, y: 527},
+                    to: {x: 1036, y: 527},
                     idle: false,
                     distance: 5.8,
                     speed: 100
