@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { Target, Vector2, Statistics } from '@/types'
+import { Target, Vector2, Statistics, CrosshairData } from '@/types'
 import { mapsData } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
@@ -22,10 +22,11 @@ import {
     drawPauseScreen,
     drawTargetHelper,
     drawCoordinates,
-    drawStartCounter
+    drawStartCounter,
+    drawCrosshair
 } from '@/functions/draw'
 import { initRecoil, updateRecoil } from '@/functions/recoil'
-import { loadResources } from '@/functions/utils'
+import { getCrosshairStorage, loadResources } from '@/functions/utils'
 
 interface CanvasParams {
     map_name: string,
@@ -69,6 +70,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const target = useRef<Target | null>(null)
 
     const screenOffset = useRef<Vector2>(structuredClone(currentSpot.initial_offset))
+    const crosshairData = useRef<CrosshairData>(getCrosshairStorage())
 
     const updateFiringState = (state: boolean) => {
         isFiring.current = state
@@ -106,6 +108,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     }
     const initGame = () => {
         audios.timer.audio.play()
+        crosshairData.current = getCrosshairStorage()
         startInterval.current = setInterval(()=>{
             if (startTimer.current > 1){
                 startTimer.current--
@@ -332,13 +335,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 ctx.current.drawImage(mapSpotImage.layer.img, screenOffset.current.x, screenOffset.current.y)
     
                 drawWeapon(ctx.current,images.deagle, images.shotflame, isFiring.current, updateFiringState)
-                
-                // CROSSHAIR //
-                ctx.current.drawImage(
-                    images.crosshair.img,
-                    (fullscreenCanvasSize.w / 2) - (images.crosshair.img.width / 2),
-                    (fullscreenCanvasSize.h / 2) - (images.crosshair.img.height / 2)
-                )
+                drawCrosshair(ctx.current, crosshairData.current)
     
                 drawStatistics(statistics.current, ctx.current)
                 drawCoordinates(ctx.current, screenOffset.current, testDistance.current, testPosition.current, testSpeedPosition.current, testSpeedScale.current)

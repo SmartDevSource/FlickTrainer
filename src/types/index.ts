@@ -59,5 +59,6 @@ export interface CrosshairData {
     red: number,
     green: number,
     blue: number,
-    opacity: number
+    opacity: number,
+    show_dot: 0
 }

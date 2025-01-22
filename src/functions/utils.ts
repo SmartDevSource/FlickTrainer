@@ -39,7 +39,6 @@ export const loadResources = async (
 
 export const getCrosshairStorage = () => {
     const crosshairStorage = localStorage.getItem('crosshair')
-    console.log("crosshairStorage :", crosshairStorage)
 
     if (crosshairStorage){
         return JSON.parse(crosshairStorage)
@@ -60,7 +59,6 @@ export const getCrosshairStorage = () => {
 
 export const getSensitivityStorage = () => {
     const sensitivityStorage = localStorage.getItem('sensitivity')
-    console.log("sensitivityStorage :", sensitivityStorage)
 
     if (sensitivityStorage){
         return parseFloat(sensitivityStorage)

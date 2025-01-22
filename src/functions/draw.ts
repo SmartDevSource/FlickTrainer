@@ -1,8 +1,10 @@
 import { ImageObject, Statistics, Target, Vector2, Timer } from "@/types"
 import { getHeadCoordinates } from "./target"
+import { crosshairData } from "./crosshair_changer"
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const framesPerSecond: number = 100
+const crosshairScaleFactor: number = 2
 
 const weaponAnim: {
     current_frame: number,
@@ -215,4 +217,91 @@ export const drawStartCounter = (ctx: CanvasRenderingContext2D, startTimer: numb
     ctx.strokeText(startTimer.toString(), 450, 430)
     ctx.fillText(startTimer.toString(), 450, 430)
     ctx.restore()
+}
+
+export const drawCrosshair = (ctx: CanvasRenderingContext2D, crosshairSettings: crosshairData) => {
+    ctx.fillStyle = `rgba(${crosshairSettings.red}, ${crosshairSettings.green}, ${crosshairSettings.blue}, ${crosshairSettings.opacity})`
+
+    // CENTRAL DOT //
+    if (crosshairSettings.show_dot){
+        ctx.fillRect(
+            (fullscreenCanvasSize.w / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
+            (fullscreenCanvasSize.h / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
+            (crosshairSettings.thickness / crosshairScaleFactor),
+            (crosshairSettings.thickness / crosshairScaleFactor)
+        )
+    }
+
+    // LEFT //
+    ctx.fillRect(
+        ((fullscreenCanvasSize.w / 2) - ((crosshairSettings.length / crosshairScaleFactor))) - ((crosshairSettings.gap / crosshairScaleFactor) / 2),
+        (fullscreenCanvasSize.h / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
+        (crosshairSettings.length / crosshairScaleFactor),
+        (crosshairSettings.thickness / crosshairScaleFactor)
+    )
+    // RIGHT //
+    ctx.fillRect(
+        (fullscreenCanvasSize.w / 2) + ((crosshairSettings.gap / crosshairScaleFactor) / 2),
+        (fullscreenCanvasSize.h / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
+        (crosshairSettings.length / crosshairScaleFactor),
+        (crosshairSettings.thickness / crosshairScaleFactor)
+    )
+    // UP //
+    ctx.fillRect(
+        (fullscreenCanvasSize.w / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
+        (fullscreenCanvasSize.h / 2) - ((crosshairSettings.length / crosshairScaleFactor)) - ((crosshairSettings.gap / crosshairScaleFactor) / 2),
+        (crosshairSettings.thickness / crosshairScaleFactor),
+        (crosshairSettings.length / crosshairScaleFactor)
+    )
+    // DOWN //
+    ctx.fillRect(
+        (fullscreenCanvasSize.w / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
+        (fullscreenCanvasSize.h / 2) + ((crosshairSettings.gap / crosshairScaleFactor) / 2),
+        (crosshairSettings.thickness / crosshairScaleFactor),
+        (crosshairSettings.length / crosshairScaleFactor)
+    )
+
+    // STROKED PART //
+    if (crosshairSettings.outline > 0){
+        ctx.strokeStyle = `rgba(0, 0, 0, ${crosshairSettings.opacity}`
+        ctx.lineWidth = crosshairSettings.outline
+
+        // CENTRAL DOT //
+        if (crosshairSettings.show_dot){
+            ctx.strokeRect(
+                (fullscreenCanvasSize.w / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
+                (fullscreenCanvasSize.h / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
+                (crosshairSettings.thickness / crosshairScaleFactor),
+                (crosshairSettings.thickness / crosshairScaleFactor)
+            )
+        }
+        // LEFT //
+        ctx.strokeRect(
+            ((fullscreenCanvasSize.w / 2) - ((crosshairSettings.length / crosshairScaleFactor))) - ((crosshairSettings.gap / crosshairScaleFactor) / 2),
+            (fullscreenCanvasSize.h / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
+            (crosshairSettings.length / crosshairScaleFactor),
+            (crosshairSettings.thickness / crosshairScaleFactor)
+        )
+        // RIGHT //
+        ctx.strokeRect(
+            (fullscreenCanvasSize.w / 2) + ((crosshairSettings.gap / crosshairScaleFactor) / 2),
+            (fullscreenCanvasSize.h / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
+            (crosshairSettings.length / crosshairScaleFactor),
+            (crosshairSettings.thickness / crosshairScaleFactor)
+        )
+        // UP //
+        ctx.strokeRect(
+            (fullscreenCanvasSize.w / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
+            (fullscreenCanvasSize.h / 2) - ((crosshairSettings.length / crosshairScaleFactor)) - ((crosshairSettings.gap / crosshairScaleFactor) / 2),
+            (crosshairSettings.thickness / crosshairScaleFactor),
+            (crosshairSettings.length / crosshairScaleFactor)
+        )
+        // DOWN //
+        ctx.strokeRect(
+            (fullscreenCanvasSize.w / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
+            (fullscreenCanvasSize.h / 2) + ((crosshairSettings.gap / crosshairScaleFactor) / 2),
+            (crosshairSettings.thickness / crosshairScaleFactor),
+            (crosshairSettings.length / crosshairScaleFactor)
+        )
+    }
 }

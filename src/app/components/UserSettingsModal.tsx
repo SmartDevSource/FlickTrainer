@@ -111,7 +111,6 @@ export const UserSettingsModal: React.FC<UserSettingsParams> = ({onClose, onSave
                                 </label>
                                 <label
                                     className="relative flex cursor-pointer items-center rounded-full"
-                                    data-ripple-dark="true"
                                 >
                                 <input
                                     id="ripple-on"
