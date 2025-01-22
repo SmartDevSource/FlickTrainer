@@ -34,6 +34,8 @@ interface CanvasParams {
     difficulty: string,
 }
 
+const startTimerValue: number = 0
+
 const Canvas = ({params}: {params: CanvasParams}) => {
     const testDistance = useRef<number>(1)
     const testCharacter = useRef<number>(3)
@@ -44,7 +46,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const isFiring = useRef<boolean>(false)
     const isPlayerDead = useRef<boolean>(false)
     const isReady = useRef<boolean>(false)
-    const startTimer = useRef<number>(3)
+    const startTimer = useRef<number>(startTimerValue)
     let startInterval = useRef<ReturnType<typeof setInterval>>(null)
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
@@ -105,7 +107,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         statistics.current.kills = 0
         statistics.current.deaths = 0
         isReady.current = false
-        startTimer.current = 3
+        startTimer.current = startTimerValue
         isPlayerDead.current = false
     }
     const initGame = () => {
