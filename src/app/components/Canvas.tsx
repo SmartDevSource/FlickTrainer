@@ -26,13 +26,12 @@ import {
     drawCrosshair
 } from '@/functions/draw'
 import { initRecoil, updateRecoil } from '@/functions/recoil'
-import { getCrosshairStorage, loadResources } from '@/functions/utils'
+import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
 
 interface CanvasParams {
     map_name: string,
     spot_name: string,
     difficulty: string,
-    mouse_sensitivity: number
 }
 
 const Canvas = ({params}: {params: CanvasParams}) => {
@@ -71,6 +70,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
 
     const screenOffset = useRef<Vector2>(structuredClone(currentSpot.initial_offset))
     const crosshairData = useRef<CrosshairData>(getCrosshairStorage())
+    const mouse_sensitivity = useRef<number>(getSensitivityStorage())
 
     const updateFiringState = (state: boolean) => {
         isFiring.current = state
@@ -109,6 +109,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const initGame = () => {
         audios.timer.audio.play()
         crosshairData.current = getCrosshairStorage()
+        mouse_sensitivity.current = getSensitivityStorage()
         startInterval.current = setInterval(()=>{
             if (startTimer.current > 1){
                 startTimer.current--
@@ -234,8 +235,8 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             if (isFullScreen.current && !isPlayerDead.current){
                 const prevOffset = screenOffset.current
                 const newOffset = {
-                    x: prevOffset.x - (event.movementX * (params.mouse_sensitivity - (params.mouse_sensitivity / 2))),
-                    y: prevOffset.y - (event.movementY * (params.mouse_sensitivity - (params.mouse_sensitivity / 2)))
+                    x: prevOffset.x - (event.movementX * (mouse_sensitivity.current - (mouse_sensitivity.current / 2))),
+                    y: prevOffset.y - (event.movementY * (mouse_sensitivity.current - (mouse_sensitivity.current / 2)))
                 }
                 if (newOffset.x < screenBoundaries.left && newOffset.x > screenBoundaries.right){
                     screenOffset.current.x = newOffset.x
