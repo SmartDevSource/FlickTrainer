@@ -36,3 +36,35 @@ export const loadResources = async (
         throw err
     })
 }
+
+export const getCrosshairStorage = () => {
+    const crosshairStorage = localStorage.getItem('crosshair')
+    console.log("crosshairStorage :", crosshairStorage)
+
+    if (crosshairStorage){
+        return JSON.parse(crosshairStorage)
+    } else {
+        return {
+            gap: 15,
+            length: 30,
+            thickness: 3,
+            outline: 0,
+            red: 0,
+            green: 255,
+            blue: 0,
+            opacity: 1,
+            show_dot: 0
+        }
+    }
+}
+
+export const getSensitivityStorage = () => {
+    const sensitivityStorage = localStorage.getItem('sensitivity')
+    console.log("sensitivityStorage :", sensitivityStorage)
+
+    if (sensitivityStorage){
+        return parseFloat(sensitivityStorage)
+    } else {
+        return .7
+    }
+}

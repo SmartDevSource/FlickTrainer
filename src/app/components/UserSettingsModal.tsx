@@ -1,6 +1,7 @@
 import { drawCrosshair, crosshairData } from "@/functions/crosshair_changer"
 import { useEffect, useRef, useState } from "react"
 import { canvasCrosshairScreen } from "@/functions/crosshair_changer"
+import { getCrosshairStorage, getSensitivityStorage } from "@/functions/utils"
 
 interface UserSettingsParams {
     onClose: () => void,
@@ -9,24 +10,17 @@ interface UserSettingsParams {
 
 export const UserSettingsModal: React.FC<UserSettingsParams> = ({onClose, onSave}) => {
     const canvasCrosshair = useRef<HTMLCanvasElement | null>(null)
-    const [crosshairSettings, setCrosshairSettings] = useState<crosshairData>({
-        gap: 5,
-        length: 30,
-        thickness: 3,
-        outline: 0,
-        red: 255,
-        green: 0,
-        blue: 0,
-        opacity: 1,
-        show_dot: 0
-    })
     const ctx = useRef<CanvasRenderingContext2D | null>(null)
-    const [sensitivity, setSensitivity] = useState<number>(1)
+
+    const [crosshairSettings, setCrosshairSettings] = useState<crosshairData>(getCrosshairStorage())
+    const [sensitivity, setSensitivity] = useState<number>(getSensitivityStorage())
 
     const handleClose = () => {
         onClose()
     }
     const handleSave = () => {
+        localStorage.setItem('crosshair', JSON.stringify(crosshairSettings))
+        localStorage.setItem('sensitivity', sensitivity.toString())
         onSave()
     }
     const handleSensitivityChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,7 +101,7 @@ export const UserSettingsModal: React.FC<UserSettingsParams> = ({onClose, onSave
                             <p className="text-base leading-relaxed text-white pt-3">
                                 Viseur
                             </p>
-                            <div className="flex flex-col border-2 rounded-md border-gray-800 justify-center items-center p-2">
+                            <div className="flex flex-col border rounded-md border-gray-600 justify-center items-center p-2">
                                 <canvas
                                     ref={canvasCrosshair}
                                     className="bg-black w-32 h-32 justify-center"
@@ -119,28 +113,28 @@ export const UserSettingsModal: React.FC<UserSettingsParams> = ({onClose, onSave
                                     className="relative flex cursor-pointer items-center rounded-full"
                                     data-ripple-dark="true"
                                 >
-                                    <input
-                                        id="ripple-on"
-                                        type="checkbox"
-                                        onChange={(e) => updateCrosshair('show_dot', e.currentTarget.checked ? 1 : 0)}
-                                        className="peer relative h-5 w-5 cursor-pointer appearance-none rounded border border-slate-300 shadow hover:shadow-md transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-slate-400 before:opacity-0 before:transition-opacity checked:border-slate-800 checked:bg-slate-800 checked:before:bg-slate-400 hover:before:opacity-10"
-                                    />
-                                    <span className="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            className="h-3.5 w-3.5"
-                                            viewBox="0 0 20 20"
-                                            fill="currentColor"
-                                            stroke="currentColor"
-                                            strokeWidth="1"
-                                        >
-                                            <path
-                                            fillRule="evenodd"
-                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                            clipRule="evenodd"
-                                            ></path>
-                                        </svg>
-                                    </span>
+                                <input
+                                    id="ripple-on"
+                                    type="checkbox"
+                                    onChange={(e) => updateCrosshair('show_dot', e.currentTarget.checked ? 1 : 0)}
+                                    className="peer relative h-5 w-5 cursor-pointer appearance-none rounded border border-slate-300 shadow hover:shadow-md transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-slate-400 before:opacity-0 before:transition-opacity checked:border-slate-800 checked:bg-slate-800 checked:before:bg-slate-400 hover:before:opacity-10"
+                                />
+                                <span className="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-white opacity-0 transition-opacity peer-checked:opacity-100">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="h-3.5 w-3.5"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        stroke="currentColor"
+                                        strokeWidth="1"
+                                    >
+                                        <path
+                                        fillRule="evenodd"
+                                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                        clipRule="evenodd"
+                                        ></path>
+                                    </svg>
+                                </span>
                                 </label>
                                 <label className="text-base leading-relaxed text-white px-3 pt-1">
                                     Ecart
@@ -167,7 +161,7 @@ export const UserSettingsModal: React.FC<UserSettingsParams> = ({onClose, onSave
                                     onChange={(e) => updateCrosshair('length', parseFloat(e.currentTarget.value))}
                                 />
                                 <label className="text-base leading-relaxed text-white px-3">
-                                    Largeur
+                                    Epaisseur
                                 </label>
                                 <input
                                     type="range" 
@@ -185,7 +179,7 @@ export const UserSettingsModal: React.FC<UserSettingsParams> = ({onClose, onSave
                                     type="range" 
                                     className="w-48 accent-orange-400" 
                                     min={0}
-                                    max={20}
+                                    max={8}
                                     step={1}
                                     value={crosshairSettings.outline}
                                     onChange={(e) => updateCrosshair('outline', parseFloat(e.currentTarget.value))}
