@@ -321,33 +321,31 @@ const Canvas = ({params}: {params: CanvasParams}) => {
 
             if (isFullScreen.current){            
                 updateRecoil(screenOffset.current)
-    
+
                 // MAP BACKGROUND  //
                 ctx.current.drawImage(mapSpotImage.background.img, screenOffset.current.x, screenOffset.current.y)
-    
+
                 // TARGET //
                 if (target.current)
                     drawTarget(target.current, screenOffset.current, ctx.current, images[target.current.character], false)
-                
+
                 // HELPER //
                 drawTargetHelper(ctx.current, images, screenOffset.current, testPosition.current, testDistance.current, testCharacter.current)
-    
+
                 // MAP BACKGROUND LAYER //
                 ctx.current.drawImage(mapSpotImage.layer.img, screenOffset.current.x, screenOffset.current.y)
-    
+
                 drawWeapon(ctx.current,images.deagle, images.shotflame, isFiring.current, updateFiringState)
                 drawCrosshair(ctx.current, crosshairData.current)
-    
+
                 drawStatistics(statistics.current, ctx.current)
                 drawCoordinates(ctx.current, screenOffset.current, testDistance.current, testPosition.current, testSpeedPosition.current, testSpeedScale.current)
-    
-                if (!isReady.current){
-                    drawStartCounter(ctx.current, startTimer.current)
-                }
 
-                if (isPlayerDead.current){
+                if (!isReady.current)
+                    drawStartCounter(ctx.current, startTimer.current)
+
+                if (isPlayerDead.current)
                     drawPlayerDeath(ctx.current)
-                }
             } else {
                 drawPauseScreen(ctx.current, mapSpotImage.background)
             }
