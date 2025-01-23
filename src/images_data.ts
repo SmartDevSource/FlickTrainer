@@ -46,7 +46,8 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/characters/ct_standup_darken.png`,
         img: new Image(),
     },
-    // MAPS //
+    ////////////////////// MAPS ///////////////////////
+    // VERTIGO //
     vertigo_ctspawn_to_mid: {
         path: `/gfx/maps/vertigo/ctspawn_to_mid.png`,
         img: new Image(),
@@ -93,6 +94,14 @@ export const images: {[key: string]: ImageObject} = {
     },
     vertigo_b_to_stairs_2_layer: {
         path: `/gfx/maps/vertigo/b_to_stairs_2_layer.png`,
+        img: new Image(),
+    },
+    vertigo_mid_to_tspawn_1: {
+        path: `/gfx/maps/vertigo/mid_to_tspawn_1.png`,
+        img: new Image(),
+    },
+    vertigo_mid_to_tspawn_1_layer: {
+        path: `/gfx/maps/vertigo/mid_to_tspawn_1_layer.png`,
         img: new Image(),
     },
 }
