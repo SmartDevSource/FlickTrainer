@@ -236,7 +236,7 @@ export const mapsData: MapsData = {
                 x: -420,
                 y: -150
             },
-            circuit: 'ct'
+            circuit: 'ct_circuit'
         },
         connector_to_mid: {
             targets: [
