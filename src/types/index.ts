@@ -62,3 +62,23 @@ export interface CrosshairData {
     opacity: number,
     show_dot: 0
 }
+
+export interface GameSettings {
+    mode: string,
+    map_name: string,
+    circuit: string,
+    spot: string,
+    difficulty: string
+}
+
+export interface SpotStruct {
+    targets: Target[],
+    initial_offset: Vector2,
+    circuit: string,
+    name?: string
+}
+
+export interface CircuitData {
+    ct_circuit: SpotStruct[],
+    terrorist_circuit: SpotStruct[],
+}

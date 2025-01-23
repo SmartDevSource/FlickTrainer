@@ -1,6 +1,11 @@
 'use client'
 import { GameSettingsModal } from '@/app/components/GameSettingsModal'
 import { useState } from 'react'
+import { GameSettings } from '@/types'
+
+interface MapPeekSettings {
+    onLaunchGame: (params: GameSettings) => void
+}
 
 const maps = [
     { logo: 'dust2_logo.jpg' },
@@ -12,7 +17,7 @@ const maps = [
     { logo: 'vertigo_logo.jpg' },
 ]
 
-export const MapPeek = () => {
+export const MapPeek: React.FC<MapPeekSettings> = ({onLaunchGame}) => {
     const [selectedMap, setSelectedMap] = useState<string>('')
 
     return (
@@ -20,6 +25,7 @@ export const MapPeek = () => {
             {selectedMap &&
                 <GameSettingsModal
                     onClose={() => setSelectedMap('')}
+                    onValid={(game_settings) => onLaunchGame(game_settings)}
                     selectedMap={selectedMap}
                 />
             }

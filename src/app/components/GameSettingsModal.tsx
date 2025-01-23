@@ -1,22 +1,12 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { ImageModal } from "./ImageModal"
+import { GameSettings } from "@/types"
+import { getMapCircuits } from "@/maps_data"
 
 interface SettingsParams {
     onClose: () => void,
+    onValid: (params: GameSettings) => void,
     selectedMap: string
-}
-
-interface Spot {
-    [key:string]: string[]
-}
-
-const spots: Spot = {
-    vertigo: [
-        'ctspawn_to_mid',
-        'ctspawn_to_short',
-        'ctspawn_to_b',
-        'connector_to_mid'
-    ],
 }
 
 const circuits = [
@@ -24,12 +14,13 @@ const circuits = [
     "terrorist_circuit",
 ]
 
-export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, selectedMap}) => {
+export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, selectedMap}) => {
+    const spots = [...getMapCircuits(selectedMap).ct_circuit, ...getMapCircuits(selectedMap).terrorist_circuit]
     const [selectedMode, setSelectedMode] = useState<'circuit' | 'spot'>('circuit')
     const [gamePathType, setGamePathType] = useState<string>('')
     const [showImageModal, setShowImageModal] = useState<string>('')
     const [selectedCircuit, setSelectedCircuit] = useState<string>('ct_circuit')
-    const [selectedSpot, setSelectedSpot] = useState<string>(spots[selectedMap][0])
+    const [selectedSpot, setSelectedSpot] = useState<string>(spots[0]?.name ?? '')
     const [selectedDifficulty, setSelectedDifficulty] = useState<string>('easy')
 
     const normalizeCircuitName = (circuit_name: string) => {
@@ -43,6 +34,16 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, selectedMa
 
     const handleClose = () => {
         onClose()
+    }
+
+    const handleLaunchTraining = () => {
+        onValid({
+            mode: selectedMode,
+            map_name: selectedMap,
+            circuit: selectedCircuit,
+            spot: selectedSpot,
+            difficulty: selectedDifficulty,
+        })
     }
 
     const updateModeSelection = () => {
@@ -63,10 +64,6 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, selectedMa
     const handleDifficultySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedDifficulty(e.target.value)
     }
-
-    useEffect(()=>{
-        console.log("Selected Difficulty :", selectedDifficulty)
-    }, [selectedDifficulty])
 
     return (
         <div
@@ -179,6 +176,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, selectedMa
                                 type="button"
                                 className="py-2.5 px-5 ms-3 text-sm text-gray-600 focus:outline-none
                                         bg-green-400 rounded-lg  hover:bg-green-300 min-w-24"
+                                onClick={() => handleLaunchTraining()}
                             >
                                 Go
                             </button>
@@ -226,25 +224,25 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, selectedMa
 
                     {gamePathType === 'spot' &&
                     <div className="flex justify-center p-3">
-                        <div className="grid grid-cols-2 gap-8 bg-transparent">
-                            {spots[selectedMap].map((spot, index) => (
+                        <div className="grid grid-cols-2 gap-8 bg-transparent max-h-[350px] overflow-y-auto">
+                            {spots.map((spot, index) => (
                                 <div
                                     key={`spot${index}`}
-                                    className="flex justify-center items-center flex-col"
+                                    className="flex justify-center items-center flex-col p-2"
                                 >
                                     <p className="text-white">
-                                        {normalizeSpotName(spot)}
+                                        {normalizeSpotName(spot.name ?? '')}
                                     </p>
                                     <img
-                                        src={`/gfx/maps/${selectedMap}/${spot}.png`}
+                                        src={`/gfx/maps/${selectedMap}/${spot.name}.png`}
                                         className={`max-h-[150px] object-contain rounded-lg select-none cursor-pointer 
-                                            ${selectedSpot === spot ? "p-0.5 bg-white" : ""}`}
-                                        onClick={() => setSelectedSpot(spot)}
+                                            ${selectedSpot === spot.name ? "p-0.5 bg-white" : ""}`}
+                                        onClick={() => setSelectedSpot(spot.name ?? '')}
                                     />
                                     <button
                                         className="my-2 px-3 text-lg text-gray-700 focus:outline-none
                                             bg-gray-300 rounded-lg hover:bg-gray-400 w-full"
-                                        onClick={() => setShowImageModal(`/gfx/maps/${selectedMap}/${spot}.png`)}
+                                        onClick={() => setShowImageModal(`/gfx/maps/${selectedMap}/${spot.name}.png`)}
                                     >
                                         Voir
                                     </button>

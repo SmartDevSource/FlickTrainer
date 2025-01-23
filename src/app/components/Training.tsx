@@ -1,22 +1,12 @@
 import Canvas from "./Canvas"
-import { Navbar } from "./Navbar"
+import { GameSettings } from "@/types"
 
-interface TrainingParams {
-  map_name: string,
-  spot_name: string,
-  difficulty: string,
-}
-
-export const Training: React.FC<TrainingParams> = ({map_name, spot_name, difficulty}) => {
+export const Training = ({game_settings}: {game_settings: GameSettings}) => {
   return (
     <>
       <div className="flex justify-center">
         <Canvas
-          params={{
-            map_name: map_name,
-            spot_name: spot_name,
-            difficulty: difficulty,
-          }}
+          game_settings={game_settings}
         />
       </div>
     </>

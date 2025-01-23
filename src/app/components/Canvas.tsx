@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { Target, Vector2, Statistics, CrosshairData } from '@/types'
-import { mapsData } from '@/maps_data'
+import { Target, Vector2, Statistics, CrosshairData, GameSettings, CircuitData, SpotStruct } from '@/types'
+import { mapsData, getMapCircuits } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
 import { 
@@ -28,21 +28,17 @@ import {
 import { initRecoil, updateRecoil } from '@/functions/recoil'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
 
-interface CanvasParams {
-    map_name: string,
-    spot_name: string,
-    difficulty: string,
-}
-
 const startTimerValue: number = 0
 
-const Canvas = ({params}: {params: CanvasParams}) => {
+const Canvas = ({game_settings}: {game_settings: GameSettings}) => {
     const testDistance = useRef<number>(1)
     const testCharacter = useRef<number>(3)
     const testSpeedPosition = useRef<number>(1)
     const testSpeedScale = useRef<number>(0.1)
     const testPosition = useRef<Vector2>({x: 0, y: 0})
 
+    const currentSpotIndex = useRef<number>(0)
+    const circuits: CircuitData = getMapCircuits(game_settings.map_name)
     const isFiring = useRef<boolean>(false)
     const isPlayerDead = useRef<boolean>(false)
     const isReady = useRef<boolean>(false)
@@ -52,28 +48,41 @@ const Canvas = ({params}: {params: CanvasParams}) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const ctx = useRef<CanvasRenderingContext2D | null>(null)
 
-    const [mapSpotImage] = useState({
-        background: {
-            path: `/gfx/maps/${params.map_name}/${params.spot_name}.png`,
-            img: new Image(),
-        },
-        layer: {
-            path: `/gfx/maps/${params.map_name}/${params.spot_name}_layer.png`,
-            img: new Image(),
-        }
-    })
+    const [mapSpotImage, setMapSpotImage] = useState(getSpotImages())
 
     const [isLoading, setIsLoading] = useState<Boolean>(true)
     const isFullScreen = useRef(false)
     const statistics = useRef<Statistics>({kills: 0, deaths: 0})
 
-    const currentSpot = structuredClone(mapsData[params.map_name][params.spot_name])
+    const currentSpot = useRef<SpotStruct>(structuredClone(mapsData[game_settings.map_name][getCurrentSpotName()]))
     const target = useRef<Target | null>(null)
 
-    const screenOffset = useRef<Vector2>(structuredClone(currentSpot.initial_offset))
+    const screenOffset = useRef<Vector2>(structuredClone(currentSpot.current.initial_offset))
     const crosshairData = useRef<CrosshairData>(getCrosshairStorage())
     const mouse_sensitivity = useRef<number>(getSensitivityStorage())
 
+    function getSpotImages() {
+        return {
+            background: {
+                path: `/gfx/maps/${game_settings.map_name}/${getCurrentSpotName()}.png`,
+                img: new Image(),
+            },
+            layer: {
+                path: `/gfx/maps/${game_settings.map_name}/${getCurrentSpotName()}_layer.png`,
+                img: new Image(),
+            }
+        }
+    }
+    function getCurrentSpotName() {
+        switch(game_settings.mode){
+            case 'circuit':
+                return circuits[game_settings.circuit as keyof CircuitData][currentSpotIndex.current].name || ''
+            case 'spot':
+                return game_settings.spot || ''
+            default:
+                return ''
+        }
+    }
     const updateFiringState = (state: boolean) => {
         isFiring.current = state
     }
@@ -85,11 +94,11 @@ const Canvas = ({params}: {params: CanvasParams}) => {
         setTimeout(() => { respawnPlayer() }, 1000)
     }
     const generateTarget = () => {
-        target.current = getRandomTarget(structuredClone(currentSpot.targets))
+        target.current = getRandomTarget(structuredClone(currentSpot.current.targets))
     }
     const respawnPlayer = () => {
         isPlayerDead.current = false
-        screenOffset.current = currentSpot.initial_offset
+        screenOffset.current = currentSpot.current.initial_offset
         if (isReady.current)
             generateTarget()
     }
@@ -182,7 +191,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
                 case 'windowed':
                     canvasRef.current.width = minimizedCanvasSize.w
                     canvasRef.current.height = minimizedCanvasSize.h
-                    screenOffset.current = {...mapsData[params.map_name][params.spot_name].initial_offset}
+                    screenOffset.current = {...mapsData[game_settings.map_name][getCurrentSpotName()].initial_offset}
                 break
             }
         }
@@ -321,7 +330,7 @@ const Canvas = ({params}: {params: CanvasParams}) => {
             updateTargetTimer()
 
             if (target.current)
-                updateTarget(target.current, params.difficulty, isFullScreen.current, updatePlayerDeath)
+                updateTarget(target.current, game_settings.difficulty, isFullScreen.current, updatePlayerDeath)
 
             if (isFullScreen.current){            
                 updateRecoil(screenOffset.current)

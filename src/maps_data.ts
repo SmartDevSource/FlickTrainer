@@ -1,12 +1,23 @@
-import { Target, Vector2 } from "./types"
+import { SpotStruct, CircuitData, Target } from "./types"
 
 type MapsData = {
     [mapName: string]: { 
-        [spotName: string]: {
-            targets: Target[],
-            initial_offset: Vector2
-        }
+        [spotName: string]: SpotStruct
     }
+}
+
+export const getMapCircuits = (map_name: string) => {
+    const circuit_data: CircuitData = {
+        ct_circuit: [],
+        terrorist_circuit: []
+    }
+
+    for (const key in mapsData[map_name]){
+        const circuit_type = mapsData[map_name][key].circuit
+        if (circuit_type === 'ct_circuit' || circuit_type === 'terrorist_circuit')
+            circuit_data[circuit_type].push({...mapsData[map_name][key], name: key})
+    }
+    return circuit_data
 }
 
 export const mapsData: MapsData = {
@@ -107,7 +118,8 @@ export const mapsData: MapsData = {
             initial_offset: {
                 x: -420,
                 y: -150
-            }
+            },
+            circuit: 'ct_circuit'
         },
         ctspawn_to_short: {
             targets: [
@@ -223,7 +235,8 @@ export const mapsData: MapsData = {
             initial_offset: {
                 x: -420,
                 y: -150
-            }
+            },
+            circuit: 'ct'
         },
         connector_to_mid: {
             targets: [
@@ -303,7 +316,8 @@ export const mapsData: MapsData = {
             initial_offset: {
                 x: -420,
                 y: -150
-            }
+            },
+            circuit: 'ct_circuit'
         },
         ctspawn_to_b: {
             targets: [
@@ -428,7 +442,8 @@ export const mapsData: MapsData = {
             initial_offset: {
                 x: -420,
                 y: -150
-            }
+            },
+            circuit: 'ct_circuit'
         },
         b_to_stairs_1: {
             targets: [
@@ -553,7 +568,8 @@ export const mapsData: MapsData = {
             initial_offset: {
                 x: -420,
                 y: -150
-            }
+            },
+            circuit: 'ct_circuit'
         },
         b_to_stairs_2: {
             targets: [
@@ -642,7 +658,8 @@ export const mapsData: MapsData = {
             initial_offset: {
                 x: -420,
                 y: -150
-            }
+            },
+            circuit: 'ct_circuit'
         },
     }
 }

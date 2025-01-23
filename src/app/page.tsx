@@ -7,11 +7,13 @@ import { Navbar } from "./components/Navbar"
 import { Training } from "./components/Training"
 import { UserSettingsModal } from "./components/UserSettingsModal"
 import { Alert, AlertParams } from "./components/Alert"
+import { GameSettings } from "@/types"
 
 const MainPage = () => {
-  const [currentPage, setCurrentPage] = useState<string>('training')
+  const [currentPage, setCurrentPage] = useState<string>('map_peek')
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
   const [messageAlert, setMessageAlert] = useState<AlertParams | null>(null)
+  const [gameSettings, setGameSettings] = useState<GameSettings | null>(null)
 
   const handleNavbarClick = (navbar_data: string) => {
     switch(navbar_data){
@@ -36,6 +38,10 @@ const MainPage = () => {
     })
   }
 
+  const prepareGame = (game_settings: GameSettings) => {
+    setGameSettings(game_settings)
+  }
+
   useEffect(()=>{
     if (messageAlert){
       setTimeout(()=>{
@@ -43,11 +49,17 @@ const MainPage = () => {
       }, 5000)
     }
   }, [messageAlert])
+
+  useEffect(()=>{
+    if (gameSettings){
+      setCurrentPage('training')
+    }
+  }, [gameSettings])
   
   return (
     <>
     {currentPage === 'home' ?
-      <Home onClick={() => setCurrentPage('settings')}/>
+      <Home onClick={() => setCurrentPage('map_peek')}/>
       :
       <Navbar onLinkClick={(navbar_data) => handleNavbarClick(navbar_data)}/>
     }
@@ -65,14 +77,14 @@ const MainPage = () => {
         onSave={() => handleUserSettingsSave()}
       />
     }
-    {currentPage === 'settings' &&
-      <MapPeek/>
+    {currentPage === 'map_peek' &&
+      <MapPeek
+        onLaunchGame={(game_settings) => prepareGame(game_settings)}
+      />
     }
-    {currentPage === 'training' &&
+    {gameSettings && currentPage === 'training' &&
       <Training
-        map_name = 'vertigo'
-        spot_name = 'b_to_stairs_2'
-        difficulty = 'easy'
+        game_settings={gameSettings}
       />
     }
     </>
