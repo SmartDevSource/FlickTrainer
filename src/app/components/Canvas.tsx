@@ -28,9 +28,14 @@ import {
 import { initRecoil, updateRecoil } from '@/functions/recoil'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
 
+interface CanvasParams {
+    game_settings: GameSettings,
+    onCircuitAccomplished: () => void
+}
+
 const startTimerValue: number = 0
 
-const Canvas = ({game_settings}: {game_settings: GameSettings}, onCircuitAccomplished: () => void) => {
+const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) => {
     const testDistance = useRef<number>(1)
     const testCharacter = useRef<number>(3)
     const testSpeedPosition = useRef<number>(1)
