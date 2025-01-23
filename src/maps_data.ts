@@ -378,7 +378,7 @@ export const mapsData: MapsData = {
                 {
                     character: 'terrorist_crouch_darken',
                     come_from: 'right',
-                    from: {x: 750, y: 525},
+                    from: {x: 740, y: 525},
                     to: {x: 695, y: 525},
                     idle: false,
                     distance: 5.59,

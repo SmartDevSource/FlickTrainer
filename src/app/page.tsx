@@ -87,7 +87,7 @@ const MainPage = () => {
         <div className="flex justify-center">
           <Canvas
             game_settings={gameSettings}
-            onCircuitAccomplished={()=>console.log("test")}
+            onCircuitAccomplished={()=>console.log("onCircuitAccomplished")}
           />
         </div>
     }

@@ -1,9 +1,19 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { Target, Vector2, Statistics, CrosshairData, GameSettings, CircuitTeams, SpotStruct, CircuitStates } from '@/types'
 import { mapsData, getMapCircuits } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
+import { 
+    Target,
+    Vector2,
+    Statistics,
+    CrosshairData,
+    GameSettings,
+    CircuitTeams,
+    SpotStruct,
+    CircuitStates,
+    MapSpotStruct 
+} from '@/types'
 import { 
     getRandomTarget,
     updateTarget,
@@ -64,7 +74,10 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
     const crosshairData = useRef<CrosshairData>(getCrosshairStorage())
     const mouseSensitivity = useRef<number>(getSensitivityStorage())
 
-    const mapSpotImage = useRef(getSpotImages())
+    const mapSpotImages = useRef<MapSpotStruct>({
+        background: {path: '', img: new Image()},
+        layer: {path: '', img: new Image()}
+    })
     const [isLoading, setIsLoading] = useState<Boolean>(true)
 
     function getCircuitStates(){
@@ -74,18 +87,6 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
             current_spot_index: 0,
             last_spot_index: Object.keys(circuits[game_settings.circuit as keyof CircuitTeams]).length,
             is_accomplished: false
-        }
-    }
-    function getSpotImages() {
-        return {
-            background: {
-                path: `/gfx/maps/${game_settings.map_name}/${getCurrentSpotName()}.png`,
-                img: new Image(),
-            },
-            layer: {
-                path: `/gfx/maps/${game_settings.map_name}/${getCurrentSpotName()}_layer.png`,
-                img: new Image(),
-            }
         }
     }
     function getCurrentSpotName() {
@@ -103,9 +104,10 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
     }
     const updateBackgroundImages = () => {
         currentSpot.current = getCurrentSpot()
-        mapSpotImage.current = getSpotImages()
-        mapSpotImage.current.background.img.src = mapSpotImage.current.background.path
-        mapSpotImage.current.layer.img.src = mapSpotImage.current.layer.path
+        const backgroundKey = `${game_settings.map_name}_${getCurrentSpotName()}`
+        const layerKey = `${game_settings.map_name}_${getCurrentSpotName()}_layer`
+        mapSpotImages.current.background = images[backgroundKey]
+        mapSpotImages.current.layer = images[layerKey]
     }
 
     const updateFiringState = (state: boolean) => {
@@ -127,10 +129,6 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
     }
     const killTarget = () => {
         if (!isDead.current){
-            isFullScreen.current = false
-            handleExitFullScreen()
-            onCircuitAccomplished()
-
             audios.headshot.audio.currentTime = 0
             audios.headshot.audio.play()
 
@@ -139,28 +137,29 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
             if (shotTimeout){
                 clearTimeout(shotTimeout)
             }
-            // if (game_settings.mode === 'circuit'){
-            //     circuitStates.current.current_kills++
-            //     if (circuitStates.current.current_kills >= circuitStates.current.kills_goal){
-            //         if (circuitStates.current.current_spot_index < circuitStates.current.last_spot_index - 1){
-            //             circuitStates.current.current_spot_index++
-            //             circuitStates.current.current_kills = 0
-            //             updateBackgroundImages()
-            //             target.current = null
-            //             setTimeout(() => {
-            //                 generateTarget()
-            //             }, 1000)
-            //         } else {
-            //             circuitStates.current.is_accomplished = true
-            //             target.current = null
-            //             handleExitFullScreen()
-            //         }
-            //     } else {
-            //         generateTarget()
-            //     }
-            // } else {
-            //     generateTarget()
-            // }
+            if (game_settings.mode === 'circuit'){
+                circuitStates.current.current_kills++
+                if (circuitStates.current.current_kills >= circuitStates.current.kills_goal){
+                    if (circuitStates.current.current_spot_index < circuitStates.current.last_spot_index - 1){
+                        circuitStates.current.current_spot_index++
+                        circuitStates.current.current_kills = 0
+                        updateBackgroundImages()
+                        target.current = null
+                        setTimeout(() => {
+                            generateTarget()
+                        }, 1000)
+                    } else {
+                        circuitStates.current.is_accomplished = true
+                        target.current = null
+                        handleExitFullScreen()
+                        onCircuitAccomplished()
+                    }
+                } else {
+                    generateTarget()
+                }
+            } else {
+                generateTarget()
+            }
         }
     }
     const generateTarget = () => {
@@ -179,12 +178,14 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
         }
         circuitStates.current.current_kills = 0
         circuitStates.current.current_spot_index = 0
-        updateBackgroundImages()
+        circuitStates.current.is_accomplished = false
+        screenOffset.current = structuredClone(currentSpot.current.initial_offset)
         statistics.current.kills = 0
         statistics.current.deaths = 0
         isReady.current = false
         startTimer.current = startTimerValue
         isDead.current = false
+        updateBackgroundImages()
     }
     const initGame = () => {
         audios.timer.audio.play()
@@ -214,18 +215,20 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
     }
 
     const toggleFullScreen = () => {
-        if (document.fullscreenElement === canvasRef.current){
-            return
+        if (!circuitStates.current.is_accomplished){
+            if (document.fullscreenElement === canvasRef.current){
+                return
+            }
+            canvasRef.current?.requestFullscreen()
+            .then(() => {
+                resizeCanvas('fullscreen')
+                isFullScreen.current = true
+                initGame()
+            })
+            .catch(err => {
+                console.error('Error while toggling in fullscreen mode :', err)
+            })
         }
-        canvasRef.current?.requestFullscreen()
-        .then(() => {
-            resizeCanvas('fullscreen')
-            isFullScreen.current = true
-            initGame()
-        })
-        .catch(err => {
-            console.error('Error while toggling in fullscreen mode :', err)
-        })
     }
 
     const handleExitFullScreen = () => {
@@ -242,7 +245,11 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
                     clearInterval(startInterval.current)
                 }
             }
-        )}
+            )
+            .catch(err =>{
+                console.log('Error while exiting fullscreen :', err)
+            })
+        }
     }
 
     const resizeCanvas = (type: string) => {
@@ -307,13 +314,17 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
                 if (canvasRef.current){
                     resizeCanvas('windowed')
                     isFullScreen.current = false
-                    resetGame()
+                    if (!circuitStates.current.is_accomplished){
+                        resetGame()
+                    } else {
+                        setTimeout(() => resetGame(), 500)
+                    }
                 }
             }
         }
 
         const handleMouseMove = (event: MouseEvent) => {
-            if (isFullScreen.current && !isDead.current){
+            if (isFullScreen.current && !isDead.current && !circuitStates.current.is_accomplished){
                 const prevOffset = screenOffset.current
                 const newOffset = {
                     x: prevOffset.x - (event.movementX * (mouseSensitivity.current - (mouseSensitivity.current / 2))),
@@ -375,7 +386,8 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
         if (ctx) {
             (async () => {
                 try {
-                    await loadResources({...images, ...mapSpotImage.current}, audios)
+                    await loadResources(images, audios)
+                    updateBackgroundImages()
                     setIsLoading(false)
                 } catch (err) {
                     console.error(`Error while loading all resources :`, err)
@@ -393,15 +405,14 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
             ctx.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
 
             updateTargetTimer()
+            updateRecoil(screenOffset.current)
 
             if (target.current)
                 updateTarget(target.current, game_settings.difficulty, isFullScreen.current, killPlayer)
 
-            if (isFullScreen.current){            
-                updateRecoil(screenOffset.current)
-
+            if (isFullScreen.current && mapSpotImages.current.background.path && mapSpotImages.current.layer.path){
                 // MAP BACKGROUND //
-                ctx.current.drawImage(mapSpotImage.current.background.img, screenOffset.current.x, screenOffset.current.y)
+                ctx.current.drawImage(mapSpotImages.current.background.img, screenOffset.current.x, screenOffset.current.y)
 
                 // TARGET //
                 if (target.current)
@@ -411,7 +422,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
                 drawTargetHelper(ctx.current, images, screenOffset.current, testPosition.current, testDistance.current, testCharacter.current)
 
                 // MAP BACKGROUND LAYER //
-                ctx.current.drawImage(mapSpotImage.current.layer.img, screenOffset.current.x, screenOffset.current.y)
+                ctx.current.drawImage(mapSpotImages.current.layer.img, screenOffset.current.x, screenOffset.current.y)
 
                 drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, updateFiringState)
                 drawCrosshair(ctx.current, crosshairData.current)
@@ -425,7 +436,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
                 if (isDead.current)
                     drawPlayerDeath(ctx.current)
             } else {
-                drawPauseScreen(ctx.current, mapSpotImage.current.background)
+                drawPauseScreen(ctx.current, mapSpotImages.current.background)
             }
             requestAnimationFrame(draw)
         }

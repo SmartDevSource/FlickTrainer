@@ -90,3 +90,8 @@ export interface CircuitStates {
     last_spot_index: number,
     is_accomplished: boolean
 }
+
+export interface MapSpotStruct {
+    background: ImageObject,
+    layer: ImageObject
+}
