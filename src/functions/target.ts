@@ -25,9 +25,9 @@ const getReactionTime = (difficulty: string) => {
     }
 }
 
-const shotPlayer = (target: Target, updatePlayerDeath: (state: boolean) => void) => {
+const shotPlayer = (target: Target, killPlayer: () => void) => {
     if (target.idle){
-        updatePlayerDeath(true)
+        killPlayer()
     }
 }
 
@@ -55,7 +55,7 @@ export const updateTargetTimer = () => {
     targetTimer.last_update = now
 }
 
-export const updateTarget = (target: Target, difficulty: string, isFullscreen: boolean, updatePlayerDeath: (state: boolean) => void) => {
+export const updateTarget = (target: Target, difficulty: string, isFullscreen: boolean, killPlayer: () => void) => {
     if (!target.idle && isFullscreen){
         if (target.from.x < target.to.x){
             target.from.x += (target.speed * targetTimer.delta_time)
@@ -72,7 +72,7 @@ export const updateTarget = (target: Target, difficulty: string, isFullscreen: b
                     target.from.x = target.to.x
                     target.idle = true
                     shotTimeout = setTimeout(()=>{
-                        shotPlayer(target, updatePlayerDeath)
+                        shotPlayer(target, killPlayer)
                     }, getReactionTime(difficulty))
                 }
             break
@@ -81,7 +81,7 @@ export const updateTarget = (target: Target, difficulty: string, isFullscreen: b
                     target.from.x = target.to.x
                     target.idle = true
                     shotTimeout = setTimeout(()=>{
-                        shotPlayer(target, updatePlayerDeath)
+                        shotPlayer(target, killPlayer)
                     }, getReactionTime(difficulty))
                 }
             break
@@ -90,7 +90,7 @@ export const updateTarget = (target: Target, difficulty: string, isFullscreen: b
                     target.from.y = target.to.y
                     target.idle = true
                     shotTimeout = setTimeout(()=>{
-                        shotPlayer(target, updatePlayerDeath)
+                        shotPlayer(target, killPlayer)
                     }, getReactionTime(difficulty))
                 }
             break

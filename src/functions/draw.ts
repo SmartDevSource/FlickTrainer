@@ -1,4 +1,4 @@
-import { ImageObject, Statistics, Target, Vector2, Timer } from "@/types"
+import { ImageObject, Statistics, Target, Vector2, Timer, CircuitStates } from "@/types"
 import { getHeadCoordinates } from "./target"
 import { crosshairData } from "./crosshair_changer"
 
@@ -164,7 +164,7 @@ export const drawCoordinates = (
     )
 }
 
-export const drawStatistics = (statistics: Statistics, ctx: CanvasRenderingContext2D) => {
+export const drawStatistics = (ctx: CanvasRenderingContext2D, statistics: Statistics, circuit_states: CircuitStates, game_mode: string) => {
     // ADD DELAY REACTION TIME (MS)
     const kd = (statistics.kills / (statistics.deaths === 0 ? 1 : statistics.deaths)).toFixed(2)
     const killsDeathBoxLength = (statistics.kills.toString().length * 15) + (statistics.deaths.toString().length * 15)
@@ -177,12 +177,22 @@ export const drawStatistics = (statistics: Statistics, ctx: CanvasRenderingConte
     ctx.strokeStyle = 'rgb(150, 150, 150)'
     ctx.strokeRect(10, 31, 210 + killsDeathBoxLength, 25)
     ctx.fillText(`Kills : ${statistics.kills}  -  Deaths : ${statistics.deaths}`, 30, 50)
+
     ctx.strokeStyle = 'rgb(150, 150, 150)'
     ctx.fillStyle = 'rgba(255, 255, 255, .3)'
     ctx.fillRect(870, 31, 80 + kdBoxLength, 25)
     ctx.strokeRect(870, 31, 80 + kdBoxLength, 25)
     ctx.fillStyle = 'rgb(255, 255, 255)'
     ctx.fillText(`KD : ${kd}`, 890, 50)
+
+    if (game_mode === 'circuit'){
+        ctx.strokeStyle = 'rgb(150, 150, 150)'
+        ctx.fillStyle = 'rgba(255, 255, 255, .3)'
+        ctx.fillRect(870, 56, 80 + kdBoxLength, 25)
+        ctx.strokeRect(870, 56, 80 + kdBoxLength, 25)
+        ctx.fillStyle = 'rgb(255, 255, 255)'
+        ctx.fillText(`${circuit_states.current_kills} / ${circuit_states.kills_goal}`, 915, 75)
+    }
 }
 
 export const drawPlayerDeath = (ctx: CanvasRenderingContext2D) => {

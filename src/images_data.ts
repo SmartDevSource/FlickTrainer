@@ -1,6 +1,7 @@
 import { ImageObject } from "./types"
 
 export const images: {[key: string]: ImageObject} = {
+    // SPRITES //
     crosshair: {
         path: `/gfx/hud/crosshair.png`,
         img: new Image(),

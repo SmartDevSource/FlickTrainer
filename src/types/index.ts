@@ -78,7 +78,15 @@ export interface SpotStruct {
     name?: string
 }
 
-export interface CircuitData {
+export interface CircuitTeams {
     ct_circuit: SpotStruct[],
     terrorist_circuit: SpotStruct[],
+}
+
+export interface CircuitStates {
+    current_kills: number,
+    kills_goal: number,
+    current_spot_index: number,
+    last_spot_index: number,
+    is_accomplished: boolean
 }

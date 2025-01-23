@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { Target, Vector2, Statistics, CrosshairData, GameSettings, CircuitData, SpotStruct } from '@/types'
+import { Target, Vector2, Statistics, CrosshairData, GameSettings, CircuitTeams, SpotStruct, CircuitStates } from '@/types'
 import { mapsData, getMapCircuits } from '@/maps_data'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
@@ -30,17 +30,18 @@ import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/fun
 
 const startTimerValue: number = 0
 
-const Canvas = ({game_settings}: {game_settings: GameSettings}) => {
+const Canvas = ({game_settings}: {game_settings: GameSettings}, onCircuitAccomplished: () => void) => {
     const testDistance = useRef<number>(1)
     const testCharacter = useRef<number>(3)
     const testSpeedPosition = useRef<number>(1)
     const testSpeedScale = useRef<number>(0.1)
     const testPosition = useRef<Vector2>({x: 0, y: 0})
 
-    const currentSpotIndex = useRef<number>(0)
-    const circuits: CircuitData = getMapCircuits(game_settings.map_name)
+    const circuits: CircuitTeams = getMapCircuits(game_settings.map_name)
+    const circuitStates = useRef<CircuitStates>(getCircuitStates())
+
     const isFiring = useRef<boolean>(false)
-    const isPlayerDead = useRef<boolean>(false)
+    const isDead = useRef<boolean>(false)
     const isReady = useRef<boolean>(false)
     const startTimer = useRef<number>(startTimerValue)
     let startInterval = useRef<ReturnType<typeof setInterval>>(null)
@@ -48,19 +49,28 @@ const Canvas = ({game_settings}: {game_settings: GameSettings}) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const ctx = useRef<CanvasRenderingContext2D | null>(null)
 
-    const [mapSpotImage, setMapSpotImage] = useState(getSpotImages())
-
-    const [isLoading, setIsLoading] = useState<Boolean>(true)
     const isFullScreen = useRef(false)
     const statistics = useRef<Statistics>({kills: 0, deaths: 0})
 
-    const currentSpot = useRef<SpotStruct>(structuredClone(mapsData[game_settings.map_name][getCurrentSpotName()]))
+    const currentSpot = useRef<SpotStruct>(getCurrentSpot())
     const target = useRef<Target | null>(null)
 
     const screenOffset = useRef<Vector2>(structuredClone(currentSpot.current.initial_offset))
     const crosshairData = useRef<CrosshairData>(getCrosshairStorage())
-    const mouse_sensitivity = useRef<number>(getSensitivityStorage())
+    const mouseSensitivity = useRef<number>(getSensitivityStorage())
 
+    const mapSpotImage = useRef(getSpotImages())
+    const [isLoading, setIsLoading] = useState<Boolean>(true)
+
+    function getCircuitStates(){
+        return {
+            current_kills: 0,
+            kills_goal: 1,
+            current_spot_index: 0,
+            last_spot_index: Object.keys(circuits[game_settings.circuit as keyof CircuitTeams]).length,
+            is_accomplished: false
+        }
+    }
     function getSpotImages() {
         return {
             background: {
@@ -76,31 +86,80 @@ const Canvas = ({game_settings}: {game_settings: GameSettings}) => {
     function getCurrentSpotName() {
         switch(game_settings.mode){
             case 'circuit':
-                return circuits[game_settings.circuit as keyof CircuitData][currentSpotIndex.current].name || ''
+                return circuits[game_settings.circuit as keyof CircuitTeams][circuitStates.current.current_spot_index].name || ''
             case 'spot':
                 return game_settings.spot || ''
             default:
                 return ''
         }
     }
+    function getCurrentSpot(){
+        return structuredClone(mapsData[game_settings.map_name][getCurrentSpotName()])
+    }
+    const updateBackgroundImages = () => {
+        currentSpot.current = getCurrentSpot()
+        mapSpotImage.current = getSpotImages()
+        mapSpotImage.current.background.img.src = mapSpotImage.current.background.path
+        mapSpotImage.current.layer.img.src = mapSpotImage.current.layer.path
+    }
+
     const updateFiringState = (state: boolean) => {
         isFiring.current = state
     }
-    const updatePlayerDeath = (state: boolean) => {
-        isPlayerDead.current = state
+    const killPlayer = () => {
+        isDead.current = true
         statistics.current.deaths++
         audios.player_death.audio.currentTime = 0
         audios.player_death.audio.play()
+        circuitStates.current.current_kills = 0
         setTimeout(() => { respawnPlayer() }, 1000)
     }
-    const generateTarget = () => {
-        target.current = getRandomTarget(structuredClone(currentSpot.current.targets))
-    }
     const respawnPlayer = () => {
-        isPlayerDead.current = false
+        isDead.current = false
         screenOffset.current = currentSpot.current.initial_offset
         if (isReady.current)
             generateTarget()
+    }
+    const killTarget = () => {
+        if (!isDead.current){
+            isFullScreen.current = false
+            handleExitFullScreen()
+            onCircuitAccomplished()
+
+            audios.headshot.audio.currentTime = 0
+            audios.headshot.audio.play()
+
+            statistics.current.kills++
+
+            if (shotTimeout){
+                clearTimeout(shotTimeout)
+            }
+            // if (game_settings.mode === 'circuit'){
+            //     circuitStates.current.current_kills++
+            //     if (circuitStates.current.current_kills >= circuitStates.current.kills_goal){
+            //         if (circuitStates.current.current_spot_index < circuitStates.current.last_spot_index - 1){
+            //             circuitStates.current.current_spot_index++
+            //             circuitStates.current.current_kills = 0
+            //             updateBackgroundImages()
+            //             target.current = null
+            //             setTimeout(() => {
+            //                 generateTarget()
+            //             }, 1000)
+            //         } else {
+            //             circuitStates.current.is_accomplished = true
+            //             target.current = null
+            //             handleExitFullScreen()
+            //         }
+            //     } else {
+            //         generateTarget()
+            //     }
+            // } else {
+            //     generateTarget()
+            // }
+        }
+    }
+    const generateTarget = () => {
+        target.current = getRandomTarget(structuredClone(currentSpot.current.targets))
     }
     const resetGame = () => {
         if (shotTimeout){
@@ -113,16 +172,19 @@ const Canvas = ({game_settings}: {game_settings: GameSettings}) => {
         if (target.current){
             target.current = null
         }
+        circuitStates.current.current_kills = 0
+        circuitStates.current.current_spot_index = 0
+        updateBackgroundImages()
         statistics.current.kills = 0
         statistics.current.deaths = 0
         isReady.current = false
         startTimer.current = startTimerValue
-        isPlayerDead.current = false
+        isDead.current = false
     }
     const initGame = () => {
         audios.timer.audio.play()
         crosshairData.current = getCrosshairStorage()
-        mouse_sensitivity.current = getSensitivityStorage()
+        mouseSensitivity.current = getSensitivityStorage()
         startInterval.current = setInterval(()=>{
             if (startTimer.current > 1){
                 startTimer.current--
@@ -167,6 +229,7 @@ const Canvas = ({game_settings}: {game_settings: GameSettings}) => {
                 document.exitPointerLock()
             }
             document.exitFullscreen().then(() => {
+                isFullScreen.current = false
                 if (shotTimeout){
                     clearTimeout(shotTimeout)
                 }
@@ -245,11 +308,11 @@ const Canvas = ({game_settings}: {game_settings: GameSettings}) => {
         }
 
         const handleMouseMove = (event: MouseEvent) => {
-            if (isFullScreen.current && !isPlayerDead.current){
+            if (isFullScreen.current && !isDead.current){
                 const prevOffset = screenOffset.current
                 const newOffset = {
-                    x: prevOffset.x - (event.movementX * (mouse_sensitivity.current - (mouse_sensitivity.current / 2))),
-                    y: prevOffset.y - (event.movementY * (mouse_sensitivity.current - (mouse_sensitivity.current / 2)))
+                    x: prevOffset.x - (event.movementX * (mouseSensitivity.current - (mouseSensitivity.current / 2))),
+                    y: prevOffset.y - (event.movementY * (mouseSensitivity.current - (mouseSensitivity.current / 2)))
                 }
                 if (newOffset.x < screenBoundaries.left && newOffset.x > screenBoundaries.right){
                     screenOffset.current.x = newOffset.x
@@ -262,7 +325,7 @@ const Canvas = ({game_settings}: {game_settings: GameSettings}) => {
 
         const handleMouseDown = (event: MouseEvent) => {
             // FIRING //
-            if (event.button === 0 && isFullScreen.current && !isPlayerDead.current && isReady.current){
+            if (event.button === 0 && isFullScreen.current && !isDead.current && isReady.current){
                 if (!isFiring.current){
                     isFiring.current = true
                     audios.deagleshot.audio.currentTime = 0
@@ -283,10 +346,7 @@ const Canvas = ({game_settings}: {game_settings: GameSettings}) => {
                             mouseCenterPosition.y >= headCoordinates.position.y &&
                             mouseCenterPosition.y <= headCoordinates.position.y + headCoordinates.scale.h)
                         {
-                            audios.headshot.audio.currentTime = 0
-                            audios.headshot.audio.play()
-                            statistics.current.kills++
-                            generateTarget()
+                            killTarget()
                         }
                     }
                 }
@@ -310,7 +370,7 @@ const Canvas = ({game_settings}: {game_settings: GameSettings}) => {
         if (ctx) {
             (async () => {
                 try {
-                    await loadResources({...images, ...mapSpotImage}, audios)
+                    await loadResources({...images, ...mapSpotImage.current}, audios)
                     setIsLoading(false)
                 } catch (err) {
                     console.error(`Error while loading all resources :`, err)
@@ -330,13 +390,13 @@ const Canvas = ({game_settings}: {game_settings: GameSettings}) => {
             updateTargetTimer()
 
             if (target.current)
-                updateTarget(target.current, game_settings.difficulty, isFullScreen.current, updatePlayerDeath)
+                updateTarget(target.current, game_settings.difficulty, isFullScreen.current, killPlayer)
 
             if (isFullScreen.current){            
                 updateRecoil(screenOffset.current)
 
-                // MAP BACKGROUND  //
-                ctx.current.drawImage(mapSpotImage.background.img, screenOffset.current.x, screenOffset.current.y)
+                // MAP BACKGROUND //
+                ctx.current.drawImage(mapSpotImage.current.background.img, screenOffset.current.x, screenOffset.current.y)
 
                 // TARGET //
                 if (target.current)
@@ -346,21 +406,21 @@ const Canvas = ({game_settings}: {game_settings: GameSettings}) => {
                 drawTargetHelper(ctx.current, images, screenOffset.current, testPosition.current, testDistance.current, testCharacter.current)
 
                 // MAP BACKGROUND LAYER //
-                ctx.current.drawImage(mapSpotImage.layer.img, screenOffset.current.x, screenOffset.current.y)
+                ctx.current.drawImage(mapSpotImage.current.layer.img, screenOffset.current.x, screenOffset.current.y)
 
-                drawWeapon(ctx.current,images.deagle, images.shotflame, isFiring.current, updateFiringState)
+                drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, updateFiringState)
                 drawCrosshair(ctx.current, crosshairData.current)
 
-                drawStatistics(statistics.current, ctx.current)
+                drawStatistics(ctx.current, statistics.current, circuitStates.current, game_settings.mode)
                 drawCoordinates(ctx.current, screenOffset.current, testDistance.current, testPosition.current, testSpeedPosition.current, testSpeedScale.current)
 
                 if (!isReady.current)
                     drawStartCounter(ctx.current, startTimer.current)
 
-                if (isPlayerDead.current)
+                if (isDead.current)
                     drawPlayerDeath(ctx.current)
             } else {
-                drawPauseScreen(ctx.current, mapSpotImage.background)
+                drawPauseScreen(ctx.current, mapSpotImage.current.background)
             }
             requestAnimationFrame(draw)
         }

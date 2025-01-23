@@ -1,10 +1,11 @@
 'use client'
 import { useEffect, useState } from "react"
 
+import Canvas from "./components/Canvas"
 import { Home } from "./components/Home"
 import { MapPeek } from "./components/MapPeek"
 import { Navbar } from "./components/Navbar"
-import { Training } from "./components/Training"
+
 import { UserSettingsModal } from "./components/UserSettingsModal"
 import { Alert, AlertParams } from "./components/Alert"
 import { GameSettings } from "@/types"
@@ -83,9 +84,12 @@ const MainPage = () => {
       />
     }
     {gameSettings && currentPage === 'training' &&
-      <Training
-        game_settings={gameSettings}
-      />
+        <div className="flex justify-center">
+          <Canvas
+            game_settings={gameSettings}
+            onCircuitAccomplished={()=>console.log("test")}
+          />
+        </div>
     }
     </>
   )

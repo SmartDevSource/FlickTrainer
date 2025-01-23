@@ -1,4 +1,4 @@
-import { SpotStruct, CircuitData, Target } from "./types"
+import { SpotStruct, CircuitTeams, Target } from "./types"
 
 type MapsData = {
     [mapName: string]: { 
@@ -7,7 +7,7 @@ type MapsData = {
 }
 
 export const getMapCircuits = (map_name: string) => {
-    const circuit_data: CircuitData = {
+    const circuit_data: CircuitTeams = {
         ct_circuit: [],
         terrorist_circuit: []
     }
