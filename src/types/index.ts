@@ -36,7 +36,8 @@ export interface Target {
 
 export interface Statistics {
     kills: number,
-    deaths: number
+    deaths: number,
+    time_elapsed: number
 }
 
 export interface RecoilSettings {
@@ -68,7 +69,8 @@ export interface GameSettings {
     map_name: string,
     circuit: string,
     spot: string,
-    difficulty: string
+    difficulty: string,
+    spot_objective: number
 }
 
 export interface SpotStruct {
@@ -88,6 +90,12 @@ export interface CircuitStates {
     kills_goal: number,
     current_spot_index: number,
     last_spot_index: number,
+    is_accomplished: boolean
+}
+
+export interface SpotStates {
+    current_kills: number,
+    kills_goal: number,
     is_accomplished: boolean
 }
 

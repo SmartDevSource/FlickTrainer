@@ -22,6 +22,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
     const [selectedCircuit, setSelectedCircuit] = useState<string>('ct_circuit')
     const [selectedSpot, setSelectedSpot] = useState<string>(spots[0]?.name ?? '')
     const [selectedDifficulty, setSelectedDifficulty] = useState<string>('easy')
+    const [spotObjective, setSpotObjective] = useState<number>(25)
 
     const normalizeCircuitName = (circuit_name: string) => {
         const firstWord = circuit_name.split('_')[0]
@@ -43,6 +44,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
             circuit: selectedCircuit,
             spot: selectedSpot,
             difficulty: selectedDifficulty,
+            spot_objective: spotObjective
         })
     }
 
@@ -63,6 +65,10 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
 
     const handleDifficultySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setSelectedDifficulty(e.target.value)
+    }
+
+    const handleSpotObjective = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSpotObjective(parseInt(e.target.value))
     }
 
     return (
@@ -169,6 +175,28 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                                     </select>
                                 </form>
                             </div>
+                            {selectedMode === 'spot' &&
+                                <div className="p-4 flex flex-row justify-between items-center">
+                                    <p className="text-base leading-relaxed text-white">
+                                        Objectif
+                                    </p>
+                                    <form className="max-w-sm">
+                                        <select
+                                            id="kills_count"
+                                            className="bg-gray-50 border border-gray-300
+                                                text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                                                focus:border-blue-500 block w-full p-2.5"
+                                            onChange={handleSpotObjective}
+                                        >
+                                            <option className="font-bold" value="25">25 kills</option>
+                                            <option className="font-bold" value="50">50 kills</option>
+                                            <option className="font-bold" value="100">100 kills</option>
+                                            <option className="font-bold" value="200">200 kills</option>
+                                        </select>
+                                    </form>
+                                </div>
+                            }
+
                         </div>
 
                         <div className="flex items-center justify-end p-4 md:p-5 border-t">

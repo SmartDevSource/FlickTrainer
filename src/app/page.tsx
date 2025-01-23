@@ -8,7 +8,7 @@ import { Navbar } from "./components/Navbar"
 
 import { UserSettingsModal } from "./components/UserSettingsModal"
 import { Alert, AlertParams } from "./components/Alert"
-import { GameSettings } from "@/types"
+import { GameSettings, Statistics } from "@/types"
 
 const MainPage = () => {
   const [currentPage, setCurrentPage] = useState<string>('map_peek')
@@ -41,6 +41,14 @@ const MainPage = () => {
 
   const prepareGame = (game_settings: GameSettings) => {
     setGameSettings(game_settings)
+  }
+
+  const handleCircuitAccomplishment = (statistics: Statistics) => {
+    console.log("handleCircuitAccomplishment :", statistics)
+  }
+
+  const handleSpotAccomplishment = (statistics: Statistics) => {
+    console.log("handleSpotAccomplishment :", statistics)
   }
 
   useEffect(()=>{
@@ -87,7 +95,8 @@ const MainPage = () => {
         <div className="flex justify-center">
           <Canvas
             game_settings={gameSettings}
-            onCircuitAccomplished={()=>console.log("onCircuitAccomplished")}
+            onCircuitAccomplished={(e)=> handleCircuitAccomplishment(e)}
+            onSpotAccomplished={(e)=> handleSpotAccomplishment(e)}
           />
         </div>
     }

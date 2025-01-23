@@ -12,7 +12,8 @@ import {
     CircuitTeams,
     SpotStruct,
     CircuitStates,
-    MapSpotStruct 
+    MapSpotStruct, 
+    SpotStates
 } from '@/types'
 import { 
     getRandomTarget,
@@ -40,12 +41,20 @@ import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/fun
 
 interface CanvasParams {
     game_settings: GameSettings,
-    onCircuitAccomplished: () => void
+    onCircuitAccomplished: (
+        statistics: Statistics,
+    ) => void,
+    onSpotAccomplished: (
+        statistics: Statistics,
+    ) => void,
 }
 
 const startTimerValue: number = 0
+const playerRespawnTimeout: number = 1000
+const generateTargetAfterNewSpotTimeout: number = 1000
+const resetGameWhenCircuitAccomplishedTimeout: number = 500
 
-const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) => {
+const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, onSpotAccomplished}) => {
     const testDistance = useRef<number>(1)
     const testCharacter = useRef<number>(3)
     const testSpeedPosition = useRef<number>(1)
@@ -53,19 +62,23 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
     const testPosition = useRef<Vector2>({x: 0, y: 0})
 
     const circuits: CircuitTeams = getMapCircuits(game_settings.map_name)
+
     const circuitStates = useRef<CircuitStates>(getCircuitStates())
+    const spotStates = useRef<SpotStates>(getSpotStates())
 
     const isFiring = useRef<boolean>(false)
     const isDead = useRef<boolean>(false)
     const isReady = useRef<boolean>(false)
     const startTimer = useRef<number>(startTimerValue)
+
     let startInterval = useRef<ReturnType<typeof setInterval>>(null)
+    let timeElapsedInterval = useRef<ReturnType<typeof setInterval>>(null)
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const ctx = useRef<CanvasRenderingContext2D | null>(null)
 
     const isFullScreen = useRef(false)
-    const statistics = useRef<Statistics>({kills: 0, deaths: 0})
+    const statistics = useRef<Statistics>({kills: 0, deaths: 0, time_elapsed: 0})
 
     const currentSpot = useRef<SpotStruct>(getCurrentSpot())
     const target = useRef<Target | null>(null)
@@ -86,6 +99,13 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
             kills_goal: 1,
             current_spot_index: 0,
             last_spot_index: Object.keys(circuits[game_settings.circuit as keyof CircuitTeams]).length,
+            is_accomplished: false
+        }
+    }
+    function getSpotStates(){
+        return {
+            current_kills: 0,
+            kills_goal: game_settings.spot_objective,
             is_accomplished: false
         }
     }
@@ -119,7 +139,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
         audios.player_death.audio.currentTime = 0
         audios.player_death.audio.play()
         circuitStates.current.current_kills = 0
-        setTimeout(() => { respawnPlayer() }, 1000)
+        setTimeout(() => { respawnPlayer() }, playerRespawnTimeout)
     }
     const respawnPlayer = () => {
         isDead.current = false
@@ -137,28 +157,40 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
             if (shotTimeout){
                 clearTimeout(shotTimeout)
             }
-            if (game_settings.mode === 'circuit'){
-                circuitStates.current.current_kills++
-                if (circuitStates.current.current_kills >= circuitStates.current.kills_goal){
-                    if (circuitStates.current.current_spot_index < circuitStates.current.last_spot_index - 1){
-                        circuitStates.current.current_spot_index++
-                        circuitStates.current.current_kills = 0
-                        updateBackgroundImages()
-                        target.current = null
-                        setTimeout(() => {
-                            generateTarget()
-                        }, 1000)
+
+            switch(game_settings.mode){
+                case 'circuit':
+                    circuitStates.current.current_kills++
+                    if (circuitStates.current.current_kills >= circuitStates.current.kills_goal){
+                        if (circuitStates.current.current_spot_index < circuitStates.current.last_spot_index - 1){
+                            circuitStates.current.current_spot_index++
+                            circuitStates.current.current_kills = 0
+                            updateBackgroundImages()
+                            target.current = null
+                            setTimeout(() => {
+                                generateTarget()
+                            }, generateTargetAfterNewSpotTimeout)
+                        } else {
+                            circuitStates.current.is_accomplished = true
+                            target.current = null
+                            handleExitFullScreen()
+                            onCircuitAccomplished(statistics.current)
+                        }
                     } else {
-                        circuitStates.current.is_accomplished = true
+                        generateTarget()
+                    }
+                break
+                case 'spot':
+                    spotStates.current.current_kills++
+                    if (spotStates.current.current_kills >= spotStates.current.kills_goal){
+                        spotStates.current.is_accomplished = true
                         target.current = null
                         handleExitFullScreen()
-                        onCircuitAccomplished()
+                        onSpotAccomplished(statistics.current)
+                    } else {
+                        generateTarget()
                     }
-                } else {
-                    generateTarget()
-                }
-            } else {
-                generateTarget()
+                break
             }
         }
     }
@@ -173,18 +205,28 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
             clearInterval(startInterval.current)
             startInterval.current = null
         }
+        if (timeElapsedInterval.current){
+            clearInterval(timeElapsedInterval.current)
+        }
         if (target.current){
             target.current = null
         }
         circuitStates.current.current_kills = 0
         circuitStates.current.current_spot_index = 0
         circuitStates.current.is_accomplished = false
-        screenOffset.current = structuredClone(currentSpot.current.initial_offset)
+
+        spotStates.current.current_kills = 0
+        spotStates.current.kills_goal = 0
+        spotStates.current.is_accomplished = false
+
         statistics.current.kills = 0
         statistics.current.deaths = 0
+        statistics.current.time_elapsed = 0
+
+        screenOffset.current = structuredClone(currentSpot.current.initial_offset)
         isReady.current = false
-        startTimer.current = startTimerValue
         isDead.current = false
+        startTimer.current = startTimerValue
         updateBackgroundImages()
     }
     const initGame = () => {
@@ -196,6 +238,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
                 startTimer.current--
                 audios.timer.audio.play()
             } else {
+                timeElapsedInterval.current = setInterval(() => { statistics.current.time_elapsed++ }, 1000)
                 isReady.current = true
                 generateTarget()
                 if (startInterval.current){
@@ -215,7 +258,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
     }
 
     const toggleFullScreen = () => {
-        if (!circuitStates.current.is_accomplished){
+        if (!circuitStates.current.is_accomplished && !spotStates.current.is_accomplished){
             if (document.fullscreenElement === canvasRef.current){
                 return
             }
@@ -243,6 +286,9 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
                 }
                 if (startInterval.current){
                     clearInterval(startInterval.current)
+                }
+                if (timeElapsedInterval.current){
+                    clearInterval(timeElapsedInterval.current)
                 }
             }
             )
@@ -314,17 +360,17 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
                 if (canvasRef.current){
                     resizeCanvas('windowed')
                     isFullScreen.current = false
-                    if (!circuitStates.current.is_accomplished){
+                    if (!circuitStates.current.is_accomplished && !spotStates.current.is_accomplished){
                         resetGame()
                     } else {
-                        setTimeout(() => resetGame(), 500)
+                        setTimeout(() => resetGame(), resetGameWhenCircuitAccomplishedTimeout)
                     }
                 }
             }
         }
 
         const handleMouseMove = (event: MouseEvent) => {
-            if (isFullScreen.current && !isDead.current && !circuitStates.current.is_accomplished){
+            if (isFullScreen.current && !isDead.current && !circuitStates.current.is_accomplished && !spotStates.current.is_accomplished){
                 const prevOffset = screenOffset.current
                 const newOffset = {
                     x: prevOffset.x - (event.movementX * (mouseSensitivity.current - (mouseSensitivity.current / 2))),
@@ -427,7 +473,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished}) 
                 drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, updateFiringState)
                 drawCrosshair(ctx.current, crosshairData.current)
 
-                drawStatistics(ctx.current, statistics.current, circuitStates.current, game_settings.mode)
+                drawStatistics(ctx.current, statistics.current, circuitStates.current, spotStates.current, game_settings.mode)
                 drawCoordinates(ctx.current, screenOffset.current, testDistance.current, testPosition.current, testSpeedPosition.current, testSpeedScale.current)
 
                 if (!isReady.current)

@@ -1,10 +1,11 @@
-import { ImageObject, Statistics, Target, Vector2, Timer, CircuitStates } from "@/types"
+import { ImageObject, Statistics, Target, Vector2, Timer, CircuitStates, SpotStates } from "@/types"
 import { getHeadCoordinates } from "./target"
 import { crosshairData } from "./crosshair_changer"
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const framesPerSecond: number = 100
 const crosshairScaleFactor: number = 2
+const drawCoordinatesYOffset: number = 25
 
 const weaponAnim: {
     current_frame: number,
@@ -142,30 +143,40 @@ export const drawCoordinates = (
     testSpeedPosition: number,
     testSpeedScale: number
 ) => {
+    ctx.save()
+    ctx.fillStyle = 'white'
     ctx.fillText(`Offset x : ${screenOffset.x.toFixed(2)} | Offset y : ${screenOffset.y.toFixed(2)}`,
         20, 
-        75
+        75 + drawCoordinatesYOffset
     )
     ctx.fillText(`Distance x : ${testDistance.toFixed(2)} | Position (x : ${testPosition.x}, y: ${testPosition.y})`,
         20,
-        100
+        100 + drawCoordinatesYOffset
     )
     ctx.fillText(`[a] Toggle Character Type`,
         20,
-        175
+        175 + drawCoordinatesYOffset
     )
     ctx.fillText(`[z] Speed Position : ${testSpeedPosition === 1 ? 'slow' : testSpeedPosition === 10 ? 'medium': 'fast'}`,
         20,
-        200
+        200 + drawCoordinatesYOffset
     )
     ctx.fillText(`[e] Speed Scale : ${testSpeedScale === .01 ? 'slow' : testSpeedScale === .1 ? 'medium' : 'fast'}`,
         20,
-        225
+        225 + drawCoordinatesYOffset
     )
+    ctx.restore()
 }
 
-export const drawStatistics = (ctx: CanvasRenderingContext2D, statistics: Statistics, circuit_states: CircuitStates, game_mode: string) => {
+export const drawStatistics = (
+    ctx: CanvasRenderingContext2D,
+    statistics: Statistics,
+    circuit_states: CircuitStates,
+    spot_states: SpotStates,
+    game_mode: string
+) => {
     // ADD DELAY REACTION TIME (MS)
+    ctx.save()
     const kd = (statistics.kills / (statistics.deaths === 0 ? 1 : statistics.deaths)).toFixed(2)
     const killsDeathBoxLength = (statistics.kills.toString().length * 15) + (statistics.deaths.toString().length * 15)
     const kdBoxLength = kd.toString().length * 13
@@ -185,14 +196,33 @@ export const drawStatistics = (ctx: CanvasRenderingContext2D, statistics: Statis
     ctx.fillStyle = 'rgb(255, 255, 255)'
     ctx.fillText(`KD : ${kd}`, 890, 50)
 
-    if (game_mode === 'circuit'){
-        ctx.strokeStyle = 'rgb(150, 150, 150)'
-        ctx.fillStyle = 'rgba(255, 255, 255, .3)'
-        ctx.fillRect(870, 56, 80 + kdBoxLength, 25)
-        ctx.strokeRect(870, 56, 80 + kdBoxLength, 25)
-        ctx.fillStyle = 'rgb(255, 255, 255)'
-        ctx.fillText(`${circuit_states.current_kills} / ${circuit_states.kills_goal}`, 915, 75)
+    switch(game_mode){
+        case 'circuit':
+            ctx.strokeStyle = 'rgb(150, 150, 150)'
+            ctx.fillStyle = 'rgba(255, 255, 255, .3)'
+            ctx.fillRect(870, 56, 80 + kdBoxLength, 25)
+            ctx.strokeRect(870, 56, 80 + kdBoxLength, 25)
+            ctx.fillStyle = 'rgb(255, 255, 255)'
+            ctx.fillText(`${circuit_states.current_kills} / ${circuit_states.kills_goal}`, 915, 75)    
+        break
+        case 'spot':
+            ctx.strokeStyle = 'rgb(150, 150, 150)'
+            ctx.fillStyle = 'rgba(255, 255, 255, .3)'
+            ctx.fillRect(870, 56, 80 + kdBoxLength, 25)
+            ctx.strokeRect(870, 56, 80 + kdBoxLength, 25)
+            ctx.fillStyle = 'rgb(255, 255, 255)'
+            ctx.fillText(`${spot_states.current_kills} / ${spot_states.kills_goal}`, 915, 75) 
+        break
     }
+
+    ctx.font = 'bold 28px Play-Bold'
+
+    ctx.fillStyle = 'rgb(255, 255, 255)'
+    ctx.lineWidth = 2
+    ctx.strokeText(`Temps : ${statistics.time_elapsed}`, 450, 50)
+    ctx.fillText(`Temps : ${statistics.time_elapsed}`, 450, 50)
+    ctx.restore()
+
 }
 
 export const drawPlayerDeath = (ctx: CanvasRenderingContext2D) => {
@@ -222,6 +252,7 @@ export const drawPauseScreen = (ctx: CanvasRenderingContext2D, background: Image
 export const drawStartCounter = (ctx: CanvasRenderingContext2D, startTimer: number) => {
     ctx.save()
     ctx.font = 'bold 114px Digit'
+    ctx.fillStyle = 'white'
     ctx.lineWidth = 5
     ctx.strokeStyle = 'black'
     ctx.strokeText(startTimer.toString(), 450, 430)
