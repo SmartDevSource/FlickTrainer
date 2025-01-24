@@ -1048,5 +1048,59 @@ export const mapsData: MapsData = {
             },
             circuit: 'ct_circuit'
         },
+        heaven_to_b_1: {
+            targets: [
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'right',
+                    from: {x: 1065, y: 526},
+                    to: {x: 1030, y: 526},
+                    idle: false,
+                    distance: 5.6,
+                    speed: 100
+                },
+            ] as Target[],
+            initial_offset: {
+                x: -420,
+                y: -150
+            },
+            circuit: 'ct_circuit'
+        },
+        heaven_to_b_2: {
+            targets: [
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'right',
+                    from: {x: 1065, y: 526},
+                    to: {x: 1030, y: 526},
+                    idle: false,
+                    distance: 5.6,
+                    speed: 100
+                },
+            ] as Target[],
+            initial_offset: {
+                x: -420,
+                y: -150
+            },
+            circuit: 'ct_circuit'
+        },
+        kenny_to_short: {
+            targets: [
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'right',
+                    from: {x: 1065, y: 526},
+                    to: {x: 1030, y: 526},
+                    idle: false,
+                    distance: 5.6,
+                    speed: 100
+                },
+            ] as Target[],
+            initial_offset: {
+                x: -420,
+                y: -150
+            },
+            circuit: 'ct_circuit'
+        },
     }
 }

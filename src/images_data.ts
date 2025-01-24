@@ -128,4 +128,20 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/vertigo/heaven_to_b_1_layer.png`,
         img: new Image(),
     },
+    vertigo_heaven_to_b_2: {
+        path: `/gfx/maps/vertigo/heaven_to_b_2.png`,
+        img: new Image(),
+    },
+    vertigo_heaven_to_b_2_layer: {
+        path: `/gfx/maps/vertigo/heaven_to_b_2_layer.png`,
+        img: new Image(),
+    },
+    vertigo_kenny_to_short: {
+        path: `/gfx/maps/vertigo/kenny_to_short.png`,
+        img: new Image(),
+    },
+    vertigo_kenny_to_short_layer: {
+        path: `/gfx/maps/vertigo/kenny_to_short_layer.png`,
+        img: new Image(),
+    },
 }
