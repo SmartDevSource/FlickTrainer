@@ -22,7 +22,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
     const [selectedCircuit, setSelectedCircuit] = useState<string>('ct_circuit')
     const [selectedSpot, setSelectedSpot] = useState<string>(spots[0]?.name ?? '')
     const [selectedDifficulty, setSelectedDifficulty] = useState<string>('easy')
-    const [spotObjective, setSpotObjective] = useState<number>(25)
+    const [spotObjective, setSpotObjective] = useState<number>(1)
 
     const normalizeCircuitName = (circuit_name: string) => {
         const firstWord = circuit_name.split('_')[0]

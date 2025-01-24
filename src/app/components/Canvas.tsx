@@ -79,6 +79,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
 
     const isFullScreen = useRef(false)
     const statistics = useRef<Statistics>({kills: 0, deaths: 0, time_elapsed: 0})
+    const [persistentStatistics, setPersistentStatistics] = useState<Statistics>({...statistics.current})
 
     const currentSpot = useRef<SpotStruct>(getCurrentSpot())
     const target = useRef<Target | null>(null)
@@ -91,7 +92,9 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
         background: {path: '', img: new Image()},
         layer: {path: '', img: new Image()}
     })
-    const [isLoading, setIsLoading] = useState<Boolean>(true)
+
+    const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [isAccomplished, setIsAccomplished] = useState<boolean>(false)
 
     function getCircuitStates(){
         return {
@@ -136,6 +139,10 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
     const killPlayer = () => {
         isDead.current = true
         statistics.current.deaths++
+        setPersistentStatistics(prev => ({
+            ...prev,
+            deaths: prev.deaths + 1
+        }))
         audios.player_death.audio.currentTime = 0
         audios.player_death.audio.play()
         circuitStates.current.current_kills = 0
@@ -153,6 +160,10 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
             audios.headshot.audio.play()
 
             statistics.current.kills++
+            setPersistentStatistics(prev => ({
+                ...prev,
+                kills: prev.kills + 1
+            }))
 
             if (shotTimeout){
                 clearTimeout(shotTimeout)
@@ -174,7 +185,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
                             circuitStates.current.is_accomplished = true
                             target.current = null
                             handleExitFullScreen()
-                            onCircuitAccomplished(statistics.current)
+                            setIsAccomplished(true)
                         }
                     } else {
                         generateTarget()
@@ -186,7 +197,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
                         spotStates.current.is_accomplished = true
                         target.current = null
                         handleExitFullScreen()
-                        onSpotAccomplished(statistics.current)
+                        setIsAccomplished(true)
                     } else {
                         generateTarget()
                     }
@@ -216,12 +227,13 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
         circuitStates.current.is_accomplished = false
 
         spotStates.current.current_kills = 0
-        spotStates.current.kills_goal = 0
         spotStates.current.is_accomplished = false
 
         statistics.current.kills = 0
         statistics.current.deaths = 0
         statistics.current.time_elapsed = 0
+
+        setPersistentStatistics({...statistics.current})
 
         screenOffset.current = structuredClone(currentSpot.current.initial_offset)
         isReady.current = false
@@ -238,7 +250,13 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
                 startTimer.current--
                 audios.timer.audio.play()
             } else {
-                timeElapsedInterval.current = setInterval(() => { statistics.current.time_elapsed++ }, 1000)
+                timeElapsedInterval.current = setInterval(() => {
+                    statistics.current.time_elapsed++
+                    setPersistentStatistics(prev => ({
+                        ...prev,
+                        time_elapsed: prev.time_elapsed + 1
+                    }))
+                }, 1000)
                 isReady.current = true
                 generateTarget()
                 if (startInterval.current){
@@ -445,6 +463,20 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
     useEffect(() => {
         if (!isLoading) draw()
     }, [isLoading])
+
+    useEffect(()=>{
+        if (isAccomplished){
+            switch(game_settings.mode){
+                case 'circuit':
+                    onCircuitAccomplished(persistentStatistics)
+                break
+                case 'spot':
+                    onSpotAccomplished(persistentStatistics)
+                break
+            }
+            setIsAccomplished(false)
+        }
+    }, [isAccomplished])
 
     const draw = () => {
         if (ctx.current && canvasRef.current){

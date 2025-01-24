@@ -96,12 +96,36 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/vertigo/b_to_stairs_2_layer.png`,
         img: new Image(),
     },
-    vertigo_mid_to_tspawn_1: {
-        path: `/gfx/maps/vertigo/mid_to_tspawn_1.png`,
+    vertigo_ctmid_to_tmid: {
+        path: `/gfx/maps/vertigo/ctmid_to_tmid.png`,
         img: new Image(),
     },
-    vertigo_mid_to_tspawn_1_layer: {
-        path: `/gfx/maps/vertigo/mid_to_tspawn_1_layer.png`,
+    vertigo_ctmid_to_tmid_layer: {
+        path: `/gfx/maps/vertigo/ctmid_to_tmid_layer.png`,
+        img: new Image(),
+    },
+    vertigo_mid_to_ladder: {
+        path: `/gfx/maps/vertigo/mid_to_ladder.png`,
+        img: new Image(),
+    },
+    vertigo_mid_to_ladder_layer: {
+        path: `/gfx/maps/vertigo/mid_to_ladder_layer.png`,
+        img: new Image(),
+    },
+    vertigo_under_ladder_to_ramp: {
+        path: `/gfx/maps/vertigo/under_ladder_to_ramp.png`,
+        img: new Image(),
+    },
+    vertigo_under_ladder_to_ramp_layer: {
+        path: `/gfx/maps/vertigo/under_ladder_to_ramp_layer.png`,
+        img: new Image(),
+    },
+    vertigo_heaven_to_b_1: {
+        path: `/gfx/maps/vertigo/heaven_to_b_1.png`,
+        img: new Image(),
+    },
+    vertigo_heaven_to_b_1_layer: {
+        path: `/gfx/maps/vertigo/heaven_to_b_1_layer.png`,
         img: new Image(),
     },
 }
