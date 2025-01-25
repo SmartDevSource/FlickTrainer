@@ -88,10 +88,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
     const crosshairData = useRef<CrosshairData>(getCrosshairStorage())
     const mouseSensitivity = useRef<number>(getSensitivityStorage())
 
-    const mapSpotImages = useRef<MapSpotStruct>({
-        background: {path: '', img: new Image()},
-        layer: {path: '', img: new Image()}
-    })
+    const mapSpotImages = useRef<MapSpotStruct>({background: {path: '', img: new Image()}, layer: {path: '', img: new Image()}})
 
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [isAccomplished, setIsAccomplished] = useState<boolean>(false)

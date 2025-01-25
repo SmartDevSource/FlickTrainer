@@ -1,5 +1,3 @@
-import Link from "next/link"
-
 interface NavbarSettings {
     onLinkClick: (call: string) => void
 }
@@ -23,9 +21,6 @@ export const Navbar: React.FC<NavbarSettings> = ({onLinkClick}) => {
                     >
                     ⚙️ Paramètres
                     </button>
-                    {/* <Link href="/" className="hover:text-gray-400 transition-colors duration-300">
-                        Lien
-                    </Link> */}
                 </div>
             </div>
       </div>

@@ -264,7 +264,7 @@ export const drawCrosshair = (ctx: CanvasRenderingContext2D, crosshairSettings: 
     ctx.fillStyle = `rgba(${crosshairSettings.red}, ${crosshairSettings.green}, ${crosshairSettings.blue}, ${crosshairSettings.opacity})`
 
     // CENTRAL DOT //
-    if (crosshairSettings.show_dot){
+    if (crosshairSettings.show_dot === 1){
         ctx.fillRect(
             (fullscreenCanvasSize.w / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
             (fullscreenCanvasSize.h / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
@@ -308,7 +308,7 @@ export const drawCrosshair = (ctx: CanvasRenderingContext2D, crosshairSettings: 
         ctx.lineWidth = crosshairSettings.outline / crosshairScaleFactor
 
         // CENTRAL DOT //
-        if (crosshairSettings.show_dot){
+        if (crosshairSettings.show_dot === 1){
             ctx.strokeRect(
                 (fullscreenCanvasSize.w / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),
                 (fullscreenCanvasSize.h / 2) - ((crosshairSettings.thickness / crosshairScaleFactor) / 2),

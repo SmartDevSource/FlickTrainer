@@ -1,7 +1,6 @@
 'use client'
 import { useEffect, useState } from "react"
 
-import Canvas from "./components/Canvas"
 import { Home } from "./components/Home"
 import { MapPeek } from "./components/MapPeek"
 import { Navbar } from "./components/Navbar"
@@ -9,6 +8,7 @@ import { Navbar } from "./components/Navbar"
 import { UserSettingsModal } from "./components/UserSettingsModal"
 import { Alert, AlertParams } from "./components/Alert"
 import { GameSettings, Statistics } from "@/types"
+import { TrainingPage } from "./components/TrainingPage"
 
 const MainPage = () => {
   const [currentPage, setCurrentPage] = useState<string>('map_peek')
@@ -20,6 +20,9 @@ const MainPage = () => {
     switch(navbar_data){
       case 'back_to_home':
         setCurrentPage('home')
+      break
+      case 'map_peek':
+        setCurrentPage('map_peek')
       break
       case 'user_settings':
         setShowUserSettings(true)
@@ -41,14 +44,6 @@ const MainPage = () => {
 
   const prepareGame = (game_settings: GameSettings) => {
     setGameSettings(game_settings)
-  }
-
-  const handleCircuitAccomplishment = (statistics: Statistics) => {
-    console.log("handleCircuitAccomplishment :", statistics)
-  }
-
-  const handleSpotAccomplishment = (statistics: Statistics) => {
-    console.log("handleSpotAccomplishment :", statistics)
   }
 
   useEffect(()=>{
@@ -92,13 +87,9 @@ const MainPage = () => {
       />
     }
     {gameSettings && currentPage === 'training' &&
-        <div className="flex justify-center">
-          <Canvas
-            game_settings={gameSettings}
-            onCircuitAccomplished={(e)=> handleCircuitAccomplishment(e)}
-            onSpotAccomplished={(e)=> handleSpotAccomplishment(e)}
-          />
-        </div>
+      <TrainingPage
+        game_settings={gameSettings}
+      />
     }
     </>
   )
