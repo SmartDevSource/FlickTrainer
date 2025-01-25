@@ -16,7 +16,7 @@ const gameSettingsTest: GameSettings = {
   circuit: "ct_circuit",
   spot: "ctspawn_to_mid",
   difficulty: "easy",
-  spot_objective: 5
+  spot_objective: 1
 }
 
 const MainPage = () => {

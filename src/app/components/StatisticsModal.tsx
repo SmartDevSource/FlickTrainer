@@ -1,11 +1,12 @@
-import { Statistics } from "@/types"
+import { GameSettings, Statistics } from "@/types"
 
 interface StatisticsModalParams {
     statistics: Statistics
+    game_settings: GameSettings,
     onClose: () => void
 }
 
-export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, onClose}) => {
+export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, game_settings, onClose}) => {
     return (
         <div
             className="fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50 select-none"
@@ -14,12 +15,15 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, on
                 <div className="relative bg-gray-700 rounded-lg shadow dark:bg-gray-700">
                     <div className="flex items-center justify-center p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                         <h3 className="text-xl font-semibold text-white dark:text-white">
-                            Performances
+                            Performances sur {game_settings.map_name}
                         </h3>
                     </div>
                     <div className="flex flex-col">
                         <div className="p-4 flex flex-row justify-between items-center">
                             <div className="flex flex-col">
+                                <p className="text-white">
+                                    Difficulté : {game_settings.difficulty}
+                                </p>
                                 <p className="text-white">
                                     Cibles abattues : {statistics.kills}
                                 </p>

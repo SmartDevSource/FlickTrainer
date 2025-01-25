@@ -27,6 +27,7 @@ export const TrainingPage: React.FC<TrainingParams> = ({game_settings, onBackMen
             {statistics && 
                 <StatisticsModal
                     statistics={statistics}
+                    game_settings={game_settings}
                     onClose={() => setStatistics(null)}
                 />
             }

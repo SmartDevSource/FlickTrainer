@@ -25,4 +25,4 @@ export const Navbar: React.FC<NavbarSettings> = ({onLinkClick}) => {
             </div>
       </div>
     )
-}  
+}
