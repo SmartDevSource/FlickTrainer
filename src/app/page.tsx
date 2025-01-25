@@ -16,11 +16,11 @@ const gameSettingsTest: GameSettings = {
   circuit: "ct_circuit",
   spot: "ctspawn_to_mid",
   difficulty: "easy",
-  spot_objective: 1
+  spot_objective: 5
 }
 
 const MainPage = () => {
-  const [currentPage, setCurrentPage] = useState<string>('training')
+  const [currentPage, setCurrentPage] = useState<string>('home')
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
   const [messageAlert, setMessageAlert] = useState<AlertParams | null>(null)
   const [gameSettings, setGameSettings] = useState<GameSettings | null>(gameSettingsTest)
@@ -77,7 +77,7 @@ const MainPage = () => {
       :
       <Navbar onLinkClick={(navbar_data) => handleNavbarClick(navbar_data)}/>
     }
-    {messageAlert && 
+    {messageAlert &&
       <Alert
         title={messageAlert.title}
         message={messageAlert.message}

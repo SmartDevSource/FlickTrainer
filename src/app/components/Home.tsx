@@ -16,7 +16,7 @@ export const Home: React.FC<HomeParams> = ({onClick}) => {
                 priority
                 className=""
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-gray-900 opacity-50"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-gray-900 opacity-30"></div>
             </div>
   
             <div className="relative z-10 flex flex-col items-center justify-center text-center min-h-screen px-4 sm:px-6 lg:px-8">

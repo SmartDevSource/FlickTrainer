@@ -282,16 +282,6 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
 
                     {gamePathType &&
                     <div className="flex items-center justify-end p-4 md:p-5 border-t">
-                        {/* <button
-                            type="button"
-                            className="py-2.5 px-5 ms-3 text-sm text-white focus:outline-none
-                                    bg-red-500 rounded-lg  hover:bg-red-400 flex items-center justify-center"
-                            onClick={() => handleGamePathType(false)}
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="h-6 w-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
-                            </svg>
-                        </button> */}
                         <button
                             type="button"
                             className="py-2.5 px-5 ms-3 text-sm text-gray-600 focus:outline-none

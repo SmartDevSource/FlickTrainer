@@ -54,6 +54,7 @@ const startTimerValue: number = 0
 const playerRespawnTimeout: number = 1000
 const generateTargetAfterNewSpotTimeout: number = 1000
 const resetGameWhenCircuitAccomplishedTimeout: number = 500
+const sensitivityFactor: number = 1.2
 
 const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, onSpotAccomplished}) => {
     const testDistance = useRef<number>(1)
@@ -93,6 +94,8 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
 
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const [isAccomplished, setIsAccomplished] = useState<boolean>(false)
+
+    const mouseAccel = useRef<Vector2>({x: 0, y: 0})
 
     function getCircuitStates(){
         return {
@@ -391,8 +394,8 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
             if (isFullScreen.current && !isDead.current && !circuitStates.current.is_accomplished && !spotStates.current.is_accomplished){
                 const prevOffset = screenOffset.current
                 const newOffset = {
-                    x: prevOffset.x - (event.movementX * (mouseSensitivity.current - (mouseSensitivity.current / 2))),
-                    y: prevOffset.y - (event.movementY * (mouseSensitivity.current - (mouseSensitivity.current / 2)))
+                    x: prevOffset.x - (event.movementX * (mouseSensitivity.current - mouseSensitivity.current / sensitivityFactor)),
+                    y: prevOffset.y - (event.movementY * (mouseSensitivity.current - mouseSensitivity.current / sensitivityFactor))
                 }
                 if (newOffset.x < screenBoundaries.left && newOffset.x > screenBoundaries.right){
                     screenOffset.current.x = newOffset.x
@@ -400,6 +403,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
                 if (newOffset.y < screenBoundaries.top && newOffset.y > screenBoundaries.bottom){
                     screenOffset.current.y = newOffset.y
                 }
+                mouseAccel.current = {x: event.movementX, y: event.movementY}
             }
         }
 
@@ -502,7 +506,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
                 // MAP BACKGROUND LAYER //
                 ctx.current.drawImage(mapSpotImages.current.layer.img, screenOffset.current.x, screenOffset.current.y)
 
-                drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, updateFiringState)
+                drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current, updateFiringState)
                 drawCrosshair(ctx.current, crosshairData.current)
 
                 drawStatistics(ctx.current, statistics.current, circuitStates.current, spotStates.current, game_settings.mode)

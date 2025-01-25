@@ -13,12 +13,14 @@ export const weaponAnim: {
     update_delay: number,
     speed_shot_animation: number,
     frames_count: number,
+    sway_offset: Vector2
 } = {
     current_frame: 0,
     last_update: 0,
     update_delay: .01,
     speed_shot_animation: 7.4,
-    frames_count: 20
+    frames_count: 20,
+    sway_offset: {x: 0, y: 0}
 }
 const deathAnim: {
     opacity: number,
@@ -36,6 +38,7 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
                             weaponImg: ImageObject,
                             flameImg: ImageObject,
                             isFiring: boolean,
+                            mouseAccel: Vector2,
                             updateFiringState: (state: boolean) => void) =>
 {
     const now = performance.now()
@@ -57,14 +60,17 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
         }
     }
     const frame_width = weaponImg.img.width / weaponAnim.frames_count
+    weaponAnim.sway_offset.x += (Math.floor(mouseAccel.x) - weaponAnim.sway_offset.x) * .02
+    weaponAnim.sway_offset.y += (Math.floor(mouseAccel.y) - weaponAnim.sway_offset.y) * .02
+
     ctx.drawImage(
         weaponImg.img,
         weaponAnim.current_frame * frame_width,
         0,
         frame_width,
         weaponImg.img.height,
-        600,
-        150,
+        600 + weaponAnim.sway_offset.x,
+        160 + weaponAnim.sway_offset.y,
         frame_width - 150,
         weaponImg.img.height - 150
     )
