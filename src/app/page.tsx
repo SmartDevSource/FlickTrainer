@@ -7,14 +7,23 @@ import { Navbar } from "./components/Navbar"
 
 import { UserSettingsModal } from "./components/UserSettingsModal"
 import { Alert, AlertParams } from "./components/Alert"
-import { GameSettings, Statistics } from "@/types"
+import { GameSettings } from "@/types"
 import { TrainingPage } from "./components/TrainingPage"
 
+const gameSettingsTest: GameSettings = {
+  mode: "spot",
+  map_name: "vertigo",
+  circuit: "ct_circuit",
+  spot: "ctspawn_to_mid",
+  difficulty: "easy",
+  spot_objective: 1
+}
+
 const MainPage = () => {
-  const [currentPage, setCurrentPage] = useState<string>('map_peek')
+  const [currentPage, setCurrentPage] = useState<string>('training')
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
   const [messageAlert, setMessageAlert] = useState<AlertParams | null>(null)
-  const [gameSettings, setGameSettings] = useState<GameSettings | null>(null)
+  const [gameSettings, setGameSettings] = useState<GameSettings | null>(gameSettingsTest)
 
   const handleNavbarClick = (navbar_data: string) => {
     switch(navbar_data){
@@ -44,6 +53,7 @@ const MainPage = () => {
 
   const prepareGame = (game_settings: GameSettings) => {
     setGameSettings(game_settings)
+    console.log(game_settings)
   }
 
   useEffect(()=>{
@@ -89,6 +99,7 @@ const MainPage = () => {
     {gameSettings && currentPage === 'training' &&
       <TrainingPage
         game_settings={gameSettings}
+        onBackMenu={() => setCurrentPage('map_peek')}
       />
     }
     </>

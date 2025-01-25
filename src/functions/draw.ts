@@ -7,7 +7,7 @@ const framesPerSecond: number = 100
 const crosshairScaleFactor: number = 2
 const drawCoordinatesYOffset: number = 25
 
-const weaponAnim: {
+export const weaponAnim: {
     current_frame: number,
     last_update: number,
     update_delay: number,

@@ -34,7 +34,8 @@ import {
     drawTargetHelper,
     drawCoordinates,
     drawStartCounter,
-    drawCrosshair
+    drawCrosshair,
+    weaponAnim
 } from '@/functions/draw'
 import { initRecoil, updateRecoil } from '@/functions/recoil'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
@@ -230,6 +231,8 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
         statistics.current.deaths = 0
         statistics.current.time_elapsed = 0
 
+        weaponAnim.current_frame = 0
+
         setPersistentStatistics({...statistics.current})
 
         screenOffset.current = structuredClone(currentSpot.current.initial_offset)
@@ -345,7 +348,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
                 case 'ArrowDown': testPosition.current.y += testSpeedPosition.current; break
                 case '+': testDistance.current -= testSpeedScale.current; break
                 case '-': testDistance.current += testSpeedScale.current; break
-                case 'Alt': case 'Meta': handleExitFullScreen(); break
+                case 'Alt': case 'Meta': case 'F12': handleExitFullScreen(); break
                 case 'A': case 'a':
                     testCharacter.current = testCharacter.current >= 9 ?
                         3
