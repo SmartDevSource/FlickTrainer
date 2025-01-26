@@ -22,9 +22,41 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
 
         switch(game_settings.mode){
             case 'circuit':
-                const circuitBestScore = localStorage.getItem(`${game_settings.map_name}_${game_settings.circuit}_${game_settings.difficulty}`)
-                if (!circuitBestScore){
-
+                const circuitHeader = `${game_settings.map_name}_${game_settings.spot}_${game_settings.difficulty}`
+                const lastCircuitBestScores = localStorage.getItem(circuitHeader)
+                const circuitCurrentStats = {
+                    kills: statistics.kills,
+                    deaths: statistics.deaths,
+                    time_elapsed: statistics.time_elapsed,
+                    kd: playerKd
+                }
+                if (!lastCircuitBestScores){
+                    localStorage.setItem(circuitHeader, JSON.stringify(circuitCurrentStats))
+                    new_records.push({
+                        header: `New KD record :`,
+                        message: `${circuitCurrentStats.kd.toFixed(2)} KD`
+                    })
+                    new_records.push({
+                        header: `New TIME record :`,
+                        message: `${circuitCurrentStats.time_elapsed} seconds`
+                    })
+                } else {
+                    const lastCircuitBestScoresObject = JSON.parse(lastCircuitBestScores)
+                    if (circuitCurrentStats.kd > lastCircuitBestScoresObject.kd){
+                        new_records.push({
+                            header: `New KD record :`,
+                            message: `${circuitCurrentStats.kd.toFixed(2)} KD`
+                        })
+                        lastCircuitBestScoresObject.kd = circuitCurrentStats.kd
+                    }
+                    if (circuitCurrentStats.time_elapsed < lastCircuitBestScoresObject.time_elapsed){
+                        new_records.push({
+                            header: `New TIME record :`,
+                            message: `${circuitCurrentStats.time_elapsed} seconds`
+                        })
+                        lastCircuitBestScoresObject.time_elapsed = circuitCurrentStats.time_elapsed
+                    }
+                    localStorage.setItem(circuitHeader, JSON.stringify(lastCircuitBestScoresObject))
                 }
             break
             case 'spot':
@@ -46,7 +78,7 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
                         header: `New TIME record :`,
                         message: `${spotCurrentStats.time_elapsed} seconds`
                     })
-                } else if (lastSpotBestScores) {
+                } else {
                     const lastSpotBestScoresObject = JSON.parse(lastSpotBestScores)
                     if (spotCurrentStats.kd > lastSpotBestScoresObject.kd){
                         new_records.push({

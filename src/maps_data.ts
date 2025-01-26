@@ -1303,13 +1303,130 @@ export const mapsData: MapsData = {
         kenny_to_short: {
             targets: [
                 {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 1054, y: 562},
+                    to: {x: 1074, y: 562},
+                    idle: false,
+                    distance: 7.7,
+                    speed: 40
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 1054, y: 562},
+                    to: {x: 1074, y: 562},
+                    idle: false,
+                    distance: 7.7,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 750, y: 544},
+                    to: {x: 761, y: 544},
+                    idle: false,
+                    distance: 10.5,
+                    speed: 40
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'right',
+                    from: {x: 840, y: 544},
+                    to: {x: 810, y: 544},
+                    idle: false,
+                    distance: 10.5,
+                    speed: 40
+                },
+                {
                     character: 'terrorist_standup_darken',
                     come_from: 'right',
-                    from: {x: 1065, y: 526},
-                    to: {x: 1030, y: 526},
+                    from: {x: 840, y: 544},
+                    to: {x: 810, y: 544},
                     idle: false,
-                    distance: 5.6,
-                    speed: 100
+                    distance: 10.5,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 750, y: 544},
+                    to: {x: 761, y: 544},
+                    idle: false,
+                    distance: 10.5,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 1040, y: 549},
+                    to: {x: 1075, y: 549},
+                    idle: false,
+                    distance: 9,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'left',
+                    from: {x: 690, y: 565},
+                    to: {x: 724, y: 565},
+                    idle: false,
+                    distance: 8,
+                    speed: 90
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'left',
+                    from: {x: 1160, y: 640},
+                    to: {x: 1280, y: 640},
+                    idle: false,
+                    distance: 3,
+                    speed: 260
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'left',
+                    from: {x: 680, y: 590},
+                    to: {x: 710, y: 590},
+                    idle: false,
+                    distance: 4.2,
+                    speed: 120
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 1040, y: 549},
+                    to: {x: 1075, y: 549},
+                    idle: false,
+                    distance: 9,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 1040, y: 549},
+                    to: {x: 1075, y: 549},
+                    idle: false,
+                    distance: 9,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'right',
+                    from: {x: 1210, y: 549},
+                    to: {x: 1192, y: 549},
+                    idle: false,
+                    distance: 9,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'right',
+                    from: {x: 1210, y: 549},
+                    to: {x: 1192, y: 549},
+                    idle: false,
+                    distance: 9,
+                    speed: 80
                 },
             ] as Target[],
             initial_offset: {

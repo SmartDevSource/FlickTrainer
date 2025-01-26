@@ -82,9 +82,17 @@ export const TrainingPage: React.FC<TrainingParams> = ({game_settings, onBackMen
                     </div>
                     <div className="flex justify-between w-full">
                         <span className="text-white p-1">
-                            Top KD :
+                            Difficulty :
                         </span>
                         <span className="text-white p-1">
+                            {game_settings.difficulty}
+                        </span>
+                    </div>
+                    <div className="flex justify-between w-full">
+                        <span className="text-white p-1">
+                            Top KD :
+                        </span>
+                        <span className="text-yellow-300 p-1">
                             {lastBestStatistics.kd.toFixed(2)}
                         </span>
                     </div>
@@ -92,7 +100,7 @@ export const TrainingPage: React.FC<TrainingParams> = ({game_settings, onBackMen
                         <span className="text-white p-1">
                             Top time :
                         </span>
-                        <span className="text-white p-1">
+                        <span className="text-yellow-300 p-1">
                             {lastBestStatistics.time_elapsed} seconds
                         </span>
                     </div>

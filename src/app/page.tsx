@@ -14,9 +14,9 @@ const gameSettingsTest: GameSettings = {
   mode: "spot",
   map_name: "vertigo",
   circuit: "ct_circuit",
-  spot: "ctspawn_to_mid",
+  spot: "kenny_to_short",
   difficulty: "easy",
-  spot_objective: 1
+  spot_objective: 25
 }
 
 const MainPage = () => {
