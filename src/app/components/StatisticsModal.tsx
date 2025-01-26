@@ -1,4 +1,6 @@
 import { GameSettings, Statistics } from "@/types"
+import { useEffect } from "react"
+import { getRoundedPlayerKD } from "@/functions/utils"
 
 interface StatisticsModalParams {
     statistics: Statistics
@@ -7,6 +9,34 @@ interface StatisticsModalParams {
 }
 
 export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, game_settings, onClose}) => {
+
+    const comparePerformances = () => {
+        const playerKd = statistics.kills / (statistics.deaths === 0 ? 1 : statistics.deaths)
+        switch(game_settings.mode){
+            case 'circuit':
+                const circuitBestScore = localStorage.getItem(`${game_settings.map_name}_${game_settings.circuit}_${game_settings.difficulty}`)
+                if (!circuitBestScore){
+
+                }
+            break
+            case 'spot':
+                const spotHeader = `${game_settings.map_name}_${game_settings.spot}_${game_settings.difficulty}`
+                const spotStats = JSON.stringify({kills: statistics.kills, deaths: statistics.deaths, time_elapsed: statistics.time_elapsed, kd: playerKd})
+
+                const spotBestScore = localStorage.getItem(spotHeader)
+                if (!spotBestScore){
+                    localStorage.setItem(spotHeader, spotStats)
+                } else {
+                    console.log("Last spotBestScore :", JSON.parse(spotBestScore))
+                }
+            break
+        }
+    }
+
+    useEffect(()=>{
+        comparePerformances()
+    }, [])
+
     return (
         <div
             className="fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50 select-none"
@@ -38,52 +68,32 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
                             <div className="w-full flex flex-row justify-between text-white 
                                 opacity-0 animate-[fadeIn_0.5s_ease-in-out_0.25s_forwards]"
                             >
-                                <p>
-                                    Difficulty :
-                                </p>
-                                <p>
-                                    {game_settings.difficulty}
-                                </p>
+                                <p> Difficulty : </p>
+                                <p> {game_settings.difficulty} </p>
                             </div>
                             <div className="w-full flex flex-row justify-between text-white 
                                 opacity-0 animate-[fadeIn_0.5s_ease-in-out_0.50s_forwards]"
                             >
-                                <p>
-                                    Targets shot :
-                                </p>
-                                <p>
-                                    {statistics.kills}
-                                </p>
+                                <p> Targets shot : </p>
+                                <p> {statistics.kills} </p>
                             </div>
                             <div className="w-full flex flex-row justify-between text-white 
                                 opacity-0 animate-[fadeIn_0.5s_ease-in-out_0.75s_forwards]"
                             >
-                                <p>
-                                    Deaths :
-                                </p>
-                                <p>
-                                    {statistics.deaths}
-                                </p>
+                                <p> Deaths : </p>
+                                <p> {statistics.deaths} </p>
                             </div>
                             <div className="w-full flex flex-row justify-between text-white 
                                 opacity-0 animate-[fadeIn_0.5s_ease-in-out_1s_forwards]"
                             >
-                                <p>
-                                    KD :
-                                </p>
-                                <p>
-                                    {(statistics.kills / (statistics.deaths === 0 ? 1 : statistics.deaths)).toFixed(2)}
-                                </p>
+                                <p> KD : </p>
+                                <p> {getRoundedPlayerKD(statistics.kills, statistics.deaths)} </p>
                             </div>
                             <div className="w-full flex flex-row justify-between text-white 
                                 opacity-0 animate-[fadeIn_0.5s_ease-in-out_1.25s_forwards]"
                             >
-                                <p>
-                                    Time :
-                                </p>
-                                <p>
-                                    {statistics.time_elapsed} seconds
-                                </p>
+                                <p> Time : </p>
+                                <p> {statistics.time_elapsed} seconds </p>
                             </div>
                         </div>
                     </div>

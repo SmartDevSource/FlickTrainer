@@ -66,3 +66,7 @@ export const getSensitivityStorage = () => {
         return .7
     }
 }
+
+export const getRoundedPlayerKD = (kills: number, deaths: number) => {
+    return (kills / (deaths === 0 ? 1 : deaths)).toFixed(2)
+}

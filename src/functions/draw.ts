@@ -1,6 +1,7 @@
 import { ImageObject, Statistics, Target, Vector2, Timer, CircuitStates, SpotStates } from "@/types"
 import { getHeadCoordinates } from "./target"
 import { crosshairData } from "./crosshair_changer"
+import { getRoundedPlayerKD } from "./utils"
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const framesPerSecond: number = 100
@@ -183,7 +184,7 @@ export const drawStatistics = (
 ) => {
     // ADD DELAY REACTION TIME (MS)
     ctx.save()
-    const kd = (statistics.kills / (statistics.deaths === 0 ? 1 : statistics.deaths)).toFixed(2)
+    const kd = getRoundedPlayerKD(statistics.kills, statistics.deaths)
     const killsDeathBoxLength = (statistics.kills.toString().length * 15) + (statistics.deaths.toString().length * 15)
     const kdBoxLength = kd.toString().length * 13
     ctx.fillStyle = 'white'
@@ -252,7 +253,7 @@ export const drawPauseScreen = (ctx: CanvasRenderingContext2D, background: Image
     ctx.fillRect(0, 0, minimizedCanvasSize.w, minimizedCanvasSize.h)
     ctx.fillStyle = 'white'
     ctx.font = 'bold 38px Play-Bold'
-    ctx.fillText("Go", 135, 130)
+    ctx.fillText("Start", 115, 130)
 }
 
 export const drawStartCounter = (ctx: CanvasRenderingContext2D, startTimer: number) => {
