@@ -41,7 +41,7 @@ export const TrainingPage: React.FC<TrainingParams> = ({game_settings, onBackMen
                 hover:text-white rounded duration-150"
                 onClick={() => onBackMenu()}
             >
-                Retour au menu principal
+                Back to main menu
             </button>
         </div>
     )

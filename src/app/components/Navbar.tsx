@@ -19,7 +19,7 @@ export const Navbar: React.FC<NavbarSettings> = ({onLinkClick}) => {
                         className="hover:text-gray-400 transition-colors duration-300"
                         onClick={() => onLinkClick('user_settings')}
                     >
-                    ⚙️ Paramètres
+                    ⚙️ Settings
                     </button>
                 </div>
             </div>

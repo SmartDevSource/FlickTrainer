@@ -225,8 +225,8 @@ export const drawStatistics = (
 
     ctx.fillStyle = 'rgb(255, 255, 255)'
     ctx.lineWidth = 2
-    ctx.strokeText(`Temps : ${statistics.time_elapsed}`, 450, 50)
-    ctx.fillText(`Temps : ${statistics.time_elapsed}`, 450, 50)
+    ctx.strokeText(`Time : ${statistics.time_elapsed}`, 455, 50)
+    ctx.fillText(`Time : ${statistics.time_elapsed}`, 455, 50)
     ctx.restore()
 
 }

@@ -30,12 +30,12 @@ export const MapPeek: React.FC<MapPeekSettings> = ({onLaunchGame}) => {
                 />
             }
             <h1 className='text-center text-white text-4xl mb-3 mt-8'>
-                Sélectionnez votre map
+                Select your map
             </h1>
             <p className='text-center text-white text-md mb-10'>
-                Tirées du map pool officiel actuel
+                Taken from the current official map pool
             </p>
-            <div className="flex justify-center items-center animate-fadeIn">
+            <div className="flex justify-center items-center animate-fadeInPage">
                 <div className="grid grid-cols-2 gap-8 bg-transparent">
                     {maps.map((current_map, index) => (
                         <button

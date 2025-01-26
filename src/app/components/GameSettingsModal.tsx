@@ -83,35 +83,12 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                 />
             }
 
-            <div className="relative p-4 w-full max-w-2xl">
+            <div className="relative p-4 w-full max-w-2xl select-none">
                 <div className="relative bg-gray-700 rounded-lg shadow dark:bg-gray-700">
-                    <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                        <h3 className="text-xl font-semibold text-white dark:text-white">
-                            Configuration pour la map {selectedMap}
+                    <div className="flex items-center justify-center p-4 md:p-5 border-b rounded-t">
+                        <h3 className="text-xl font-semibold text-white">
+                            Settings for {selectedMap} map
                         </h3>
-                        <button
-                            type="button"
-                            className="text-gray-400 bg-transparent hover:bg-gray-200
-                                    hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex 
-                                    justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                            onClick={() => handleClose()}
-                        >
-                            <svg
-                                className="w-3 h-3"
-                                aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 14 14"
-                            >
-                                <path
-                                    stroke="currentColor"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-                                />
-                            </svg>
-                        </button>
                     </div>
 
                     {!gamePathType &&
@@ -119,7 +96,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                         <div className="flex flex-col">
                             <div className="p-4 flex flex-row justify-between items-center">
                                 <p className="text-base leading-relaxed text-white">
-                                    Mode de jeu
+                                    Game mode
                                 </p>
                                 <div>
                                     <button
@@ -140,7 +117,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                             </div>
                             <div className="p-4 flex flex-row justify-between items-center">
                                 <p className="text-base leading-relaxed text-white">
-                                    Sélection du {selectedMode}
+                                    {selectedMode.charAt(0).toUpperCase() + selectedMode.slice(1)} selection
                                 </p>
                                 <button
                                     type="button"
@@ -158,7 +135,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
 
                             <div className="p-4 flex flex-row justify-between items-center">
                                 <p className="text-base leading-relaxed text-white">
-                                    Difficulté
+                                    Difficulty
                                 </p>
                                 <form className="max-w-sm">
                                     <select
@@ -168,9 +145,9 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                                             focus:border-blue-500 block w-full p-2.5"
                                         onChange={handleDifficultySelect}
                                     >
-                                        <option className="font-bold" value="easy">Facile</option>
-                                        <option className="font-bold" value="medium">Moyen</option>
-                                        <option className="font-bold" value="hard">Difficile</option>
+                                        <option className="font-bold" value="easy">Easy</option>
+                                        <option className="font-bold" value="medium">Medium</option>
+                                        <option className="font-bold" value="hard">Hard</option>
                                         <option className="font-bold" value="faceit_peek">Faceit Peek</option>
                                     </select>
                                 </form>
@@ -178,7 +155,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                             {selectedMode === 'spot' &&
                                 <div className="p-4 flex flex-row justify-between items-center">
                                     <p className="text-base leading-relaxed text-white">
-                                        Objectif
+                                        Objective
                                     </p>
                                     <form className="max-w-sm">
                                         <select
@@ -214,7 +191,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                                         bg-red-500 rounded-lg  hover:bg-red-400 min-w-24"
                                 onClick={() => handleClose()}
                             >
-                                Fermer
+                                Close
                             </button>
                         </div>
                     </>
@@ -242,7 +219,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                                             bg-gray-300 rounded-lg hover:bg-gray-400 w-full"
                                         onClick={() => setShowImageModal(`/web/images/map_circuits/${selectedMap}/${circuit}.png`)}
                                     >
-                                        Voir
+                                        Watch
                                     </button>
                                 </div>
                             ))}
@@ -272,7 +249,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                                             bg-gray-300 rounded-lg hover:bg-gray-400 w-full"
                                         onClick={() => setShowImageModal(`/gfx/maps/${selectedMap}/${spot.name}.png`)}
                                     >
-                                        Voir
+                                        Watch
                                     </button>
                                 </div>
                             ))}
@@ -288,7 +265,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                                     bg-green-400 rounded-lg  hover:bg-green-300 min-w-24"
                             onClick={() => handleGamePathType(false)}
                         >
-                            Valider
+                            Select
                         </button>
                     </div>
                     }

@@ -46,8 +46,8 @@ const MainPage = () => {
     setShowUserSettings(false)
     setMessageAlert({
       type: 'success',
-      title: 'Sauvegarde effectuée avec succès.',
-      message: 'Vos préférences ont été mises à jour et seront effectives dés votre prochain entrainement'
+      title: 'Saving completed successfully.',
+      message: 'Your preferences have been updated and will take effect from your next training session.'
     })
   }
 

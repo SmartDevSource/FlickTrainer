@@ -6,7 +6,7 @@ interface HomeParams {
 
 export const Home: React.FC<HomeParams> = ({onClick}) => {
     return (
-        <div className="relative bg-gray-900 overflow-hidden animate-fadeIn">
+        <div className="relative bg-gray-900 overflow-hidden animate-fadeInPage">
             <div className="absolute inset-0">
             <Image
                 src="/web/images/cs2_bg.jpg"
@@ -25,8 +25,8 @@ export const Home: React.FC<HomeParams> = ({onClick}) => {
                 </h1>
     
                 <p className="mt-4 text-lg text-gray-200 sm:text-xl lg:text-2xl max-w-3xl">
-                    Maîtrisez l'art de la précision et améliorez vos réflexes. <br />
-                    Perfectionnez vos compétences dans le monde compétitif de Counter-Strike 2.
+                    Master the art of precision and enhance your reflexes. <br />
+                    Perfect your skills in the competitive world of Counter-Strike 2.
                 </p>
     
                 <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -36,7 +36,7 @@ export const Home: React.FC<HomeParams> = ({onClick}) => {
                                     transition-shadow duration-300 ease-in-out cursor-pointer"
                             onClick={() => onClick()}
                     >
-                        Commencer l'entraînement
+                        Start Training
                     </button>
                 </div>
             </div>

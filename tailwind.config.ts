@@ -13,13 +13,18 @@ export default {
         foreground: "var(--foreground)",
       },
       keyframes: {
-        fadeIn: {
+        fadeInPage: {
           '0%': { opacity: '0', backgroundColor: "#171717" },
           '100%': { opacity: '1', backgroundColor: "transparent" },
         },
+        fadeIn: {
+          '0%': { opacity: '0'},
+          '100%': { opacity: '1'}
+        }
       },
       animation: {
-        fadeIn: 'fadeIn .5s ease-in-out',
+        fadeInPage: 'fadeInPage .5s ease-in-out',
+        fadeIn: 'fadeIn .5s ease-in-out forwards'
       },
     },
   },

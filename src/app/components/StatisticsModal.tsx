@@ -12,29 +12,77 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
             className="fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50 select-none"
         >
             <div className="relative p-4 w-full max-w-sm">
-                <div className="relative bg-gray-700 rounded-lg shadow dark:bg-gray-700">
-                    <div className="flex items-center justify-center p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                        <h3 className="text-xl font-semibold text-white dark:text-white">
-                            Performances sur {game_settings.map_name}
+                <div className="relative bg-gray-700 rounded-lg shadow">
+                    <div className="flex items-center flex-col justify-center p-4 md:p-5 border-b rounded-t">
+                        <h3 className="text-xl font-semibold text-white">
+                            Performances on {game_settings.map_name}
                         </h3>
+                        <div className="pt-3">
+                            {game_settings.mode === 'circuit' ?
+                                <>
+                                    <h4 className="text-md font-semibold text-white">
+                                        CIRCUIT : {game_settings.circuit.split('_').join(' ').toUpperCase()}
+                                    </h4>
+                                </>
+                                :
+                                <>
+                                    <h4 className="text-md font-semibold text-white">
+                                        SPOT : {game_settings.spot.split('_').join(' ').toUpperCase()}
+                                    </h4>
+                                </>
+                            }
+                        </div>
                     </div>
                     <div className="flex flex-col">
-                        <div className="p-4 flex flex-row justify-between items-center">
-                            <div className="flex flex-col">
-                                <p className="text-white">
-                                    Difficulté : {game_settings.difficulty}
+                        <div className="flex flex-col p-3">
+                            <div className="w-full flex flex-row justify-between text-white 
+                                opacity-0 animate-[fadeIn_0.5s_ease-in-out_0.25s_forwards]"
+                            >
+                                <p>
+                                    Difficulty :
                                 </p>
-                                <p className="text-white">
-                                    Cibles abattues : {statistics.kills}
+                                <p>
+                                    {game_settings.difficulty}
                                 </p>
-                                <p className="text-white">
-                                    Morts : {statistics.deaths}
+                            </div>
+                            <div className="w-full flex flex-row justify-between text-white 
+                                opacity-0 animate-[fadeIn_0.5s_ease-in-out_0.50s_forwards]"
+                            >
+                                <p>
+                                    Targets shot :
                                 </p>
-                                <p className="text-white">
-                                    KD : {(statistics.kills / (statistics.deaths === 0 ? 1 : statistics.deaths)).toFixed(2)}
+                                <p>
+                                    {statistics.kills}
                                 </p>
-                                <p className="text-white">
-                                    En {statistics.time_elapsed} secondes
+                            </div>
+                            <div className="w-full flex flex-row justify-between text-white 
+                                opacity-0 animate-[fadeIn_0.5s_ease-in-out_0.75s_forwards]"
+                            >
+                                <p>
+                                    Deaths :
+                                </p>
+                                <p>
+                                    {statistics.deaths}
+                                </p>
+                            </div>
+                            <div className="w-full flex flex-row justify-between text-white 
+                                opacity-0 animate-[fadeIn_0.5s_ease-in-out_1s_forwards]"
+                            >
+                                <p>
+                                    KD :
+                                </p>
+                                <p>
+                                    {(statistics.kills / (statistics.deaths === 0 ? 1 : statistics.deaths)).toFixed(2)}
+                                </p>
+                            </div>
+                            <div className="w-full flex flex-row justify-between text-white 
+                                opacity-0 animate-[fadeIn_0.5s_ease-in-out_1.25s_forwards]"
+                            >
+                                <p>
+                                    Time :
+                                </p>
+                                <p>
+                                    {statistics.time_elapsed} seconds
                                 </p>
                             </div>
                         </div>
@@ -46,7 +94,7 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
                                     bg-red-500 rounded-lg hover:bg-red-400 min-w-24"
                             onClick={() => onClose()}
                         >
-                            Fermer
+                            Close
                         </button>
                     </div>
                 </div>
