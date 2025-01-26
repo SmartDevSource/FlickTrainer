@@ -65,12 +65,12 @@ export const TrainingPage: React.FC<TrainingParams> = ({game_settings, onBackMen
             {lastBestStatistics &&
                 <div
                     className="flex flex-col justify-center items-center 
-                        bg-gray-700 rounded-lg shadow m-5 select-none min-w-[250px]"
+                        bg-gray-700 rounded-lg shadow mt-5 select-none min-w-[250px] py-1"
                 >
-                    <span className="border-b w-full text-white text-lg text-center">
+                    <span className="border-b w-full text-white text-lg text-center pb-1">
                         {game_settings.map_name.toUpperCase()}
                     </span>
-                    <div className="flex justify-between w-full">
+                    <div className="flex justify-between w-full px-2">
                         <span className="text-white p-1">
                             {game_settings.mode === 'circuit' ?
                                 'Circuit :'
@@ -86,7 +86,7 @@ export const TrainingPage: React.FC<TrainingParams> = ({game_settings, onBackMen
                             }
                         </span>
                     </div>
-                    <div className="flex justify-between w-full">
+                    <div className="flex justify-between w-full px-2 border-b">
                         <span className="text-white p-1">
                             Difficulty :
                         </span>
@@ -94,7 +94,7 @@ export const TrainingPage: React.FC<TrainingParams> = ({game_settings, onBackMen
                             {game_settings.difficulty}
                         </span>
                     </div>
-                    <div className="flex justify-between w-full">
+                    <div className="flex justify-between w-full px-2">
                         <span className="text-white p-1">
                             Top KD :
                         </span>
@@ -102,7 +102,7 @@ export const TrainingPage: React.FC<TrainingParams> = ({game_settings, onBackMen
                             {lastBestStatistics.kd.toFixed(2)}
                         </span>
                     </div>
-                    <div className="flex justify-between w-full">
+                    <div className="flex justify-between w-full px-2">
                         <span className="text-white p-1">
                             Top time :
                         </span>
@@ -110,13 +110,24 @@ export const TrainingPage: React.FC<TrainingParams> = ({game_settings, onBackMen
                             {lastBestStatistics.time_elapsed} seconds
                         </span>
                     </div>
-                    <div className="flex justify-between w-full">
+                    <div className="flex justify-between w-full px-2">
                         <span className="text-white p-1">
-                            Precision :
+                            Top precision :
                         </span>
-                        <span className="text-yellow-300 p-1">
+                        {lastBestStatistics.precision &&
+                            <span
+                            className={`
+                                ${lastBestStatistics.precision < 33 ?
+                                    "text-red-600" :
+                                    lastBestStatistics.precision >= 33 && lastBestStatistics.precision < 66 ?
+                                    "text-orange-500" :
+                                    "text-lime-500"
+                                } 
+                                p-1`}>
                             {lastBestStatistics.precision} %
                         </span>
+                        }
+
                     </div>
                 </div>
             }
