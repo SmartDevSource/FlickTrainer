@@ -53,7 +53,6 @@ const MainPage = () => {
 
   const prepareGame = (game_settings: GameSettings) => {
     setGameSettings(game_settings)
-    console.log(game_settings)
   }
 
   useEffect(()=>{

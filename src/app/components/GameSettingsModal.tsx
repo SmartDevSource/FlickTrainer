@@ -22,7 +22,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
     const [selectedCircuit, setSelectedCircuit] = useState<string>('ct_circuit')
     const [selectedSpot, setSelectedSpot] = useState<string>(spots[0]?.name ?? '')
     const [selectedDifficulty, setSelectedDifficulty] = useState<string>('easy')
-    const [spotObjective, setSpotObjective] = useState<number>(1)
+    const [spotObjective, setSpotObjective] = useState<number>(5)
 
     const normalizeCircuitName = (circuit_name: string) => {
         const firstWord = circuit_name.split('_')[0]
@@ -84,7 +84,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
             }
 
             <div className="relative p-4 w-full max-w-2xl select-none">
-                <div className="relative bg-gray-700 rounded-lg shadow dark:bg-gray-700">
+                <div className="relative bg-gray-700 rounded-lg shadow">
                     <div className="flex items-center justify-center p-4 md:p-5 border-b rounded-t">
                         <h3 className="text-xl font-semibold text-white">
                             Settings for {selectedMap} map

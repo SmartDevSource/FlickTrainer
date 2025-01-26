@@ -1,4 +1,4 @@
-import { AudioObject, ImageObject } from "@/types"
+import { AudioObject, ImageObject, Statistics } from "@/types"
 
 export const loadResources = async (
         images: { [key: string]: ImageObject }, 
@@ -65,8 +65,4 @@ export const getSensitivityStorage = () => {
     } else {
         return .7
     }
-}
-
-export const getRoundedPlayerKD = (kills: number, deaths: number) => {
-    return (kills / (deaths === 0 ? 1 : deaths)).toFixed(2)
 }

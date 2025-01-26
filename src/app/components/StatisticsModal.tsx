@@ -1,17 +1,25 @@
 import { GameSettings, Statistics } from "@/types"
-import { useEffect } from "react"
-import { getRoundedPlayerKD } from "@/functions/utils"
+import { useEffect, useState, useRef } from "react"
 
 interface StatisticsModalParams {
     statistics: Statistics
     game_settings: GameSettings,
-    onClose: () => void
+    onClose: () => void,
+    onUpdateStatistics: () => void
 }
 
-export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, game_settings, onClose}) => {
+interface RecordStruct {
+    [key:string]: string
+}
+
+export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, game_settings, onClose, onUpdateStatistics}) => {
+    const [newRecords, setNewRecords] = useState<RecordStruct[] | null>(null)
+    const comparedPerformances = useRef<boolean>(false)
 
     const comparePerformances = () => {
         const playerKd = statistics.kills / (statistics.deaths === 0 ? 1 : statistics.deaths)
+        const new_records = []
+
         switch(game_settings.mode){
             case 'circuit':
                 const circuitBestScore = localStorage.getItem(`${game_settings.map_name}_${game_settings.circuit}_${game_settings.difficulty}`)
@@ -21,20 +29,52 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
             break
             case 'spot':
                 const spotHeader = `${game_settings.map_name}_${game_settings.spot}_${game_settings.difficulty}`
-                const spotStats = JSON.stringify({kills: statistics.kills, deaths: statistics.deaths, time_elapsed: statistics.time_elapsed, kd: playerKd})
-
-                const spotBestScore = localStorage.getItem(spotHeader)
-                if (!spotBestScore){
-                    localStorage.setItem(spotHeader, spotStats)
-                } else {
-                    console.log("Last spotBestScore :", JSON.parse(spotBestScore))
+                const lastSpotBestScores = localStorage.getItem(spotHeader)
+                const spotCurrentStats = {
+                    kills: statistics.kills,
+                    deaths: statistics.deaths,
+                    time_elapsed: statistics.time_elapsed,
+                    kd: playerKd
+                }
+                if (!lastSpotBestScores){
+                    localStorage.setItem(spotHeader, JSON.stringify(spotCurrentStats))
+                    new_records.push({
+                        header: `New KD record :`,
+                        message: `${spotCurrentStats.kd.toFixed(2)} KD`
+                    })
+                    new_records.push({
+                        header: `New TIME record :`,
+                        message: `${spotCurrentStats.time_elapsed} seconds`
+                    })
+                } else if (lastSpotBestScores) {
+                    const lastSpotBestScoresObject = JSON.parse(lastSpotBestScores)
+                    if (spotCurrentStats.kd > lastSpotBestScoresObject.kd){
+                        new_records.push({
+                            header: `New KD record :`,
+                            message: `${spotCurrentStats.kd.toFixed(2)} KD`
+                        })
+                        lastSpotBestScoresObject.kd = spotCurrentStats.kd
+                    }
+                    if (spotCurrentStats.time_elapsed < lastSpotBestScoresObject.time_elapsed){
+                        new_records.push({
+                            header: `New TIME record :`,
+                            message: `${spotCurrentStats.time_elapsed} seconds`
+                        })
+                        lastSpotBestScoresObject.time_elapsed = spotCurrentStats.time_elapsed
+                    }
+                    localStorage.setItem(spotHeader, JSON.stringify(lastSpotBestScoresObject))
                 }
             break
         }
+        setNewRecords(new_records)
+        comparedPerformances.current = true
+        onUpdateStatistics()
     }
 
     useEffect(()=>{
-        comparePerformances()
+        if (!comparedPerformances.current){
+            comparePerformances()
+        }
     }, [])
 
     return (
@@ -64,7 +104,7 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
                         </div>
                     </div>
                     <div className="flex flex-col">
-                        <div className="flex flex-col p-3">
+                        <div className="flex flex-col p-3 justify-center">
                             <div className="w-full flex flex-row justify-between text-white 
                                 opacity-0 animate-[fadeIn_0.5s_ease-in-out_0.25s_forwards]"
                             >
@@ -87,7 +127,7 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
                                 opacity-0 animate-[fadeIn_0.5s_ease-in-out_1s_forwards]"
                             >
                                 <p> KD : </p>
-                                <p> {getRoundedPlayerKD(statistics.kills, statistics.deaths)} </p>
+                                <p> {statistics.kd.toFixed(2)} </p>
                             </div>
                             <div className="w-full flex flex-row justify-between text-white 
                                 opacity-0 animate-[fadeIn_0.5s_ease-in-out_1.25s_forwards]"
@@ -95,6 +135,26 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
                                 <p> Time : </p>
                                 <p> {statistics.time_elapsed} seconds </p>
                             </div>
+                            {newRecords && newRecords.length > 0 &&
+                                <div className="flex flex-col pt-4 items-center opacity-0 animate-[fadeIn_0.5s_ease-in-out_1.50s_forwards]">
+                                    <h3 className="text-lg text-white">
+                                        NEW RECORD{newRecords.length > 1 ? 'S' : ''} :
+                                    </h3>
+                                    {newRecords.map((new_record, index) => (
+                                        <div 
+                                            key={`new_record_${index}`}
+                                            className="w-full flex justify-between "
+                                        >
+                                            <span className="text-white">
+                                                {new_record.header}
+                                            </span>
+                                            <span className="text-lime-500">
+                                                {new_record.message}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            }
                         </div>
                     </div>
                     <div className="flex items-center justify-end p-4 md:p-5 border-t">

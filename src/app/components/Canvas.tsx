@@ -80,7 +80,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
     const ctx = useRef<CanvasRenderingContext2D | null>(null)
 
     const isFullScreen = useRef(false)
-    const statistics = useRef<Statistics>({kills: 0, deaths: 0, time_elapsed: 0})
+    const statistics = useRef<Statistics>({kills: 0, deaths: 0, time_elapsed: 0, kd: 0})
     const [persistentStatistics, setPersistentStatistics] = useState<Statistics>({...statistics.current})
 
     const currentSpot = useRef<SpotStruct>(getCurrentSpot())
@@ -140,9 +140,11 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
     const killPlayer = () => {
         isDead.current = true
         statistics.current.deaths++
+        statistics.current.kd = (statistics.current.kills / (statistics.current.deaths === 0 ? 1 : statistics.current.deaths))
         setPersistentStatistics(prev => ({
             ...prev,
-            deaths: prev.deaths + 1
+            deaths: prev.deaths + 1,
+            kd: statistics.current.kd
         }))
         audios.player_death.audio.currentTime = 0
         audios.player_death.audio.play()
@@ -161,9 +163,12 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
             audios.headshot.audio.play()
 
             statistics.current.kills++
+            statistics.current.kd = (statistics.current.kills / (statistics.current.deaths === 0 ? 1 : statistics.current.deaths))
+
             setPersistentStatistics(prev => ({
                 ...prev,
-                kills: prev.kills + 1
+                kills: prev.kills + 1,
+                kd: statistics.current.kd 
             }))
 
             if (shotTimeout){

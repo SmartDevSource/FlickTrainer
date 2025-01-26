@@ -37,7 +37,8 @@ export interface Target {
 export interface Statistics {
     kills: number,
     deaths: number,
-    time_elapsed: number
+    time_elapsed: number,
+    kd: number
 }
 
 export interface RecoilSettings {

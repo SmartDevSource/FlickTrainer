@@ -1,7 +1,6 @@
 import { ImageObject, Statistics, Target, Vector2, Timer, CircuitStates, SpotStates } from "@/types"
 import { getHeadCoordinates } from "./target"
 import { crosshairData } from "./crosshair_changer"
-import { getRoundedPlayerKD } from "./utils"
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const framesPerSecond: number = 100
@@ -184,7 +183,7 @@ export const drawStatistics = (
 ) => {
     // ADD DELAY REACTION TIME (MS)
     ctx.save()
-    const kd = getRoundedPlayerKD(statistics.kills, statistics.deaths)
+    const kd = statistics.kd.toFixed(2)
     const killsDeathBoxLength = (statistics.kills.toString().length * 15) + (statistics.deaths.toString().length * 15)
     const kdBoxLength = kd.toString().length * 13
     ctx.fillStyle = 'white'
