@@ -80,7 +80,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
     const ctx = useRef<CanvasRenderingContext2D | null>(null)
 
     const isFullScreen = useRef(false)
-    const statistics = useRef<Statistics>({kills: 0, deaths: 0, time_elapsed: 0, kd: 0})
+    const statistics = useRef<Statistics>({kills: 0, deaths: 0, time_elapsed: 0, kd: 0, shots: 0})
     const [persistentStatistics, setPersistentStatistics] = useState<Statistics>({...statistics.current})
 
     const currentSpot = useRef<SpotStruct>(getCurrentSpot())
@@ -418,6 +418,10 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
                 if (!isFiring.current){
                     isFiring.current = true
                     audios.deagleshot.audio.currentTime = 0
+                    setPersistentStatistics(prev => ({
+                        ...prev,
+                        shots: prev.shots + 1
+                    }))
                     audios.deagleshot.audio.play()
                     initRecoil(screenOffset.current)
                     if (target?.current && screenOffset?.current && images[target?.current?.character]){

@@ -16,7 +16,7 @@ const gameSettingsTest: GameSettings = {
   circuit: "ct_circuit",
   spot: "kenny_to_short",
   difficulty: "easy",
-  spot_objective: 25
+  spot_objective: 2
 }
 
 const MainPage = () => {

@@ -46,6 +46,12 @@ export const TrainingPage: React.FC<TrainingParams> = ({game_settings, onBackMen
         }
     }, [])
 
+    useEffect(()=>{
+        if (lastBestStatistics){
+            console.log("last best stats :", lastBestStatistics)
+        }
+    }, [lastBestStatistics])
+
     return (
         <div className="flex flex-col items-center justify-center">
             {statistics &&
@@ -102,6 +108,14 @@ export const TrainingPage: React.FC<TrainingParams> = ({game_settings, onBackMen
                         </span>
                         <span className="text-yellow-300 p-1">
                             {lastBestStatistics.time_elapsed} seconds
+                        </span>
+                    </div>
+                    <div className="flex justify-between w-full">
+                        <span className="text-white p-1">
+                            Precision :
+                        </span>
+                        <span className="text-yellow-300 p-1">
+                            {lastBestStatistics.precision} %
                         </span>
                     </div>
                 </div>

@@ -17,7 +17,8 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
     const comparedPerformances = useRef<boolean>(false)
 
     const comparePerformances = () => {
-        const playerKd = statistics.kills / (statistics.deaths === 0 ? 1 : statistics.deaths)
+        const player_kd = statistics.kills / (statistics.deaths === 0 ? 1 : statistics.deaths)
+        const precision = ((statistics.kills / statistics.shots) * 100).toFixed(0)
         const new_records = []
 
         switch(game_settings.mode){
@@ -28,7 +29,8 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
                     kills: statistics.kills,
                     deaths: statistics.deaths,
                     time_elapsed: statistics.time_elapsed,
-                    kd: playerKd
+                    kd: player_kd,
+                    precision: parseInt(precision)
                 }
                 if (!lastCircuitBestScores){
                     localStorage.setItem(circuitHeader, JSON.stringify(circuitCurrentStats))
@@ -39,6 +41,10 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
                     new_records.push({
                         header: `New TIME record :`,
                         message: `${circuitCurrentStats.time_elapsed} seconds`
+                    })
+                    new_records.push({
+                        header: `New PRECISION record :`,
+                        message: `${circuitCurrentStats.precision} %`
                     })
                 } else {
                     const lastCircuitBestScoresObject = JSON.parse(lastCircuitBestScores)
@@ -56,6 +62,13 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
                         })
                         lastCircuitBestScoresObject.time_elapsed = circuitCurrentStats.time_elapsed
                     }
+                    if (circuitCurrentStats.precision > lastCircuitBestScoresObject.precision){
+                        new_records.push({
+                            header: `New PRECISION record :`,
+                            message: `${circuitCurrentStats.precision} %`
+                        })
+                        lastCircuitBestScoresObject.precision = circuitCurrentStats.precision
+                    }
                     localStorage.setItem(circuitHeader, JSON.stringify(lastCircuitBestScoresObject))
                 }
             break
@@ -66,7 +79,8 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
                     kills: statistics.kills,
                     deaths: statistics.deaths,
                     time_elapsed: statistics.time_elapsed,
-                    kd: playerKd
+                    kd: player_kd,
+                    precision: parseInt(precision)
                 }
                 if (!lastSpotBestScores){
                     localStorage.setItem(spotHeader, JSON.stringify(spotCurrentStats))
@@ -77,6 +91,10 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
                     new_records.push({
                         header: `New TIME record :`,
                         message: `${spotCurrentStats.time_elapsed} seconds`
+                    })
+                    new_records.push({
+                        header: `New PRECISION record :`,
+                        message: `${spotCurrentStats.precision} %`
                     })
                 } else {
                     const lastSpotBestScoresObject = JSON.parse(lastSpotBestScores)
@@ -93,6 +111,13 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
                             message: `${spotCurrentStats.time_elapsed} seconds`
                         })
                         lastSpotBestScoresObject.time_elapsed = spotCurrentStats.time_elapsed
+                    }
+                    if (spotCurrentStats.precision > lastSpotBestScoresObject.precision){
+                        new_records.push({
+                            header: `New PRECISION record :`,
+                            message: `${spotCurrentStats.precision} %`
+                        })
+                        lastSpotBestScoresObject.precision = spotCurrentStats.precision
                     }
                     localStorage.setItem(spotHeader, JSON.stringify(lastSpotBestScoresObject))
                 }
@@ -166,6 +191,12 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
                             >
                                 <p> Time : </p>
                                 <p> {statistics.time_elapsed} seconds </p>
+                            </div>
+                            <div className="w-full flex flex-row justify-between text-white 
+                                opacity-0 animate-[fadeIn_0.5s_ease-in-out_1.25s_forwards]"
+                            >
+                                <p> Precision : </p>
+                                <p> {((statistics.kills / statistics.shots) * 100).toFixed(0)} % </p>
                             </div>
                             {newRecords && newRecords.length > 0 &&
                                 <div className="flex flex-col pt-4 items-center opacity-0 animate-[fadeIn_0.5s_ease-in-out_1.50s_forwards]">

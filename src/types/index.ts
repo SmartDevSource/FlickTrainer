@@ -38,7 +38,9 @@ export interface Statistics {
     kills: number,
     deaths: number,
     time_elapsed: number,
-    kd: number
+    kd: number,
+    shots: number,
+    precision?: number
 }
 
 export interface RecoilSettings {
