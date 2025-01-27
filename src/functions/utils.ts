@@ -63,6 +63,6 @@ export const getSensitivityStorage = () => {
     if (sensitivityStorage){
         return parseFloat(sensitivityStorage)
     } else {
-        return .7
+        return 1.2
     }
 }
