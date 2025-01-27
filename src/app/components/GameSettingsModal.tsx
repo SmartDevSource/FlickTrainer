@@ -267,6 +267,14 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                         >
                             Select
                         </button>
+                        <button
+                            type="button"
+                            className="py-2.5 px-5 ms-3 text-sm text-white focus:outline-none
+                                    bg-red-500 rounded-lg  hover:bg-red-400 min-w-24"
+                            onClick={() => handleClose()}
+                        >
+                            Close
+                        </button>
                     </div>
                     }
                 </div>
