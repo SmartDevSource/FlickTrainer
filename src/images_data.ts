@@ -2,10 +2,6 @@ import { ImageObject } from "./types"
 
 export const images: {[key: string]: ImageObject} = {
     // SPRITES //
-    crosshair: {
-        path: `/gfx/hud/crosshair.png`,
-        img: new Image(),
-    },
     deagle: {
         path: `/gfx/hud/deagle.png`,
         img: new Image(),
@@ -48,6 +44,7 @@ export const images: {[key: string]: ImageObject} = {
     },
     ////////////////////// MAPS ///////////////////////
     // VERTIGO //
+    // CT SIDE //
     vertigo_ctspawn_to_mid: {
         path: `/gfx/maps/vertigo/ctspawn_to_mid.png`,
         img: new Image(),
@@ -96,6 +93,14 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/vertigo/b_to_stairs_2_layer.png`,
         img: new Image(),
     },
+    vertigo_under_b_stairs_to_tspawn: {
+        path: `/gfx/maps/vertigo/under_b_stairs_to_tspawn.png`,
+        img: new Image(),
+    },
+    vertigo_under_b_stairs_to_tspawn_layer: {
+        path: `/gfx/maps/vertigo/under_b_stairs_to_tspawn_layer.png`,
+        img: new Image(),
+    },
     vertigo_ctmid_to_tmid: {
         path: `/gfx/maps/vertigo/ctmid_to_tmid.png`,
         img: new Image(),
@@ -142,6 +147,38 @@ export const images: {[key: string]: ImageObject} = {
     },
     vertigo_kenny_to_short_layer: {
         path: `/gfx/maps/vertigo/kenny_to_short_layer.png`,
+        img: new Image(),
+    },
+    vertigo_a_site_to_ramp: {
+        path: `/gfx/maps/vertigo/a_site_to_ramp.png`,
+        img: new Image(),
+    },
+    vertigo_a_site_to_ramp_layer: {
+        path: `/gfx/maps/vertigo/a_site_to_ramp_layer.png`,
+        img: new Image(),
+    },
+    vertigo_a_to_ramp: {
+        path: `/gfx/maps/vertigo/a_to_ramp.png`,
+        img: new Image(),
+    },
+    vertigo_a_to_ramp_layer: {
+        path: `/gfx/maps/vertigo/a_to_ramp_layer.png`,
+        img: new Image(),
+    },
+    vertigo_under_to_a_ramp: {
+        path: `/gfx/maps/vertigo/under_to_a_ramp.png`,
+        img: new Image(),
+    },
+    vertigo_under_to_a_ramp_layer: {
+        path: `/gfx/maps/vertigo/under_to_a_ramp_layer.png`,
+        img: new Image(),
+    },
+    vertigo_ctspawn_short_to_a: {
+        path: `/gfx/maps/vertigo/ctspawn_short_to_a.png`,
+        img: new Image(),
+    },
+    vertigo_ctspawn_short_to_a_layer: {
+        path: `/gfx/maps/vertigo/ctspawn_short_to_a_layer.png`,
         img: new Image(),
     },
 }

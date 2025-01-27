@@ -661,6 +661,42 @@ export const mapsData: MapsData = {
             },
             circuit: 'ct_circuit'
         },
+        under_b_stairs_to_tspawn: {
+            targets: [
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'right',
+                    from: {x: 700, y: 519},
+                    to: {x: 670, y: 519},
+                    idle: false,
+                    distance: 4.76,
+                    speed: 80
+                },
+            ] as Target[],
+            initial_offset: {
+                x: -420,
+                y: -150
+            },
+            circuit: 'ct_circuit'
+        },
+        under_to_a_ramp: {
+            targets: [
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'right',
+                    from: {x: 700, y: 519},
+                    to: {x: 670, y: 519},
+                    idle: false,
+                    distance: 4.76,
+                    speed: 80
+                },
+            ] as Target[],
+            initial_offset: {
+                x: -420,
+                y: -150
+            },
+            circuit: 'ct_circuit'
+        },
         ctmid_to_tmid: {
             targets: [
                 {
@@ -1427,6 +1463,24 @@ export const mapsData: MapsData = {
                     idle: false,
                     distance: 9,
                     speed: 80
+                },
+            ] as Target[],
+            initial_offset: {
+                x: -420,
+                y: -150
+            },
+            circuit: 'ct_circuit'
+        },
+        a_site_to_ramp: {
+            targets: [
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 1054, y: 562},
+                    to: {x: 1074, y: 562},
+                    idle: false,
+                    distance: 7.7,
+                    speed: 40
                 },
             ] as Target[],
             initial_offset: {
