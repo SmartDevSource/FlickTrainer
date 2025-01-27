@@ -75,7 +75,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
         <div
             className="fixed inset-0 z-50 flex justify-center items-center w-full h-full bg-black bg-opacity-50"
         >
-            {showImageModal && 
+            {showImageModal &&
                 <ImageModal
                     onClose={() => setShowImageModal('')}
                     image_path={showImageModal}

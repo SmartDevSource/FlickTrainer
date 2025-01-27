@@ -2,6 +2,10 @@ import { ImageObject, Statistics, Target, Vector2, Timer, CircuitStates, SpotSta
 import { getHeadCoordinates } from "./target"
 import { crosshairData } from "./crosshair_changer"
 
+export const minimizedCanvasSize = {w: 320, h: 240}
+export const fullscreenCanvasSize = {w: 1240, h: 768}
+export const screenBoundaries = {left: 150, top: 150, right: -825, bottom: -445}
+
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const framesPerSecond: number = 100
 const crosshairScaleFactor: number = 2
@@ -29,10 +33,6 @@ const deathAnim: {
     opacity: 0,
     update_delay: 5
 }
-
-export const minimizedCanvasSize = {w: 320, h: 240}
-export const fullscreenCanvasSize = {w: 1240, h: 768}
-export const screenBoundaries = {left: 0, top: 0, right: -675, bottom: -295}
 
 export const drawWeapon = (ctx: CanvasRenderingContext2D,
                             weaponImg: ImageObject,

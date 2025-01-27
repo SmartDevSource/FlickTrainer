@@ -15,7 +15,7 @@ const gameSettingsTest: GameSettings = {
   map_name: "vertigo",
   circuit: "ct_circuit",
   spot: "kenny_to_short",
-  difficulty: "medium",
+  difficulty: "easy",
   spot_objective: 3
 }
 
@@ -23,7 +23,7 @@ const MainPage = () => {
   const [currentPage, setCurrentPage] = useState<string>('home')
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
   const [messageAlert, setMessageAlert] = useState<AlertParams | null>(null)
-  const [gameSettings, setGameSettings] = useState<GameSettings | null>(null)
+  const [gameSettings, setGameSettings] = useState<GameSettings | null>(gameSettingsTest)
 
   const handleNavbarClick = (navbar_data: string) => {
     switch(navbar_data){
