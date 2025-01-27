@@ -4,7 +4,6 @@ const headOffset: number = 55
 const targetTimer: Timer = {last_update: performance.now(), delta_time: 0}
 const verticalOffset: {standup: number, crouch: number} = {standup: .4, crouch: 2}
 
-export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
 export let shotTimeout: ReturnType<typeof setTimeout> | null = null
 
 export const getRandomTarget = (targets: Target[]) => {

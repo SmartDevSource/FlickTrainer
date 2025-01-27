@@ -19,13 +19,13 @@ import {
     getRandomTarget,
     updateTarget,
     getHeadCoordinates,
-    screenBoundaries,
     shotTimeout, 
     updateTargetTimer
 } from '@/functions/target'
 import {
     fullscreenCanvasSize,
     minimizedCanvasSize,
+    screenBoundaries,
     drawTarget,
     drawWeapon,
     drawStatistics,

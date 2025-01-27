@@ -1,5 +1,3 @@
-import Image from "next/image"
-
 interface HomeParams {
     onClick: () => void
 }
@@ -8,13 +6,10 @@ export const Home: React.FC<HomeParams> = ({onClick}) => {
     return (
         <div className="relative bg-gray-900 overflow-hidden animate-fadeInPage">
             <div className="absolute inset-0">
-            <Image
+            <img
                 src="/web/images/cs2_bg.jpg"
                 alt="Counter-Strike 2 Theme"
-                layout="fill"
-                objectFit="cover"
-                priority
-                className=""
+                className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black via-gray-900 to-gray-900 opacity-30"></div>
             </div>

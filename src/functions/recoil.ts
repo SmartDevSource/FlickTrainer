@@ -1,5 +1,5 @@
 import { RecoilSettings, Vector2, Timer } from "@/types"
-import { screenBoundaries } from "./target"
+import { screenBoundaries } from "./draw"
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 

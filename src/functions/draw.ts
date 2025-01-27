@@ -31,8 +31,8 @@ const deathAnim: {
 }
 
 export const minimizedCanvasSize = {w: 320, h: 240}
-export const fullscreenCanvasSize = {w: 1024, h: 768}
-export const screenBoundaries = {left: 0, top: 0, right: -890, bottom: -295}
+export const fullscreenCanvasSize = {w: 1240, h: 768}
+export const screenBoundaries = {left: 0, top: 0, right: -675, bottom: -295}
 
 export const drawWeapon = (ctx: CanvasRenderingContext2D,
                             weaponImg: ImageObject,
@@ -69,7 +69,7 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
         0,
         frame_width,
         weaponImg.img.height,
-        600 + weaponAnim.sway_offset.x,
+        800 + weaponAnim.sway_offset.x,
         160 + weaponAnim.sway_offset.y,
         frame_width - 150,
         weaponImg.img.height - 150
@@ -81,7 +81,7 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
             0,
             flameImg.img.width,
             flameImg.img.height,
-            470,
+            660,
             320,
             flameImg.img.width / 2,
             flameImg.img.height / 2
@@ -197,27 +197,27 @@ export const drawStatistics = (
 
     ctx.strokeStyle = 'rgb(150, 150, 150)'
     ctx.fillStyle = 'rgba(255, 255, 255, .3)'
-    ctx.fillRect(870, 31, 80 + kdBoxLength, 25)
-    ctx.strokeRect(870, 31, 80 + kdBoxLength, 25)
+    ctx.fillRect(1085, 31, 80 + kdBoxLength, 25)
+    ctx.strokeRect(1085, 31, 80 + kdBoxLength, 25)
     ctx.fillStyle = 'rgb(255, 255, 255)'
-    ctx.fillText(`KD : ${kd}`, 890, 50)
+    ctx.fillText(`KD : ${kd}`, 1105, 50)
 
     switch(game_mode){
         case 'circuit':
             ctx.strokeStyle = 'rgb(150, 150, 150)'
             ctx.fillStyle = 'rgba(255, 255, 255, .3)'
-            ctx.fillRect(870, 56, 80 + kdBoxLength, 25)
-            ctx.strokeRect(870, 56, 80 + kdBoxLength, 25)
+            ctx.fillRect(1085, 56, 80 + kdBoxLength, 25)
+            ctx.strokeRect(1085, 56, 80 + kdBoxLength, 25)
             ctx.fillStyle = 'rgb(255, 255, 255)'
-            ctx.fillText(`${circuit_states.current_kills} / ${circuit_states.kills_goal}`, 915, 75)    
+            ctx.fillText(`${circuit_states.current_kills} / ${circuit_states.kills_goal}`, 1130, 75)    
         break
         case 'spot':
             ctx.strokeStyle = 'rgb(150, 150, 150)'
             ctx.fillStyle = 'rgba(255, 255, 255, .3)'
-            ctx.fillRect(870, 56, 80 + kdBoxLength, 25)
-            ctx.strokeRect(870, 56, 80 + kdBoxLength, 25)
+            ctx.fillRect(1085, 56, 80 + kdBoxLength, 25)
+            ctx.strokeRect(1085, 56, 80 + kdBoxLength, 25)
             ctx.fillStyle = 'rgb(255, 255, 255)'
-            ctx.fillText(`${spot_states.current_kills} / ${spot_states.kills_goal}`, 915, 75) 
+            ctx.fillText(`${spot_states.current_kills} / ${spot_states.kills_goal}`, 1130, 75) 
         break
     }
 
@@ -225,10 +225,9 @@ export const drawStatistics = (
 
     ctx.fillStyle = 'rgb(255, 255, 255)'
     ctx.lineWidth = 2
-    ctx.strokeText(`Time : ${statistics.time_elapsed}`, 455, 50)
-    ctx.fillText(`Time : ${statistics.time_elapsed}`, 455, 50)
+    ctx.strokeText(`Time : ${statistics.time_elapsed}`, 570, 50)
+    ctx.fillText(`Time : ${statistics.time_elapsed}`, 570, 50)
     ctx.restore()
-
 }
 
 export const drawPlayerDeath = (ctx: CanvasRenderingContext2D) => {
@@ -261,8 +260,8 @@ export const drawStartCounter = (ctx: CanvasRenderingContext2D, startTimer: numb
     ctx.fillStyle = 'white'
     ctx.lineWidth = 5
     ctx.strokeStyle = 'black'
-    ctx.strokeText(startTimer.toString(), 450, 430)
-    ctx.fillText(startTimer.toString(), 450, 430)
+    ctx.strokeText(startTimer.toString(), 565, 430)
+    ctx.fillText(startTimer.toString(), 565, 430)
     ctx.restore()
 }
 
