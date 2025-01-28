@@ -23,7 +23,7 @@ export const StatisticsModal: React.FC<StatisticsModalParams> = ({statistics, ga
 
         switch(game_settings.mode){
             case 'circuit':
-                const circuitHeader = `${game_settings.map_name}_${game_settings.spot}_${game_settings.difficulty}`
+                const circuitHeader = `${game_settings.map_name}_${game_settings.circuit}_${game_settings.difficulty}`
                 const lastCircuitBestScores = localStorage.getItem(circuitHeader)
                 const circuitCurrentStats = {
                     kills: statistics.kills,
