@@ -1,4 +1,4 @@
-import { AudioObject, ImageObject, Statistics } from "@/types"
+import { AudioObject, ImageObject, Statistics, Vector2 } from "@/types"
 
 export const loadResources = async (
         images: { [key: string]: ImageObject }, 

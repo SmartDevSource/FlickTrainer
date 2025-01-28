@@ -9,7 +9,6 @@ export const screenBoundaries = {left: 150, top: 150, right: -825, bottom: -445}
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const framesPerSecond: number = 100
 const crosshairScaleFactor: number = 2
-const drawCoordinatesYOffset: number = 25
 
 export const weaponAnim: {
     current_frame: number,
@@ -119,59 +118,17 @@ export const drawTarget = (target: Target, screenOffset: Vector2, ctx: CanvasRen
     }
 }
 
-export const drawTargetHelper = (
-    ctx: CanvasRenderingContext2D,
-    images: { [key:string]: ImageObject},
-    screenOffset: Vector2,
-    testPosition: Vector2,
-    testDistance: number,
-    testCharacter: number
-) => {
-    const currentCharacter = Object.keys(images)[testCharacter]
-    ctx.drawImage(
-        images[currentCharacter].img,
-        0,
-        0,
-        images[currentCharacter].img.width,
-        images[currentCharacter].img.height,
-        testPosition.x + screenOffset.x,
-        testPosition.y + screenOffset.y,
-        images[currentCharacter].img.width / testDistance,
-        images[currentCharacter].img.height / testDistance
-    )
-}
-
-export const drawCoordinates = (
+export const drawScreenOffsets = (
     ctx: CanvasRenderingContext2D,
     screenOffset: Vector2,
-    testDistance: number,
-    testPosition: Vector2,
-    testSpeedPosition: number,
-    testSpeedScale: number
 ) => {
     ctx.save()
     ctx.fillStyle = 'white'
-    ctx.fillText(`Offset x : ${screenOffset.x.toFixed(2)} | Offset y : ${screenOffset.y.toFixed(2)}`,
+    ctx.font = '24px Arial'
+    ctx.fillText(`Offset (x, y) : ${screenOffset.x.toFixed(2)} | ${screenOffset.y.toFixed(2)}`,
         20, 
-        75 + drawCoordinatesYOffset
+        75
     )
-    ctx.fillText(`Distance x : ${testDistance.toFixed(2)} | Position (x : ${testPosition.x}, y: ${testPosition.y})`,
-        20,
-        100 + drawCoordinatesYOffset
-    )
-    ctx.fillText(`[a] Toggle Character Type`,
-        20,
-        175 + drawCoordinatesYOffset
-    )
-    ctx.fillText(`[z] Speed Position : ${testSpeedPosition === 1 ? 'slow' : testSpeedPosition === 10 ? 'medium': 'fast'}`,
-        20,
-        200 + drawCoordinatesYOffset
-    )
-    ctx.fillText(`[e] Speed Scale : ${testSpeedScale === .01 ? 'slow' : testSpeedScale === .1 ? 'medium' : 'fast'}`,
-        20,
-        225 + drawCoordinatesYOffset
-    )
-    ctx.restore()
 }
 
 export const drawStatistics = (
@@ -181,7 +138,6 @@ export const drawStatistics = (
     spot_states: SpotStates,
     game_mode: string
 ) => {
-    // ADD DELAY REACTION TIME (MS)
     ctx.save()
     const kd = statistics.kd.toFixed(2)
     const killsDeathBoxLength = (statistics.kills.toString().length * 15) + (statistics.deaths.toString().length * 15)

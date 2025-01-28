@@ -31,14 +31,23 @@ import {
     drawStatistics,
     drawPlayerDeath,
     drawPauseScreen,
-    drawTargetHelper,
-    drawCoordinates,
+    drawScreenOffsets,
     drawStartCounter,
     drawCrosshair,
     weaponAnim
 } from '@/functions/draw'
+import { drawHelperData, drawTargetHelper, getHelperCoords } from '@/functions/target_helper'
 import { initRecoil, updateRecoil } from '@/functions/recoil'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
+
+export interface Keys {
+    left: boolean,
+    up: boolean,
+    right: boolean,
+    down: boolean,
+    minus: boolean,
+    plus: boolean
+}
 
 interface CanvasParams {
     game_settings: GameSettings,
@@ -57,11 +66,14 @@ const resetGameWhenCircuitAccomplishedTimeout: number = 500
 const sensitivityFactor: number = 1.2
 
 const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, onSpotAccomplished}) => {
-    const testDistance = useRef<number>(1)
-    const testCharacter = useRef<number>(3)
+    const testDistance = useRef<number>(2)
+    const testCharacter = useRef<number>(4)
     const testSpeedPosition = useRef<number>(1)
     const testSpeedScale = useRef<number>(0.1)
-    const testPosition = useRef<Vector2>({x: 0, y: 0})
+    const testPosition = useRef<Vector2>({x: 700, y: 300})
+    const testStartPosition = useRef<Vector2>({x: 0, y: 0})
+    const testComeFrom = useRef<string>('left')
+    const testKeysPressed = useRef<Keys>({left: false, up: false, right: false, down: false, minus: false, plus: false})
 
     const circuits: CircuitTeams = getMapCircuits(game_settings.map_name)
 
@@ -350,18 +362,18 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
         }
         const handleKeydown = (event:KeyboardEvent) => {
             switch(event.key){
-                case 'ArrowLeft': testPosition.current.x -= testSpeedPosition.current; break
-                case 'ArrowRight': testPosition.current.x += testSpeedPosition.current; break
-                case 'ArrowUp': testPosition.current.y -= testSpeedPosition.current; break
-                case 'ArrowDown': testPosition.current.y += testSpeedPosition.current; break
-                case '+': testDistance.current -= testSpeedScale.current; break
-                case '-': testDistance.current += testSpeedScale.current; break
+                case 'ArrowLeft': testKeysPressed.current.left = true; break
+                case 'ArrowRight': testKeysPressed.current.right = true; break
+                case 'ArrowUp': testKeysPressed.current.up = true; break
+                case 'ArrowDown': testKeysPressed.current.down = true; break
+                case '+': testKeysPressed.current.plus = true; break
+                case '-': testKeysPressed.current.minus = true; break
                 case 'Alt': case 'Meta': case 'F12': handleExitFullScreen(); break
                 case 'A': case 'a':
                     testCharacter.current = testCharacter.current >= 9 ?
-                        3
+                        2
                         :
-                        testCharacter.current + 2
+                        testCharacter.current + 1
                 break
                 case 'Z': case 'z':
                     testSpeedPosition.current *= 10
@@ -375,6 +387,33 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
                         testSpeedScale.current = .01
                     }
                 break
+                case 'F': case 'f':
+                    testComeFrom.current = testComeFrom.current === 'left' ? 'right' : 'left'
+                break
+                case 'G': case 'g':
+                    testStartPosition.current = {...testPosition.current}
+                break
+                case 'S': case 's':
+                    const helperCoords = getHelperCoords(
+                        Object.keys(images)[testCharacter.current],
+                        testComeFrom.current,
+                        testStartPosition.current,
+                        testPosition.current,
+                        testDistance.current
+                    )
+                    navigator.clipboard.writeText(helperCoords)
+                break
+            }
+        }
+
+        const handleKeyUp = (event: KeyboardEvent) => {
+            switch(event.key){
+                case 'ArrowLeft': testKeysPressed.current.left = false; break
+                case 'ArrowRight': testKeysPressed.current.right = false; break
+                case 'ArrowUp': testKeysPressed.current.up = false; break
+                case 'ArrowDown': testKeysPressed.current.down = false; break
+                case '+': testKeysPressed.current.plus = false; break
+                case '-': testKeysPressed.current.minus = false; break
             }
         }
         
@@ -447,12 +486,14 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
         }
 
         window.addEventListener('keydown', handleKeydown)
+        window.addEventListener('keyup', handleKeyUp)
         window.addEventListener('fullscreenchange', handleFullscreenChange)
         window.addEventListener('mousemove', handleMouseMove)
         window.addEventListener('mousedown', handleMouseDown)
 
         return () => {
             window.removeEventListener('keydown', handleKeydown)
+            window.removeEventListener('keyup', handleKeyUp)
             window.removeEventListener('fullscreenchange', handleFullscreenChange)
             window.removeEventListener('mousemove', handleMouseMove)
             window.removeEventListener('mousedown', handleMouseDown)
@@ -491,11 +532,33 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
         }
     }, [isAccomplished])
 
+    const updateTestValues = () => {
+        if (testKeysPressed.current.left){
+            testPosition.current.x -= testSpeedPosition.current
+        }
+        if (testKeysPressed.current.right){
+            testPosition.current.x += testSpeedPosition.current
+        }
+        if (testKeysPressed.current.up){
+            testPosition.current.y -= testSpeedPosition.current
+        }
+        if (testKeysPressed.current.down){
+            testPosition.current.y += testSpeedPosition.current
+        }
+        if (testKeysPressed.current.plus){
+            testDistance.current -= testSpeedScale.current;
+        }
+        if (testKeysPressed.current.minus){
+            testDistance.current += testSpeedScale.current;
+        }
+    }
+
     const draw = () => {
         if (ctx.current && canvasRef.current){
             ctx.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
 
             updateTargetTimer()
+            updateTestValues()
             updateRecoil(screenOffset.current)
 
             if (target.current)
@@ -519,7 +582,8 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
                 drawCrosshair(ctx.current, crosshairData.current)
 
                 drawStatistics(ctx.current, statistics.current, circuitStates.current, spotStates.current, game_settings.mode)
-                drawCoordinates(ctx.current, screenOffset.current, testDistance.current, testPosition.current, testSpeedPosition.current, testSpeedScale.current)
+                // drawScreenOffsets(ctx.current, screenOffset.current)
+                drawHelperData(ctx.current, testDistance.current, testStartPosition.current, testPosition.current, testSpeedPosition.current, testSpeedScale.current, testComeFrom.current)
 
                 if (!isReady.current)
                     drawStartCounter(ctx.current, startTimer.current)
@@ -537,7 +601,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
         <canvas
             ref={canvasRef}
             className='h-72 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))]
-             from-slate-500 via-slate-400 to-slate-300" 
+             from-slate-500 via-slate-400 to-slate-300
                 m-16 cursor-crosshair'
             onClick={() => toggleFullScreen()}
         />
