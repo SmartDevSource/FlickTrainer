@@ -181,4 +181,12 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/vertigo/ctspawn_short_to_a_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    vertigo_sandbag_to_a_ramp: {
+        path: `/gfx/maps/vertigo/sandbag_to_a_ramp.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    vertigo_sandbag_to_a_ramp_layer: {
+        path: `/gfx/maps/vertigo/sandbag_to_a_ramp_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
