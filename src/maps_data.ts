@@ -238,6 +238,24 @@ export const mapsData: MapsData = {
             },
             circuit: 'ct_circuit'
         },
+        ctspawn_short_to_a: {
+            targets: [
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 805, y: 555},
+                    to: {x: 832, y: 555},
+                    idle: false,
+                    distance: 6.09,
+                    speed: 100
+                },
+            ] as Target[],
+            initial_offset: {
+                x: -420,
+                y: -150
+            },
+            circuit: 'ct_circuit'
+        },
         connector_to_mid: {
             targets: [
                 {
@@ -1663,6 +1681,96 @@ export const mapsData: MapsData = {
         a_site_to_ramp: {
             targets: [
                 {
+                    character: "terrorist_crouch",
+                    come_from: "right",
+                    from: {x: 1018, y: 521},
+                    to: {x: 990, y: 521},
+                    idle: false,
+                    distance: 6.999999999999991,
+                    speed: 71
+                },
+                {
+                    character: "terrorist_standup",
+                    come_from: "right",
+                    from: {x: 1018, y: 521},
+                    to: {x: 990, y: 521},
+                    idle: false,
+                    distance: 6.999999999999991,
+                    speed: 107
+                },
+                {
+                    character: "terrorist_crouch",
+                    come_from: "right",
+                    from: {x: 650, y: 522},
+                    to: {x: 629, y: 522},
+                    idle: false,
+                    distance: 6.499999999999993,
+                    speed: 90
+                },
+                {
+                    character: "terrorist_standup",
+                    come_from: "right",
+                    from: {x: 650, y: 522},
+                    to: {x: 629, y: 522},
+                    idle: false,
+                    distance: 6.499999999999993,
+                    speed: 115
+                },
+                {
+                    character: "terrorist_crouch",
+                    come_from: "left",
+                    from: {x: 744, y: 526},
+                    to: {x: 766, y: 526},
+                    idle: false,
+                    distance: 7.999999999999988,
+                    speed: 63
+                },
+                {
+                    character: "terrorist_standup",
+                    come_from: "left",
+                    from: {x: 744, y: 526},
+                    to: {x: 766, y: 526},
+                    idle: false,
+                    distance: 7.999999999999988,
+                    speed: 94
+                },
+                {
+                    character: "terrorist_crouch",
+                    come_from: "right",
+                    from: {x: 1014, y: 520},
+                    to: {x: 979, y: 520},
+                    idle: false,
+                    distance: 4.350000000000003,
+                    speed: 115
+                },
+                {
+                    character: "terrorist_standup",
+                    come_from: "right",
+                    from: {x: 1014, y: 520},
+                    to: {x: 979, y: 520},
+                    idle: false,
+                    distance: 4.350000000000003,
+                    speed: 172
+                },
+                {
+                    character: "terrorist_crouch",
+                    come_from: "right",
+                    from: {x: 951, y: 613},
+                    to: {x: 903, y: 568},
+                    idle: false,
+                    distance: 5.490000000000002,
+                    speed: 80
+                },
+                {
+                    character: "terrorist_standup",
+                    come_from: "right",
+                    from: {x: 951, y: 613},
+                    to: {x: 903, y: 568},
+                    idle: false,
+                    distance: 5.490000000000002,
+                    speed: 137
+                },
+                {
                     character: 'terrorist_standup',
                     come_from: 'right',
                     from: {x: 972, y: 610},
@@ -1670,6 +1778,24 @@ export const mapsData: MapsData = {
                     idle: false,
                     distance: 5.4,
                     speed: 130
+                },
+            ] as Target[],
+            initial_offset: {
+                x: -420,
+                y: -150
+            },
+            circuit: 'ct_circuit'
+        },
+        a_to_ramp: {
+            targets: [
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 805, y: 555},
+                    to: {x: 832, y: 555},
+                    idle: false,
+                    distance: 6.09,
+                    speed: 100
                 },
             ] as Target[],
             initial_offset: {
