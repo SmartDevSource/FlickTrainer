@@ -1663,15 +1663,6 @@ export const mapsData: MapsData = {
         a_site_to_ramp: {
             targets: [
                 {
-                    character: "terrorist_crouch",
-                    come_from: "left",
-                    from: {x: 741, y: 517},
-                    to: {x: 765, y: 517},
-                    idle: false,
-                    distance: 7.19999999999999,
-                    speed: 69
-                },
-                {
                     character: 'terrorist_standup',
                     come_from: 'right',
                     from: {x: 972, y: 610},
