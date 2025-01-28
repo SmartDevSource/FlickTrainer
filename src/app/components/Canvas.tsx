@@ -50,7 +50,7 @@ interface CanvasParams {
     ) => void,
 }
 
-const startTimerValue: number = 3
+const startTimerValue: number = 0
 const playerRespawnTimeout: number = 1000
 const generateTargetAfterNewSpotTimeout: number = 1000
 const resetGameWhenCircuitAccomplishedTimeout: number = 500
