@@ -1663,13 +1663,13 @@ export const mapsData: MapsData = {
         a_site_to_ramp: {
             targets: [
                 {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'left',
-                    from: {x: 1054, y: 562},
-                    to: {x: 1074, y: 562},
+                    character: 'terrorist_standup',
+                    come_from: 'right',
+                    from: {x: 972, y: 610},
+                    to: {x: 952, y: 589},
                     idle: false,
-                    distance: 7.7,
-                    speed: 40
+                    distance: 5.4,
+                    speed: 130
                 },
             ] as Target[],
             initial_offset: {
