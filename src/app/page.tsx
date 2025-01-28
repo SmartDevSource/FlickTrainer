@@ -14,7 +14,7 @@ const gameSettingsTest: GameSettings = {
   mode: "spot",
   map_name: "vertigo",
   circuit: "ct_circuit",
-  spot: "a_to_ramp", //ctspawn_short_to_a
+  spot: "ctspawn_short_to_a", //ctspawn_short_to_a
   difficulty: "easy",
   spot_objective: 25
 }
