@@ -106,13 +106,67 @@ export const dust2: MapStruct = {
     top_mid_to_short: {
         targets: [
             {
-                character: "ct_crouch",
+                character: "ct_standup",
                 come_from: "left",
-                from: {x: 975, y: 584},
-                to: {x: 975, y: 572},
+                from: {x: 773, y: 644},
+                to: {x: 807, y: 644},
                 idle: false,
-                distance: 10.799999999999978,
-                speed: 46
+                distance: 7.499999999999989,
+                speed: 100
+            },
+            {
+                character: "ct_crouch_darken",
+                come_from: "left",
+                from: {x: 753, y: 615},
+                to: {x: 788, y: 615},
+                idle: false,
+                distance: 4.5,
+                speed: 120
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 753, y: 642},
+                to: {x: 788, y: 608},
+                idle: false,
+                distance: 4.5,
+                speed: 120
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 951, y: 561},
+                to: {x: 910, y: 561},
+                idle: false,
+                distance: 11.299999999999976,
+                speed: 100
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 951, y: 561},
+                to: {x: 923, y: 561},
+                idle: false,
+                distance: 11.299999999999976,
+                speed: 100
+            },
+            {
+                character: "ct_crouch",
+                come_from: "right",
+                from: {x: 951, y: 561},
+                to: {x: 933, y: 561},
+                idle: false,
+                distance: 11.299999999999976,
+                speed: 55
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 951, y: 561},
+                to: {x: 933, y: 561},
+                idle: false,
+                distance: 11.299999999999976,
+                speed: 66
             },
 
         ] as Target[],
@@ -317,12 +371,48 @@ export const dust2: MapStruct = {
         targets: [
             {
                 character: "ct_crouch",
-                come_from: "left",
-                from: {x: 975, y: 584},
-                to: {x: 975, y: 572},
+                come_from: "right",
+                from: {x: 905, y: 458},
+                to: {x: 885, y: 458},
                 idle: false,
-                distance: 10.799999999999978,
-                speed: 46
+                distance: 6.299999999999994,
+                speed: 79
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 707, y: 503},
+                to: {x: 730, y: 503},
+                idle: false,
+                distance: 7.19999999999999,
+                speed: 104
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 689, y: 466},
+                to: {x: 722, y: 466},
+                idle: false,
+                distance: 5.099999999999998,
+                speed: 147
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 834, y: 529},
+                to: {x: 805, y: 529},
+                idle: false,
+                distance: 8.299999999999986,
+                speed: 100
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 834, y: 529},
+                to: {x: 819, y: 529},
+                idle: false,
+                distance: 8.299999999999986,
+                speed: 90
             },
 
         ] as Target[],
@@ -337,11 +427,137 @@ export const dust2: MapStruct = {
             {
                 character: "ct_crouch",
                 come_from: "left",
-                from: {x: 975, y: 584},
-                to: {x: 975, y: 572},
+                from: {x: 470, y: 617},
+                to: {x: 470, y: 569},
                 idle: false,
-                distance: 10.799999999999978,
-                speed: 46
+                distance: 3.100000000000001,
+                speed: 200
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 1161, y: 711},
+                to: {x: 1182, y: 688},
+                idle: false,
+                distance: 5.799999999999995,
+                speed: 129
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 1041, y: 696},
+                to: {x: 1041, y: 671},
+                idle: false,
+                distance: 5.799999999999995,
+                speed: 129
+            },
+            {
+                character: "ct_crouch_darken",
+                come_from: "right",
+                from: {x: 1277, y: 635},
+                to: {x: 1260, y: 635},
+                idle: false,
+                distance: 9.099999999999984,
+                speed: 62
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1277, y: 635},
+                to: {x: 1260, y: 635},
+                idle: false,
+                distance: 9.099999999999984,
+                speed: 82
+            },
+            {
+                character: "ct_crouch",
+                come_from: "left",
+                from: {x: 1247, y: 621},
+                to: {x: 1247, y: 608},
+                idle: false,
+                distance: 14.499999999999964,
+                speed: 60
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 600, y: 530},
+                to: {x: 625, y: 530},
+                idle: false,
+                distance: 9,
+                speed: 100
+            },
+            {
+                character: "ct_crouch",
+                come_from: "left",
+                from: {x: 600, y: 530},
+                to: {x: 615, y: 530},
+                idle: false,
+                distance: 9,
+                speed: 60
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 600, y: 530},
+                to: {x: 615, y: 530},
+                idle: false,
+                distance: 9,
+                speed: 88
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 805, y: 548},
+                to: {x: 930, y: 548},
+                idle: false,
+                distance: 8.399999999999986,
+                speed: 89
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 805, y: 548},
+                to: {x: 775, y: 548},
+                idle: false,
+                distance: 8.399999999999986,
+                speed: 89
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 805, y: 548},
+                to: {x: 785, y: 548},
+                idle: false,
+                distance: 8.399999999999986,
+                speed: 89
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 805, y: 548},
+                to: {x: 795, y: 548},
+                idle: false,
+                distance: 8.399999999999986,
+                speed: 89
+            },
+            {
+                character: "ct_crouch",
+                come_from: "left",
+                from: {x: 1034, y: 613},
+                to: {x: 1050, y: 613},
+                idle: false,
+                distance: 9.799999999999981,
+                speed: 55
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 1034, y: 613},
+                to: {x: 1050, y: 613},
+                idle: false,
+                distance: 9.799999999999981,
+                speed: 77
             },
 
         ] as Target[],
