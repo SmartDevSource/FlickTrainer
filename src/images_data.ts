@@ -189,4 +189,15 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/vertigo/ct_circuit/sandbag_to_a_ramp_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    // DUST 2 //
+    // CT SIDE //
+    // TERRORIST SIDE //
+    dust2_tspawn_to_mid: {
+        path: `/gfx/maps/dust2/terrorist_circuit/tspawn_to_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_tspawn_to_mid_layer: {
+        path: `/gfx/maps/dust2/terrorist_circuit/tspawn_to_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }

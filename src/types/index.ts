@@ -106,3 +106,7 @@ export interface MapSpotStruct {
     background: ImageObject,
     layer: ImageObject
 }
+
+export interface MapStruct {
+    [spotName: string]: SpotStruct
+}

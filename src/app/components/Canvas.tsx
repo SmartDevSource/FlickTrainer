@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { mapsData, getMapCircuits } from '@/maps_data'
+import { mapsData, getMapCircuits } from '@/functions/maps'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
 import { 

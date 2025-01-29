@@ -14,7 +14,8 @@ const maps = [
     { logo: 'mirage_logo.jpg' },
     { logo: 'train_logo.jpg' },
     { logo: 'anubis_logo.jpg' },
-    { logo: 'vertigo_logo.jpg' },
+    { logo: 'ancient_logo.jpg' },
+    // { logo: 'vertigo_logo.jpg' },
 ]
 
 export const MapPeek: React.FC<MapPeekSettings> = ({onLaunchGame}) => {

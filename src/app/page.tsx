@@ -12,9 +12,9 @@ import { TrainingPage } from "./components/TrainingPage"
 
 const gameSettingsTest: GameSettings = {
   mode: "spot",
-  map_name: "vertigo",
-  circuit: "ct_circuit",
-  spot: "sandbag_to_a_ramp",
+  map_name: "dust2",
+  circuit: "terrorist_circuit",
+  spot: "tspawn_to_mid",
   difficulty: "easy",
   spot_objective: 25
 }
