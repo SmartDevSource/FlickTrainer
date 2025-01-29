@@ -9,15 +9,10 @@ interface SettingsParams {
     selectedMap: string
 }
 
-const circuits = [
-    "ct_circuit",
-    "terrorist_circuit",
-]
-
 export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, selectedMap}) => {
     const spots = [...getMapCircuits(selectedMap).ct_circuit, ...getMapCircuits(selectedMap).terrorist_circuit]
     const [selectedMode, setSelectedMode] = useState<'circuit' | 'spot'>('circuit')
-    const [gamePathType, setGamePathType] = useState<string>('')
+    const [showSpots, setShowSpots] = useState<boolean>(false)
     const [showImageModal, setShowImageModal] = useState<string>('')
     const [selectedCircuit, setSelectedCircuit] = useState<string>('ct_circuit')
     const [selectedSpot, setSelectedSpot] = useState<string>(spots[0]?.name ?? '')
@@ -52,15 +47,8 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
         setSelectedMode((prev:string) => prev === 'circuit' ? 'spot' : 'circuit')
     }
 
-    const handleGamePathType = (show: boolean) => {
-        switch(show){
-            case true:
-                setGamePathType(selectedMode)
-            break
-            case false:
-                setGamePathType('')
-            break
-        }
+    const handleCircuitSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setSelectedCircuit(e.target.value)
     }
 
     const handleDifficultySelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -91,7 +79,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                         </h3>
                     </div>
 
-                    {!gamePathType &&
+                    {!showSpots &&
                     <>
                         <div className="flex flex-col">
                             <div className="p-4 flex flex-row justify-between items-center">
@@ -119,18 +107,31 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                                 <p className="text-base leading-relaxed text-white">
                                     {selectedMode.charAt(0).toUpperCase() + selectedMode.slice(1)} selection
                                 </p>
-                                <button
-                                    type="button"
-                                    className="py-1 px-5 ms-3 text-lg text-gray-600 focus:outline-none
-                                            bg-gray-400 rounded-lg  hover:bg-gray-300 min-w-16"
-                                    onClick={() => handleGamePathType(true)}
-                                >
-                                    {
-                                        selectedMode === 'circuit' ?
-                                        normalizeCircuitName(selectedCircuit) :
-                                        normalizeSpotName(selectedSpot)
-                                    }
-                                </button>
+                                {selectedMode === 'spot' &&
+                                    <button
+                                        type="button"
+                                        className="py-1 px-5 ms-3 text-lg text-gray-600 focus:outline-none
+                                                bg-gray-400 rounded-lg  hover:bg-gray-300 min-w-16"
+                                        onClick={() => setShowSpots(true)}
+                                    >
+                                        {normalizeSpotName(selectedSpot)}
+                                    </button>
+                                }
+                                {selectedMode === 'circuit' &&
+                                    <form className="max-w-sm">
+                                        <select
+                                            id="circuit_type"
+                                            className="bg-gray-50 border border-gray-300
+                                                text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                                                focus:border-blue-500 block w-full p-2.5"
+                                            onChange={handleCircuitSelection}
+                                        >
+                                            <option className="font-bold" value="ct_circuit">Ct</option>
+                                            <option className="font-bold" value="terrorist_circuit">Terrorist</option>
+                                        </select>
+                                    </form>
+                                }
+
                             </div>
 
                             <div className="p-4 flex flex-row justify-between items-center">
@@ -197,37 +198,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                     </>
                     }
 
-                    {gamePathType === 'circuit' &&
-                    <div className="flex justify-center p-3">
-                        <div className="grid grid-cols-2 gap-8 bg-transparent">
-                            {circuits.map((circuit, index) => (
-                                <div
-                                    key={`circuit${index}`}
-                                    className="flex justify-center items-center flex-col"
-                                >
-                                    <p className="text-white">
-                                        {normalizeCircuitName(circuit)}
-                                    </p>
-                                    <img
-                                        src={`/web/images/map_circuits/${selectedMap}/${circuit}.png`}
-                                        className={`max-h-[150px] object-contain rounded-lg select-none cursor-pointer 
-                                            ${selectedCircuit === circuit ? "p-0.5 bg-white" : ""}`}
-                                        onClick={() => setSelectedCircuit(circuit)}
-                                    />
-                                    <button
-                                        className="my-2 px-3 text-lg text-gray-700 focus:outline-none
-                                            bg-gray-300 rounded-lg hover:bg-gray-400 w-full"
-                                        onClick={() => setShowImageModal(`/web/images/map_circuits/${selectedMap}/${circuit}.png`)}
-                                    >
-                                        Watch
-                                    </button>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    }
-
-                    {gamePathType === 'spot' &&
+                    {showSpots &&
                     <div className="flex justify-center p-3">
                         <div className="grid grid-cols-2 gap-8 bg-transparent max-h-[350px] overflow-y-auto">
                             {spots.map((spot, index) => (
@@ -257,13 +228,13 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                     </div>
                     }
 
-                    {gamePathType &&
+                    {showSpots &&
                     <div className="flex items-center justify-end p-4 md:p-5 border-t">
                         <button
                             type="button"
                             className="py-2.5 px-5 ms-3 text-sm text-gray-600 focus:outline-none
                                     bg-green-400 rounded-lg  hover:bg-green-300 min-w-24"
-                            onClick={() => handleGamePathType(false)}
+                            onClick={() => setShowSpots(false)}
                         >
                             Select
                         </button>
