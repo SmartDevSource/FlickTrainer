@@ -600,9 +600,7 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
     return (
         <canvas
             ref={canvasRef}
-            className='h-72 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))]
-             from-slate-500 via-slate-400 to-slate-300
-                m-16 cursor-crosshair'
+            className='bg-slate-900 m-16 cursor-crosshair'
             onClick={() => toggleFullScreen()}
         />
     )

@@ -200,4 +200,20 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/dust2/terrorist_circuit/tspawn_to_mid_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    dust2_tmid_to_ctmid: {
+        path: `/gfx/maps/dust2/terrorist_circuit/tmid_to_ctmid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_tmid_to_ctmid_layer: {
+        path: `/gfx/maps/dust2/terrorist_circuit/tmid_to_ctmid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_short_to_lower: {
+        path: `/gfx/maps/dust2/terrorist_circuit/short_to_lower.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_short_to_lower_layer: {
+        path: `/gfx/maps/dust2/terrorist_circuit/short_to_lower_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
