@@ -239,7 +239,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                                         {normalizeSpotName(spot.name ?? '')}
                                     </p>
                                     <img
-                                        src={`/gfx/maps/${selectedMap}/${spot.name}.png`}
+                                        src={`/gfx/maps/${selectedMap}/${spot.circuit}/${spot.name}.png`}
                                         className={`max-h-[150px] object-contain rounded-lg select-none cursor-pointer 
                                             ${selectedSpot === spot.name ? "p-0.5 bg-white" : ""}`}
                                         onClick={() => setSelectedSpot(spot.name ?? '')}
@@ -247,7 +247,7 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
                                     <button
                                         className="my-2 px-3 text-lg text-gray-700 focus:outline-none
                                             bg-gray-300 rounded-lg hover:bg-gray-400 w-full"
-                                        onClick={() => setShowImageModal(`/gfx/maps/${selectedMap}/${spot.name}.png`)}
+                                        onClick={() => setShowImageModal(`/gfx/maps/${selectedMap}/${spot.circuit}/${spot.name}.png`)}
                                     >
                                         Watch
                                     </button>

@@ -15,7 +15,7 @@ export const getMapCircuits = (map_name: string) => {
     for (const key in mapsData[map_name]){
         const circuit_type = mapsData[map_name][key].circuit
         if (circuit_type === 'ct_circuit' || circuit_type === 'terrorist_circuit')
-            circuit_data[circuit_type].push({...mapsData[map_name][key], name: key})
+            circuit_data[circuit_type].push({...mapsData[map_name][key], name: key, circuit: circuit_type})
     }
     return circuit_data
 }
@@ -122,231 +122,6 @@ export const mapsData: MapsData = {
             },
             circuit: 'ct_circuit'
         },
-        ctspawn_to_short: {
-            targets: [
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'left',
-                    from: {x: 805, y: 555},
-                    to: {x: 832, y: 555},
-                    idle: false,
-                    distance: 6.09,
-                    speed: 100
-                },
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'left',
-                    from: {x: 872, y: 555},
-                    to: {x: 880, y: 555},
-                    idle: false,
-                    distance: 11.59,
-                    speed: 30
-                },
-                {
-                    character: 'terrorist_standup',
-                    come_from: 'left',
-                    from: {x: 890, y: 550},
-                    to: {x: 895, y: 550},
-                    idle: false,
-                    distance: 12.79,
-                    speed: 15
-                },
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'right',
-                    from: {x: 960, y: 550},
-                    to: {x: 947, y: 550},
-                    idle: false,
-                    distance: 8.29,
-                    speed: 60
-                },
-                {
-                    character: 'terrorist_standup',
-                    come_from: 'right',
-                    from: {x: 975, y: 552},
-                    to: {x: 955, y: 552},
-                    idle: false,
-                    distance: 13.39,
-                    speed: 60
-                },
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'right',
-                    from: {x: 1040, y: 555},
-                    to: {x: 1020 , y: 555},
-                    idle: false,
-                    distance: 6.09,
-                    speed: 60
-                },
-                {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'left',
-                    from: {x: 805, y: 555},
-                    to: {x: 832, y: 555},
-                    idle: false,
-                    distance: 6.09,
-                    speed: 100
-                },
-                {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'left',
-                    from: {x: 872, y: 555},
-                    to: {x: 880, y: 555},
-                    idle: false,
-                    distance: 11.59,
-                    speed: 30
-                },
-                {
-                    character: 'terrorist_crouch',
-                    come_from: 'left',
-                    from: {x: 890, y: 550},
-                    to: {x: 895, y: 550},
-                    idle: false,
-                    distance: 12.79,
-                    speed: 15
-                },
-                {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'right',
-                    from: {x: 960, y: 550},
-                    to: {x: 947, y: 550},
-                    idle: false,
-                    distance: 8.29,
-                    speed: 60
-                },
-                {
-                    character: 'terrorist_crouch',
-                    come_from: 'right',
-                    from: {x: 975, y: 552},
-                    to: {x: 955, y: 552},
-                    idle: false,
-                    distance: 13.39,
-                    speed: 60
-                },
-                {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'right',
-                    from: {x: 1040, y: 555},
-                    to: {x: 1020 , y: 555},
-                    idle: false,
-                    distance: 6.09,
-                    speed: 60
-                },
-            ] as Target[],
-            initial_offset: {
-                x: -420,
-                y: -150
-            },
-            circuit: 'ct_circuit'
-        },
-        ctspawn_short_to_a: {
-            targets: [
-                {
-                    character: "terrorist_standup",
-                    come_from: "down",
-                    from: {x: 924, y: 515},
-                    to: {x: 924, y: 500},
-                    idle: false,
-                    distance: 8.999999999999984,
-                    speed: 83
-                },
-                {
-                    character: "terrorist_crouch",
-                    come_from: "right",
-                    from: {x: 507, y: 555},
-                    to: {x: 487, y: 555},
-                    idle: false,
-                    distance: 7.699999999999989,
-                    speed: 65
-                },
-                {
-                    character: "terrorist_standup",
-                    come_from: "right",
-                    from: {x: 501, y: 549},
-                    to: {x: 485, y: 549},
-                    idle: false,
-                    distance: 7.29999999999999,
-                    speed: 103
-                },
-                {
-                    character: "terrorist_crouch_darken",
-                    come_from: "right",
-                    from: {x: 498, y: 543},
-                    to: {x: 471, y: 543},
-                    idle: false,
-                    distance: 4.799999999999999,
-                    speed: 104
-                },
-                {
-                    character: "terrorist_standup_darken",
-                    come_from: "right",
-                    from: {x: 501, y: 543},
-                    to: {x: 473, y: 543},
-                    idle: false,
-                    distance: 4.799999999999999,
-                    speed: 156
-                },
-                {
-                    character: "terrorist_standup",
-                    come_from: "right",
-                    from: {x: 1052, y: 547},
-                    to: {x: 1030, y: 547},
-                    idle: false,
-                    distance: 10.29999999999998,
-                    speed: 73
-                },
-                {
-                    character: "terrorist_crouch",
-                    come_from: "right",
-                    from: {x: 1052, y: 547},
-                    to: {x: 1040, y: 547},
-                    idle: false,
-                    distance: 10.29999999999998,
-                    speed: 49
-                },
-                {
-                    character: "terrorist_standup",
-                    come_from: "right",
-                    from: {x: 1052, y: 547},
-                    to: {x: 1043, y: 547},
-                    idle: false,
-                    distance: 10.29999999999998,
-                    speed: 73
-                },
-                {
-                    character: "terrorist_crouch",
-                    come_from: "right",
-                    from: {x: 1042, y: 545},
-                    to: {x: 1031, y: 545},
-                    idle: false,
-                    distance: 7.29999999999999,
-                    speed: 69
-                },
-                {
-                    character: "terrorist_standup",
-                    come_from: "right",
-                    from: {x: 1047, y: 545},
-                    to: {x: 1036, y: 545},
-                    idle: false,
-                    distance: 7.29999999999999,
-                    speed: 103
-                },
-                {
-                    character: "terrorist_standup",
-                    come_from: "right",
-                    from: {x: 1064, y: 480},
-                    to: {x: 1019, y: 480},
-                    idle: false,
-                    distance: 1.3999999999999995,
-                    speed: 280
-                },
-            ] as Target[],
-            initial_offset: {
-                x: -420,
-                y: -150
-            },
-            circuit: 'ct_circuit'
-        },
         connector_to_mid: {
             targets: [
                 {
@@ -420,6 +195,393 @@ export const mapsData: MapsData = {
                     idle: false,
                     distance: 3.5,
                     speed: 130
+                },
+            ] as Target[],
+            initial_offset: {
+                x: -420,
+                y: -150
+            },
+            circuit: 'ct_circuit'
+        },
+        ctmid_to_tmid: {
+            targets: [
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'left',
+                    from: {x: 675, y: 540},
+                    to: {x: 693, y: 540},
+                    idle: false,
+                    distance: 7.5,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'left',
+                    from: {x: 685, y: 540},
+                    to: {x: 708, y: 540},
+                    idle: false,
+                    distance: 7.5,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'left',
+                    from: {x: 685, y: 540},
+                    to: {x: 700, y: 540},
+                    idle: false,
+                    distance: 7.5,
+                    speed: 40
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 664, y: 536},
+                    to: {x: 684, y: 536},
+                    idle: false,
+                    distance: 5.2,
+                    speed: 110
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 664, y: 536},
+                    to: {x: 684, y: 536},
+                    idle: false,
+                    distance: 5.2,
+                    speed: 110
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 663, y: 536},
+                    to: {x: 700, y: 536},
+                    idle: false,
+                    distance: 5.2,
+                    speed: 110
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 663, y: 536},
+                    to: {x: 715, y: 536},
+                    idle: false,
+                    distance: 5.2,
+                    speed: 115
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 663, y: 536},
+                    to: {x: 700, y: 536},
+                    idle: false,
+                    distance: 5.2,
+                    speed: 90
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'right',
+                    from: {x: 915, y: 539},
+                    to: {x: 897, y: 539},
+                    idle: false,
+                    distance: 7.5,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'right',
+                    from: {x: 915, y: 539},
+                    to: {x: 898, y: 539},
+                    idle: false,
+                    distance: 7.5,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'right',
+                    from: {x: 915, y: 539},
+                    to: {x: 877, y: 539},
+                    idle: false,
+                    distance: 7.5,
+                    speed: 110
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'right',
+                    from: {x: 915, y: 539},
+                    to: {x: 900, y: 539},
+                    idle: false,
+                    distance: 7.5,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'right',
+                    from: {x: 900, y: 539},
+                    to: {x: 878, y: 539},
+                    idle: false,
+                    distance: 8.9,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'right',
+                    from: {x: 900, y: 539},
+                    to: {x: 888, y: 539},
+                    idle: false,
+                    distance: 8.9,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'right',
+                    from: {x: 910, y: 539},
+                    to: {x: 890, y: 539},
+                    idle: false,
+                    distance: 8.9,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'right',
+                    from: {x: 910, y: 539},
+                    to: {x: 897, y: 539},
+                    idle: false,
+                    distance: 8.9,
+                    speed: 60
+                },
+            ] as Target[],
+            initial_offset: {
+                x: -420,
+                y: -150
+            },
+            circuit: 'ct_circuit'
+        },
+        mid_to_ladder: {
+            targets: [
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'right',
+                    from: {x: 1250, y: 547},
+                    to: {x: 1230, y: 547},
+                    idle: false,
+                    distance: 5.81,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'right',
+                    from: {x: 1250, y: 547},
+                    to: {x: 1230, y: 547},
+                    idle: false,
+                    distance: 5.81,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'right',
+                    from: {x: 1250, y: 547},
+                    to: {x: 1210, y: 547},
+                    idle: false,
+                    distance: 5.81,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'right',
+                    from: {x: 1250, y: 547},
+                    to: {x: 1210, y: 547},
+                    idle: false,
+                    distance: 5.81,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'right',
+                    from: {x: 1250, y: 547},
+                    to: {x: 1215, y: 547},
+                    idle: false,
+                    distance: 4.49,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch',
+                    come_from: 'right',
+                    from: {x: 1250, y: 547},
+                    to: {x: 1215, y: 547},
+                    idle: false,
+                    distance: 4.49,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 878, y: 550},
+                    to: {x: 895, y: 550},
+                    idle: false,
+                    distance: 6.38,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 878, y: 550},
+                    to: {x: 895, y: 550},
+                    idle: false,
+                    distance: 6.38,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 870, y: 550},
+                    to: {x: 892, y: 550},
+                    idle: false,
+                    distance: 6.29,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 870, y: 550},
+                    to: {x: 892, y: 550},
+                    idle: false,
+                    distance: 6.29,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 885, y: 550},
+                    to: {x: 910, y: 550},
+                    idle: false,
+                    distance: 6.29,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 885, y: 550},
+                    to: {x: 910, y: 550},
+                    idle: false,
+                    distance: 6.29,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'right',
+                    from: {x: 950, y: 550},
+                    to: {x: 925, y: 550},
+                    idle: false,
+                    distance: 6.29,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'right',
+                    from: {x: 950, y: 550},
+                    to: {x: 925, y: 550},
+                    idle: false,
+                    distance: 6.29,
+                    speed: 80
+                },
+            ] as Target[],
+            initial_offset: {
+                x: -420,
+                y: -150
+            },
+            circuit: 'ct_circuit'
+        },
+        under_ladder_to_ramp: {
+            targets: [
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'right',
+                    from: {x: 1065, y: 526},
+                    to: {x: 1030, y: 526},
+                    idle: false,
+                    distance: 5.6,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'right',
+                    from: {x: 1065, y: 526},
+                    to: {x: 1030, y: 526},
+                    idle: false,
+                    distance: 5.6,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'right',
+                    from: {x: 1065, y: 526},
+                    to: {x: 1043, y: 526},
+                    idle: false,
+                    distance: 5.6,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'right',
+                    from: {x: 1065, y: 526},
+                    to: {x: 1043, y: 526},
+                    idle: false,
+                    distance: 5.6,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 790, y: 530},
+                    to: {x: 815, y: 530},
+                    idle: false,
+                    distance: 8,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 790, y: 530},
+                    to: {x: 815, y: 530},
+                    idle: false,
+                    distance: 8,
+                    speed: 80
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 760, y: 519},
+                    to: {x: 800, y: 519},
+                    idle: false,
+                    distance: 4.03,
+                    speed: 180
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 760, y: 519},
+                    to: {x: 800, y: 519},
+                    idle: false,
+                    distance: 4.03,
+                    speed: 120
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 700, y: 508},
+                    to: {x: 779, y: 508},
+                    idle: false,
+                    distance: 2.11,
+                    speed: 240
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 700, y: 508},
+                    to: {x: 779, y: 508},
+                    idle: false,
+                    distance: 2.11,
+                    speed: 180
                 },
             ] as Target[],
             initial_offset: {
@@ -995,150 +1157,114 @@ export const mapsData: MapsData = {
             },
             circuit: 'ct_circuit'
         },
-        ctmid_to_tmid: {
+        ctspawn_to_short: {
             targets: [
                 {
-                    character: 'terrorist_crouch',
+                    character: 'terrorist_standup_darken',
                     come_from: 'left',
-                    from: {x: 675, y: 540},
-                    to: {x: 693, y: 540},
+                    from: {x: 805, y: 555},
+                    to: {x: 832, y: 555},
                     idle: false,
-                    distance: 7.5,
-                    speed: 60
+                    distance: 6.09,
+                    speed: 100
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'left',
+                    from: {x: 872, y: 555},
+                    to: {x: 880, y: 555},
+                    idle: false,
+                    distance: 11.59,
+                    speed: 30
                 },
                 {
                     character: 'terrorist_standup',
                     come_from: 'left',
-                    from: {x: 685, y: 540},
-                    to: {x: 708, y: 540},
+                    from: {x: 890, y: 550},
+                    to: {x: 895, y: 550},
                     idle: false,
-                    distance: 7.5,
-                    speed: 80
-                },
-                {
-                    character: 'terrorist_crouch',
-                    come_from: 'left',
-                    from: {x: 685, y: 540},
-                    to: {x: 700, y: 540},
-                    idle: false,
-                    distance: 7.5,
-                    speed: 40
-                },
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'left',
-                    from: {x: 664, y: 536},
-                    to: {x: 684, y: 536},
-                    idle: false,
-                    distance: 5.2,
-                    speed: 110
-                },
-                {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'left',
-                    from: {x: 664, y: 536},
-                    to: {x: 684, y: 536},
-                    idle: false,
-                    distance: 5.2,
-                    speed: 110
-                },
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'left',
-                    from: {x: 663, y: 536},
-                    to: {x: 700, y: 536},
-                    idle: false,
-                    distance: 5.2,
-                    speed: 110
-                },
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'left',
-                    from: {x: 663, y: 536},
-                    to: {x: 715, y: 536},
-                    idle: false,
-                    distance: 5.2,
-                    speed: 115
-                },
-                {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'left',
-                    from: {x: 663, y: 536},
-                    to: {x: 700, y: 536},
-                    idle: false,
-                    distance: 5.2,
-                    speed: 90
+                    distance: 12.79,
+                    speed: 15
                 },
                 {
                     character: 'terrorist_standup_darken',
                     come_from: 'right',
-                    from: {x: 915, y: 539},
-                    to: {x: 897, y: 539},
+                    from: {x: 960, y: 550},
+                    to: {x: 947, y: 550},
                     idle: false,
-                    distance: 7.5,
+                    distance: 8.29,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_standup',
+                    come_from: 'right',
+                    from: {x: 975, y: 552},
+                    to: {x: 955, y: 552},
+                    idle: false,
+                    distance: 13.39,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_standup_darken',
+                    come_from: 'right',
+                    from: {x: 1040, y: 555},
+                    to: {x: 1020 , y: 555},
+                    idle: false,
+                    distance: 6.09,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'left',
+                    from: {x: 805, y: 555},
+                    to: {x: 832, y: 555},
+                    idle: false,
+                    distance: 6.09,
                     speed: 100
                 },
                 {
                     character: 'terrorist_crouch_darken',
-                    come_from: 'right',
-                    from: {x: 915, y: 539},
-                    to: {x: 898, y: 539},
+                    come_from: 'left',
+                    from: {x: 872, y: 555},
+                    to: {x: 880, y: 555},
                     idle: false,
-                    distance: 7.5,
-                    speed: 60
+                    distance: 11.59,
+                    speed: 30
                 },
                 {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'right',
-                    from: {x: 915, y: 539},
-                    to: {x: 877, y: 539},
+                    character: 'terrorist_crouch',
+                    come_from: 'left',
+                    from: {x: 890, y: 550},
+                    to: {x: 895, y: 550},
                     idle: false,
-                    distance: 7.5,
-                    speed: 110
+                    distance: 12.79,
+                    speed: 15
                 },
                 {
                     character: 'terrorist_crouch_darken',
                     come_from: 'right',
-                    from: {x: 915, y: 539},
-                    to: {x: 900, y: 539},
+                    from: {x: 960, y: 550},
+                    to: {x: 947, y: 550},
                     idle: false,
-                    distance: 7.5,
-                    speed: 60
-                },
-                {
-                    character: 'terrorist_standup',
-                    come_from: 'right',
-                    from: {x: 900, y: 539},
-                    to: {x: 878, y: 539},
-                    idle: false,
-                    distance: 8.9,
-                    speed: 80
-                },
-                {
-                    character: 'terrorist_standup',
-                    come_from: 'right',
-                    from: {x: 900, y: 539},
-                    to: {x: 888, y: 539},
-                    idle: false,
-                    distance: 8.9,
-                    speed: 80
-                },
-                {
-                    character: 'terrorist_crouch',
-                    come_from: 'right',
-                    from: {x: 910, y: 539},
-                    to: {x: 890, y: 539},
-                    idle: false,
-                    distance: 8.9,
+                    distance: 8.29,
                     speed: 60
                 },
                 {
                     character: 'terrorist_crouch',
                     come_from: 'right',
-                    from: {x: 910, y: 539},
-                    to: {x: 897, y: 539},
+                    from: {x: 975, y: 552},
+                    to: {x: 955, y: 552},
                     idle: false,
-                    distance: 8.9,
+                    distance: 13.39,
+                    speed: 60
+                },
+                {
+                    character: 'terrorist_crouch_darken',
+                    come_from: 'right',
+                    from: {x: 1040, y: 555},
+                    to: {x: 1020 , y: 555},
+                    idle: false,
+                    distance: 6.09,
                     speed: 60
                 },
             ] as Target[],
@@ -1148,232 +1274,106 @@ export const mapsData: MapsData = {
             },
             circuit: 'ct_circuit'
         },
-        mid_to_ladder: {
+        ctspawn_short_to_a: {
             targets: [
                 {
-                    character: 'terrorist_standup',
-                    come_from: 'right',
-                    from: {x: 1250, y: 547},
-                    to: {x: 1230, y: 547},
+                    character: "terrorist_standup",
+                    come_from: "down",
+                    from: {x: 924, y: 515},
+                    to: {x: 924, y: 500},
                     idle: false,
-                    distance: 5.81,
-                    speed: 100
+                    distance: 8.999999999999984,
+                    speed: 83
                 },
                 {
-                    character: 'terrorist_crouch',
-                    come_from: 'right',
-                    from: {x: 1250, y: 547},
-                    to: {x: 1230, y: 547},
+                    character: "terrorist_crouch",
+                    come_from: "right",
+                    from: {x: 507, y: 555},
+                    to: {x: 487, y: 555},
                     idle: false,
-                    distance: 5.81,
-                    speed: 80
+                    distance: 7.699999999999989,
+                    speed: 65
                 },
                 {
-                    character: 'terrorist_standup',
-                    come_from: 'right',
-                    from: {x: 1250, y: 547},
-                    to: {x: 1210, y: 547},
+                    character: "terrorist_standup",
+                    come_from: "right",
+                    from: {x: 501, y: 549},
+                    to: {x: 485, y: 549},
                     idle: false,
-                    distance: 5.81,
-                    speed: 100
+                    distance: 7.29999999999999,
+                    speed: 103
                 },
                 {
-                    character: 'terrorist_crouch',
-                    come_from: 'right',
-                    from: {x: 1250, y: 547},
-                    to: {x: 1210, y: 547},
+                    character: "terrorist_crouch_darken",
+                    come_from: "right",
+                    from: {x: 498, y: 543},
+                    to: {x: 471, y: 543},
                     idle: false,
-                    distance: 5.81,
-                    speed: 80
+                    distance: 4.799999999999999,
+                    speed: 104
                 },
                 {
-                    character: 'terrorist_standup',
-                    come_from: 'right',
-                    from: {x: 1250, y: 547},
-                    to: {x: 1215, y: 547},
+                    character: "terrorist_standup_darken",
+                    come_from: "right",
+                    from: {x: 501, y: 543},
+                    to: {x: 473, y: 543},
                     idle: false,
-                    distance: 4.49,
-                    speed: 100
+                    distance: 4.799999999999999,
+                    speed: 156
                 },
                 {
-                    character: 'terrorist_crouch',
-                    come_from: 'right',
-                    from: {x: 1250, y: 547},
-                    to: {x: 1215, y: 547},
+                    character: "terrorist_standup",
+                    come_from: "right",
+                    from: {x: 1052, y: 547},
+                    to: {x: 1030, y: 547},
                     idle: false,
-                    distance: 4.49,
-                    speed: 80
+                    distance: 10.29999999999998,
+                    speed: 73
                 },
                 {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'left',
-                    from: {x: 878, y: 550},
-                    to: {x: 895, y: 550},
+                    character: "terrorist_crouch",
+                    come_from: "right",
+                    from: {x: 1052, y: 547},
+                    to: {x: 1040, y: 547},
                     idle: false,
-                    distance: 6.38,
-                    speed: 100
+                    distance: 10.29999999999998,
+                    speed: 49
                 },
                 {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'left',
-                    from: {x: 878, y: 550},
-                    to: {x: 895, y: 550},
+                    character: "terrorist_standup",
+                    come_from: "right",
+                    from: {x: 1052, y: 547},
+                    to: {x: 1043, y: 547},
                     idle: false,
-                    distance: 6.38,
-                    speed: 80
+                    distance: 10.29999999999998,
+                    speed: 73
                 },
                 {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'left',
-                    from: {x: 870, y: 550},
-                    to: {x: 892, y: 550},
+                    character: "terrorist_crouch",
+                    come_from: "right",
+                    from: {x: 1042, y: 545},
+                    to: {x: 1031, y: 545},
                     idle: false,
-                    distance: 6.29,
-                    speed: 100
+                    distance: 7.29999999999999,
+                    speed: 69
                 },
                 {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'left',
-                    from: {x: 870, y: 550},
-                    to: {x: 892, y: 550},
+                    character: "terrorist_standup",
+                    come_from: "right",
+                    from: {x: 1047, y: 545},
+                    to: {x: 1036, y: 545},
                     idle: false,
-                    distance: 6.29,
-                    speed: 80
+                    distance: 7.29999999999999,
+                    speed: 103
                 },
                 {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'left',
-                    from: {x: 885, y: 550},
-                    to: {x: 910, y: 550},
+                    character: "terrorist_standup",
+                    come_from: "right",
+                    from: {x: 1064, y: 480},
+                    to: {x: 1019, y: 480},
                     idle: false,
-                    distance: 6.29,
-                    speed: 100
-                },
-                {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'left',
-                    from: {x: 885, y: 550},
-                    to: {x: 910, y: 550},
-                    idle: false,
-                    distance: 6.29,
-                    speed: 80
-                },
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'right',
-                    from: {x: 950, y: 550},
-                    to: {x: 925, y: 550},
-                    idle: false,
-                    distance: 6.29,
-                    speed: 100
-                },
-                {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'right',
-                    from: {x: 950, y: 550},
-                    to: {x: 925, y: 550},
-                    idle: false,
-                    distance: 6.29,
-                    speed: 80
-                },
-            ] as Target[],
-            initial_offset: {
-                x: -420,
-                y: -150
-            },
-            circuit: 'ct_circuit'
-        },
-        under_ladder_to_ramp: {
-            targets: [
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'right',
-                    from: {x: 1065, y: 526},
-                    to: {x: 1030, y: 526},
-                    idle: false,
-                    distance: 5.6,
-                    speed: 100
-                },
-                {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'right',
-                    from: {x: 1065, y: 526},
-                    to: {x: 1030, y: 526},
-                    idle: false,
-                    distance: 5.6,
-                    speed: 80
-                },
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'right',
-                    from: {x: 1065, y: 526},
-                    to: {x: 1043, y: 526},
-                    idle: false,
-                    distance: 5.6,
-                    speed: 100
-                },
-                {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'right',
-                    from: {x: 1065, y: 526},
-                    to: {x: 1043, y: 526},
-                    idle: false,
-                    distance: 5.6,
-                    speed: 80
-                },
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'left',
-                    from: {x: 790, y: 530},
-                    to: {x: 815, y: 530},
-                    idle: false,
-                    distance: 8,
-                    speed: 100
-                },
-                {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'left',
-                    from: {x: 790, y: 530},
-                    to: {x: 815, y: 530},
-                    idle: false,
-                    distance: 8,
-                    speed: 80
-                },
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'left',
-                    from: {x: 760, y: 519},
-                    to: {x: 800, y: 519},
-                    idle: false,
-                    distance: 4.03,
-                    speed: 180
-                },
-                {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'left',
-                    from: {x: 760, y: 519},
-                    to: {x: 800, y: 519},
-                    idle: false,
-                    distance: 4.03,
-                    speed: 120
-                },
-                {
-                    character: 'terrorist_standup_darken',
-                    come_from: 'left',
-                    from: {x: 700, y: 508},
-                    to: {x: 779, y: 508},
-                    idle: false,
-                    distance: 2.11,
-                    speed: 240
-                },
-                {
-                    character: 'terrorist_crouch_darken',
-                    come_from: 'left',
-                    from: {x: 700, y: 508},
-                    to: {x: 779, y: 508},
-                    idle: false,
-                    distance: 2.11,
-                    speed: 180
+                    distance: 1.3999999999999995,
+                    speed: 280
                 },
             ] as Target[],
             initial_offset: {
