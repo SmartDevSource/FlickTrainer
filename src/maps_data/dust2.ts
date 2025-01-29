@@ -103,6 +103,25 @@ export const dust2: MapStruct = {
         },
         circuit: 'terrorist_circuit'
     },
+    top_mid_to_short: {
+        targets: [
+            {
+                character: "ct_crouch",
+                come_from: "left",
+                from: {x: 975, y: 584},
+                to: {x: 975, y: 572},
+                idle: false,
+                distance: 10.799999999999978,
+                speed: 46
+            },
+
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
     tmid_to_ctmid: {
         targets: [
             {
@@ -285,6 +304,44 @@ export const dust2: MapStruct = {
                 idle: false,
                 distance: 7.39999999999999,
                 speed: 101
+            },
+
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    short_to_a_1: {
+        targets: [
+            {
+                character: "ct_crouch",
+                come_from: "left",
+                from: {x: 975, y: 584},
+                to: {x: 975, y: 572},
+                idle: false,
+                distance: 10.799999999999978,
+                speed: 46
+            },
+
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    short_to_a_2: {
+        targets: [
+            {
+                character: "ct_crouch",
+                come_from: "left",
+                from: {x: 975, y: 584},
+                to: {x: 975, y: 572},
+                idle: false,
+                distance: 10.799999999999978,
+                speed: 46
             },
 
         ] as Target[],
