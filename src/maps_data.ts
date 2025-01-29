@@ -22,6 +22,7 @@ export const getMapCircuits = (map_name: string) => {
 
 export const mapsData: MapsData = {
     vertigo: {
+        ////////////////// CT CIRCUIT //////////////////
         ctspawn_to_mid: {
             targets: [
                 {
@@ -2101,5 +2102,6 @@ export const mapsData: MapsData = {
             },
             circuit: 'ct_circuit'
         },
+        ////////////////// TERRORIST CIRCUIT //////////////////
     }
 }

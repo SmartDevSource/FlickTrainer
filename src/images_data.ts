@@ -46,147 +46,147 @@ export const images: {[key: string]: ImageObject} = {
     // VERTIGO //
     // CT SIDE //
     vertigo_ctspawn_to_mid: {
-        path: `/gfx/maps/vertigo/ctspawn_to_mid.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/ctspawn_to_mid.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_ctspawn_to_mid_layer: {
-        path: `/gfx/maps/vertigo/ctspawn_to_mid_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/ctspawn_to_mid_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_ctspawn_to_short: {
-        path: `/gfx/maps/vertigo/ctspawn_to_short.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/ctspawn_to_short.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_ctspawn_to_short_layer: {
-        path: `/gfx/maps/vertigo/ctspawn_to_short_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/ctspawn_to_short_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_ctspawn_to_b: {
-        path: `/gfx/maps/vertigo/ctspawn_to_b.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/ctspawn_to_b.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_ctspawn_to_b_layer: {
-        path: `/gfx/maps/vertigo/ctspawn_to_b_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/ctspawn_to_b_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_connector_to_mid: {
-        path: `/gfx/maps/vertigo/connector_to_mid.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/connector_to_mid.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_connector_to_mid_layer: {
-        path: `/gfx/maps/vertigo/connector_to_mid_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/connector_to_mid_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_b_to_stairs_1: {
-        path: `/gfx/maps/vertigo/b_to_stairs_1.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/b_to_stairs_1.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_b_to_stairs_1_layer: {
-        path: `/gfx/maps/vertigo/b_to_stairs_1_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/b_to_stairs_1_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_b_to_stairs_2: {
-        path: `/gfx/maps/vertigo/b_to_stairs_2.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/b_to_stairs_2.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_b_to_stairs_2_layer: {
-        path: `/gfx/maps/vertigo/b_to_stairs_2_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/b_to_stairs_2_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_under_b_stairs_to_tspawn: {
-        path: `/gfx/maps/vertigo/under_b_stairs_to_tspawn.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/under_b_stairs_to_tspawn.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_under_b_stairs_to_tspawn_layer: {
-        path: `/gfx/maps/vertigo/under_b_stairs_to_tspawn_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/under_b_stairs_to_tspawn_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_ctmid_to_tmid: {
-        path: `/gfx/maps/vertigo/ctmid_to_tmid.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/ctmid_to_tmid.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_ctmid_to_tmid_layer: {
-        path: `/gfx/maps/vertigo/ctmid_to_tmid_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/ctmid_to_tmid_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_mid_to_ladder: {
-        path: `/gfx/maps/vertigo/mid_to_ladder.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/mid_to_ladder.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_mid_to_ladder_layer: {
-        path: `/gfx/maps/vertigo/mid_to_ladder_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/mid_to_ladder_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_under_ladder_to_ramp: {
-        path: `/gfx/maps/vertigo/under_ladder_to_ramp.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/under_ladder_to_ramp.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_under_ladder_to_ramp_layer: {
-        path: `/gfx/maps/vertigo/under_ladder_to_ramp_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/under_ladder_to_ramp_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_heaven_to_b_1: {
-        path: `/gfx/maps/vertigo/heaven_to_b_1.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/heaven_to_b_1.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_heaven_to_b_1_layer: {
-        path: `/gfx/maps/vertigo/heaven_to_b_1_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/heaven_to_b_1_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_heaven_to_b_2: {
-        path: `/gfx/maps/vertigo/heaven_to_b_2.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/heaven_to_b_2.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_heaven_to_b_2_layer: {
-        path: `/gfx/maps/vertigo/heaven_to_b_2_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/heaven_to_b_2_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_kenny_to_short: {
-        path: `/gfx/maps/vertigo/kenny_to_short.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/kenny_to_short.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_kenny_to_short_layer: {
-        path: `/gfx/maps/vertigo/kenny_to_short_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/kenny_to_short_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_a_site_to_ramp: {
-        path: `/gfx/maps/vertigo/a_site_to_ramp.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/a_site_to_ramp.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_a_site_to_ramp_layer: {
-        path: `/gfx/maps/vertigo/a_site_to_ramp_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/a_site_to_ramp_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_a_to_ramp: {
-        path: `/gfx/maps/vertigo/a_to_ramp.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/a_to_ramp.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_a_to_ramp_layer: {
-        path: `/gfx/maps/vertigo/a_to_ramp_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/a_to_ramp_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_under_to_a_ramp: {
-        path: `/gfx/maps/vertigo/under_to_a_ramp.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/under_to_a_ramp.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_under_to_a_ramp_layer: {
-        path: `/gfx/maps/vertigo/under_to_a_ramp_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/under_to_a_ramp_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_ctspawn_short_to_a: {
-        path: `/gfx/maps/vertigo/ctspawn_short_to_a.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/ctspawn_short_to_a.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_ctspawn_short_to_a_layer: {
-        path: `/gfx/maps/vertigo/ctspawn_short_to_a_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/ctspawn_short_to_a_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_sandbag_to_a_ramp: {
-        path: `/gfx/maps/vertigo/sandbag_to_a_ramp.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/sandbag_to_a_ramp.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     vertigo_sandbag_to_a_ramp_layer: {
-        path: `/gfx/maps/vertigo/sandbag_to_a_ramp_layer.png`,
+        path: `/gfx/maps/vertigo/ct_circuit/sandbag_to_a_ramp_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
 }
