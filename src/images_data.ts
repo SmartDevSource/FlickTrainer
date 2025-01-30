@@ -280,12 +280,12 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/dust2/terrorist_circuit/car_to_ct_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
-    dust2_a_to_short: {
-        path: `/gfx/maps/dust2/terrorist_circuit/a_to_short.png`,
+    dust2_tside_a_to_short: {
+        path: `/gfx/maps/dust2/terrorist_circuit/tside_a_to_short.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
-    dust2_a_to_short_layer: {
-        path: `/gfx/maps/dust2/terrorist_circuit/a_to_short_layer.png`,
+    dust2_tside_a_to_short_layer: {
+        path: `/gfx/maps/dust2/terrorist_circuit/tside_a_to_short_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     dust2_tunnel_to_lower: {
@@ -334,6 +334,14 @@ export const images: {[key: string]: ImageObject} = {
     },
     dust2_ctspawn_to_long_layer: {
         path: `/gfx/maps/dust2/ct_circuit/ctspawn_to_long_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_ctside_a_to_short: {
+        path: `/gfx/maps/dust2/terrorist_circuit/ctside_a_to_short.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_ctside_a_to_short_layer: {
+        path: `/gfx/maps/dust2/terrorist_circuit/ctside_a_to_short_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     dust2_ramp_a_to_long: {
