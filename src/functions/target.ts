@@ -12,7 +12,7 @@ export const getRandomTarget = (targets: Target[]) => {
         clearTimeout(shotTimeout)
     }
     console.log("Random index target :", rndIndex)
-    return targets[0]
+    return targets[rndIndex]
 }
 
 const getReactionTime = (difficulty: string) => {

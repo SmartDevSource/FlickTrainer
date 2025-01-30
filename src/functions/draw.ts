@@ -58,9 +58,15 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
             }
         }
     }
+
     const frame_width = weaponImg.img.width / weaponAnim.frames_count
-    weaponAnim.sway_offset.x += (Math.floor(mouseAccel.x) - weaponAnim.sway_offset.x) * .02
-    weaponAnim.sway_offset.y += (Math.floor(mouseAccel.y) - weaponAnim.sway_offset.y) * .02
+
+    const normalized_mouseaccel = {
+        x: Math.floor(mouseAccel.x) < -60 ? -60 : Math.floor(mouseAccel.x) > 60 ? 60 : Math.floor(mouseAccel.x),
+        y: Math.floor(mouseAccel.y) < -60 ? -60 : Math.floor(mouseAccel.y) > 60 ? 60 : Math.floor(mouseAccel.y)
+    }
+    weaponAnim.sway_offset.x += (normalized_mouseaccel.x - weaponAnim.sway_offset.x) * .02
+    weaponAnim.sway_offset.y += (normalized_mouseaccel.y - weaponAnim.sway_offset.y) * .02
 
     ctx.drawImage(
         weaponImg.img,
@@ -138,10 +144,12 @@ export const drawStatistics = (
     spot_states: SpotStates,
     game_mode: string
 ) => {
-    ctx.save()
     const kd = statistics.kd.toFixed(2)
     const killsDeathBoxLength = (statistics.kills.toString().length * 15) + (statistics.deaths.toString().length * 15)
     const kdBoxLength = kd.toString().length * 13
+
+    ctx.save()
+
     ctx.fillStyle = 'white'
     ctx.font = 'bold 20px Play-Bold'
     ctx.fillStyle = 'rgba(255, 255, 255, .3)'
@@ -183,6 +191,7 @@ export const drawStatistics = (
     ctx.lineWidth = 2
     ctx.strokeText(`Time : ${statistics.time_elapsed}`, 570, 50)
     ctx.fillText(`Time : ${statistics.time_elapsed}`, 570, 50)
+
     ctx.restore()
 }
 
@@ -233,7 +242,6 @@ export const drawCrosshair = (ctx: CanvasRenderingContext2D, crosshairSettings: 
             (crosshairSettings.thickness / crosshairScaleFactor)
         )
     }
-
     // LEFT //
     ctx.fillRect(
         ((fullscreenCanvasSize.w / 2) - ((crosshairSettings.length / crosshairScaleFactor))) - ((crosshairSettings.gap / crosshairScaleFactor) / 2),
@@ -262,7 +270,6 @@ export const drawCrosshair = (ctx: CanvasRenderingContext2D, crosshairSettings: 
         (crosshairSettings.thickness / crosshairScaleFactor),
         (crosshairSettings.length / crosshairScaleFactor)
     )
-
     // STROKED PART //
     if (crosshairSettings.outline > 0){
         ctx.strokeStyle = `rgba(0, 0, 0, ${crosshairSettings.opacity}`

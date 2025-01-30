@@ -19,7 +19,7 @@ export const dust2: MapStruct = {
                 from: {x: 1017, y: 479},
                 to: {x: 1017, y: 471},
                 idle: false,
-                distance: 13.499999999999968,
+                distance: 14,
                 speed: 56
             },
             {
