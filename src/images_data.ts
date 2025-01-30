@@ -328,4 +328,20 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/dust2/terrorist_circuit/window_to_ct_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    dust2_ctspawn_to_long: {
+        path: `/gfx/maps/dust2/ct_circuit/ctspawn_to_long.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_ctspawn_to_long_layer: {
+        path: `/gfx/maps/dust2/ct_circuit/ctspawn_to_long_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_ramp_a_to_long: {
+        path: `/gfx/maps/dust2/ct_circuit/ramp_a_to_long.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_ramp_a_to_long_layer: {
+        path: `/gfx/maps/dust2/ct_circuit/ramp_a_to_long_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
