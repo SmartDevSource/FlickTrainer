@@ -337,11 +337,11 @@ export const images: {[key: string]: ImageObject} = {
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     dust2_ctside_a_to_short: {
-        path: `/gfx/maps/dust2/terrorist_circuit/ctside_a_to_short.png`,
+        path: `/gfx/maps/dust2/ct_circuit/ctside_a_to_short.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     dust2_ctside_a_to_short_layer: {
-        path: `/gfx/maps/dust2/terrorist_circuit/ctside_a_to_short_layer.png`,
+        path: `/gfx/maps/dust2/ct_circuit/ctside_a_to_short_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     dust2_ramp_a_to_long: {

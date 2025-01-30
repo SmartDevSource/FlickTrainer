@@ -144,7 +144,7 @@ export const dust2: MapStruct = {
             x: -420,
             y: -150
         },
-        circuit: 'terrorist_circuit'
+        circuit: 'ct_circuit'
     },
     ramp_a_to_long: {
         targets: [

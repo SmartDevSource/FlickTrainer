@@ -13,7 +13,7 @@ import { TrainingPage } from "./components/TrainingPage"
 const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'dust2',
-  circuit: 'terrorist_circuit',
+  circuit: 'ct_circuit',
   spot: 'ctside_a_to_short',
   difficulty: 'easy',
   spot_objective: 25
