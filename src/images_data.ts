@@ -376,4 +376,12 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/dust2/ct_circuit/tspawn_to_mid_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    dust2_mid_to_top_mid: {
+        path: `/gfx/maps/dust2/ct_circuit/mid_to_top_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_mid_to_top_mid_layer: {
+        path: `/gfx/maps/dust2/ct_circuit/mid_to_top_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
