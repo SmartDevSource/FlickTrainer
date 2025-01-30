@@ -79,11 +79,74 @@ export const dust2: MapStruct = {
             {
                 character: "ct_standup",
                 come_from: "right",
-                from: {x: 1027, y: 510},
-                to: {x: 1019, y: 510},
+                from: {x: 999, y: 527},
+                to: {x: 980, y: 527},
                 idle: false,
-                distance: 15.499999999999961,
-                speed: 48
+                distance: 13.699999999999967,
+                speed: 55
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 997, y: 531},
+                to: {x: 983, y: 531},
+                idle: false,
+                distance: 10.699999999999978,
+                speed: 70
+            },
+            {
+                character: "ct_crouch_darken",
+                come_from: "left",
+                from: {x: 935, y: 570},
+                to: {x: 935, y: 563},
+                idle: false,
+                distance: 16.29999999999996,
+                speed: 31
+            },
+            {
+                character: "ct_crouch_darken",
+                come_from: "left",
+                from: {x: 906, y: 569},
+                to: {x: 906, y: 565},
+                idle: false,
+                distance: 16.29999999999996,
+                speed: 31
+            },
+            {
+                character: "ct_crouch_darken",
+                come_from: "left",
+                from: {x: 870, y: 570},
+                to: {x: 870, y: 564},
+                idle: false,
+                distance: 16.29999999999996,
+                speed: 31
+            },
+            {
+                character: "ct_crouch",
+                come_from: "left",
+                from: {x: 737, y: 532},
+                to: {x: 753, y: 532},
+                idle: false,
+                distance: 9.699999999999982,
+                speed: 77
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 737, y: 532},
+                to: {x: 770, y: 532},
+                idle: false,
+                distance: 9.699999999999982,
+                speed: 100
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 737, y: 532},
+                to: {x: 753, y: 532},
+                idle: false,
+                distance: 9.699999999999982,
+                speed: 100
             },
         ] as Target[],
         initial_offset: {
