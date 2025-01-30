@@ -747,7 +747,7 @@ export const dust2: MapStruct = {
         },
         circuit: 'terrorist_circuit'
     },
-    tspawn_to_long_1: {
+    tspawn_to_long: {
         targets: [
             {
                 character: "ct_standup",
@@ -838,6 +838,276 @@ export const dust2: MapStruct = {
                 idle: false,
                 distance: 11.099999999999977,
                 speed: 68
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    long_to_a: {
+        targets: [
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 853, y: 500},
+                to: {x: 865, y: 500},
+                idle: false,
+                distance: 15.99999999999996,
+                speed: 60
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 847, y: 550},
+                to: {x: 864, y: 550},
+                idle: false,
+                distance: 11.399999999999975,
+                speed: 66
+            },
+            {
+                character: "ct_crouch",
+                come_from: "left",
+                from: {x: 1158, y: 555},
+                to: {x: 1158, y: 543},
+                idle: false,
+                distance: 10.399999999999979,
+                speed: 48
+            },
+            {
+                character: "ct_crouch",
+                come_from: "right",
+                from: {x: 1143, y: 552},
+                to: {x: 1123, y: 552},
+                idle: false,
+                distance: 9.399999999999983,
+                speed: 53
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1240, y: 551},
+                to: {x: 1221, y: 551},
+                idle: false,
+                distance: 7.599999999999989,
+                speed: 99
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 842, y: 555},
+                to: {x: 878, y: 555},
+                idle: false,
+                distance: 10.09999999999998,
+                speed: 85
+            },
+            {
+                character: "ct_crouch_darken",
+                come_from: "left",
+                from: {x: 842, y: 555},
+                to: {x: 862, y: 555},
+                idle: false,
+                distance: 10.09999999999998,
+                speed: 60
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 842, y: 555},
+                to: {x: 862, y: 555},
+                idle: false,
+                distance: 10.09999999999998,
+                speed: 85
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    car_to_ct: {
+        targets: [
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 842, y: 632},
+                to: {x: 827, y: 632},
+                idle: false,
+                distance: 14.799999999999963,
+                speed: 51
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 776, y: 620},
+                to: {x: 756, y: 620},
+                idle: false,
+                distance: 17.59999999999998,
+                speed: 65
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 690, y: 620},
+                to: {x: 706, y: 620},
+                idle: false,
+                distance: 17.59999999999998,
+                speed: 65
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 931, y: 570},
+                to: {x: 895, y: 570},
+                idle: false,
+                distance: 8.299999999999986,
+                speed: 110
+            },
+            {
+                character: "ct_crouch",
+                come_from: "right",
+                from: {x: 931, y: 570},
+                to: {x: 913, y: 570},
+                idle: false,
+                distance: 8.299999999999986,
+                speed: 70
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 931, y: 570},
+                to: {x: 913, y: 570},
+                idle: false,
+                distance: 8.299999999999986,
+                speed: 90
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 999, y: 503},
+                to: {x: 999, y: 491},
+                idle: false,
+                distance: 9.499999999999982,
+                speed: 79
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 1245, y: 460},
+                to: {x: 1264, y: 460},
+                idle: false,
+                distance: 7.899999999999988,
+                speed: 95
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1168, y: 468},
+                to: {x: 1145, y: 468},
+                idle: false,
+                distance: 8.099999999999987,
+                speed: 93
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1003, y: 500},
+                to: {x: 966, y: 500},
+                idle: false,
+                distance: 11.599999999999975,
+                speed: 100
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 676, y: 518},
+                to: {x: 705, y: 518},
+                idle: false,
+                distance: 12.199999999999973,
+                speed: 90
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 676, y: 518},
+                to: {x: 692, y: 518},
+                idle: false,
+                distance: 12.199999999999973,
+                speed: 90
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    a_to_short: {
+        targets: [
+            {
+                character: "ct_crouch",
+                come_from: "left",
+                from: {x: 701, y: 526},
+                to: {x: 759, y: 526},
+                idle: false,
+                distance: 2.5000000000000004,
+                speed: 150
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 734, y: 549},
+                to: {x: 749, y: 549},
+                idle: false,
+                distance: 11,
+                speed: 75
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 734, y: 549},
+                to: {x: 765, y: 549},
+                idle: false,
+                distance: 11,
+                speed: 90
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1265, y: 542},
+                to: {x: 1220, y: 542},
+                idle: false,
+                distance: 5.1999999999999975,
+                speed: 144
+            },
+            {
+                character: "ct_crouch",
+                come_from: "right",
+                from: {x: 1265, y: 542},
+                to: {x: 1239, y: 542},
+                idle: false,
+                distance: 5.1999999999999975,
+                speed: 90
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1265, y: 542},
+                to: {x: 1239, y: 542},
+                idle: false,
+                distance: 5.1999999999999975,
+                speed: 144
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 635, y: 527},
+                to: {x: 665, y: 527},
+                idle: false,
+                distance: 3.9000000000000017,
+                speed: 192
             },
         ] as Target[],
         initial_offset: {
