@@ -352,4 +352,20 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/dust2/ct_circuit/ramp_a_to_long_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    dust2_long_to_sas: {
+        path: `/gfx/maps/dust2/ct_circuit/long_to_sas.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_long_to_sas_layer: {
+        path: `/gfx/maps/dust2/ct_circuit/long_to_sas_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_sas_to_tspawn: {
+        path: `/gfx/maps/dust2/ct_circuit/sas_to_tspawn.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_sas_to_tspawn_layer: {
+        path: `/gfx/maps/dust2/ct_circuit/sas_to_tspawn_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }

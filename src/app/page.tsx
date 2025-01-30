@@ -14,7 +14,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'dust2',
   circuit: 'ct_circuit',
-  spot: 'ctside_a_to_short',
+  spot: 'sas_to_tspawn',
   difficulty: 'easy',
   spot_objective: 25
 }
