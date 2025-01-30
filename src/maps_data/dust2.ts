@@ -407,8 +407,71 @@ export const dust2: MapStruct = {
         },
         circuit: 'ct_circuit'
     },
-    ////////////////// TERRORIST CIRCUIT //////////////////
     tspawn_to_mid: {
+        targets: [
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 1182, y: 564},
+                to: {x: 1080, y: 564},
+                idle: false,
+                distance: 2,
+                speed: 375
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 1182, y: 564},
+                to: {x: 1127, y: 564},
+                idle: false,
+                distance: 2,
+                speed: 375
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 1001, y: 597},
+                to: {x: 970, y: 597},
+                idle: false,
+                distance: 10.799999999999978,
+                speed: 90
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 1001, y: 597},
+                to: {x: 984, y: 597},
+                idle: false,
+                distance: 10.799999999999978,
+                speed: 69
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 814, y: 592},
+                to: {x: 830, y: 592},
+                idle: false,
+                distance: 8.799999999999985,
+                speed: 85
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 814, y: 592},
+                to: {x: 840, y: 592},
+                idle: false,
+                distance: 8.799999999999985,
+                speed: 100
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'ct_circuit'
+    },
+    ////////////////// TERRORIST CIRCUIT //////////////////
+    top_mid_to_mid: {
         targets: [
             {
                 character: "ct_standup",

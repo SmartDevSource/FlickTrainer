@@ -192,12 +192,12 @@ export const images: {[key: string]: ImageObject} = {
     // DUST 2 //
     // CT SIDE //
     // TERRORIST SIDE //
-    dust2_tspawn_to_mid: {
-        path: `/gfx/maps/dust2/terrorist_circuit/tspawn_to_mid.png`,
+    dust2_top_mid_to_mid: {
+        path: `/gfx/maps/dust2/terrorist_circuit/top_mid_to_mid.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
-    dust2_tspawn_to_mid_layer: {
-        path: `/gfx/maps/dust2/terrorist_circuit/tspawn_to_mid_layer.png`,
+    dust2_top_mid_to_mid_layer: {
+        path: `/gfx/maps/dust2/terrorist_circuit/top_mid_to_mid_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     dust2_top_mid_to_short: {
@@ -366,6 +366,14 @@ export const images: {[key: string]: ImageObject} = {
     },
     dust2_sas_to_tspawn_layer: {
         path: `/gfx/maps/dust2/ct_circuit/sas_to_tspawn_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_tspawn_to_mid: {
+        path: `/gfx/maps/dust2/ct_circuit/tspawn_to_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_tspawn_to_mid_layer: {
+        path: `/gfx/maps/dust2/ct_circuit/tspawn_to_mid_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
 }
