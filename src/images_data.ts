@@ -288,4 +288,44 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/dust2/terrorist_circuit/a_to_short_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    dust2_tunnel_to_lower: {
+        path: `/gfx/maps/dust2/terrorist_circuit/tunnel_to_lower.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_tunnel_to_lower_layer: {
+        path: `/gfx/maps/dust2/terrorist_circuit/tunnel_to_lower_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_lower_to_short: {
+        path: `/gfx/maps/dust2/terrorist_circuit/lower_to_short.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_lower_to_short_layer: {
+        path: `/gfx/maps/dust2/terrorist_circuit/lower_to_short_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_tunnel_to_b: {
+        path: `/gfx/maps/dust2/terrorist_circuit/tunnel_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_tunnel_to_b_layer: {
+        path: `/gfx/maps/dust2/terrorist_circuit/tunnel_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_b_site_to_doors: {
+        path: `/gfx/maps/dust2/terrorist_circuit/b_site_to_doors.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_b_site_to_doors_layer: {
+        path: `/gfx/maps/dust2/terrorist_circuit/b_site_to_doors_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_window_to_ct: {
+        path: `/gfx/maps/dust2/terrorist_circuit/window_to_ct.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_window_to_ct_layer: {
+        path: `/gfx/maps/dust2/terrorist_circuit/window_to_ct_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }

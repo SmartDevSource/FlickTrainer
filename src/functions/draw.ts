@@ -4,7 +4,7 @@ import { crosshairData } from "./crosshair_changer"
 
 export const minimizedCanvasSize = {w: 320, h: 240}
 export const fullscreenCanvasSize = {w: 1240, h: 768}
-export const screenBoundaries = {left: 150, top: 150, right: -825, bottom: -445}
+export const screenBoundaries = {left: 250, top: 250, right: -925, bottom: -545}
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const framesPerSecond: number = 100

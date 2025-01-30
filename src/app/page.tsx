@@ -14,7 +14,7 @@ const gameSettingsTest: GameSettings = {
   mode: "spot",
   map_name: "dust2",
   circuit: "terrorist_circuit",
-  spot: "a_to_short",
+  spot: "window_to_ct",
   difficulty: "easy",
   spot_objective: 25
 }
