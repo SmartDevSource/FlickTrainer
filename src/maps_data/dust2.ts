@@ -15,7 +15,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "terrorist_standup",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 1017, y: 479},
                 to: {x: 1017, y: 471},
                 idle: false,
@@ -177,7 +177,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_crouch_darken",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 906, y: 569},
                 to: {x: 906, y: 565},
                 idle: false,
@@ -186,7 +186,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_crouch_darken",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 870, y: 570},
                 to: {x: 870, y: 564},
                 idle: false,
@@ -474,7 +474,7 @@ export const dust2: MapStruct = {
         targets: [
             {
                 character: "terrorist_standup_darken",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 943, y: 532},
                 to: {x: 943, y: 524},
                 idle: false,
@@ -591,7 +591,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "terrorist_crouch",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 929, y: 549},
                 to: {x: 929, y: 534},
                 idle: false,
@@ -672,7 +672,7 @@ export const dust2: MapStruct = {
         targets: [
             {
                 character: "terrorist_standup",
-                come_from: "right",
+                come_from: "down",
                 from: {x: 970, y: 634},
                 to: {x: 936, y: 601},
                 idle: false,
@@ -825,7 +825,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "terrorist_standup_darken",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 701, y: 365},
                 to: {x: 701, y: 335},
                 idle: false,
@@ -969,7 +969,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "terrorist_standup_darken",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 530, y: 573},
                 to: {x: 530, y: 540},
                 idle: false,
@@ -987,7 +987,7 @@ export const dust2: MapStruct = {
         targets: [
             {
                 character: "terrorist_standup_darken",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 1072, y: 580},
                 to: {x: 1096, y: 567},
                 idle: false,
@@ -1204,7 +1204,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_crouch_darken",
-                come_from: "right",
+                come_from: "down",
                 from: {x: 980, y: 569},
                 to: {x: 970, y: 560},
                 idle: false,
@@ -1213,7 +1213,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_crouch_darken",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 960, y: 569},
                 to: {x: 970, y: 560},
                 idle: false,
@@ -1222,7 +1222,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_crouch_darken",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 929, y: 569},
                 to: {x: 929, y: 560},
                 idle: false,
@@ -1294,7 +1294,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_standup_darken",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 753, y: 642},
                 to: {x: 788, y: 608},
                 idle: false,
@@ -1349,7 +1349,7 @@ export const dust2: MapStruct = {
         targets: [
             {
                 character: "ct_crouch",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 975, y: 584},
                 to: {x: 975, y: 572},
                 idle: false,
@@ -1530,7 +1530,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_standup_darken",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 1239, y: 528},
                 to: {x: 1239, y: 499},
                 idle: false,
@@ -1548,7 +1548,7 @@ export const dust2: MapStruct = {
         targets: [
             {
                 character: "ct_standup_darken",
-                come_from: "right",
+                come_from: "down",
                 from: {x: 503, y: 711},
                 to: {x: 465, y: 673},
                 idle: false,
@@ -1557,7 +1557,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_crouch",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 887, y: 664},
                 to: {x: 887, y: 610},
                 idle: false,
@@ -1703,7 +1703,7 @@ export const dust2: MapStruct = {
         targets: [
             {
                 character: "ct_crouch",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 470, y: 617},
                 to: {x: 470, y: 569},
                 idle: false,
@@ -1712,7 +1712,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_standup_darken",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 1161, y: 711},
                 to: {x: 1182, y: 688},
                 idle: false,
@@ -1721,7 +1721,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_standup_darken",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 1041, y: 696},
                 to: {x: 1041, y: 671},
                 idle: false,
@@ -1748,7 +1748,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_crouch",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 1247, y: 621},
                 to: {x: 1247, y: 608},
                 idle: false,
@@ -2037,7 +2037,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_crouch",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 1158, y: 555},
                 to: {x: 1158, y: 543},
                 idle: false,
@@ -2154,7 +2154,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_standup",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 999, y: 503},
                 to: {x: 999, y: 491},
                 idle: false,
@@ -2307,7 +2307,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_standup",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 881, y: 542},
                 to: {x: 881, y: 513},
                 idle: false,
@@ -2343,7 +2343,7 @@ export const dust2: MapStruct = {
         targets: [
             {
                 character: "ct_standup",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 895, y: 483},
                 to: {x: 895, y: 476},
                 idle: false,
@@ -2352,7 +2352,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_standup",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 915, y: 483},
                 to: {x: 915, y: 476},
                 idle: false,
@@ -2361,7 +2361,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_standup",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 933, y: 483},
                 to: {x: 933, y: 476},
                 idle: false,
@@ -2442,7 +2442,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_standup",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 1017, y: 547},
                 to: {x: 1017, y: 535},
                 idle: false,
@@ -2460,7 +2460,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_standup_darken",
-                come_from: "left",
+                come_from: "down",
                 from: {x: 899, y: 554},
                 to: {x: 899, y: 548},
                 idle: false,
@@ -2514,7 +2514,7 @@ export const dust2: MapStruct = {
             },
             {
                 character: "ct_crouch",
-                come_from: "right",
+                come_from: "down",
                 from: {x: 433, y: 516},
                 to: {x: 411, y: 522},
                 idle: false,
