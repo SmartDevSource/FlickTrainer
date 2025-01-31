@@ -384,4 +384,60 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/dust2/ct_circuit/mid_to_top_mid_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    dust2_top_mid_to_taxi: {
+        path: `/gfx/maps/dust2/ct_circuit/top_mid_to_taxi.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_top_mid_to_taxi_layer: {
+        path: `/gfx/maps/dust2/ct_circuit/top_mid_to_taxi_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_short_to_top_mid: {
+        path: `/gfx/maps/dust2/ct_circuit/short_to_top_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_short_to_top_mid_layer: {
+        path: `/gfx/maps/dust2/ct_circuit/short_to_top_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_lower_to_tunnel: {
+        path: `/gfx/maps/dust2/ct_circuit/lower_to_tunnel.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_lower_to_tunnel_layer: {
+        path: `/gfx/maps/dust2/ct_circuit/lower_to_tunnel_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_mid_to_b: {
+        path: `/gfx/maps/dust2/ct_circuit/mid_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_mid_to_b_layer: {
+        path: `/gfx/maps/dust2/ct_circuit/mid_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_double_doors_to_b: {
+        path: `/gfx/maps/dust2/ct_circuit/double_doors_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_double_doors_to_b_layer: {
+        path: `/gfx/maps/dust2/ct_circuit/double_doors_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_window_to_b: {
+        path: `/gfx/maps/dust2/ct_circuit/window_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_window_to_b_layer: {
+        path: `/gfx/maps/dust2/ct_circuit/window_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_b_to_tunnel: {
+        path: `/gfx/maps/dust2/ct_circuit/b_to_tunnel.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    dust2_b_to_tunnel_layer: {
+        path: `/gfx/maps/dust2/ct_circuit/b_to_tunnel_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
