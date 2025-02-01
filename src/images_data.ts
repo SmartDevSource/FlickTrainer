@@ -465,6 +465,14 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/inferno/terrorist_circuit/top_mid_to_long_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    inferno_long_to_library: {
+        path: `/gfx/maps/inferno/terrorist_circuit/long_to_library.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_long_to_library_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/long_to_library_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     inferno_top_mid_to_short: {
         path: `/gfx/maps/inferno/terrorist_circuit/top_mid_to_short.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
@@ -503,6 +511,14 @@ export const images: {[key: string]: ImageObject} = {
     },
     inferno_balcony_to_pit_layer: {
         path: `/gfx/maps/inferno/terrorist_circuit/balcony_to_pit_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_pit_to_a: {
+        path: `/gfx/maps/inferno/terrorist_circuit/pit_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_pit_to_a_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/pit_to_a_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
 }

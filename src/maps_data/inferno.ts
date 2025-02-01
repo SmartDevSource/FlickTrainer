@@ -310,6 +310,78 @@ export const inferno: MapStruct = {
         },
         circuit: 'terrorist_circuit'
     },
+    long_to_library: {
+        targets: [
+            {
+                character: "ct_crouch_darken",
+                come_from: "right",
+                from: {x: 1113, y: 560},
+                to: {x: 1098, y: 560},
+                idle: false,
+                distance: 8.899999999999984,
+                speed: 64
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1113, y: 560},
+                to: {x: 1085, y: 560},
+                idle: false,
+                distance: 8.899999999999984,
+                speed: 94
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1113, y: 560},
+                to: {x: 1098, y: 560},
+                idle: false,
+                distance: 8.899999999999984,
+                speed: 84
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 981, y: 560},
+                to: {x: 1016, y: 560},
+                idle: false,
+                distance: 10.499999999999979,
+                speed: 90
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 981, y: 560},
+                to: {x: 999, y: 560},
+                idle: false,
+                distance: 10.499999999999979,
+                speed: 71
+            },
+            {
+                character: "ct_crouch_darken",
+                come_from: "left",
+                from: {x: 594, y: 529},
+                to: {x: 634, y: 529},
+                idle: false,
+                distance: 3.6000000000000014,
+                speed: 110
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 592, y: 529},
+                to: {x: 638, y: 529},
+                idle: false,
+                distance: 3.6000000000000014,
+                speed: 208
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
     top_mid_to_short: {
         targets: [
             {
@@ -743,6 +815,114 @@ export const inferno: MapStruct = {
                 idle: false,
                 distance: 7.999999999999988,
                 speed: 94
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    pit_to_a: {
+        targets: [
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1172, y: 539},
+                to: {x: 1148, y: 539},
+                idle: false,
+                distance: 11.899999999999974,
+                speed: 90
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1175, y: 536},
+                to: {x: 1161, y: 536},
+                idle: false,
+                distance: 11.899999999999974,
+                speed: 63
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 1014, y: 543},
+                to: {x: 1045, y: 543},
+                idle: false,
+                distance: 12.199999999999973,
+                speed: 90
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 1014, y: 543},
+                to: {x: 1032, y: 543},
+                idle: false,
+                distance: 12.199999999999973,
+                speed: 61
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 884, y: 530},
+                to: {x: 917, y: 530},
+                idle: false,
+                distance: 9.299999999999983,
+                speed: 100
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 876, y: 515},
+                to: {x: 906, y: 515},
+                idle: false,
+                distance: 7.19999999999999,
+                speed: 104
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 779, y: 500},
+                to: {x: 717, y: 500},
+                idle: false,
+                distance: 6,
+                speed: 140
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 779, y: 500},
+                to: {x: 735, y: 500},
+                idle: false,
+                distance: 6,
+                speed: 140
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 779, y: 500},
+                to: {x: 752, y: 500},
+                idle: false,
+                distance: 6,
+                speed: 121
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 526, y: 518},
+                to: {x: 580, y: 518},
+                idle: false,
+                distance: 4.6,
+                speed: 163
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 526, y: 518},
+                to: {x: 565, y: 518},
+                idle: false,
+                distance: 4.6,
+                speed: 163
             },
         ] as Target[],
         initial_offset: {
