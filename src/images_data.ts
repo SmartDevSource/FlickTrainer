@@ -473,12 +473,36 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/inferno/terrorist_circuit/top_mid_to_short_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    inferno_short_to_pit: {
+        path: `/gfx/maps/inferno/terrorist_circuit/short_to_pit.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_short_to_pit_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/short_to_pit_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     inferno_second_mid_bridge: {
         path: `/gfx/maps/inferno/terrorist_circuit/second_mid_bridge.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     inferno_second_mid_bridge_layer: {
         path: `/gfx/maps/inferno/terrorist_circuit/second_mid_bridge_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_app_to_boiler: {
+        path: `/gfx/maps/inferno/terrorist_circuit/app_to_boiler.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_app_to_boiler_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/app_to_boiler_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_balcony_to_pit: {
+        path: `/gfx/maps/inferno/terrorist_circuit/balcony_to_pit.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_balcony_to_pit_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/balcony_to_pit_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
 }

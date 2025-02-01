@@ -14,7 +14,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'inferno',
   circuit: 'terrorist_circuit',
-  spot: 'second_mid_bridge',
+  spot: 'short_to_pit',
   difficulty: 'easy',
   spot_objective: 25
 }
