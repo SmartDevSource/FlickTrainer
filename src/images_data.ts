@@ -440,4 +440,45 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/dust2/ct_circuit/b_to_tunnel_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    ////////////////////// INFERNO //////////////////////
+    inferno_tramp_to_mid: {
+        path: `/gfx/maps/inferno/terrorist_circuit/tramp_to_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_tramp_to_mid_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/tramp_to_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_mid_to_second_mid: {
+        path: `/gfx/maps/inferno/terrorist_circuit/mid_to_second_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_mid_to_second_mid_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/mid_to_second_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_top_mid_to_long: {
+        path: `/gfx/maps/inferno/terrorist_circuit/top_mid_to_long.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_top_mid_to_long_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/top_mid_to_long_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_top_mid_to_short: {
+        path: `/gfx/maps/inferno/terrorist_circuit/top_mid_to_short.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_top_mid_to_short_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/top_mid_to_short_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_second_mid_bridge: {
+        path: `/gfx/maps/inferno/terrorist_circuit/second_mid_bridge.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_second_mid_bridge_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/second_mid_bridge_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }

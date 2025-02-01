@@ -12,10 +12,10 @@ import { TrainingPage } from "./components/TrainingPage"
 
 const gameSettingsTest: GameSettings = {
   mode: 'spot',
-  map_name: 'dust2',
-  circuit: 'ct_circuit',
-  spot: 'mid_to_top_mid', // 
-  difficulty: 'medium',
+  map_name: 'inferno',
+  circuit: 'terrorist_circuit',
+  spot: 'tramp_to_mid', // mid_to_second_mid // top_mid_to_long // top_mid_to_short // second_mid_bridge
+  difficulty: 'easy',
   spot_objective: 25
 }
 
