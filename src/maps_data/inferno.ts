@@ -1267,13 +1267,130 @@ export const inferno: MapStruct = {
     pool_to_triple: {
         targets: [
             {
-                character: "ct_standup",
+                character: "ct_standup_darken",
                 come_from: "right",
-                from: {x: 1119, y: 539},
-                to: {x: 1053, y: 539},
+                from: {x: 1413, y: 447},
+                to: {x: 1295, y: 447},
                 idle: false,
-                distance: 4.200000000000001,
-                speed: 179
+                distance: 2.3000000000000003,
+                speed: 326
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1408, y: 517},
+                to: {x: 1365, y: 517},
+                idle: false,
+                distance: 5.999999999999995,
+                speed: 125
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 1238, y: 520},
+                to: {x: 1289, y: 520},
+                idle: false,
+                distance: 6.399999999999993,
+                speed: 130
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 1238, y: 520},
+                to: {x: 1267, y: 520},
+                idle: false,
+                distance: 6.399999999999993,
+                speed: 117
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1231, y: 520},
+                to: {x: 1195, y: 520},
+                idle: false,
+                distance: 6.299999999999994,
+                speed: 130
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1231, y: 520},
+                to: {x: 1208, y: 520},
+                idle: false,
+                distance: 6.299999999999994,
+                speed: 119
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 954, y: 523},
+                to: {x: 995, y: 523},
+                idle: false,
+                distance: 6.799999999999992,
+                speed: 130
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 954, y: 523},
+                to: {x: 984, y: 523},
+                idle: false,
+                distance: 6.799999999999992,
+                speed: 110
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 855, y: 521},
+                to: {x: 820, y: 521},
+                idle: false,
+                distance: 7.29999999999999,
+                speed: 110
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 855, y: 521},
+                to: {x: 838, y: 521},
+                idle: false,
+                distance: 7.29999999999999,
+                speed: 103
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 584, y: 505},
+                to: {x: 652, y: 505},
+                idle: false,
+                distance: 4.799999999999999,
+                speed: 190
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 584, y: 505},
+                to: {x: 615, y: 505},
+                idle: false,
+                distance: 4.799999999999999,
+                speed: 156
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 385, y: 495},
+                to: {x: 450, y: 495},
+                idle: false,
+                distance: 3.7,
+                speed: 200
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 385, y: 495},
+                to: {x: 424, y: 495},
+                idle: false,
+                distance: 3.7,
+                speed: 187
             },
         ] as Target[],
         initial_offset: {
