@@ -473,6 +473,14 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/inferno/terrorist_circuit/long_to_library_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    inferno_long_to_a: {
+        path: `/gfx/maps/inferno/terrorist_circuit/long_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_long_to_a_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/long_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     inferno_top_mid_to_short: {
         path: `/gfx/maps/inferno/terrorist_circuit/top_mid_to_short.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
@@ -519,6 +527,22 @@ export const images: {[key: string]: ImageObject} = {
     },
     inferno_pit_to_a_layer: {
         path: `/gfx/maps/inferno/terrorist_circuit/pit_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_banana_to_car: {
+        path: `/gfx/maps/inferno/terrorist_circuit/banana_to_car.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_banana_to_car_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/banana_to_car_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_top_banana_to_sandbag: {
+        path: `/gfx/maps/inferno/terrorist_circuit/top_banana_to_sandbag.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_top_banana_to_sandbag_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/top_banana_to_sandbag_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
 }

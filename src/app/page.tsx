@@ -14,7 +14,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'inferno',
   circuit: 'terrorist_circuit',
-  spot: 'long_to_library',
+  spot: 'top_banana_to_sandbag',
   difficulty: 'easy',
   spot_objective: 25
 }
