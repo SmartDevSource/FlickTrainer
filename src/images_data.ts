@@ -545,4 +545,36 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/inferno/terrorist_circuit/top_banana_to_sandbag_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    inferno_banana_to_b: {
+        path: `/gfx/maps/inferno/terrorist_circuit/banana_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_banana_to_b_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/banana_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_dark_to_ct: {
+        path: `/gfx/maps/inferno/terrorist_circuit/dark_to_ct.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_dark_to_ct_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/dark_to_ct_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_pool_to_triple: {
+        path: `/gfx/maps/inferno/terrorist_circuit/pool_to_triple.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_pool_to_triple_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/pool_to_triple_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_triple_to_ct: {
+        path: `/gfx/maps/inferno/terrorist_circuit/triple_to_ct.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_triple_to_ct_layer: {
+        path: `/gfx/maps/inferno/terrorist_circuit/triple_to_ct_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
