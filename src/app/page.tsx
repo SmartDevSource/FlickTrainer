@@ -13,8 +13,8 @@ import { TrainingPage } from "./components/TrainingPage"
 const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'inferno',
-  circuit: 'terrorist_circuit',
-  spot: 'pool_to_triple', // triple_to_ct // dark_to_ct
+  circuit: 'ct_circuit',
+  spot: 'mid_to_ramp', // 
   difficulty: 'easy',
   spot_objective: 25
 }

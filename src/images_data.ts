@@ -441,6 +441,7 @@ export const images: {[key: string]: ImageObject} = {
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     ////////////////////// INFERNO //////////////////////
+    /////// T SIDE ///////
     inferno_tramp_to_mid: {
         path: `/gfx/maps/inferno/terrorist_circuit/tramp_to_mid.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
@@ -575,6 +576,23 @@ export const images: {[key: string]: ImageObject} = {
     },
     inferno_triple_to_ct_layer: {
         path: `/gfx/maps/inferno/terrorist_circuit/triple_to_ct_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    /////// CT SIDE ///////
+    inferno_long_to_mid: {
+        path: `/gfx/maps/inferno/ct_circuit/long_to_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_long_to_mid_layer: {
+        path: `/gfx/maps/inferno/ct_circuit/long_to_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_mid_to_ramp: {
+        path: `/gfx/maps/inferno/ct_circuit/mid_to_ramp.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_mid_to_ramp_layer: {
+        path: `/gfx/maps/inferno/ct_circuit/mid_to_ramp_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
 }
