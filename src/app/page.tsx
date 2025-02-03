@@ -14,7 +14,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'inferno',
   circuit: 'ct_circuit',
-  spot: 'mid_to_ramp', // 
+  spot: 'car_to_banana',
   difficulty: 'easy',
   spot_objective: 25
 }

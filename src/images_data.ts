@@ -595,4 +595,68 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/inferno/ct_circuit/mid_to_ramp_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    inferno_top_mid_to_second_mid: {
+        path: `/gfx/maps/inferno/ct_circuit/top_mid_to_second_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_top_mid_to_second_mid_layer: {
+        path: `/gfx/maps/inferno/ct_circuit/top_mid_to_second_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_low_mid_to_banana: {
+        path: `/gfx/maps/inferno/ct_circuit/low_mid_to_banana.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_low_mid_to_banana_layer: {
+        path: `/gfx/maps/inferno/ct_circuit/low_mid_to_banana_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_pit_to_short: {
+        path: `/gfx/maps/inferno/ct_circuit/pit_to_short.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_pit_to_short_layer: {
+        path: `/gfx/maps/inferno/ct_circuit/pit_to_short_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_short_to_mid: {
+        path: `/gfx/maps/inferno/ct_circuit/short_to_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_short_to_mid_layer: {
+        path: `/gfx/maps/inferno/ct_circuit/short_to_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_app_to_second_mid: {
+        path: `/gfx/maps/inferno/ct_circuit/app_to_second_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_app_to_second_mid_layer: {
+        path: `/gfx/maps/inferno/ct_circuit/app_to_second_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_antiboiler_to_second_mid: {
+        path: `/gfx/maps/inferno/ct_circuit/antiboiler_to_second_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_antiboiler_to_second_mid_layer: {
+        path: `/gfx/maps/inferno/ct_circuit/antiboiler_to_second_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_ctspawn_to_b: {
+        path: `/gfx/maps/inferno/ct_circuit/ctspawn_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_ctspawn_to_b_layer: {
+        path: `/gfx/maps/inferno/ct_circuit/ctspawn_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_car_to_banana: {
+        path: `/gfx/maps/inferno/ct_circuit/car_to_banana.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    inferno_car_to_banana_layer: {
+        path: `/gfx/maps/inferno/ct_circuit/car_to_banana_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
