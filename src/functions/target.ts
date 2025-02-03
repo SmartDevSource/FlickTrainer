@@ -15,11 +15,11 @@ export const getRandomTarget = (targets: Target[]) => {
     }
 
     lastTargetIndex = rndIndex
+    console.log("Random index target :", rndIndex)
 
     if (shotTimeout){
         clearTimeout(shotTimeout)
     }
-    console.log("Random index target :", rndIndex)
     return targets[rndIndex]
 }
 

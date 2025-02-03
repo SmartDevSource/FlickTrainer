@@ -12,9 +12,9 @@ import { TrainingPage } from "./components/TrainingPage"
 
 const gameSettingsTest: GameSettings = {
   mode: 'spot',
-  map_name: 'inferno',
+  map_name: 'nuke',
   circuit: 'ct_circuit',
-  spot: 'car_to_banana',
+  spot: 'radio_to_trophee',
   difficulty: 'easy',
   spot_objective: 25
 }

@@ -659,4 +659,38 @@ export const images: {[key: string]: ImageObject} = {
     },
     /////// NUKE T SIDE ///////
     
+    /////// NUKE CT SIDE ///////
+    nuke_under_heaven_to_ramp: {
+        path: `/gfx/maps/nuke/ct_circuit/under_heaven_to_ramp.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_under_heaven_to_ramp_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/under_heaven_to_ramp_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_ramp_to_radio: {
+        path: `/gfx/maps/nuke/ct_circuit/ramp_to_radio.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_ramp_to_radio_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/ramp_to_radio_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_radio_to_trophee: {
+        path: `/gfx/maps/nuke/ct_circuit/radio_to_trophee.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_radio_to_trophee_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/radio_to_trophee_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    // nuke_garage_to_outside: {
+    //     path: `/gfx/maps/nuke/ct_circuit/garage_to_outside.png`,
+    //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    // },
+    // nuke_garage_to_outside_layer: {
+    //     path: `/gfx/maps/nuke/ct_circuit/garage_to_outside_layer.png`,
+    //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    // },
+    
 }
