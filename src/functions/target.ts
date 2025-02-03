@@ -3,11 +3,21 @@ import { ImageObject, Target, Vector2, Timer } from "@/types"
 const headOffset: number = 55
 const targetTimer: Timer = {last_update: performance.now(), delta_time: 0}
 const verticalOffset: {standup: number, crouch: number} = {standup: .4, crouch: 2}
+let lastTargetIndex = -1
 
 export let shotTimeout: ReturnType<typeof setTimeout> | null = null
 
 export const getRandomTarget = (targets: Target[]) => {
-    const rndIndex = Math.floor(Math.random() * targets.length)
+    let rndIndex = Math.floor(Math.random() * targets.length)
+
+    while(rndIndex === lastTargetIndex){
+        console.log("lastTargetIndex :", lastTargetIndex)
+        console.log("rndIndex :", rndIndex)
+        rndIndex = Math.floor(Math.random() * targets.length)
+    }
+
+    lastTargetIndex = rndIndex
+
     if (shotTimeout){
         clearTimeout(shotTimeout)
     }
