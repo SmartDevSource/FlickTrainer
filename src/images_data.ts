@@ -684,6 +684,14 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/nuke/ct_circuit/radio_to_trophee_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    nuke_radio_to_lobby: {
+        path: `/gfx/maps/nuke/ct_circuit/radio_to_lobby.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_radio_to_lobby_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/radio_to_lobby_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     // nuke_garage_to_outside: {
     //     path: `/gfx/maps/nuke/ct_circuit/garage_to_outside.png`,
     //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
