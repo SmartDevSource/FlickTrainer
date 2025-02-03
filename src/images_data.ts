@@ -189,9 +189,7 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/vertigo/ct_circuit/sandbag_to_a_ramp_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
-    // DUST 2 //
-    // CT SIDE //
-    // TERRORIST SIDE //
+    /////// DUST 2 T SIDE ///////
     dust2_top_mid_to_mid: {
         path: `/gfx/maps/dust2/terrorist_circuit/top_mid_to_mid.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
@@ -328,6 +326,7 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/dust2/terrorist_circuit/window_to_ct_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    /////// DUST 2 CT SIDE ///////
     dust2_ctspawn_to_long: {
         path: `/gfx/maps/dust2/ct_circuit/ctspawn_to_long.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
@@ -440,8 +439,7 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/dust2/ct_circuit/b_to_tunnel_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
-    ////////////////////// INFERNO //////////////////////
-    /////// T SIDE ///////
+    /////// INFERNO T SIDE ///////
     inferno_tramp_to_mid: {
         path: `/gfx/maps/inferno/terrorist_circuit/tramp_to_mid.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
@@ -578,7 +576,7 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/inferno/terrorist_circuit/triple_to_ct_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
-    /////// CT SIDE ///////
+    /////// INFERNO CT SIDE ///////
     inferno_long_to_mid: {
         path: `/gfx/maps/inferno/ct_circuit/long_to_mid.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
@@ -659,4 +657,6 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/inferno/ct_circuit/car_to_banana_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    /////// NUKE T SIDE ///////
+    
 }

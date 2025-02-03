@@ -3,6 +3,7 @@ import { SpotStruct, CircuitTeams } from "../types"
 import { vertigo } from "@/maps_data/vertigo"
 import { dust2 } from "@/maps_data/dust2"
 import { inferno } from "@/maps_data/inferno"
+import { nuke } from "@/maps_data/nuke"
 
 type MapsData = {
     [mapName: string]: { 
@@ -27,5 +28,6 @@ export const getMapCircuits = (map_name: string) => {
 export const mapsData: MapsData = {
     vertigo,
     dust2,
-    inferno
+    inferno,
+    nuke
 }
