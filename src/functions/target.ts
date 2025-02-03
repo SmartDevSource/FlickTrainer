@@ -11,8 +11,6 @@ export const getRandomTarget = (targets: Target[]) => {
     let rndIndex = Math.floor(Math.random() * targets.length)
 
     while(rndIndex === lastTargetIndex){
-        console.log("lastTargetIndex :", lastTargetIndex)
-        console.log("rndIndex :", rndIndex)
         rndIndex = Math.floor(Math.random() * targets.length)
     }
 
