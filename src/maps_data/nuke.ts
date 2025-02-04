@@ -659,6 +659,61 @@ export const nuke: MapStruct = {
         },
         circuit: 'ct_circuit'
     },
+    ctside_doubledoors_to_b: {
+        targets: [
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 1022, y: 531},
+                to: {x: 1058, y: 531},
+                idle: false,
+                distance: 6.099999999999994,
+                speed: 123
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 896, y: 528},
+                to: {x: 865, y: 528},
+                idle: false,
+                distance: 5.699999999999996,
+                speed: 132
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 639, y: 527},
+                to: {x: 673, y: 527},
+                idle: false,
+                distance: 4.699999999999999,
+                speed: 160
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 1031, y: 397},
+                to: {x: 1055, y: 397},
+                idle: false,
+                distance: 7.19999999999999,
+                speed: 104
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 900, y: 381},
+                to: {x: 879, y: 381},
+                idle: false,
+                distance: 5.999999999999995,
+                speed: 125
+            },
+
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'ct_circuit'
+    },
 
     // garage_to_outside: {
     //     targets: [
