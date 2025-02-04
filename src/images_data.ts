@@ -732,6 +732,14 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/nuke/ct_circuit/ctside_doubledoors_to_b_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    nuke_ctside_ramp_to_b: {
+        path: `/gfx/maps/nuke/ct_circuit/ctside_ramp_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_ctside_ramp_to_b_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/ctside_ramp_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     // nuke_garage_to_outside: {
     //     path: `/gfx/maps/nuke/ct_circuit/garage_to_outside.png`,
     //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
