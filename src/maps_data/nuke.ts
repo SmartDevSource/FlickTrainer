@@ -524,6 +524,142 @@ export const nuke: MapStruct = {
         },
         circuit: 'ct_circuit'
     },
+    ctside_labo_to_b: {
+        targets: [
+            {
+                character: "terrorist_standup",
+                come_from: "down",
+                from: {x: 1082, y: 651},
+                to: {x: 1082, y: 621},
+                idle: false,
+                distance: 8.199999999999987,
+                speed: 91
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 888, y: 568},
+                to: {x: 909, y: 568},
+                idle: false,
+                distance: 12.199999999999973,
+                speed: 61
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 1316, y: 500},
+                to: {x: 1298, y: 500},
+                idle: false,
+                distance: 8.199999999999987,
+                speed: 91
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "down",
+                from: {x: 1146, y: 660},
+                to: {x: 1146, y: 635},
+                idle: false,
+                distance: 7.099999999999991,
+                speed: 106
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 996, y: 550},
+                to: {x: 987, y: 550},
+                idle: false,
+                distance: 13.09999999999997,
+                speed: 57
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "left",
+                from: {x: 966, y: 550},
+                to: {x: 980, y: 550},
+                idle: false,
+                distance: 13.09999999999997,
+                speed: 57
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 883, y: 485},
+                to: {x: 909, y: 485},
+                idle: false,
+                distance: 11.299999999999976,
+                speed: 90
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 883, y: 485},
+                to: {x: 898, y: 485},
+                idle: false,
+                distance: 11.299999999999976,
+                speed: 70
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'ct_circuit'
+    },
+    ctside_doubledoors_to_ramp: {
+        targets: [
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 1018, y: 553},
+                to: {x: 967, y: 553},
+                idle: false,
+                distance: 3.300000000000001,
+                speed: 227
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 950, y: 573},
+                to: {x: 976, y: 573},
+                idle: false,
+                distance: 6.699999999999992,
+                speed: 112
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 998, y: 461},
+                to: {x: 949, y: 461},
+                idle: false,
+                distance: 8.599999999999985,
+                speed: 125
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 812, y: 521},
+                to: {x: 793, y: 521},
+                idle: false,
+                distance: 5.899999999999995,
+                speed: 127
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 805, y: 479},
+                to: {x: 789, y: 479},
+                idle: false,
+                distance: 11.899999999999974,
+                speed: 63
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'ct_circuit'
+    },
+
     // garage_to_outside: {
     //     targets: [
     //         {
@@ -543,6 +679,24 @@ export const nuke: MapStruct = {
     //     circuit: 'ct_circuit'
     // },
     // secret_to_outside: {
+    //     targets: [
+    //         {
+    //             character: "ct_standup",
+    //             come_from: "right",
+    //             from: {x: 1027, y: 510},
+    //             to: {x: 1019, y: 510},
+    //             idle: false,
+    //             distance: 15.499999999999961,
+    //             speed: 48
+    //         },
+    //     ] as Target[],
+    //     initial_offset: {
+    //         x: -420,
+    //         y: -150
+    //     },
+    //     circuit: 'terrorist_circuit'
+    // },
+    // redbox_to_outside: {
     //     targets: [
     //         {
     //             character: "ct_standup",

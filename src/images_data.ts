@@ -708,12 +708,44 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/nuke/ct_circuit/ctside_single_door_to_b_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    nuke_ctside_labo_to_b: {
+        path: `/gfx/maps/nuke/ct_circuit/ctside_labo_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_ctside_labo_to_b_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/ctside_labo_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_ctside_doubledoors_to_ramp: {
+        path: `/gfx/maps/nuke/ct_circuit/ctside_doubledoors_to_ramp.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_ctside_doubledoors_to_ramp_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/ctside_doubledoors_to_ramp_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     // nuke_garage_to_outside: {
     //     path: `/gfx/maps/nuke/ct_circuit/garage_to_outside.png`,
     //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     // },
     // nuke_garage_to_outside_layer: {
     //     path: `/gfx/maps/nuke/ct_circuit/garage_to_outside_layer.png`,
+    //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    // },
+    // nuke_secret_to_outside: {
+    //     path: `/gfx/maps/nuke/ct_circuit/secret_to_outside.png`,
+    //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    // },
+    // nuke_secret_to_outside_layer: {
+    //     path: `/gfx/maps/nuke/ct_circuit/secret_to_outside_layer.png`,
+    //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    // },
+    // nuke_redbox_to_outside: {
+    //     path: `/gfx/maps/nuke/ct_circuit/redbox_to_outside.png`,
+    //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    // },
+    // nuke_redbox_to_outside_layer: {
+    //     path: `/gfx/maps/nuke/ct_circuit/redbox_to_outside_layer.png`,
     //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     // },
     
