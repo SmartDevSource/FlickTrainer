@@ -730,6 +730,14 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/nuke/terrorist_circuit/tside_ramp_to_b_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    nuke_tside_lobby: {
+        path: `/gfx/maps/nuke/terrorist_circuit/tside_lobby.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_tside_lobby_layer: {
+        path: `/gfx/maps/nuke/terrorist_circuit/tside_lobby_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     /////// NUKE CT SIDE ///////
     nuke_under_heaven_to_ramp: {
         path: `/gfx/maps/nuke/ct_circuit/under_heaven_to_ramp.png`,

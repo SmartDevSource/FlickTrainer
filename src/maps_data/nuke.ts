@@ -1913,5 +1913,50 @@ export const nuke: MapStruct = {
         },
         circuit: 'terrorist_circuit'
     },
+    tside_lobby: {
+        targets: [
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 1182, y: 530},
+                to: {x: 1154, y: 530},
+                idle: false,
+                distance: 3.4000000000000012,
+                speed: 221
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 1129, y: 546},
+                to: {x: 1154, y: 546},
+                idle: false,
+                distance: 8.199999999999987,
+                speed: 91
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 836, y: 535},
+                to: {x: 793, y: 535},
+                idle: false,
+                distance: 4.899999999999999,
+                speed: 153
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 130, y: 503},
+                to: {x: 320, y: 503},
+                idle: false,
+                distance: 1.9,
+                speed: 550
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
     
 }
