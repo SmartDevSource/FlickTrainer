@@ -1047,59 +1047,203 @@ export const nuke: MapStruct = {
         },
         circuit: 'ct_circuit'
     },
-    // garage_to_outside: {
-    //     targets: [
-    //         {
-    //             character: "terrorist_standup",
-    //             come_from: "left",
-    //             from: {x: 824, y: 450},
-    //             to: {x: 855, y: 450},
-    //             idle: false,
-    //             distance: 11.599999999999975,
-    //             speed: 90
-    //         },
-    //     ] as Target[],
-    //     initial_offset: {
-    //         x: -420,
-    //         y: -150
-    //     },
-    //     circuit: 'ct_circuit'
-    // },
-    // secret_to_outside: {
-    //     targets: [
-    //         {
-    //             character: "ct_standup",
-    //             come_from: "right",
-    //             from: {x: 1027, y: 510},
-    //             to: {x: 1019, y: 510},
-    //             idle: false,
-    //             distance: 15.499999999999961,
-    //             speed: 48
-    //         },
-    //     ] as Target[],
-    //     initial_offset: {
-    //         x: -420,
-    //         y: -150
-    //     },
-    //     circuit: 'terrorist_circuit'
-    // },
-    // redbox_to_outside: {
-    //     targets: [
-    //         {
-    //             character: "ct_standup",
-    //             come_from: "right",
-    //             from: {x: 1027, y: 510},
-    //             to: {x: 1019, y: 510},
-    //             idle: false,
-    //             distance: 15.499999999999961,
-    //             speed: 48
-    //         },
-    //     ] as Target[],
-    //     initial_offset: {
-    //         x: -420,
-    //         y: -150
-    //     },
-    //     circuit: 'terrorist_circuit'
-    // },
+    garage_to_outside: {
+        targets: [
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 1052, y: 546},
+                to: {x: 1025, y: 546},
+                idle: false,
+                distance: 5.399999999999997,
+                speed: 139
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "left",
+                from: {x: 929, y: 547},
+                to: {x: 942, y: 547},
+                idle: false,
+                distance: 15.399999999999961,
+                speed: 49
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 898, y: 547},
+                to: {x: 880, y: 547},
+                idle: false,
+                distance: 15.399999999999961,
+                speed: 49
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "left",
+                from: {x: 816, y: 545},
+                to: {x: 833, y: 545},
+                idle: false,
+                distance: 12.499999999999972,
+                speed: 60
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 653, y: 543},
+                to: {x: 637, y: 543},
+                idle: false,
+                distance: 9.599999999999982,
+                speed: 78
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 1019, y: 542},
+                to: {x: 999, y: 542},
+                idle: false,
+                distance: 11.199999999999976,
+                speed: 67
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'ct_circuit'
+    },
+    secret_to_outside: {
+        targets: [
+            {
+                character: "terrorist_crouch_darken",
+                come_from: "left",
+                from: {x: 860, y: 579},
+                to: {x: 880, y: 579},
+                idle: false,
+                distance: 8.199999999999987,
+                speed: 55
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 828, y: 578},
+                to: {x: 854, y: 578},
+                idle: false,
+                distance: 8.199999999999987,
+                speed: 91
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 1163, y: 552},
+                to: {x: 1116, y: 552},
+                idle: false,
+                distance: 5.099999999999998,
+                speed: 147
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 994, y: 586},
+                to: {x: 972, y: 586},
+                idle: false,
+                distance: 10.29999999999998,
+                speed: 73
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "left",
+                from: {x: 889, y: 434},
+                to: {x: 889, y: 418},
+                idle: false,
+                distance: 14.499999999999964,
+                speed: 80
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "down",
+                from: {x: 925, y: 435},
+                to: {x: 925, y: 414},
+                idle: false,
+                distance: 13.199999999999969,
+                speed: 80
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 654, y: 598},
+                to: {x: 630, y: 598},
+                idle: false,
+                distance: 12.89999999999997,
+                speed: 58
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 648, y: 583},
+                to: {x: 628, y: 583},
+                idle: false,
+                distance: 8.899999999999984,
+                speed: 84
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    redbox_to_outside: {
+        targets: [
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 1167, y: 543},
+                to: {x: 1040, y: 543},
+                idle: false,
+                distance: 3.300000000000001,
+                speed: 280
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 846, y: 539},
+                to: {x: 812, y: 539},
+                idle: false,
+                distance: 8.499999999999986,
+                speed: 88
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 1167, y: 543},
+                to: {x: 1115, y: 543},
+                idle: false,
+                distance: 3.300000000000001,
+                speed: 227
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "left",
+                from: {x: 931, y: 547},
+                to: {x: 950, y: 547},
+                idle: false,
+                distance: 9.89999999999998,
+                speed: 76
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 841, y: 547},
+                to: {x: 825, y: 547},
+                idle: false,
+                distance: 7.29999999999999,
+                speed: 103
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
     ////////////////// TERRORIST CIRCUIT //////////////////
 }

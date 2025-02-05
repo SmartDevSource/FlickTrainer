@@ -772,29 +772,28 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/nuke/ct_circuit/single_door_to_lobby_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
-    // nuke_garage_to_outside: {
-    //     path: `/gfx/maps/nuke/ct_circuit/garage_to_outside.png`,
-    //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
-    // },
-    // nuke_garage_to_outside_layer: {
-    //     path: `/gfx/maps/nuke/ct_circuit/garage_to_outside_layer.png`,
-    //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
-    // },
-    // nuke_secret_to_outside: {
-    //     path: `/gfx/maps/nuke/ct_circuit/secret_to_outside.png`,
-    //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
-    // },
-    // nuke_secret_to_outside_layer: {
-    //     path: `/gfx/maps/nuke/ct_circuit/secret_to_outside_layer.png`,
-    //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
-    // },
-    // nuke_redbox_to_outside: {
-    //     path: `/gfx/maps/nuke/ct_circuit/redbox_to_outside.png`,
-    //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
-    // },
-    // nuke_redbox_to_outside_layer: {
-    //     path: `/gfx/maps/nuke/ct_circuit/redbox_to_outside_layer.png`,
-    //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
-    // },
-    
+    nuke_garage_to_outside: {
+        path: `/gfx/maps/nuke/ct_circuit/garage_to_outside.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_garage_to_outside_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/garage_to_outside_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_secret_to_outside: {
+        path: `/gfx/maps/nuke/ct_circuit/secret_to_outside.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_secret_to_outside_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/secret_to_outside_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_redbox_to_outside: {
+        path: `/gfx/maps/nuke/ct_circuit/redbox_to_outside.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_redbox_to_outside_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/redbox_to_outside_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
