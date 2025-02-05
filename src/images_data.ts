@@ -658,7 +658,30 @@ export const images: {[key: string]: ImageObject} = {
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     /////// NUKE T SIDE ///////
-    
+    nuke_outside_to_garage: {
+        path: `/gfx/maps/nuke/terrorist_circuit/outside_to_garage.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_outside_to_garage_layer: {
+        path: `/gfx/maps/nuke/terrorist_circuit/outside_to_garage_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_outside_to_heaven: {
+        path: `/gfx/maps/nuke/terrorist_circuit/outside_to_heaven.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_outside_to_heaven_layer: {
+        path: `/gfx/maps/nuke/terrorist_circuit/outside_to_heaven_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_secret_to_doubledoors: {
+        path: `/gfx/maps/nuke/terrorist_circuit/secret_to_doubledoors.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_secret_to_doubledoors_layer: {
+        path: `/gfx/maps/nuke/terrorist_circuit/secret_to_doubledoors_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     /////// NUKE CT SIDE ///////
     nuke_under_heaven_to_ramp: {
         path: `/gfx/maps/nuke/ct_circuit/under_heaven_to_ramp.png`,

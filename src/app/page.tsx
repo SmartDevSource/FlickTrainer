@@ -14,7 +14,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'nuke',
   circuit: 'ct_circuit',
-  spot: 'redbox_to_outside',
+  spot: 'secret_to_doubledoors', // 
   difficulty: 'easy',
   spot_objective: 25
 }

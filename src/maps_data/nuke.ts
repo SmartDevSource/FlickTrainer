@@ -1246,4 +1246,184 @@ export const nuke: MapStruct = {
         circuit: 'terrorist_circuit'
     },
     ////////////////// TERRORIST CIRCUIT //////////////////
+    outside_to_garage: {
+        targets: [
+            {
+                character: "terrorist_standup_darken",
+                come_from: "down",
+                from: {x: 1069, y: 577},
+                to: {x: 1069, y: 563},
+                idle: false,
+                distance: 11.299999999999976,
+                speed: 66
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "left",
+                from: {x: 542, y: 533},
+                to: {x: 570, y: 533},
+                idle: false,
+                distance: 8.699999999999985,
+                speed: 86
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "left",
+                from: {x: 644, y: 535},
+                to: {x: 658, y: 535},
+                idle: false,
+                distance: 11.899999999999974,
+                speed: 63
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 776, y: 536},
+                to: {x: 752, y: 536},
+                idle: false,
+                distance: 7.899999999999988,
+                speed: 95
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 782, y: 538},
+                to: {x: 766, y: 538},
+                idle: false,
+                distance: 15.099999999999962,
+                speed: 50
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 730, y: 538},
+                to: {x: 747, y: 538},
+                idle: false,
+                distance: 15.099999999999962,
+                speed: 50
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    outside_to_heaven: {
+        targets: [
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 1386, y: 521},
+                to: {x: 1331, y: 521},
+                idle: false,
+                distance: 4.4,
+                speed: 170
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 1229, y: 532},
+                to: {x: 1207, y: 532},
+                idle: false,
+                distance: 6.999999999999991,
+                speed: 107
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 1026, y: 532},
+                to: {x: 1042, y: 532},
+                idle: false,
+                distance: 9.89999999999998,
+                speed: 76
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 775, y: 532},
+                to: {x: 801, y: 532},
+                idle: false,
+                distance: 7.39999999999999,
+                speed: 101
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 994, y: 535},
+                to: {x: 982, y: 535},
+                idle: false,
+                distance: 16.499999999999964,
+                speed: 45
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 1045, y: 434},
+                to: {x: 1056, y: 434},
+                idle: false,
+                distance: 18.099999999999987,
+                speed: 41
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    secret_to_doubledoors: {
+        targets: [
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 1004, y: 615},
+                to: {x: 1004, y: 595},
+                idle: false,
+                distance: 7.799999999999988,
+                speed: 96
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "down",
+                from: {x: 907, y: 614},
+                to: {x: 907, y: 593},
+                idle: false,
+                distance: 7.799999999999988,
+                speed: 96
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "down",
+                from: {x: 966, y: 615},
+                to: {x: 966, y: 591},
+                idle: false,
+                distance: 7.29999999999999,
+                speed: 103
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 802, y: 488},
+                to: {x: 831, y: 488},
+                idle: false,
+                distance: 5.099999999999998,
+                speed: 147
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 649, y: 512},
+                to: {x: 709, y: 512},
+                idle: false,
+                distance: 2.7000000000000006,
+                speed: 278
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
 }
