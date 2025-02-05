@@ -13,8 +13,8 @@ import { TrainingPage } from "./components/TrainingPage"
 const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'nuke',
-  circuit: 'ct_circuit',
-  spot: 'secret_to_doubledoors', // 
+  circuit: 'terrorist_circuit',
+  spot: 'tside_secret_to_b',
   difficulty: 'easy',
   spot_objective: 25
 }
