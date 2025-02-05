@@ -738,6 +738,46 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/nuke/terrorist_circuit/tside_lobby_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    nuke_tside_single_door_to_main: {
+        path: `/gfx/maps/nuke/terrorist_circuit/tside_single_door_to_main.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_tside_single_door_to_main_layer: {
+        path: `/gfx/maps/nuke/terrorist_circuit/tside_single_door_to_main_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_tside_hut_to_a: {
+        path: `/gfx/maps/nuke/terrorist_circuit/tside_hut_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_tside_hut_to_a_layer: {
+        path: `/gfx/maps/nuke/terrorist_circuit/tside_hut_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_tside_a_to_main: {
+        path: `/gfx/maps/nuke/terrorist_circuit/tside_a_to_main.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_tside_a_to_main_layer: {
+        path: `/gfx/maps/nuke/terrorist_circuit/tside_a_to_main_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_tside_radio_to_ramp: {
+        path: `/gfx/maps/nuke/terrorist_circuit/tside_radio_to_ramp.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_tside_radio_to_ramp_layer: {
+        path: `/gfx/maps/nuke/terrorist_circuit/tside_radio_to_ramp_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_tside_radio_to_under_heaven: {
+        path: `/gfx/maps/nuke/terrorist_circuit/tside_radio_to_under_heaven.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_tside_radio_to_under_heaven_layer: {
+        path: `/gfx/maps/nuke/terrorist_circuit/tside_radio_to_under_heaven_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     /////// NUKE CT SIDE ///////
     nuke_under_heaven_to_ramp: {
         path: `/gfx/maps/nuke/ct_circuit/under_heaven_to_ramp.png`,

@@ -14,7 +14,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'nuke',
   circuit: 'terrorist_circuit',
-  spot: 'tside_lobby',
+  spot: 'tside_radio_to_under_heaven',
   difficulty: 'easy',
   spot_objective: 25
 }
