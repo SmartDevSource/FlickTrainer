@@ -740,6 +740,38 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/nuke/ct_circuit/ctside_ramp_to_b_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    nuke_heaven_to_a: {
+        path: `/gfx/maps/nuke/ct_circuit/heaven_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_heaven_to_a_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/heaven_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_a_to_single_door: {
+        path: `/gfx/maps/nuke/ct_circuit/a_to_single_door.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_a_to_single_door_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/a_to_single_door_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_ctside_main_to_a: {
+        path: `/gfx/maps/nuke/ct_circuit/ctside_main_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_ctside_main_to_a_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/ctside_main_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_single_door_to_lobby: {
+        path: `/gfx/maps/nuke/ct_circuit/single_door_to_lobby.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    nuke_single_door_to_lobby_layer: {
+        path: `/gfx/maps/nuke/ct_circuit/single_door_to_lobby_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     // nuke_garage_to_outside: {
     //     path: `/gfx/maps/nuke/ct_circuit/garage_to_outside.png`,
     //     img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
