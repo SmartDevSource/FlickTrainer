@@ -12,9 +12,9 @@ import { TrainingPage } from "./components/TrainingPage"
 
 const gameSettingsTest: GameSettings = {
   mode: 'spot',
-  map_name: 'nuke',
-  circuit: 'terrorist_circuit',
-  spot: 'tside_radio_to_under_heaven',
+  map_name: 'mirage',
+  circuit: 'ct_circuit',
+  spot: 'ctside_close_stairs_to_a',
   difficulty: 'easy',
   spot_objective: 25
 }

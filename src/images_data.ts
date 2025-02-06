@@ -923,4 +923,29 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/nuke/ct_circuit/redbox_to_outside_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    /////// MIRAGE CT SIDE ///////
+    mirage_ctside_ct_to_a: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_ct_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_ct_to_a_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_ct_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_jungle_to_a: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_jungle_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_jungle_to_a_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_jungle_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_close_stairs_to_a: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_close_stairs_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_close_stairs_to_a_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_close_stairs_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
