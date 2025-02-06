@@ -948,4 +948,20 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/mirage/ct_circuit/ctside_close_stairs_to_a_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    mirage_ctside_stairs_to_ramp: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_stairs_to_ramp.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_stairs_to_ramp_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_stairs_to_ramp_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_ninja_to_ramp: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_ninja_to_ramp.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_ninja_to_ramp_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_ninja_to_ramp_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
