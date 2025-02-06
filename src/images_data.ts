@@ -964,4 +964,44 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/mirage/ct_circuit/ctside_ninja_to_ramp_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    mirage_ctside_ramp_to_tspawn: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_ramp_to_tspawn.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_ramp_to_tspawn_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_ramp_to_tspawn_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_palace: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_palace.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_palace_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_palace_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_connector_to_short: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_connector_to_short.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_connector_to_short_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_connector_to_short_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_window_to_mid: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_window_to_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_window_to_mid_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_window_to_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_top_mid_to_tvroom: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_top_mid_to_tvroom.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_top_mid_to_tvroom_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_top_mid_to_tvroom_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
