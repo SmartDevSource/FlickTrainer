@@ -1062,59 +1062,59 @@ export const images: {[key: string]: ImageObject} = {
     },
     /////// MIRAGE T SIDE ///////
     mirage_tside_ramp_to_a: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_ramp_to_a.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_ramp_to_a.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mirage_tside_ramp_to_a_layer: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_ramp_to_a_layer.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_ramp_to_a_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mirage_tside_tetris_to_a: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_tetris_to_a.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_tetris_to_a.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mirage_tside_tetris_to_a_layer: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_tetris_to_a_layer.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_tetris_to_a_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mirage_tside_palace_to_stairs: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_palace_to_stairs.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_palace_to_stairs.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mirage_tside_palace_to_stairs_layer: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_palace_to_stairs_layer.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_palace_to_stairs_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mirage_tside_under_palace: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_under_palace.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_under_palace.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mirage_tside_under_palace_layer: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_under_palace_layer.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_under_palace_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mirage_tside_a_to_stairs: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_a_to_stairs.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_a_to_stairs.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mirage_tside_a_to_stairs_layer: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_a_to_stairs_layer.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_a_to_stairs_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mirage_tside_top_mid_to_connector: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_top_mid_to_connector.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_top_mid_to_connector.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mirage_tside_top_mid_to_connector_layer: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_top_mid_to_connector_layer.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_top_mid_to_connector_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mirage_tside_top_mid_to_short: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_top_mid_to_short.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_top_mid_to_short.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mirage_tside_top_mid_to_short_layer: {
-        path: `/gfx/maps/mirage/ct_circuit/tside_top_mid_to_short_layer.png`,
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_top_mid_to_short_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
 }
