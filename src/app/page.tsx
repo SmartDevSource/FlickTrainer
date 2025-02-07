@@ -14,7 +14,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'mirage',
   circuit: 'ct_circuit',
-  spot: 'ctside_top_mid_to_tvroom', // 
+  spot: 'ctside_b_app', // 
   difficulty: 'easy',
   spot_objective: 25
 }

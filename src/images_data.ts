@@ -1004,4 +1004,60 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/mirage/ct_circuit/ctside_top_mid_to_tvroom_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    mirage_ctside_kitchen: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_kitchen.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_kitchen_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_kitchen_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_kitchen_to_b: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_kitchen_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_kitchen_to_b_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_kitchen_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_kitchen_to_truck: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_kitchen_to_truck.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_kitchen_to_truck_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_kitchen_to_truck_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_bench_to_b: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_bench_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_bench_to_b_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_bench_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_short_to_a: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_short_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_short_to_a_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_short_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_truck_to_app: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_truck_to_app.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_truck_to_app_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_truck_to_app_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_b_app: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_b_app.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_ctside_b_app_layer: {
+        path: `/gfx/maps/mirage/ct_circuit/ctside_b_app_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
