@@ -1074,4 +1074,22 @@ export const mirage: MapStruct = {
         circuit: 'ct_circuit'
     },
     ////////////////// TERRORIST CIRCUIT //////////////////
+    tside_ramp_to_a: {
+        targets: [
+            {
+                character: "ct_crouch_darken",
+                come_from: "right",
+                from: {x: 1063, y: 545},
+                to: {x: 1031, y: 545},
+                idle: false,
+                distance: 2.5000000000000004,
+                speed: 200
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
 }
