@@ -71,6 +71,8 @@ export const updateTarget = (target: Target, difficulty: string, isFullscreen: b
         }
         if (target.from.y > target.to.y){
             target.from.y -= (target.speed * targetTimer.delta_time)
+        } else if (target.from.y < target.to.y){
+            target.from.y += (target.speed * targetTimer.delta_time)
         }
 
         switch(target.come_from){
@@ -94,6 +96,15 @@ export const updateTarget = (target: Target, difficulty: string, isFullscreen: b
             break
             case 'down':
                 if (target.from.y < target.to.y){
+                    target.from.y = target.to.y
+                    target.idle = true
+                    shotTimeout = setTimeout(()=>{
+                        shotPlayer(target, killPlayer)
+                    }, getReactionTime(difficulty))
+                }
+            break
+            case 'up':
+                if (target.from.y > target.to.y){
                     target.from.y = target.to.y
                     target.idle = true
                     shotTimeout = setTimeout(()=>{

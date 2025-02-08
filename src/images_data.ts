@@ -1230,5 +1230,37 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/train/ct_circuit/ctside_popdog_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    train_ctside_connector_to_b: {
+        path: `/gfx/maps/train/ct_circuit/ctside_connector_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_ctside_connector_to_b_layer: {
+        path: `/gfx/maps/train/ct_circuit/ctside_connector_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_ctside_middle_to_b: {
+        path: `/gfx/maps/train/ct_circuit/ctside_middle_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_ctside_middle_to_b_layer: {
+        path: `/gfx/maps/train/ct_circuit/ctside_middle_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_ctside_left_to_heaven: {
+        path: `/gfx/maps/train/ct_circuit/ctside_left_to_heaven.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_ctside_left_to_heaven_layer: {
+        path: `/gfx/maps/train/ct_circuit/ctside_left_to_heaven_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_ctside_heaven_to_tspawn: {
+        path: `/gfx/maps/train/ct_circuit/ctside_heaven_to_tspawn.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_ctside_heaven_to_tspawn_layer: {
+        path: `/gfx/maps/train/ct_circuit/ctside_heaven_to_tspawn_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     /////// TRAIN T SIDE ///////
 }
