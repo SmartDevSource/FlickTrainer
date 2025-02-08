@@ -1117,4 +1117,60 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/mirage/terrorist_circuit/tside_top_mid_to_short_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    mirage_tside_short_to_a: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_short_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_tside_short_to_a_layer: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_short_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_tside_connector_to_a: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_connector_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_tside_connector_to_a_layer: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_connector_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_tside_short_to_b: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_short_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_tside_short_to_b_layer: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_short_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_tside_b_to_kitchen: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_b_to_kitchen.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_tside_b_to_kitchen_layer: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_b_to_kitchen_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_tside_app_to_under: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_app_to_under.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_tside_app_to_under_layer: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_app_to_under_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_tside_app_to_short: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_app_to_short.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_tside_app_to_short_layer: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_app_to_short_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_tside_app_to_b: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_app_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mirage_tside_app_to_b_layer: {
+        path: `/gfx/maps/mirage/terrorist_circuit/tside_app_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }

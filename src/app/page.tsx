@@ -14,7 +14,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'mirage',
   circuit: 'terrorist_circuit',
-  spot: 'tside_top_mid_to_short', // 
+  spot: 'tside_app_to_b', // 
   difficulty: 'easy',
   spot_objective: 25
 }
