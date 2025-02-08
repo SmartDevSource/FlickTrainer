@@ -1174,12 +1174,12 @@ export const images: {[key: string]: ImageObject} = {
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     /////// TRAIN CT SIDE ///////
-    train_: {
-        path: `/gfx/maps/train/ct_circuit/ctside_.png`,
+    train_ctside_ctspawn_to_electric: {
+        path: `/gfx/maps/train/ct_circuit/ctside_ctspawn_to_electric.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
-    train__layer: {
-        path: `/gfx/maps/train/ct_circuit/ctside__layer`,
+    train_ctside_ctspawn_to_electric_layer: {
+        path: `/gfx/maps/train/ct_circuit/ctside_ctspawn_to_electric_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     /////// TRAIN T SIDE ///////
