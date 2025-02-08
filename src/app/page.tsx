@@ -14,7 +14,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'train',
   circuit: 'ct_circuit',
-  spot: 'ctside_ctspawn_to_electric',
+  spot: 'ctside_popdog', // 
   difficulty: 'easy',
   spot_objective: 25
 }

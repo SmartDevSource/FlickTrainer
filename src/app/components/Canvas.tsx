@@ -506,17 +506,17 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
                 try {
                     await loadResources(images, audios)
                     updateBackgroundImages()
-                    setIsLoading(false)
+                    
+                    setTimeout(() => {
+                        setIsLoading(false)
+                        draw()
+                    }, 1000)
                 } catch (err) {
                     console.error(`Error while loading all resources :`, err)
                 }
             })()
         }
     }, [ctx])
-
-    useEffect(() => {
-        if (!isLoading) draw()
-    }, [isLoading])
 
     useEffect(()=>{
         if (isAccomplished){
@@ -598,11 +598,18 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
     }
 
     return (
-        <canvas
-            ref={canvasRef}
-            className='bg-slate-900 m-16 cursor-crosshair'
-            onClick={() => toggleFullScreen()}
-        />
+        <>
+            {isLoading &&
+                <h1 className='text-white text-2xl mt-6'>
+                    Loading resources ...
+                </h1>
+            }
+            <canvas
+                ref={canvasRef}
+                className='bg-slate-900 m-16 cursor-crosshair'
+                onClick={() => !isLoading && toggleFullScreen()}
+            />
+        </>
     )
 }
 
