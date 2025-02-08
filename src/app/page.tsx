@@ -12,7 +12,7 @@ import { TrainingPage } from "./components/TrainingPage"
 
 const gameSettingsTest: GameSettings = {
   mode: 'spot',
-  map_name: 'mirage',
+  map_name: 'train',
   circuit: 'terrorist_circuit',
   spot: 'tside_app_to_b', // 
   difficulty: 'easy',

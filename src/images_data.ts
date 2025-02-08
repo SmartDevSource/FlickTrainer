@@ -1173,4 +1173,14 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/mirage/terrorist_circuit/tside_app_to_b_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    /////// TRAIN CT SIDE ///////
+    train_: {
+        path: `/gfx/maps/train/ct_circuit/ctside_.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train__layer: {
+        path: `/gfx/maps/train/ct_circuit/ctside__layer`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    /////// TRAIN T SIDE ///////
 }

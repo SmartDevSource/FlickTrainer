@@ -5,6 +5,7 @@ import { dust2 } from "@/maps_data/dust2"
 import { inferno } from "@/maps_data/inferno"
 import { nuke } from "@/maps_data/nuke"
 import { mirage } from "@/maps_data/mirage"
+import { train } from "@/maps_data/train"
 
 type MapsData = {
     [mapName: string]: { 
@@ -31,5 +32,6 @@ export const mapsData: MapsData = {
     dust2,
     inferno,
     nuke,
-    mirage
+    mirage,
+    train
 }
