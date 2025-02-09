@@ -14,7 +14,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'train',
   circuit: 'ct_circuit',
-  spot: 'ctside_heaven_to_tspawn',
+  spot: 'tside_ivy_to_ctspawn', // 
   difficulty: 'easy',
   spot_objective: 25
 }

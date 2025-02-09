@@ -506,11 +506,11 @@ const Canvas: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, o
                 try {
                     await loadResources(images, audios)
                     updateBackgroundImages()
-                    
+
                     setTimeout(() => {
                         setIsLoading(false)
                         draw()
-                    }, 1000)
+                    }, performance.now())
                 } catch (err) {
                     console.error(`Error while loading all resources :`, err)
                 }

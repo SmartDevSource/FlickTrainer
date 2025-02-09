@@ -1263,4 +1263,60 @@ export const images: {[key: string]: ImageObject} = {
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     /////// TRAIN T SIDE ///////
+    train_tside_ivy: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_ivy.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_ivy_layer: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_ivy_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_ivy_to_long: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_ivy_to_long.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_ivy_to_long_layer: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_ivy_to_long_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_ivy_to_a: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_ivy_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_ivy_to_a_layer: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_ivy_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_main_to_a_left: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_main_to_a_left.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_main_to_a_left_layer: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_main_to_a_left_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_electric_to_a: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_electric_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_electric_to_a_layer: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_electric_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_a_to_connector: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_a_to_connector.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_a_to_connector_layer: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_a_to_connector_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_ivy_to_ctspawn: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_ivy_to_ctspawn.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_ivy_to_ctspawn_layer: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_ivy_to_ctspawn_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
