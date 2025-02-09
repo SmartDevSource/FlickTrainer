@@ -1319,4 +1319,44 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/train/terrorist_circuit/tside_ivy_to_ctspawn_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    train_tside_upper_to_b: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_upper_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_upper_to_b_layer: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_upper_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_b_to_connector: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_b_to_connector.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_b_to_connector_layer: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_b_to_connector_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_b_to_backsite_left: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_b_to_backsite_left.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_b_to_backsite_left_layer: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_b_to_backsite_left_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_b_to_backsite_right: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_b_to_backsite_right.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_b_to_backsite_right_layer: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_b_to_backsite_right_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_heaven_to_b: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_heaven_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    train_tside_heaven_to_b_layer: {
+        path: `/gfx/maps/train/terrorist_circuit/tside_heaven_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }
