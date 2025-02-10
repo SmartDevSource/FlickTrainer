@@ -15,7 +15,7 @@ const recoilSettings: RecoilSettings = {
         speed: 100
 }
 
-export const initRecoil = (screenOffset: Vector2) => {
+export const initDeagleRecoil = (screenOffset: Vector2) => {
     recoilSettings.start_position = {
         x: screenOffset.x,
         y: screenOffset.y
@@ -30,7 +30,7 @@ export const initRecoil = (screenOffset: Vector2) => {
 }
 
 
-export const updateRecoil = (screenOffset: Vector2) => {
+export const updateDeagleRecoil = (screenOffset: Vector2) => {
     const now = performance.now()
     timer.delta_time = (now - timer.last_update) / 1000
     timer.last_update = now

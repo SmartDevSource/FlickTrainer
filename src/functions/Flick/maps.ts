@@ -1,4 +1,4 @@
-import { SpotStruct, CircuitTeams } from "../types"
+import { SpotStruct, CircuitTeams } from "../../types"
 
 import { vertigo } from "@/maps_data/vertigo"
 import { dust2 } from "@/maps_data/dust2"

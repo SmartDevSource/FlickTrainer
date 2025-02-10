@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useRef, useState } from 'react'
-import { mapsData, getMapCircuits } from '@/functions/maps'
+import { mapsData, getMapCircuits } from '@/functions/Flick/maps'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
 import { 
@@ -21,7 +21,7 @@ import {
     getHeadCoordinates,
     shotTimeout, 
     updateTargetTimer
-} from '@/functions/target'
+} from '@/functions/Flick/target'
 import {
     fullscreenCanvasSize,
     minimizedCanvasSize,
@@ -35,9 +35,9 @@ import {
     drawStartCounter,
     drawCrosshair,
     weaponAnim
-} from '@/functions/draw'
-import { drawHelperData, drawTargetHelper, getHelperCoords } from '@/functions/target_helper'
-import { initRecoil, updateRecoil } from '@/functions/deagle_recoil'
+} from '@/functions/Flick/draw'
+import { drawHelperData, drawTargetHelper, getHelperCoords } from '@/functions/Flick/target_helper'
+import { initDeagleRecoil, updateDeagleRecoil } from '@/functions/Flick/deagle_recoil'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
 
 export interface Keys {
@@ -462,7 +462,7 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
                         shots: prev.shots + 1
                     }))
                     audios.deagleshot.audio.play()
-                    initRecoil(screenOffset.current)
+                    initDeagleRecoil(screenOffset.current)
                     if (target?.current && screenOffset?.current && images[target?.current?.character]){
                         const headCoordinates = getHeadCoordinates(
                             target.current,
@@ -559,7 +559,7 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
 
             updateTargetTimer()
             updateTestValues()
-            updateRecoil(screenOffset.current)
+            updateDeagleRecoil(screenOffset.current)
 
             if (target.current)
                 updateTarget(target.current, game_settings.difficulty, isFullScreen.current, killPlayer)

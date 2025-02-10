@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { ImageModal } from "./ImageModal"
 import { GameSettings } from "@/types"
-import { getMapCircuits } from "@/functions/maps"
+import { getMapCircuits } from "@/functions/Flick/maps"
 
 interface SettingsParams {
     onClose: () => void,

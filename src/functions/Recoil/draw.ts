@@ -1,6 +1,5 @@
-import { ImageObject, Statistics, Target, Vector2, Timer, CircuitStates, SpotStates } from "@/types"
-import { getHeadCoordinates } from "./target"
-import { crosshairData } from "./crosshair_changer"
+import { ImageObject, Vector2, Timer } from "@/types"
+import { crosshairData } from "../crosshair_changer"
 
 export const minimizedCanvasSize = {w: 320, h: 240}
 export const fullscreenCanvasSize = {w: 1240, h: 768}
@@ -25,20 +24,12 @@ export const weaponAnim: {
     frames_count: 20,
     sway_offset: {x: 0, y: 0}
 }
-const deathAnim: {
-    opacity: number,
-    update_delay: number
-} = {
-    opacity: 0,
-    update_delay: 5
-}
 
 export const drawWeapon = (ctx: CanvasRenderingContext2D,
                             weaponImg: ImageObject,
                             flameImg: ImageObject,
                             isFiring: boolean,
-                            mouseAccel: Vector2,
-                            updateFiringState: (state: boolean) => void) =>
+                            mouseAccel: Vector2) =>
 {
     const now = performance.now()
     timer.delta_time = (now - timer.last_update) / 1000
@@ -49,13 +40,12 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
         const currentFrameRate = Math.floor(weaponAnim.last_update * framesPerSecond)
 
         if (currentFrameRate > 0){
-            weaponAnim.last_update = 0
-            weaponAnim.current_frame += currentFrameRate
-
-            if (weaponAnim.current_frame >= weaponAnim.frames_count - 1){
-                updateFiringState(false)
-                weaponAnim.current_frame = 0
-            }
+            // weaponAnim.last_update = 0
+            // weaponAnim.current_frame += currentFrameRate
+            // if (weaponAnim.current_frame >= weaponAnim.frames_count - 1){
+            //     updateFiringState(false)
+            //     weaponAnim.current_frame = 0
+            // }
         }
     }
 
@@ -94,36 +84,6 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
     }
 }
 
-export const drawTarget = (target: Target, screenOffset: Vector2, ctx: CanvasRenderingContext2D, targetImg: ImageObject, enableHitbox: boolean) => {
-    ctx.drawImage(
-        targetImg.img,
-        0,
-        0,
-        targetImg.img.width,
-        targetImg.img.height,
-        target.from.x + screenOffset.x,
-        target.from.y + screenOffset.y,
-        targetImg.img.width / target.distance,
-        targetImg.img.height / target.distance
-    )
-    if (enableHitbox){
-        ctx.save()
-        const headCoordinates = getHeadCoordinates(
-            target,
-            screenOffset,
-            targetImg
-        )
-        ctx.fillStyle = 'rgba(255, 0, 0, .5)'
-        ctx.fillRect(
-            headCoordinates.position.x,
-            headCoordinates.position.y,
-            headCoordinates.scale.w,
-            headCoordinates.scale.h
-        )
-        ctx.restore()
-    }
-}
-
 export const drawScreenOffsets = (
     ctx: CanvasRenderingContext2D,
     screenOffset: Vector2,
@@ -137,75 +97,6 @@ export const drawScreenOffsets = (
     )
 }
 
-export const drawStatistics = (
-    ctx: CanvasRenderingContext2D,
-    statistics: Statistics,
-    circuit_states: CircuitStates,
-    spot_states: SpotStates,
-    game_mode: string
-) => {
-    const kd = statistics.kd.toFixed(2)
-    const killsDeathBoxLength = (statistics.kills.toString().length * 15) + (statistics.deaths.toString().length * 15)
-    const kdBoxLength = kd.toString().length * 13
-
-    ctx.save()
-
-    ctx.fillStyle = 'white'
-    ctx.font = 'bold 20px Play-Bold'
-    ctx.fillStyle = 'rgba(255, 255, 255, .3)'
-    ctx.fillRect(10, 31, 210 + killsDeathBoxLength, 25)
-    ctx.fillStyle = 'rgb(255, 255, 255)'
-    ctx.strokeStyle = 'rgb(150, 150, 150)'
-    ctx.strokeRect(10, 31, 210 + killsDeathBoxLength, 25)
-    ctx.fillText(`Kills : ${statistics.kills}  -  Deaths : ${statistics.deaths}`, 30, 50)
-
-    ctx.strokeStyle = 'rgb(150, 150, 150)'
-    ctx.fillStyle = 'rgba(255, 255, 255, .3)'
-    ctx.fillRect(1085, 31, 80 + kdBoxLength, 25)
-    ctx.strokeRect(1085, 31, 80 + kdBoxLength, 25)
-    ctx.fillStyle = 'rgb(255, 255, 255)'
-    ctx.fillText(`KD : ${kd}`, 1105, 50)
-
-    switch(game_mode){
-        case 'circuit':
-            ctx.strokeStyle = 'rgb(150, 150, 150)'
-            ctx.fillStyle = 'rgba(255, 255, 255, .3)'
-            ctx.fillRect(1085, 56, 80 + kdBoxLength, 25)
-            ctx.strokeRect(1085, 56, 80 + kdBoxLength, 25)
-            ctx.fillStyle = 'rgb(255, 255, 255)'
-            ctx.fillText(`${circuit_states.current_kills} / ${circuit_states.kills_goal}`, 1130, 75)    
-        break
-        case 'spot':
-            ctx.strokeStyle = 'rgb(150, 150, 150)'
-            ctx.fillStyle = 'rgba(255, 255, 255, .3)'
-            ctx.fillRect(1085, 56, 80 + kdBoxLength, 25)
-            ctx.strokeRect(1085, 56, 80 + kdBoxLength, 25)
-            ctx.fillStyle = 'rgb(255, 255, 255)'
-            ctx.fillText(`${spot_states.current_kills} / ${spot_states.kills_goal}`, 1130, 75) 
-        break
-    }
-
-    ctx.font = 'bold 28px Play-Bold'
-
-    ctx.fillStyle = 'rgb(255, 255, 255)'
-    ctx.lineWidth = 2
-    ctx.strokeText(`Time : ${statistics.time_elapsed}`, 570, 50)
-    ctx.fillText(`Time : ${statistics.time_elapsed}`, 570, 50)
-
-    ctx.restore()
-}
-
-export const drawPlayerDeath = (ctx: CanvasRenderingContext2D) => {
-    if (deathAnim.opacity < 1){
-        deathAnim.opacity += timer.delta_time * deathAnim.update_delay
-        if (deathAnim.opacity > 1){
-            deathAnim.opacity = 1
-        }
-    }
-    ctx.fillStyle = `rgba(0, 0, 0, ${deathAnim.opacity})`
-    ctx.fillRect(0, 0, fullscreenCanvasSize.w, fullscreenCanvasSize.h)
-}
-
 export const drawPauseScreen = (ctx: CanvasRenderingContext2D, background: ImageObject) => {
     const scale_x = background.img.width * (ctx.canvas.width / background.img.width)
     const scale_y = background.img.height * (ctx.canvas.height / background.img.height)
@@ -217,17 +108,6 @@ export const drawPauseScreen = (ctx: CanvasRenderingContext2D, background: Image
     ctx.fillStyle = 'white'
     ctx.font = 'bold 38px Play-Bold'
     ctx.fillText("Start", 115, 130)
-}
-
-export const drawStartCounter = (ctx: CanvasRenderingContext2D, startTimer: number) => {
-    ctx.save()
-    ctx.font = 'bold 114px Digit'
-    ctx.fillStyle = 'white'
-    ctx.lineWidth = 5
-    ctx.strokeStyle = 'black'
-    ctx.strokeText(startTimer.toString(), 565, 430)
-    ctx.fillText(startTimer.toString(), 565, 430)
-    ctx.restore()
 }
 
 export const drawCrosshair = (ctx: CanvasRenderingContext2D, crosshairSettings: crosshairData) => {

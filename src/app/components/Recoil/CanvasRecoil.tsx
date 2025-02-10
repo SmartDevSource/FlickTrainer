@@ -3,15 +3,15 @@ import React, { useEffect, useRef, useState } from 'react'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
 import { Vector2, CrosshairData, ImageObject } from '@/types'
-import { shotTimeout, updateTargetTimer } from '@/functions/target'
-import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries, drawWeapon, drawPauseScreen, drawCrosshair } from '@/functions/draw'
-import { initRecoil, updateRecoil } from '@/functions/deagle_recoil'
+import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries, drawWeapon, drawPauseScreen, drawCrosshair } from '@/functions/Recoil/draw'
+import { updateRecoil } from '@/functions/Recoil/recoil_manager'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
 
 const sensitivityFactor: number = 1.2
 
 const CanvasRecoil = () => {
     const isFiring = useRef<boolean>(false)
+    const weapon = useRef<string>('ak47')
 
     let startInterval = useRef<ReturnType<typeof setInterval>>(null)
     let timeElapsedInterval = useRef<ReturnType<typeof setInterval>>(null)
@@ -69,9 +69,6 @@ const CanvasRecoil = () => {
             }
             document.exitFullscreen().then(() => {
                 isFullScreen.current = false
-                if (shotTimeout){
-                    clearTimeout(shotTimeout)
-                }
                 if (startInterval.current){
                     clearInterval(startInterval.current)
                 }
@@ -153,7 +150,14 @@ const CanvasRecoil = () => {
                     isFiring.current = true
                     audios.deagleshot.audio.currentTime = 0
                     audios.deagleshot.audio.play()
-                    initRecoil(screenOffset.current)
+                }
+            }
+        }
+        const handleMouseUp = (event: MouseEvent) => {
+            // FIRING //
+            if (event.button === 0 && isFullScreen.current){
+                if (isFiring.current){
+                    isFiring.current = false
                 }
             }
         }
@@ -162,12 +166,14 @@ const CanvasRecoil = () => {
         window.addEventListener('fullscreenchange', handleFullscreenChange)
         window.addEventListener('mousemove', handleMouseMove)
         window.addEventListener('mousedown', handleMouseDown)
+        window.addEventListener('mouseup', handleMouseUp)
 
         return () => {
             window.removeEventListener('keydown', handleKeydown)
             window.removeEventListener('fullscreenchange', handleFullscreenChange)
             window.removeEventListener('mousemove', handleMouseMove)
             window.removeEventListener('mousedown', handleMouseDown)
+            window.removeEventListener('mouseup', handleMouseUp)
         }
     }, [])
 
@@ -180,7 +186,7 @@ const CanvasRecoil = () => {
                     setTimeout(() => {
                         setIsLoading(false)
                         draw()
-                    }, performance.now())
+                    }, 1000)
                 } catch (err) {
                     console.error(`Error while loading all resources :`, err)
                 }
@@ -192,14 +198,13 @@ const CanvasRecoil = () => {
         if (ctx.current && canvasRef.current && backgroundImage.current){
             ctx.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
 
-            updateTargetTimer()
-            updateRecoil(screenOffset.current)
+            updateRecoil(screenOffset.current, weapon.current, isFiring.current)
 
             if (isFullScreen.current){
                 // MAP BACKGROUND //
                 ctx.current.drawImage(backgroundImage.current.img, screenOffset.current.x, screenOffset.current.y)
 
-                drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current, updateFiringState)
+                drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current)
                 drawCrosshair(ctx.current, crosshairData.current)
 
                 // drawScreenOffsets(ctx.current, screenOffset.current)

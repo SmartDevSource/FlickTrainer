@@ -110,3 +110,22 @@ export interface MapSpotStruct {
 export interface MapStruct {
     [spotName: string]: SpotStruct
 }
+
+export interface Weapon {
+    spreads: Record<number, Vector2>
+}
+
+export interface WeaponsStruct {
+    [weapon: string]: Weapon
+}
+
+export interface SpraySettings {
+    index: number,
+    bullets_amount: number,
+    current_weapon: Weapon | null,
+    is_spraying: boolean,
+    spray_offset: Vector2,
+    next_spread: Vector2,
+    angle: number,
+    distance: number
+}
