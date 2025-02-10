@@ -8,7 +8,8 @@ import { Navbar } from "./components/Navbar"
 import { UserSettingsModal } from "./components/UserSettingsModal"
 import { Alert, AlertParams } from "./components/Alert"
 import { GameSettings } from "@/types"
-import { TrainingPage } from "./components/TrainingPage"
+import { FlickTrainingPage } from "./components/Flick/FlickTrainingPage"
+import { RecoilTrainingPage } from "./components/Recoil/RecoilTrainingPage"
 
 const gameSettingsTest: GameSettings = {
   mode: 'spot',
@@ -20,7 +21,7 @@ const gameSettingsTest: GameSettings = {
 }
 
 const MainPage = () => {
-  const [currentPage, setCurrentPage] = useState<string>('home')
+  const [currentPage, setCurrentPage] = useState<string>('home') // recoil_training
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
   const [messageAlert, setMessageAlert] = useState<AlertParams | null>(null)
   const [gameSettings, setGameSettings] = useState<GameSettings | null>(gameSettingsTest)
@@ -65,7 +66,7 @@ const MainPage = () => {
 
   useEffect(()=>{
     if (gameSettings){
-      setCurrentPage('training')
+      setCurrentPage('flick_training')
     }
   }, [gameSettings])
   
@@ -95,10 +96,15 @@ const MainPage = () => {
         onLaunchGame={(game_settings) => prepareGame(game_settings)}
       />
     }
-    {gameSettings && currentPage === 'training' &&
-      <TrainingPage
+    {gameSettings && currentPage === 'flick_training' &&
+      <FlickTrainingPage
         game_settings={gameSettings}
         onBackMenu={() => setCurrentPage('map_peek')}
+      />
+    }
+    {currentPage === 'recoil_training' &&
+      <RecoilTrainingPage
+        onBackMenu={() => setCurrentPage('home')}
       />
     }
     </>
