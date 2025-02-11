@@ -112,7 +112,8 @@ export interface MapStruct {
 }
 
 export interface Weapon {
-    spreads: Record<number, Vector2>
+    fire_rate: number
+    spreads: Record<number, Vector2>,
 }
 
 export interface WeaponsStruct {

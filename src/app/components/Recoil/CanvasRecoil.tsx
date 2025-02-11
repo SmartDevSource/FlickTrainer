@@ -2,15 +2,16 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
-import { Vector2, CrosshairData, ImageObject, RecoilBackground } from '@/types'
+import { Vector2, CrosshairData, RecoilBackground } from '@/types'
 import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries, drawWeapon, drawPauseScreen, drawCrosshair } from '@/functions/Recoil/draw'
-import { updateRecoil } from '@/functions/Recoil/recoil_manager'
+import { updateRecoil, screenSprayOffset, spreadOffset } from '@/functions/Recoil/recoil_manager'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
 
 const sensitivityFactor: number = 1.2
 
 const CanvasRecoil = () => {
     const isFiring = useRef<boolean>(false)
+    const currentSpread = useRef<Vector2>({x: 0, y: 0})
     const weapon = useRef<string>('ak47')
 
     let startInterval = useRef<ReturnType<typeof setInterval>>(null)
@@ -23,6 +24,7 @@ const CanvasRecoil = () => {
 
     const screenOffset = useRef<Vector2>({x: 0, y: 0})
     const aimPunch = useRef<Vector2>({x: 0, y: 0})
+    const spreadPunch = useRef<Vector2>({x: 0, y: 0})
 
     const crosshairData = useRef<CrosshairData>(getCrosshairStorage())
     const mouseSensitivity = useRef<number>(getSensitivityStorage())
@@ -34,6 +36,9 @@ const CanvasRecoil = () => {
     
     const updateFiringState = (state: boolean) => {
         isFiring.current = state
+    }
+    const updateCurrentSpread = (spread: Vector2) => {
+        currentSpread.current = spread
     }
 
     const updateBackground = (direction: string) => {
@@ -213,8 +218,15 @@ const CanvasRecoil = () => {
 
     const getScreenOffsetAimPunch = () => {
         return {
-            x: screenOffset.current.x + aimPunch.current.x,
-            y: screenOffset.current.y + aimPunch.current.y,
+            x: screenOffset.current.x + (aimPunch.current.x / screenSprayOffset.x),
+            y: screenOffset.current.y + (aimPunch.current.y / screenSprayOffset.y),
+        }
+    }
+
+    const getPatternSpreadOffset = () => {
+        return {
+            x: aimPunch.current.x / spreadOffset.x,
+            y: aimPunch.current.y / spreadOffset.y,
         }
     }
 
@@ -222,12 +234,36 @@ const CanvasRecoil = () => {
         if (ctx.current && canvasRef.current && backgroundImage.current){
             ctx.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
 
-            updateRecoil(aimPunch.current, weapon.current, isFiring.current, updateFiringState)
+            updateRecoil(
+                aimPunch.current,
+                weapon.current,
+                isFiring.current,
+                updateFiringState,
+                updateCurrentSpread
+            )
 
             if (isFullScreen.current){
                 // MAP BACKGROUND //
                 const screenOffsetAimPunch = getScreenOffsetAimPunch()
                 ctx.current.drawImage(backgroundImage.current.image.img, screenOffsetAimPunch.x, screenOffsetAimPunch.y)
+
+                const patternSpreadOffset = getPatternSpreadOffset()
+                ctx.current.save()
+                ctx.current.fillStyle = 'red'
+                ctx.current.fillRect(
+                    (fullscreenCanvasSize.w / 2) - patternSpreadOffset.x,
+                    (fullscreenCanvasSize.h / 2) - patternSpreadOffset.y,
+                    5,
+                    5
+                )
+                ctx.current.fillStyle = 'blue'
+                ctx.current.fillRect(
+                    (fullscreenCanvasSize.w / 2) - currentSpread.current.x,
+                    (fullscreenCanvasSize.h / 2) - currentSpread.current.y,
+                    5,
+                    5
+                )
+                ctx.current.restore()
 
                 // drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current)
                 drawCrosshair(ctx.current, crosshairData.current)

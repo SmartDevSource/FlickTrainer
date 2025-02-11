@@ -1,13 +1,16 @@
 import { Vector2, Timer, SpraySettings } from "@/types"
 import { weapons } from "./weapons"
 
+export const screenSprayOffset: Vector2 = {x: 30, y: 20} // plus j'augmente X, moins le spread horizontal est important
+export const spreadOffset: Vector2 = {x: 30, y: 20} // plus j'augmente X, moins le spread horizontal est important
+
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
-const shotCadenza: number = .01
-const screenSprayOffset: Vector2 = {x: 30, y: 20} // plus j'augmente X, moins le spread horizontal est important
+const spreadFactor: number = .01
 const sprayRecoveryDuration: number = 5
+const fireTimer: {elapsed: number} = {elapsed: 0}
 const recoveryTimer: {elapsed: number} = {elapsed: 0}
 
-const spraySettings: SpraySettings = {
+export const spraySettings: SpraySettings = {
     index: 1,
     bullets_amount: 0,
     current_weapon: null,
@@ -16,8 +19,8 @@ const spraySettings: SpraySettings = {
     next_spread: {x: 0, y: 0},
     angle: 0,
     distance: 0,
-    isRecovering: false
-}
+    isRecovering: false,
+}   
 
 const initSprayParams = (weapon_name: string) => {
     const current_weapon = weapons[weapon_name as keyof typeof weapons]
@@ -52,38 +55,46 @@ export const updateRecoil = (
     aimPunch: Vector2,
     weapon_name: string,
     isFiring: boolean, 
-    updateFiringState: (state: boolean) => void) =>
+    updateFiringState: (state: boolean) => void,
+    updateCurrentSpread: (spread: Vector2) => void) =>
 {
     const now = performance.now()
     timer.delta_time = (now - timer.last_update) / 1000
     timer.last_update = now
 
-    const step = timer.delta_time / shotCadenza
+    fireTimer.elapsed += timer.delta_time
+
+    const step = timer.delta_time / spreadFactor
 
     if (isFiring){
         if (!spraySettings.is_spraying){
             initSprayParams(weapon_name)
         } else {
-            if (spraySettings.index < spraySettings.bullets_amount){
-                const dx = spraySettings.next_spread.x - spraySettings.spray_offset.x
-                const dy = spraySettings.next_spread.y - spraySettings.spray_offset.y
+            if (spraySettings.current_weapon && fireTimer.elapsed > spraySettings.current_weapon.fire_rate){
+                fireTimer.elapsed = 0
+                if (spraySettings.index < spraySettings.bullets_amount){
 
-                spraySettings.spray_offset.x += dx * step
-                spraySettings.spray_offset.y += dy * step
-
-                const distance_to_next_spread = Math.sqrt(dx * dx + dy * dy)
-
-                if (distance_to_next_spread < .1){
-                    spraySettings.index++
-                    updateSprayData()
+                    const dx = spraySettings.next_spread.x - spraySettings.spray_offset.x
+                    const dy = spraySettings.next_spread.y - spraySettings.spray_offset.y
+    
+                    spraySettings.spray_offset.x += dx * step
+                    spraySettings.spray_offset.y += dy * step
+    
+                    const distance_to_next_spread = Math.sqrt(dx * dx + dy * dy)
+    
+                    if (distance_to_next_spread < .1){
+                        spraySettings.index++
+                        updateSprayData()
+                        updateCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
+                    }
+    
+                    aimPunch.x += spraySettings.spray_offset.x
+                    aimPunch.y += spraySettings.spray_offset.y
+                } else {
+                    spraySettings.is_spraying = false
+                    spraySettings.isRecovering = true
+                    updateFiringState(false)
                 }
-
-                aimPunch.x += spraySettings.spray_offset.x / screenSprayOffset.x
-                aimPunch.y += spraySettings.spray_offset.y / screenSprayOffset.y
-            } else {
-                spraySettings.is_spraying = false
-                spraySettings.isRecovering = true
-                updateFiringState(false)
             }
         }
     } else {
@@ -94,7 +105,7 @@ export const updateRecoil = (
 
         if (spraySettings.index > 1){
             recoveryTimer.elapsed += timer.delta_time
-            if (recoveryTimer.elapsed >= shotCadenza){
+            if (recoveryTimer.elapsed >= spreadFactor){
                 spraySettings.index--
                 recoveryTimer.elapsed = 0
             }
