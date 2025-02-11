@@ -1,11 +1,6 @@
 import { ImageObject } from "./types"
 
 export const images: {[key: string]: ImageObject} = {
-    // RECOIL TRAINER BACKGROUND //
-    recoil_background_2: {
-        path: `/gfx/recoil_trainer/recoil_background_2.png`,
-        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
-    },
     // SPRITES //
     deagle: {
         path: `/gfx/hud/deagle.png`,
@@ -1362,6 +1357,56 @@ export const images: {[key: string]: ImageObject} = {
     },
     train_tside_heaven_to_b_layer: {
         path: `/gfx/maps/train/terrorist_circuit/tside_heaven_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    /////// ANUBIS CT SIDE ///////
+    anubis_ctside_ctspawn_to_b: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_ctspawn_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_ctspawn_to_b_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_ctspawn_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_temple_to_b: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_temple_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_temple_to_b_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_temple_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_pillar_to_b_main: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_pillar_to_b_main.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_pillar_to_b_main_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_pillar_to_b_main_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_connector_to_water: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_connector_to_water.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_connector_to_water_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_connector_to_water_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_b_main: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_b_main.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_b_main_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_b_main_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+
+
+
+
+    // RECOIL TRAINER BACKGROUND //
+    recoil_background_2: {
+        path: `/gfx/recoil_trainer/recoil_background_2.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
 }

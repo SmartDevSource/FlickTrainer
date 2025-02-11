@@ -215,7 +215,7 @@ const CanvasRecoil = () => {
                 const screenOffsetAimPunch = getScreenOffsetAimPunch()
                 ctx.current.drawImage(backgroundImage.current.img, screenOffsetAimPunch.x, screenOffsetAimPunch.y)
 
-                drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current)
+                // drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current)
                 drawCrosshair(ctx.current, crosshairData.current)
 
                 // drawScreenOffsets(ctx.current, screenOffset.current)
