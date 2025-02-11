@@ -1416,6 +1416,62 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/anubis/ct_circuit/ctside_mid_2_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    anubis_ctside_mid_to_window: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_mid_to_window.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_mid_to_window_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_mid_to_window_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_mid_to_b: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_mid_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_mid_to_b_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_mid_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_mid_to_a: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_mid_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_mid_to_a_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_mid_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_a_camera: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_a_camera.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_a_camera_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_a_camera_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_a_heaven: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_a_heaven.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_a_heaven_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_a_heaven_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_pilar_to_a_main: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_pilar_to_a_main.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_pilar_to_a_main_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_pilar_to_a_main_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_a_main_to_water: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_a_main_to_water.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_a_main_to_water_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_a_main_to_water_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 
 
 

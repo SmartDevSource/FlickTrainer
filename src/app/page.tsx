@@ -15,7 +15,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'anubis',
   circuit: 'ct_circuit',
-  spot: 'ctside_mid_2',
+  spot: 'ctside_a_main_to_water',
   difficulty: 'easy',
   spot_objective: 25
 }
