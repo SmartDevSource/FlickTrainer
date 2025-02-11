@@ -1400,6 +1400,22 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/anubis/ct_circuit/ctside_b_main_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    anubis_ctside_mid_1: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_mid_1.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_mid_1_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_mid_1_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_mid_2: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_mid_2.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_ctside_mid_2_layer: {
+        path: `/gfx/maps/anubis/ct_circuit/ctside_mid_2_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 
 
 

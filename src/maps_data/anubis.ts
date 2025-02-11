@@ -335,5 +335,131 @@ export const anubis: MapStruct = {
         },
         circuit: 'ct_circuit'
     },
+    ctside_mid_1: {
+        targets: [
+            {
+                character: "terrorist_crouch_darken",
+                come_from: "up",
+                from: {x: 1102, y: 518},
+                to: {x: 1074, y: 542},
+                idle: false,
+                distance: 5.999999999999995,
+                speed: 83
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 1116, y: 526},
+                to: {x: 1076, y: 526},
+                idle: false,
+                distance: 5.999999999999995,
+                speed: 125
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 950, y: 558},
+                to: {x: 932, y: 558},
+                idle: false,
+                distance: 9.599999999999982,
+                speed: 78
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "left",
+                from: {x: 398, y: 516},
+                to: {x: 566, y: 516},
+                idle: false,
+                distance: 2.2,
+                speed: 341
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "left",
+                from: {x: 398, y: 516},
+                to: {x: 490, y: 516},
+                idle: false,
+                distance: 2.2,
+                speed: 341
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'ct_circuit'
+    },
+    ctside_mid_2: {
+        targets: [
+            {
+                character: "terrorist_crouch_darken",
+                come_from: "left",
+                from: {x: 826, y: 568},
+                to: {x: 850, y: 568},
+                idle: false,
+                distance: 11.599999999999975,
+                speed: 55
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "right",
+                from: {x: 1018, y: 568},
+                to: {x: 992, y: 568},
+                idle: false,
+                distance: 11.599999999999975,
+                speed: 90
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 1016, y: 568},
+                to: {x: 982, y: 568},
+                idle: false,
+                distance: 9.799999999999981,
+                speed: 100
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "right",
+                from: {x: 1016, y: 568},
+                to: {x: 1000, y: 568},
+                idle: false,
+                distance: 9.799999999999981,
+                speed: 90
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "left",
+                from: {x: 828, y: 568},
+                to: {x: 866, y: 568},
+                idle: false,
+                distance: 9.799999999999981,
+                speed: 100
+            },
+            {
+                character: "terrorist_standup",
+                come_from: "left",
+                from: {x: 828, y: 568},
+                to: {x: 850, y: 568},
+                idle: false,
+                distance: 9.799999999999981,
+                speed: 90
+            },
+            {
+                character: "terrorist_standup_darken",
+                come_from: "left",
+                from: {x: 496, y: 558},
+                to: {x: 582, y: 558},
+                idle: false,
+                distance: 3.200000000000001,
+                speed: 234
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'ct_circuit'
+    },
     ////////////////// T CIRCUIT //////////////////
 }
