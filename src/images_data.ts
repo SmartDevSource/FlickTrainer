@@ -1477,8 +1477,20 @@ export const images: {[key: string]: ImageObject} = {
 
 
     // RECOIL TRAINER BACKGROUND //
+    recoil_background_1: {
+        path: `/gfx/recoil_trainer/recoil_background_1.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     recoil_background_2: {
         path: `/gfx/recoil_trainer/recoil_background_2.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    recoil_background_3: {
+        path: `/gfx/recoil_trainer/recoil_background_3.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    recoil_background_4: {
+        path: `/gfx/recoil_trainer/recoil_background_4.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
 }

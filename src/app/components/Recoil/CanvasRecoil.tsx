@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
-import { Vector2, CrosshairData, ImageObject } from '@/types'
+import { Vector2, CrosshairData, ImageObject, RecoilBackground } from '@/types'
 import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries, drawWeapon, drawPauseScreen, drawCrosshair } from '@/functions/Recoil/draw'
 import { updateRecoil } from '@/functions/Recoil/recoil_manager'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
@@ -27,13 +27,27 @@ const CanvasRecoil = () => {
     const crosshairData = useRef<CrosshairData>(getCrosshairStorage())
     const mouseSensitivity = useRef<number>(getSensitivityStorage())
 
-    const backgroundImage = useRef<ImageObject>({path: '', img: new Image()})
+    const backgroundImage = useRef<RecoilBackground>({index: 1, image: {path:'', img: new Image()}})
 
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const mouseAccel = useRef<Vector2>({x: 0, y: 0})
     
     const updateFiringState = (state: boolean) => {
         isFiring.current = state
+    }
+
+    const updateBackground = (direction: string) => {
+        switch(direction){
+            case '+':
+                if (backgroundImage.current.index < 4)
+                    backgroundImage.current.index++
+            break
+            case '-':
+                if (backgroundImage.current.index > 1)
+                    backgroundImage.current.index--
+            break
+        }
+        backgroundImage.current.image.img = images[`recoil_background_${backgroundImage.current.index}`].img
     }
 
     const initGame = () => {
@@ -111,7 +125,8 @@ const CanvasRecoil = () => {
         }
         const handleKeydown = (event:KeyboardEvent) => {
             switch(event.key.toLowerCase()){
-                case '1': alert("1"); break
+                case 'z': case 'w': updateBackground('-'); break
+                case 's': updateBackground('+'); break
                 case 'Alt': case 'Meta': case 'F12': handleExitFullScreen(); break
             }
         }
@@ -184,7 +199,7 @@ const CanvasRecoil = () => {
             (async () => {
                 try {
                     await loadResources(images, audios)
-                    backgroundImage.current.img = images.recoil_background_2.img
+                    updateBackground('+')
                     setTimeout(() => {
                         setIsLoading(false)
                         draw()
@@ -197,7 +212,6 @@ const CanvasRecoil = () => {
     }, [ctx])
 
     const getScreenOffsetAimPunch = () => {
-        console.table(aimPunch.current)
         return {
             x: screenOffset.current.x + aimPunch.current.x,
             y: screenOffset.current.y + aimPunch.current.y,
@@ -213,14 +227,14 @@ const CanvasRecoil = () => {
             if (isFullScreen.current){
                 // MAP BACKGROUND //
                 const screenOffsetAimPunch = getScreenOffsetAimPunch()
-                ctx.current.drawImage(backgroundImage.current.img, screenOffsetAimPunch.x, screenOffsetAimPunch.y)
+                ctx.current.drawImage(backgroundImage.current.image.img, screenOffsetAimPunch.x, screenOffsetAimPunch.y)
 
                 // drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current)
                 drawCrosshair(ctx.current, crosshairData.current)
 
                 // drawScreenOffsets(ctx.current, screenOffset.current)
             } else {
-                drawPauseScreen(ctx.current, backgroundImage.current)
+                drawPauseScreen(ctx.current, backgroundImage.current.image)
             }
             requestAnimationFrame(draw)
         }

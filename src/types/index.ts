@@ -130,3 +130,8 @@ export interface SpraySettings {
     distance: number,
     isRecovering: boolean
 }
+
+export interface RecoilBackground {
+    index: number,
+    image: ImageObject
+}

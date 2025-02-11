@@ -115,6 +115,5 @@ export const updateRecoil = (
                 spraySettings.isRecovering = false
             }
         }
-        console.log("index :", spraySettings.index)
     }
 }
