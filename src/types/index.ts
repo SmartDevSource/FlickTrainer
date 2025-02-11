@@ -127,5 +127,6 @@ export interface SpraySettings {
     spray_offset: Vector2,
     next_spread: Vector2,
     angle: number,
-    distance: number
+    distance: number,
+    isRecovering: boolean
 }

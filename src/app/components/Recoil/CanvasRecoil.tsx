@@ -22,6 +22,8 @@ const CanvasRecoil = () => {
     const isFullScreen = useRef(false)
 
     const screenOffset = useRef<Vector2>({x: 0, y: 0})
+    const aimPunch = useRef<Vector2>({x: 0, y: 0})
+
     const crosshairData = useRef<CrosshairData>(getCrosshairStorage())
     const mouseSensitivity = useRef<number>(getSensitivityStorage())
 
@@ -148,8 +150,8 @@ const CanvasRecoil = () => {
             if (event.button === 0 && isFullScreen.current){
                 if (!isFiring.current){
                     isFiring.current = true
-                    audios.deagleshot.audio.currentTime = 0
-                    audios.deagleshot.audio.play()
+                    // audios.deagleshot.audio.currentTime = 0
+                    // audios.deagleshot.audio.play()
                 }
             }
         }
@@ -194,21 +196,29 @@ const CanvasRecoil = () => {
         }
     }, [ctx])
 
+    const getScreenOffsetAimPunch = () => {
+        console.table(aimPunch.current)
+        return {
+            x: screenOffset.current.x + aimPunch.current.x,
+            y: screenOffset.current.y + aimPunch.current.y,
+        }
+    }
+
     const draw = () => {
         if (ctx.current && canvasRef.current && backgroundImage.current){
             ctx.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
 
-            updateRecoil(screenOffset.current, weapon.current, isFiring.current)
+            updateRecoil(aimPunch.current, weapon.current, isFiring.current, updateFiringState)
 
             if (isFullScreen.current){
                 // MAP BACKGROUND //
-                ctx.current.drawImage(backgroundImage.current.img, screenOffset.current.x, screenOffset.current.y)
+                const screenOffsetAimPunch = getScreenOffsetAimPunch()
+                ctx.current.drawImage(backgroundImage.current.img, screenOffsetAimPunch.x, screenOffsetAimPunch.y)
 
                 drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current)
                 drawCrosshair(ctx.current, crosshairData.current)
 
                 // drawScreenOffsets(ctx.current, screenOffset.current)
-
             } else {
                 drawPauseScreen(ctx.current, backgroundImage.current)
             }
