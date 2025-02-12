@@ -2,17 +2,20 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
-import { Vector2, CrosshairData, RecoilBackground } from '@/types'
-import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries, drawWeapon, drawPauseScreen, drawCrosshair } from '@/functions/Recoil/draw'
-import { updateRecoil, screenSprayOffset, spreadOffset } from '@/functions/Recoil/recoil_manager'
+import { Vector2, CrosshairData, RecoilBackground, Weapon } from '@/types'
+import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries, 
+    drawWeapon, drawPauseScreen, drawCrosshair, drawTrajectorySpreads,
+    drawFixedPattern }
+from '@/functions/Recoil/draw'
+import { updateRecoil, screenSprayOffset } from '@/functions/Recoil/recoil_manager'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
+import { weapons } from '@/functions/Recoil/weapons'
 
 const sensitivityFactor: number = 1.2
 
 const CanvasRecoil = () => {
     const isFiring = useRef<boolean>(false)
-    const currentSpread = useRef<Vector2>({x: 0, y: 0})
-    const weapon = useRef<string>('ak47')
+    const weapon = useRef<Weapon>(weapons['ak47'])
 
     let startInterval = useRef<ReturnType<typeof setInterval>>(null)
     let timeElapsedInterval = useRef<ReturnType<typeof setInterval>>(null)
@@ -24,7 +27,7 @@ const CanvasRecoil = () => {
 
     const screenOffset = useRef<Vector2>({x: 0, y: 0})
     const aimPunch = useRef<Vector2>({x: 0, y: 0})
-    const spreadPunch = useRef<Vector2>({x: 0, y: 0})
+    const currentSpread = useRef<Vector2>({x: 0, y: 0})
 
     const crosshairData = useRef<CrosshairData>(getCrosshairStorage())
     const mouseSensitivity = useRef<number>(getSensitivityStorage())
@@ -37,7 +40,7 @@ const CanvasRecoil = () => {
     const updateFiringState = (state: boolean) => {
         isFiring.current = state
     }
-    const updateCurrentSpread = (spread: Vector2) => {
+    const setCurrentSpread = (spread: Vector2) => {
         currentSpread.current = spread
     }
 
@@ -225,8 +228,8 @@ const CanvasRecoil = () => {
 
     const getPatternSpreadOffset = () => {
         return {
-            x: aimPunch.current.x / spreadOffset.x,
-            y: aimPunch.current.y / spreadOffset.y,
+            x: aimPunch.current.x / screenSprayOffset.x,
+            y: aimPunch.current.y / screenSprayOffset.y,
         }
     }
 
@@ -239,7 +242,7 @@ const CanvasRecoil = () => {
                 weapon.current,
                 isFiring.current,
                 updateFiringState,
-                updateCurrentSpread
+                setCurrentSpread
             )
 
             if (isFullScreen.current){
@@ -248,27 +251,14 @@ const CanvasRecoil = () => {
                 ctx.current.drawImage(backgroundImage.current.image.img, screenOffsetAimPunch.x, screenOffsetAimPunch.y)
 
                 const patternSpreadOffset = getPatternSpreadOffset()
-                ctx.current.save()
-                ctx.current.fillStyle = 'red'
-                ctx.current.fillRect(
-                    (fullscreenCanvasSize.w / 2) - patternSpreadOffset.x,
-                    (fullscreenCanvasSize.h / 2) - patternSpreadOffset.y,
-                    5,
-                    5
-                )
-                ctx.current.fillStyle = 'blue'
-                ctx.current.fillRect(
-                    (fullscreenCanvasSize.w / 2) - currentSpread.current.x,
-                    (fullscreenCanvasSize.h / 2) - currentSpread.current.y,
-                    5,
-                    5
-                )
-                ctx.current.restore()
+                drawTrajectorySpreads(ctx.current, patternSpreadOffset)
 
                 // drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current)
                 drawCrosshair(ctx.current, crosshairData.current)
 
                 // drawScreenOffsets(ctx.current, screenOffset.current)
+
+                drawFixedPattern(ctx.current, screenOffsetAimPunch, weapon.current)
             } else {
                 drawPauseScreen(ctx.current, backgroundImage.current.image)
             }

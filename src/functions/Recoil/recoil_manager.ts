@@ -1,8 +1,6 @@
-import { Vector2, Timer, SpraySettings } from "@/types"
-import { weapons } from "./weapons"
+import { Vector2, Timer, SpraySettings, Weapon } from "@/types"
 
-export const screenSprayOffset: Vector2 = {x: 30, y: 20} // plus j'augmente X, moins le spread horizontal est important
-export const spreadOffset: Vector2 = {x: 30, y: 20} // plus j'augmente X, moins le spread horizontal est important
+export const screenSprayOffset: Vector2 = {x: 40, y: 30} // plus j'augmente X, moins le spread horizontal est important
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const spreadFactor: number = .01
@@ -22,11 +20,9 @@ export const spraySettings: SpraySettings = {
     isRecovering: false,
 }   
 
-const initSprayParams = (weapon_name: string) => {
-    const current_weapon = weapons[weapon_name as keyof typeof weapons]
-
-    spraySettings.current_weapon = current_weapon
-    spraySettings.bullets_amount = Object.keys(current_weapon.spreads).length
+const initSprayParams = (weapon: Weapon) => {
+    spraySettings.current_weapon = weapon
+    spraySettings.bullets_amount = Object.keys(weapon.spreads).length
     spraySettings.is_spraying = true
     spraySettings.spray_offset = {x: 0, y: 0}
     updateSprayData()
@@ -53,10 +49,10 @@ const updateSprayData = () => {
 
 export const updateRecoil = (
     aimPunch: Vector2,
-    weapon_name: string,
+    weapon: Weapon,
     isFiring: boolean, 
     updateFiringState: (state: boolean) => void,
-    updateCurrentSpread: (spread: Vector2) => void) =>
+    setCurrentSpread: (spread: Vector2) => void) =>
 {
     const now = performance.now()
     timer.delta_time = (now - timer.last_update) / 1000
@@ -68,7 +64,8 @@ export const updateRecoil = (
 
     if (isFiring){
         if (!spraySettings.is_spraying){
-            initSprayParams(weapon_name)
+            initSprayParams(weapon)
+            setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
         } else {
             if (spraySettings.current_weapon && fireTimer.elapsed > spraySettings.current_weapon.fire_rate){
                 fireTimer.elapsed = 0
@@ -85,7 +82,7 @@ export const updateRecoil = (
                     if (distance_to_next_spread < .1){
                         spraySettings.index++
                         updateSprayData()
-                        updateCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
+                        setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
                     }
     
                     aimPunch.x += spraySettings.spray_offset.x

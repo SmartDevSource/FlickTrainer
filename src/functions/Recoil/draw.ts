@@ -1,4 +1,4 @@
-import { ImageObject, Vector2, Timer } from "@/types"
+import { ImageObject, Vector2, Timer, Weapon } from "@/types"
 import { crosshairData } from "../crosshair_changer"
 
 export const minimizedCanvasSize = {w: 320, h: 240}
@@ -8,6 +8,9 @@ export const screenBoundaries = {left: 250, top: 250, right: -925, bottom: -545}
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const framesPerSecond: number = 100
 const crosshairScaleFactor: number = 2
+const sprayGapFactor: number = 3
+
+const sprayPatternPosition: Vector2 = {x: 1000, y: 550}
 
 export const weaponAnim: {
     current_frame: number,
@@ -193,4 +196,42 @@ export const drawCrosshair = (ctx: CanvasRenderingContext2D, crosshairSettings: 
             (crosshairSettings.length / crosshairScaleFactor)
         )
     }
+}
+
+export const drawTrajectorySpreads = (ctx: CanvasRenderingContext2D, patternSpreadOffset: Vector2) => {
+    ctx.save()
+    ctx.fillStyle = 'red'
+    ctx.fillRect(
+        (fullscreenCanvasSize.w / 2) - patternSpreadOffset.x,
+        (fullscreenCanvasSize.h / 2) - patternSpreadOffset.y,
+        5,
+        5
+    )
+    ctx.restore()
+}
+
+export const drawFixedPattern = (
+    ctx: CanvasRenderingContext2D,
+    screenOffsetAimPunch: Vector2,
+    weapon: Weapon) =>
+{
+    ctx.save()
+    ctx.fillStyle = 'red'
+
+    let last_spread = {x: 0, y: 0}
+
+    for (let i = 1; i <= Object.keys(weapon.spreads).length; i++){
+        const offset_x = last_spread.x + weapon.spreads[i].x
+        const offset_y = last_spread.y + weapon.spreads[i].y
+
+        ctx.font = '10px Arial'
+        ctx.fillText(
+            i.toString(),
+            sprayPatternPosition.x + (screenOffsetAimPunch.x) + (offset_x / sprayGapFactor),
+            sprayPatternPosition.y + (screenOffsetAimPunch.y) + (offset_y / sprayGapFactor),
+        )
+        
+        last_spread = {x: offset_x, y: offset_y}
+    }
+    ctx.restore()
 }
