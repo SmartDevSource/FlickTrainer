@@ -251,7 +251,12 @@ const CanvasRecoil = () => {
                 ctx.current.drawImage(backgroundImage.current.image.img, screenOffsetAimPunch.x, screenOffsetAimPunch.y)
 
                 const patternSpreadOffset = getPatternSpreadOffset()
-                drawTrajectorySpreads(ctx.current, patternSpreadOffset)
+                drawTrajectorySpreads(
+                    ctx.current,
+                    patternSpreadOffset,
+                    screenOffsetAimPunch,
+                    spraySettings
+                )
 
                 // drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current)
                 drawCrosshair(ctx.current, crosshairData.current)
