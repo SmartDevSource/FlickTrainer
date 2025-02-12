@@ -1,9 +1,10 @@
-import { ImageObject, Vector2, Timer, Weapon } from "@/types"
+import { ImageObject, Vector2, Timer, Weapon, SpraySettings } from "@/types"
 import { crosshairData } from "../crosshair_changer"
 
 export const minimizedCanvasSize = {w: 320, h: 240}
 export const fullscreenCanvasSize = {w: 1240, h: 768}
 export const screenBoundaries = {left: 250, top: 250, right: -925, bottom: -545}
+export const screenScaleFactor = (fullscreenCanvasSize.w / fullscreenCanvasSize.h)
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const framesPerSecond: number = 100
@@ -200,7 +201,13 @@ export const drawCrosshair = (ctx: CanvasRenderingContext2D, crosshairSettings: 
 
 export const drawTrajectorySpreads = (ctx: CanvasRenderingContext2D, patternSpreadOffset: Vector2) => {
     ctx.save()
-    ctx.fillStyle = 'red'
+    ctx.fillStyle = 'pink'
+    ctx.strokeRect(
+        (fullscreenCanvasSize.w / 2) - patternSpreadOffset.x,
+        (fullscreenCanvasSize.h / 2) - patternSpreadOffset.y,
+        5,
+        5
+    )
     ctx.fillRect(
         (fullscreenCanvasSize.w / 2) - patternSpreadOffset.x,
         (fullscreenCanvasSize.h / 2) - patternSpreadOffset.y,
@@ -213,10 +220,10 @@ export const drawTrajectorySpreads = (ctx: CanvasRenderingContext2D, patternSpre
 export const drawFixedPattern = (
     ctx: CanvasRenderingContext2D,
     screenOffsetAimPunch: Vector2,
-    weapon: Weapon) =>
+    weapon: Weapon,
+    spraySettings: SpraySettings) =>
 {
     ctx.save()
-    ctx.fillStyle = 'red'
 
     let last_spread = {x: 0, y: 0}
 
@@ -224,13 +231,26 @@ export const drawFixedPattern = (
         const offset_x = last_spread.x + weapon.spreads[i].x
         const offset_y = last_spread.y + weapon.spreads[i].y
 
-        ctx.font = '10px Arial'
-        ctx.fillText(
-            i.toString(),
+        spraySettings.is_spraying ?
+            spraySettings.index + 1 === i ? ctx.fillStyle = 'lime' : ctx.fillStyle = 'red' :
+            spraySettings.index === i ?  ctx.fillStyle = 'lime' : ctx.fillStyle = 'red' 
+
+        ctx.fillRect(
             sprayPatternPosition.x + (screenOffsetAimPunch.x) + (offset_x / sprayGapFactor),
             sprayPatternPosition.y + (screenOffsetAimPunch.y) + (offset_y / sprayGapFactor),
+            5,
+            5
         )
-        
+
+        /// DRAWING INDEX NUMBERS ///
+        // ctx.font = '10px Arial'
+
+        // ctx.fillText(
+        //     i.toString(),
+        //     sprayPatternPosition.x + (screenOffsetAimPunch.x) + (offset_x / sprayGapFactor),
+        //     sprayPatternPosition.y + (screenOffsetAimPunch.y) + (offset_y / sprayGapFactor),
+        // )
+
         last_spread = {x: offset_x, y: offset_y}
     }
     ctx.restore()

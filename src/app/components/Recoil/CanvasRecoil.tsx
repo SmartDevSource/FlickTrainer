@@ -5,9 +5,9 @@ import { audios } from '@/audio_data'
 import { Vector2, CrosshairData, RecoilBackground, Weapon } from '@/types'
 import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries, 
     drawWeapon, drawPauseScreen, drawCrosshair, drawTrajectorySpreads,
-    drawFixedPattern }
+    drawFixedPattern, screenScaleFactor }
 from '@/functions/Recoil/draw'
-import { updateRecoil, screenSprayOffset } from '@/functions/Recoil/recoil_manager'
+import { updateRecoil, screenSprayOffset, spraySettings } from '@/functions/Recoil/recoil_manager'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
 import { weapons } from '@/functions/Recoil/weapons'
 
@@ -221,15 +221,15 @@ const CanvasRecoil = () => {
 
     const getScreenOffsetAimPunch = () => {
         return {
-            x: screenOffset.current.x + (aimPunch.current.x / screenSprayOffset.x),
-            y: screenOffset.current.y + (aimPunch.current.y / screenSprayOffset.y),
+            x: screenOffset.current.x + (aimPunch.current.x / (screenSprayOffset.x / screenScaleFactor)),
+            y: screenOffset.current.y + (aimPunch.current.y / (screenSprayOffset.y / screenScaleFactor)),
         }
     }
 
     const getPatternSpreadOffset = () => {
         return {
-            x: aimPunch.current.x / screenSprayOffset.x,
-            y: aimPunch.current.y / screenSprayOffset.y,
+            x: aimPunch.current.x / (screenSprayOffset.x / screenScaleFactor),
+            y: aimPunch.current.y / (screenSprayOffset.y / screenScaleFactor),
         }
     }
 
@@ -258,7 +258,12 @@ const CanvasRecoil = () => {
 
                 // drawScreenOffsets(ctx.current, screenOffset.current)
 
-                drawFixedPattern(ctx.current, screenOffsetAimPunch, weapon.current)
+                drawFixedPattern(
+                    ctx.current,
+                    screenOffsetAimPunch,
+                    weapon.current,
+                    spraySettings
+                )
             } else {
                 drawPauseScreen(ctx.current, backgroundImage.current.image)
             }
