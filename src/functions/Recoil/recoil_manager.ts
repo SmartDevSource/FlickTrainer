@@ -1,6 +1,6 @@
 import { Vector2, Timer, SpraySettings, Weapon } from "@/types"
 
-export const screenSprayOffset: Vector2 = {x: 30, y: 30} // plus j'augmente X, moins le spread horizontal est important
+export const screenSprayOffset: Vector2 = {x: 70, y: 80} // plus j'augmente X, moins le spread horizontal est important
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const spreadFactor: number = .01

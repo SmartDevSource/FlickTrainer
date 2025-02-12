@@ -12,9 +12,12 @@ const crosshairScaleFactor: number = 2
 
 const sprayGapFactor: number = 3
 const sprayPatternPosition: Vector2 = {x: 1000, y: 550}
-const impactSize: number = 5
+const impactHelperSize: number = 5
+const spreadImageSize: number = 10
 const spreads: Vector2[] = []
+
 let lastSpreadIndex: number = 0
+let fireLatch: boolean = false
 
 export const weaponAnim: {
     current_frame: number,
@@ -36,8 +39,8 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
                             weaponImg: ImageObject,
                             flameImg: ImageObject,
                             isFiring: boolean,
-                            mouseAccel: Vector2) =>
-{
+                            mouseAccel: Vector2
+) => {
     const now = performance.now()
     timer.delta_time = (now - timer.last_update) / 1000
     timer.last_update = now
@@ -206,77 +209,94 @@ export const drawTrajectorySpreads = (
     ctx: CanvasRenderingContext2D,
     patternSpreadOffset: Vector2,
     screenOffsetAimPunch: Vector2,
-    spraySettings: SpraySettings) => 
-{
-    const fixed_spread_offset_x = ((fullscreenCanvasSize.w / 2) - patternSpreadOffset.x) - impactSize / 2
-    const fixed_spread_offset_y = ((fullscreenCanvasSize.h / 2) - patternSpreadOffset.y) - impactSize / 2
+    spraySettings: SpraySettings,
+    spread_img: ImageObject
+) => {
+    const relative_spread_offset_x = ((fullscreenCanvasSize.w / 2) - screenOffsetAimPunch.x - (patternSpreadOffset.x)) - spreadImageSize / 2
+    const relative_spread_offset_y = ((fullscreenCanvasSize.h / 2) - screenOffsetAimPunch.y - (patternSpreadOffset.y * screenScaleFactor)) - spreadImageSize / 2
 
-    const relative_spread_offset_x = ((fullscreenCanvasSize.w / 2) - screenOffsetAimPunch.x) - impactSize / 2
-    const relative_spread_offset_y = ((fullscreenCanvasSize.h / 2) - screenOffsetAimPunch.y) - impactSize / 2
-
-    if (!spraySettings.is_spraying && spreads.length > 0){
-        spreads.splice(0, spreads.length)
+    if (!spraySettings.is_spraying && spreads.length > 0 && !fireLatch){
+        fireLatch = true
     }
 
-    if (lastSpreadIndex != spraySettings.index){
+    if (spraySettings.is_spraying && fireLatch){
+        spreads.splice(0, spreads.length)
+        fireLatch = false
+    }
+
+    if (lastSpreadIndex != spraySettings.index && spraySettings.is_spraying){
         lastSpreadIndex = spraySettings.index
         spreads.push({x: relative_spread_offset_x, y: relative_spread_offset_y})
     }
-    ctx.save()
-    ctx.fillStyle = 'pink'
-    ctx.strokeRect(fixed_spread_offset_x, fixed_spread_offset_y, impactSize, impactSize)
-    ctx.fillRect(fixed_spread_offset_x, fixed_spread_offset_y, impactSize, impactSize)
-    ctx.restore()
-
-    ctx.save()
-    ctx.fillStyle = 'black'
     spreads.forEach(spread => {
-        ctx.fillRect(
+        ctx.drawImage(
+            spread_img.img,
             screenOffsetAimPunch.x + spread.x,
             screenOffsetAimPunch.y + spread.y,
-            impactSize,
-            impactSize
+            spreadImageSize,
+            spreadImageSize
         )
     })
-    ctx.restore()
 }
 
 export const drawFixedPattern = (
     ctx: CanvasRenderingContext2D,
     screenOffsetAimPunch: Vector2,
     weapon: Weapon,
-    spraySettings: SpraySettings) =>
-{
+    spraySettings: SpraySettings
+) => {
     ctx.save()
-
     let last_spread = {x: 0, y: 0}
+    let current_spread_data = {offset_x: 0, offset_y: 0, index: 0}
 
     for (let i = 1; i <= Object.keys(weapon.spreads).length; i++){
         const offset_x = last_spread.x + weapon.spreads[i].x
         const offset_y = last_spread.y + weapon.spreads[i].y
 
-        spraySettings.is_spraying ?
-            spraySettings.index + 1 === i ? ctx.fillStyle = 'lime' : ctx.fillStyle = 'red' :
-            spraySettings.index === i ?  ctx.fillStyle = 'lime' : ctx.fillStyle = 'red' 
+        if (spraySettings.index === i){
+            current_spread_data.offset_x = offset_x
+            current_spread_data.offset_y = offset_y
+        }
 
-        ctx.fillRect(
+        ctx.fillStyle = 'red'
+        ctx.globalAlpha = .5
+
+        ctx.beginPath()
+        ctx.arc(
             sprayPatternPosition.x + (screenOffsetAimPunch.x) + (offset_x / sprayGapFactor),
             sprayPatternPosition.y + (screenOffsetAimPunch.y) + (offset_y / sprayGapFactor),
-            impactSize,
-            impactSize
+            impactHelperSize,
+            0,
+            2 * Math.PI
         )
+        ctx.fill()
+        ctx.stroke()
 
         /// DRAWING INDEX NUMBERS ///
-        ctx.font = '10px Arial'
+        // ctx.font = '10px Arial'
 
-        ctx.fillStyle = 'yellow'
-        ctx.fillText(
-            i.toString(),
-            sprayPatternPosition.x + (screenOffsetAimPunch.x) + (offset_x / sprayGapFactor),
-            sprayPatternPosition.y + (screenOffsetAimPunch.y) + (offset_y / sprayGapFactor),
-        )
+        // ctx.fillStyle = 'yellow'
+        // ctx.fillText(
+        //     i.toString(),
+        //     sprayPatternPosition.x + (screenOffsetAimPunch.x) + (offset_x / sprayGapFactor),
+        //     sprayPatternPosition.y + (screenOffsetAimPunch.y) + (offset_y / sprayGapFactor),
+        // )
 
         last_spread = {x: offset_x, y: offset_y}
     }
+
+    ctx.fillStyle = 'lime'
+    ctx.globalAlpha = 1
+    ctx.beginPath()
+    ctx.arc(
+        sprayPatternPosition.x + (screenOffsetAimPunch.x) + (current_spread_data.offset_x / sprayGapFactor),
+        sprayPatternPosition.y + (screenOffsetAimPunch.y) + (current_spread_data.offset_y / sprayGapFactor),
+        impactHelperSize,
+        0,
+        2 * Math.PI
+    )
+    ctx.fill()
+    ctx.stroke()
+
     ctx.restore()
 }

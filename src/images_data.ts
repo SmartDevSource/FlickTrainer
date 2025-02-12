@@ -1493,4 +1493,8 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/recoil_trainer/recoil_background_4.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    spread: {
+        path: `/gfx/recoil_trainer/spread.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 }

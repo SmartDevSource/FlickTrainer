@@ -255,13 +255,11 @@ const CanvasRecoil = () => {
                     ctx.current,
                     patternSpreadOffset,
                     screenOffsetAimPunch,
-                    spraySettings
+                    spraySettings,
+                    images.spread
                 )
 
                 // drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current)
-                drawCrosshair(ctx.current, crosshairData.current)
-
-                // drawScreenOffsets(ctx.current, screenOffset.current)
 
                 drawFixedPattern(
                     ctx.current,
@@ -269,6 +267,8 @@ const CanvasRecoil = () => {
                     weapon.current,
                     spraySettings
                 )
+
+                drawCrosshair(ctx.current, crosshairData.current)
             } else {
                 drawPauseScreen(ctx.current, backgroundImage.current.image)
             }

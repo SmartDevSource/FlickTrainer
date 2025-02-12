@@ -2,7 +2,7 @@ import { WeaponsStruct } from "@/types"
 
 export const weapons: WeaponsStruct = {
     ak47: {
-        fire_rate: .01,
+        fire_rate: .1,
         spreads: {
             1: {
                 x: 0,
