@@ -17,8 +17,11 @@ const impactHelperSize: number = 5
 const spreadImageSize: number = 10
 const spreads: Vector2[] = []
 
+let bulletsIntoTarget: number = 0
 let lastSpreadIndex: number = 0
 let fireLatch: boolean = false
+let showPattern: boolean = true
+let lastPercentage: number = 0
 
 export const weaponAnim: {
     current_frame: number,
@@ -206,13 +209,28 @@ export const drawCrosshair = (ctx: CanvasRenderingContext2D, crosshairSettings: 
     }
 }
 
+
+const showBulletsPercentage = (ctx: CanvasRenderingContext2D) => {
+    if (lastPercentage){
+        ctx.save()
+        ctx.fillStyle = 'white'
+        ctx.strokeStyle = 'black'
+        ctx.font = '30px Play-Bold'
+        ctx.fillText(`Spray accuracy : ${lastPercentage.toFixed(2)} %`, 850, 50)
+        ctx.strokeText(`Spray accuracy : ${lastPercentage.toFixed(2)} %`, 850, 50)
+        ctx.restore()
+    }
+}
+
 export const drawTrajectorySpreads = (
     ctx: CanvasRenderingContext2D,
+    weapon: Weapon,
     patternSpreadOffset: Vector2,
     screenOffsetAimPunch: Vector2,
     spraySettings: SpraySettings,
     spread_img: ImageObject,
-    beep: AudioObject
+    slowPercentage: number,
+    audios: {[key: string]: AudioObject},
 ) => {
     const relative_spread_offset_x = ((fullscreenCanvasSize.w / 2) - screenOffsetAimPunch.x - (patternSpreadOffset.x)) - spreadImageSize / 2
     const relative_spread_offset_y = ((fullscreenCanvasSize.h / 2) - screenOffsetAimPunch.y - (patternSpreadOffset.y * screenScaleFactor)) - spreadImageSize / 2
@@ -224,23 +242,35 @@ export const drawTrajectorySpreads = (
     if (spraySettings.is_spraying && fireLatch){
         spreads.splice(0, spreads.length)
         fireLatch = false
+        bulletsIntoTarget = 0
     }
 
     if (lastSpreadIndex != spraySettings.index && spraySettings.is_spraying){
         lastSpreadIndex = spraySettings.index
 
-        const isOnTarget = Math.abs(currentTargetSpreadPosition.x - (fullscreenCanvasSize.w / 2)) <= spreadImageSize / 2 &&
-                           Math.abs(currentTargetSpreadPosition.y - (fullscreenCanvasSize.h / 2)) <= spreadImageSize / 2
+        let targetArea = (((1 / slowPercentage) * (spreadImageSize / 2)) * 10)
+        if (targetArea > 25) targetArea = 25
+
+        const isOnTarget = Math.abs(currentTargetSpreadPosition.x - (fullscreenCanvasSize.w / 2)) <= targetArea &&
+                           Math.abs(currentTargetSpreadPosition.y - (fullscreenCanvasSize.h / 2)) <= targetArea
         if (isOnTarget){
-            const rnd_x = Math.floor(Math.random() * 4) - 2 
-            const rnd_y = Math.floor(Math.random() * 4) - 2 
+            const rnd_x = Math.floor(Math.random() * 4) - 2
+            const rnd_y = Math.floor(Math.random() * 4) - 2
             spreads.push({x: sprayPatternPosition.x + rnd_x, y: sprayPatternPosition.y + rnd_y})
-            beep.audio.currentTime = 0
-            beep.audio.play()
+            bulletsIntoTarget++
         } else {
             spreads.push({x: relative_spread_offset_x, y: relative_spread_offset_y})
         }
-        console.log("isOnTarget :", isOnTarget)
+        if (spraySettings.index === Object.keys(weapon.spreads).length){
+            showPattern = false
+            lastPercentage = (bulletsIntoTarget * 100) / Object.keys(spreads).length
+            audios.beep.audio.currentTime = 0
+            setTimeout(()=>{
+                audios.beep.audio.play()
+                showPattern = true
+                bulletsIntoTarget = 0
+            }, 2000)
+        }
     }
     spreads.forEach(spread => {
         ctx.drawImage(
@@ -251,6 +281,8 @@ export const drawTrajectorySpreads = (
             spreadImageSize
         )
     })
+
+    showBulletsPercentage(ctx)
 }
 
 export const drawFixedPattern = (
@@ -272,10 +304,9 @@ export const drawFixedPattern = (
             current_spread_data.offset_y = offset_y
         }
 
-        if (i >= spraySettings.index){
+        if (i >= spraySettings.index && showPattern){
             ctx.fillStyle = 'red'
             ctx.globalAlpha = .5
-    
             ctx.beginPath()
             ctx.arc(
                 sprayPatternPosition.x + (screenOffsetAimPunch.x) + (offset_x / sprayGapFactor),
@@ -288,34 +319,26 @@ export const drawFixedPattern = (
             ctx.stroke()
         }
 
-        /// DRAWING INDEX NUMBERS ///
-        // ctx.font = '10px Arial'
-
-        // ctx.fillStyle = 'yellow'
-        // ctx.fillText(
-        //     i.toString(),
-        //     sprayPatternPosition.x + (screenOffsetAimPunch.x) + (offset_x / sprayGapFactor),
-        //     sprayPatternPosition.y + (screenOffsetAimPunch.y) + (offset_y / sprayGapFactor),
-        // )
-
         last_spread = {x: offset_x, y: offset_y}
     }
 
-    currentTargetSpreadPosition.x = sprayPatternPosition.x + (screenOffsetAimPunch.x) + (current_spread_data.offset_x / sprayGapFactor)
-    currentTargetSpreadPosition.y = sprayPatternPosition.y + (screenOffsetAimPunch.y) + (current_spread_data.offset_y / sprayGapFactor)
-
-    ctx.fillStyle = 'lime'
-    ctx.globalAlpha = 1
-    ctx.beginPath()
-    ctx.arc(
-        currentTargetSpreadPosition.x,
-        currentTargetSpreadPosition.y,
-        impactHelperSize,
-        0,
-        2 * Math.PI
-    )
-    ctx.fill()
-    ctx.stroke()
+    if (showPattern){
+        currentTargetSpreadPosition.x = sprayPatternPosition.x + (screenOffsetAimPunch.x) + (current_spread_data.offset_x / sprayGapFactor)
+        currentTargetSpreadPosition.y = sprayPatternPosition.y + (screenOffsetAimPunch.y) + (current_spread_data.offset_y / sprayGapFactor)
+    
+        ctx.fillStyle = 'lime'
+        ctx.globalAlpha = 1
+        ctx.beginPath()
+        ctx.arc(
+            currentTargetSpreadPosition.x,
+            currentTargetSpreadPosition.y,
+            impactHelperSize,
+            0,
+            2 * Math.PI
+        )
+        ctx.fill()
+        ctx.stroke()
+    }
 
     ctx.restore()
 }

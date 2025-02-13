@@ -15,7 +15,7 @@ const sensitivityFactor: number = 1.2
 
 const CanvasRecoil = () => {
     const isFiring = useRef<boolean>(false)
-    const weapon = useRef<Weapon>(weapons['ak47'])
+    const weapon = useRef<Weapon>(weapons['mac10'])
 
     let startInterval = useRef<ReturnType<typeof setInterval>>(null)
     let timeElapsedInterval = useRef<ReturnType<typeof setInterval>>(null)
@@ -253,11 +253,13 @@ const CanvasRecoil = () => {
                 const patternSpreadOffset = getPatternSpreadOffset()
                 drawTrajectorySpreads(
                     ctx.current,
+                    weapon.current,
                     patternSpreadOffset,
                     screenOffsetAimPunch,
                     spraySettings,
                     images.spread,
-                    audios.beep
+                    slowPercentage.value,
+                    audios
                 )
 
                 // drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current)
