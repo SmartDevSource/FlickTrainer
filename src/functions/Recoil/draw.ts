@@ -249,13 +249,13 @@ export const drawTrajectorySpreads = (
         lastSpreadIndex = spraySettings.index
 
         let targetArea = (((1 / slowPercentage) * (spreadImageSize / 2)) * 10)
-        if (targetArea > 25) targetArea = 25
+        if (targetArea > 20) targetArea = 20
 
         const isOnTarget = Math.abs(currentTargetSpreadPosition.x - (fullscreenCanvasSize.w / 2)) <= targetArea &&
                            Math.abs(currentTargetSpreadPosition.y - (fullscreenCanvasSize.h / 2)) <= targetArea
         if (isOnTarget){
-            const rnd_x = Math.floor(Math.random() * 4) - 2
-            const rnd_y = Math.floor(Math.random() * 4) - 2
+            const rnd_x = Math.floor(Math.random() * 10) - 5
+            const rnd_y = Math.floor(Math.random() * 10) - 5
             spreads.push({x: sprayPatternPosition.x + rnd_x, y: sprayPatternPosition.y + rnd_y})
             bulletsIntoTarget++
         } else {

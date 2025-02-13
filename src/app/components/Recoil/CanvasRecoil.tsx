@@ -15,7 +15,7 @@ const sensitivityFactor: number = 1.2
 
 const CanvasRecoil = () => {
     const isFiring = useRef<boolean>(false)
-    const weapon = useRef<Weapon>(weapons['mac10'])
+    const weapon = useRef<Weapon>(weapons['ak47'])
 
     let startInterval = useRef<ReturnType<typeof setInterval>>(null)
     let timeElapsedInterval = useRef<ReturnType<typeof setInterval>>(null)
