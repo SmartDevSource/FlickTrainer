@@ -7,7 +7,7 @@ import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries,
     drawWeapon, drawPauseScreen, drawCrosshair, drawTrajectorySpreads,
     drawFixedPattern, screenScaleFactor }
 from '@/functions/Recoil/draw'
-import { updateRecoil, screenSprayOffset, spraySettings } from '@/functions/Recoil/recoil_manager'
+import { updateRecoil, screenSprayOffset, spraySettings, slowPercentage } from '@/functions/Recoil/recoil_manager'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
 import { weapons } from '@/functions/Recoil/weapons'
 
@@ -25,7 +25,7 @@ const CanvasRecoil = () => {
 
     const isFullScreen = useRef(false)
 
-    const screenOffset = useRef<Vector2>({x: 0, y: 0})
+    const screenOffset = useRef<Vector2>({x: -500, y: 0})
     const aimPunch = useRef<Vector2>({x: 0, y: 0})
     const currentSpread = useRef<Vector2>({x: 0, y: 0})
 
@@ -256,7 +256,8 @@ const CanvasRecoil = () => {
                     patternSpreadOffset,
                     screenOffsetAimPunch,
                     spraySettings,
-                    images.spread
+                    images.spread,
+                    audios.beep
                 )
 
                 // drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current)

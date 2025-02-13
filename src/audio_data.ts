@@ -21,4 +21,9 @@ export const audios: {[key: string]: AudioObject} = {
         volume: .6,
         audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
     },
+    beep: {
+        path: `/audio/beep.mp3`,
+        volume: .6,
+        audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
+    },
 }

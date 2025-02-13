@@ -361,39 +361,39 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
             initCanvas()
         }
         const handleKeydown = (event:KeyboardEvent) => {
-            switch(event.key){
-                case 'ArrowLeft': testKeysPressed.current.left = true; break
-                case 'ArrowRight': testKeysPressed.current.right = true; break
-                case 'ArrowUp': testKeysPressed.current.up = true; break
-                case 'ArrowDown': testKeysPressed.current.down = true; break
+            switch(event.key.toLocaleLowerCase()){
+                case 'arrowleft': testKeysPressed.current.left = true; break
+                case 'arrowright': testKeysPressed.current.right = true; break
+                case 'arrowup': testKeysPressed.current.up = true; break
+                case 'arrowdown': testKeysPressed.current.down = true; break
                 case '+': testKeysPressed.current.plus = true; break
                 case '-': testKeysPressed.current.minus = true; break
-                case 'Alt': case 'Meta': case 'F12': handleExitFullScreen(); break
-                case 'A': case 'a':
+                case 'alt': case 'meta': case 'f12': handleExitFullScreen(); break
+                case 'a':
                     testCharacter.current = testCharacter.current >= 9 ?
                         2
                         :
                         testCharacter.current + 1
                 break
-                case 'Z': case 'z':
+                case 'z':
                     testSpeedPosition.current *= 10
                     if (testSpeedPosition.current > 100){
                         testSpeedPosition.current = 1
                     }
                 break
-                case 'E': case 'e':
+                case 'e':
                     testSpeedScale.current *= 10
                     if (testSpeedScale.current > 1){
                         testSpeedScale.current = .01
                     }
                 break
-                case 'F': case 'f':
+                case 'f':
                     testComeFrom.current = testComeFrom.current === 'left' ? 'right' : 'left'
                 break
-                case 'G': case 'g':
+                case 'g':
                     testStartPosition.current = {...testPosition.current}
                 break
-                case 'S': case 's':
+                case 's':
                     const helperCoords = getHelperCoords(
                         Object.keys(images)[testCharacter.current],
                         testComeFrom.current,
@@ -407,11 +407,11 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
         }
 
         const handleKeyUp = (event: KeyboardEvent) => {
-            switch(event.key){
-                case 'ArrowLeft': testKeysPressed.current.left = false; break
-                case 'ArrowRight': testKeysPressed.current.right = false; break
-                case 'ArrowUp': testKeysPressed.current.up = false; break
-                case 'ArrowDown': testKeysPressed.current.down = false; break
+            switch(event.key.toLowerCase()){
+                case 'arrowleft': testKeysPressed.current.left = false; break
+                case 'arrowright': testKeysPressed.current.right = false; break
+                case 'arrowup': testKeysPressed.current.up = false; break
+                case 'arrowdown': testKeysPressed.current.down = false; break
                 case '+': testKeysPressed.current.plus = false; break
                 case '-': testKeysPressed.current.minus = false; break
             }

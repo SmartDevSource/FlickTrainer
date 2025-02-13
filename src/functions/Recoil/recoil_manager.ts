@@ -1,12 +1,13 @@
 import { Vector2, Timer, SpraySettings, Weapon } from "@/types"
 
-export const screenSprayOffset: Vector2 = {x: 70, y: 80} // plus j'augmente X, moins le spread horizontal est important
+export const screenSprayOffset: Vector2 = {x: 70, y: 85} // plus j'augmente X, moins le spread horizontal est important
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const spreadFactor: number = .01
 const sprayRecoveryDuration: number = 5
 const fireTimer: {elapsed: number} = {elapsed: 0}
 const recoveryTimer: {elapsed: number} = {elapsed: 0}
+export const slowPercentage: {value: number} = {value: 1}
 
 export const spraySettings: SpraySettings = {
     index: 1,
@@ -67,7 +68,7 @@ export const updateRecoil = (
             initSprayParams(weapon)
             setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
         } else {
-            if (spraySettings.current_weapon && fireTimer.elapsed > spraySettings.current_weapon.fire_rate){
+            if (spraySettings.current_weapon && fireTimer.elapsed > spraySettings.current_weapon.fire_rate * slowPercentage.value){ // * (percentage slower)
                 fireTimer.elapsed = 0
                 if (spraySettings.index < spraySettings.bullets_amount){
 

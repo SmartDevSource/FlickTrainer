@@ -1,4 +1,4 @@
-import { ImageObject, Vector2, Timer, Weapon, SpraySettings } from "@/types"
+import { ImageObject, Vector2, Timer, Weapon, SpraySettings, AudioObject } from "@/types"
 import { crosshairData } from "../crosshair_changer"
 
 export const minimizedCanvasSize = {w: 320, h: 240}
@@ -12,6 +12,7 @@ const crosshairScaleFactor: number = 2
 
 const sprayGapFactor: number = 3
 const sprayPatternPosition: Vector2 = {x: 1000, y: 550}
+const currentTargetSpreadPosition: Vector2 = {x: 0, y: 0}
 const impactHelperSize: number = 5
 const spreadImageSize: number = 10
 const spreads: Vector2[] = []
@@ -210,7 +211,8 @@ export const drawTrajectorySpreads = (
     patternSpreadOffset: Vector2,
     screenOffsetAimPunch: Vector2,
     spraySettings: SpraySettings,
-    spread_img: ImageObject
+    spread_img: ImageObject,
+    beep: AudioObject
 ) => {
     const relative_spread_offset_x = ((fullscreenCanvasSize.w / 2) - screenOffsetAimPunch.x - (patternSpreadOffset.x)) - spreadImageSize / 2
     const relative_spread_offset_y = ((fullscreenCanvasSize.h / 2) - screenOffsetAimPunch.y - (patternSpreadOffset.y * screenScaleFactor)) - spreadImageSize / 2
@@ -226,7 +228,19 @@ export const drawTrajectorySpreads = (
 
     if (lastSpreadIndex != spraySettings.index && spraySettings.is_spraying){
         lastSpreadIndex = spraySettings.index
-        spreads.push({x: relative_spread_offset_x, y: relative_spread_offset_y})
+
+        const isOnTarget = Math.abs(currentTargetSpreadPosition.x - (fullscreenCanvasSize.w / 2)) <= spreadImageSize / 2 &&
+                           Math.abs(currentTargetSpreadPosition.y - (fullscreenCanvasSize.h / 2)) <= spreadImageSize / 2
+        if (isOnTarget){
+            const rnd_x = Math.floor(Math.random() * 4) - 2 
+            const rnd_y = Math.floor(Math.random() * 4) - 2 
+            spreads.push({x: sprayPatternPosition.x + rnd_x, y: sprayPatternPosition.y + rnd_y})
+            beep.audio.currentTime = 0
+            beep.audio.play()
+        } else {
+            spreads.push({x: relative_spread_offset_x, y: relative_spread_offset_y})
+        }
+        console.log("isOnTarget :", isOnTarget)
     }
     spreads.forEach(spread => {
         ctx.drawImage(
@@ -258,19 +272,21 @@ export const drawFixedPattern = (
             current_spread_data.offset_y = offset_y
         }
 
-        ctx.fillStyle = 'red'
-        ctx.globalAlpha = .5
-
-        ctx.beginPath()
-        ctx.arc(
-            sprayPatternPosition.x + (screenOffsetAimPunch.x) + (offset_x / sprayGapFactor),
-            sprayPatternPosition.y + (screenOffsetAimPunch.y) + (offset_y / sprayGapFactor),
-            impactHelperSize,
-            0,
-            2 * Math.PI
-        )
-        ctx.fill()
-        ctx.stroke()
+        if (i >= spraySettings.index){
+            ctx.fillStyle = 'red'
+            ctx.globalAlpha = .5
+    
+            ctx.beginPath()
+            ctx.arc(
+                sprayPatternPosition.x + (screenOffsetAimPunch.x) + (offset_x / sprayGapFactor),
+                sprayPatternPosition.y + (screenOffsetAimPunch.y) + (offset_y / sprayGapFactor),
+                impactHelperSize,
+                0,
+                2 * Math.PI
+            )
+            ctx.fill()
+            ctx.stroke()
+        }
 
         /// DRAWING INDEX NUMBERS ///
         // ctx.font = '10px Arial'
@@ -285,12 +301,15 @@ export const drawFixedPattern = (
         last_spread = {x: offset_x, y: offset_y}
     }
 
+    currentTargetSpreadPosition.x = sprayPatternPosition.x + (screenOffsetAimPunch.x) + (current_spread_data.offset_x / sprayGapFactor)
+    currentTargetSpreadPosition.y = sprayPatternPosition.y + (screenOffsetAimPunch.y) + (current_spread_data.offset_y / sprayGapFactor)
+
     ctx.fillStyle = 'lime'
     ctx.globalAlpha = 1
     ctx.beginPath()
     ctx.arc(
-        sprayPatternPosition.x + (screenOffsetAimPunch.x) + (current_spread_data.offset_x / sprayGapFactor),
-        sprayPatternPosition.y + (screenOffsetAimPunch.y) + (current_spread_data.offset_y / sprayGapFactor),
+        currentTargetSpreadPosition.x,
+        currentTargetSpreadPosition.y,
         impactHelperSize,
         0,
         2 * Math.PI
