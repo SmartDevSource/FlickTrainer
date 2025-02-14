@@ -10,7 +10,7 @@ const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const framesPerSecond: number = 100
 const crosshairScaleFactor: number = 2
 
-const sprayGapFactor: number = 3
+const sprayGapFactor: number = 1.5
 const sprayPatternPosition: Vector2 = {x: 1000, y: 550}
 const currentTargetSpreadPosition: Vector2 = {x: 0, y: 0}
 const impactHelperSize: number = 5
@@ -339,6 +339,5 @@ export const drawFixedPattern = (
         ctx.fill()
         ctx.stroke()
     }
-
     ctx.restore()
 }
