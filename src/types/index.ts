@@ -123,7 +123,7 @@ export interface WeaponsStruct {
 export interface SpraySettings {
     index: number,
     bullets_amount: number,
-    current_weapon: Weapon | null,
+    current_weapon: Weapon,
     is_spraying: boolean,
     spray_offset: Vector2,
     next_spread: Vector2,

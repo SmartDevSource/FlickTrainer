@@ -249,7 +249,7 @@ export const drawTrajectorySpreads = (
         lastSpreadIndex = spraySettings.index
 
         let targetArea = (((1 / slowPercentage) * (spreadImageSize / 2)) * 10)
-        if (targetArea > 20) targetArea = 20
+        if (targetArea > 15) targetArea = 15
 
         const isOnTarget = Math.abs(currentTargetSpreadPosition.x - (fullscreenCanvasSize.w / 2)) <= targetArea &&
                            Math.abs(currentTargetSpreadPosition.y - (fullscreenCanvasSize.h / 2)) <= targetArea

@@ -1,18 +1,20 @@
-import { Vector2, Timer, SpraySettings, Weapon } from "@/types"
+import { Vector2, Timer, SpraySettings, Weapon, WeaponsStruct } from "@/types"
+import { weapons } from "./weapons"
 
 export const screenSprayOffset: Vector2 = {x: 40, y: 40} // plus j'augmente X, moins le spread horizontal est important
+export const slowPercentage: {value: number} = {value: 1}
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
 const spreadFactor: number = .01
 const sprayRecoveryDuration: number = 5
 const fireTimer: {elapsed: number} = {elapsed: 0}
 const recoveryTimer: {elapsed: number} = {elapsed: 0}
-export const slowPercentage: {value: number} = {value: 1}
+const timeShot: {value: number} = {value: 0}
 
 export const spraySettings: SpraySettings = {
     index: 1,
     bullets_amount: 0,
-    current_weapon: null,
+    current_weapon: weapons.ak47,
     is_spraying: false,
     spray_offset: {x: 0, y: 0},
     next_spread: {x: 0, y: 0},
@@ -30,21 +32,19 @@ const initSprayParams = (weapon: Weapon) => {
 }
 
 const updateSprayData = () => {
-    if (spraySettings.current_weapon != null){
-        if (spraySettings.index < spraySettings.bullets_amount){
-            const current_spread = spraySettings.current_weapon.spreads[spraySettings.index]
-            const next_spread = spraySettings.current_weapon.spreads[spraySettings.index + 1]
+    if (spraySettings.index < spraySettings.bullets_amount){
+        const current_spread = spraySettings.current_weapon.spreads[spraySettings.index]
+        const next_spread = spraySettings.current_weapon.spreads[spraySettings.index + 1]
 
-            spraySettings.spray_offset.x = current_spread.x
-            spraySettings.spray_offset.y = current_spread.y
+        spraySettings.spray_offset.x = current_spread.x
+        spraySettings.spray_offset.y = current_spread.y
 
-            const dx = next_spread.x - current_spread.x
-            const dy = next_spread.y - current_spread.y
+        const dx = next_spread.x - current_spread.x
+        const dy = next_spread.y - current_spread.y
 
-            spraySettings.angle = Math.atan2(dy, dx)
-            spraySettings.distance = Math.sqrt(dx * dx + dy * dy)
-            spraySettings.next_spread = next_spread
-        }
+        spraySettings.angle = Math.atan2(dy, dx)
+        spraySettings.distance = Math.sqrt(dx * dx + dy * dy)
+        spraySettings.next_spread = next_spread
     }
 }
 
@@ -59,38 +59,39 @@ export const updateRecoil = (
     timer.delta_time = (now - timer.last_update) / 1000
     timer.last_update = now
 
+    const step = (timer.delta_time / spreadFactor)
     fireTimer.elapsed += timer.delta_time
-
-    const step = timer.delta_time / spreadFactor
 
     if (isFiring){
         if (!spraySettings.is_spraying){
             initSprayParams(weapon)
             setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
+            timeShot.value = now
         } else {
-            if (spraySettings.current_weapon && fireTimer.elapsed > spraySettings.current_weapon.fire_rate * slowPercentage.value){ // * (percentage slower)
-                fireTimer.elapsed = 0
+            if (spraySettings.current_weapon && fireTimer.elapsed >= spraySettings.current_weapon.fire_rate * slowPercentage.value){ // * (percentage slower)
                 if (spraySettings.index < spraySettings.bullets_amount){
-
                     const dx = spraySettings.next_spread.x - spraySettings.spray_offset.x
                     const dy = spraySettings.next_spread.y - spraySettings.spray_offset.y
-    
+
                     spraySettings.spray_offset.x += dx * step
                     spraySettings.spray_offset.y += dy * step
-    
+
                     const distance_to_next_spread = Math.sqrt(dx * dx + dy * dy)
-    
+
                     if (distance_to_next_spread < .1){
                         spraySettings.index++
+                        fireTimer.elapsed = 0
                         updateSprayData()
                         setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
                     }
-    
+
                     aimPunch.x += spraySettings.spray_offset.x
                     aimPunch.y += spraySettings.spray_offset.y
                 } else {
                     spraySettings.is_spraying = false
                     spraySettings.isRecovering = true
+                    fireTimer.elapsed = 0
+                    console.log("Shot length :", now - timeShot.value)
                     updateFiringState(false)
                 }
             }
