@@ -1,7 +1,7 @@
-import { Vector2, Timer, SpraySettings, Weapon, WeaponsStruct } from "@/types"
+import { Vector2, Timer, SpraySettings, Weapon, AudioObject } from "@/types"
 import { weapons } from "./weapons"
 
-export const screenSprayOffset: Vector2 = {x: 40, y: 40} // plus j'augmente X, moins le spread horizontal est important
+export const screenSprayOffset: Vector2 = {x: 35, y: 35} // plus j'augmente X, moins le spread horizontal est important
 export const slowPercentage: {value: number} = {value: 1}
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
@@ -23,9 +23,9 @@ export const spraySettings: SpraySettings = {
     isRecovering: false,
 }   
 
-const initSprayParams = (weapon: Weapon) => {
-    spraySettings.current_weapon = weapon
-    spraySettings.bullets_amount = Object.keys(weapon.spreads).length
+const initSprayParams = (weaponName: string) => {
+    spraySettings.current_weapon = weapons[weaponName]
+    spraySettings.bullets_amount = Object.keys(weapons[weaponName].spreads).length
     spraySettings.is_spraying = true
     spraySettings.spray_offset = {x: 0, y: 0}
     updateSprayData()
@@ -50,11 +50,11 @@ const updateSprayData = () => {
 
 export const updateRecoil = (
     aimPunch: Vector2,
-    weapon: Weapon,
+    weaponName: string,
     isFiring: boolean, 
     updateFiringState: (state: boolean) => void,
-    setCurrentSpread: (spread: Vector2) => void) =>
-{
+    setCurrentSpread: (spread: Vector2) => void,
+) => {
     const now = performance.now()
     timer.delta_time = (now - timer.last_update) / 1000
     timer.last_update = now
@@ -64,7 +64,7 @@ export const updateRecoil = (
 
     if (isFiring){
         if (!spraySettings.is_spraying){
-            initSprayParams(weapon)
+            initSprayParams(weaponName)
             setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
             timeShot.value = now
         } else {
@@ -83,6 +83,7 @@ export const updateRecoil = (
                         fireTimer.elapsed = 0
                         updateSprayData()
                         setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
+                        console.log(spraySettings.current_weapon)
                     }
 
                     aimPunch.x += spraySettings.spray_offset.x

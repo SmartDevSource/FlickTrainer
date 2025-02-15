@@ -127,7 +127,7 @@ export const weapons: WeaponsStruct = {
         }
     },
     mac10: {
-        fire_rate: .01,
+        fire_rate: .0135,
         spreads: {
           1: {
             x: 0,
@@ -252,7 +252,7 @@ export const weapons: WeaponsStruct = {
         },
     },
     galil: {
-      fire_rate: 0.09,
+      fire_rate: .028,
       spreads: {
         1: {
           x: 0,

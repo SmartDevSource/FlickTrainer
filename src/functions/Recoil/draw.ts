@@ -1,4 +1,5 @@
 import { ImageObject, Vector2, Timer, Weapon, SpraySettings, AudioObject } from "@/types"
+import { weapons } from "./weapons"
 import { crosshairData } from "../crosshair_changer"
 
 export const minimizedCanvasSize = {w: 320, h: 240}
@@ -23,6 +24,9 @@ let fireLatch: boolean = false
 let showPattern: boolean = true
 let lastPercentage: number = 0
 
+const audioPool: HTMLAudioElement[] = []
+const maxSounds = 5
+
 export const weaponAnim: {
     current_frame: number,
     last_update: number,
@@ -37,6 +41,20 @@ export const weaponAnim: {
     speed_shot_animation: 7.4,
     frames_count: 20,
     sway_offset: {x: 0, y: 0}
+}
+
+const playShotSound = (audios: {[key: string]: AudioObject}, weaponName: string) => {
+    let sound = audioPool.find(audio => audio.ended || audio.paused)
+    if (!sound){
+        if (audioPool.length < maxSounds){
+            sound = new Audio(audios[weaponName].audio.src)
+            audioPool.push(sound)
+        } else {
+            sound = audioPool[0]
+            sound.currentTime = 0
+        }
+    }
+    sound.play()
 }
 
 export const drawWeapon = (ctx: CanvasRenderingContext2D,
@@ -224,7 +242,7 @@ const showBulletsPercentage = (ctx: CanvasRenderingContext2D) => {
 
 export const drawTrajectorySpreads = (
     ctx: CanvasRenderingContext2D,
-    weapon: Weapon,
+    weaponName: string,
     patternSpreadOffset: Vector2,
     screenOffsetAimPunch: Vector2,
     spraySettings: SpraySettings,
@@ -248,6 +266,8 @@ export const drawTrajectorySpreads = (
     if (lastSpreadIndex != spraySettings.index && spraySettings.is_spraying){
         lastSpreadIndex = spraySettings.index
 
+        playShotSound(audios, weaponName)
+
         let targetArea = (((1 / slowPercentage) * (spreadImageSize / 2)) * 10)
         if (targetArea > 15) targetArea = 15
 
@@ -261,7 +281,7 @@ export const drawTrajectorySpreads = (
         } else {
             spreads.push({x: relative_spread_offset_x, y: relative_spread_offset_y})
         }
-        if (spraySettings.index === Object.keys(weapon.spreads).length){
+        if (spraySettings.index === Object.keys(weapons[weaponName].spreads).length){
             showPattern = false
             lastPercentage = (bulletsIntoTarget * 100) / Object.keys(spreads).length
             audios.beep.audio.currentTime = 0
@@ -287,17 +307,17 @@ export const drawTrajectorySpreads = (
 
 export const drawFixedPattern = (
     ctx: CanvasRenderingContext2D,
+    weaponName: string,
     screenOffsetAimPunch: Vector2,
-    weapon: Weapon,
     spraySettings: SpraySettings
 ) => {
     ctx.save()
     let last_spread = {x: 0, y: 0}
     let current_spread_data = {offset_x: 0, offset_y: 0, index: 0}
 
-    for (let i = 1; i <= Object.keys(weapon.spreads).length; i++){
-        const offset_x = last_spread.x + weapon.spreads[i].x
-        const offset_y = last_spread.y + weapon.spreads[i].y
+    for (let i = 1; i <= Object.keys(weapons[weaponName].spreads).length; i++){
+        const offset_x = last_spread.x + weapons[weaponName].spreads[i].x
+        const offset_y = last_spread.y + weapons[weaponName].spreads[i].y
 
         if (spraySettings.index === i){
             current_spread_data.offset_x = offset_x

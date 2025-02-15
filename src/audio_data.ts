@@ -26,4 +26,25 @@ export const audios: {[key: string]: AudioObject} = {
         volume: .6,
         audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
     },
+    galil: {
+        path: `/audio/galil.mp3`,
+        volume: .6,
+        audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
+    },
+    mac10: {
+        path: `/audio/mac10.mp3`,
+        volume: .6,
+        audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
+    },
+    ak47: {
+        path: `/audio/ak47.mp3`,
+        volume: .6,
+        audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
+    },
+    m4a1s: {
+        path: `/audio/m4a1s.mp3`,
+        volume: .6,
+        audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
+    },
+    
 }

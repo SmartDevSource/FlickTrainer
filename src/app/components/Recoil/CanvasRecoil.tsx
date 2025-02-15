@@ -9,13 +9,12 @@ import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries,
 from '@/functions/Recoil/draw'
 import { updateRecoil, screenSprayOffset, spraySettings, slowPercentage } from '@/functions/Recoil/recoil_manager'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
-import { weapons } from '@/functions/Recoil/weapons'
 
 const sensitivityFactor: number = 1.2
 
 const CanvasRecoil = () => {
     const isFiring = useRef<boolean>(false)
-    const weapon = useRef<Weapon>(weapons['mac10'])
+    const weaponName = useRef<string>('galil')
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const ctx = useRef<CanvasRenderingContext2D | null>(null)
@@ -230,10 +229,10 @@ const CanvasRecoil = () => {
 
             updateRecoil(
                 aimPunch.current,
-                weapon.current,
+                weaponName.current,
                 isFiring.current,
                 updateFiringState,
-                setCurrentSpread
+                setCurrentSpread,
             )
 
             if (isFullScreen.current){
@@ -244,7 +243,7 @@ const CanvasRecoil = () => {
                 const patternSpreadOffset = getPatternSpreadOffset()
                 drawTrajectorySpreads(
                     ctx.current,
-                    weapon.current,
+                    weaponName.current,
                     patternSpreadOffset,
                     screenOffsetAimPunch,
                     spraySettings,
@@ -257,8 +256,8 @@ const CanvasRecoil = () => {
 
                 drawFixedPattern(
                     ctx.current,
+                    weaponName.current,
                     screenOffsetAimPunch,
-                    weapon.current,
                     spraySettings
                 )
 
