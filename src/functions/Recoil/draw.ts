@@ -1,6 +1,8 @@
+import { spraySettings } from './recoil_manager';
 import { ImageObject, Vector2, Timer, Weapon, SpraySettings, AudioObject } from "@/types"
 import { weapons } from "./weapons"
 import { crosshairData } from "../crosshair_changer"
+import { playShotSound } from "../utils"
 
 export const minimizedCanvasSize = {w: 320, h: 240}
 export const fullscreenCanvasSize = {w: 1240, h: 768}
@@ -24,9 +26,6 @@ let fireLatch: boolean = false
 let showPattern: boolean = true
 let lastPercentage: number = 0
 
-const audioPool: HTMLAudioElement[] = []
-const maxSounds = 5
-
 export const weaponAnim: {
     current_frame: number,
     last_update: number,
@@ -43,25 +42,13 @@ export const weaponAnim: {
     sway_offset: {x: 0, y: 0}
 }
 
-const playShotSound = (audios: {[key: string]: AudioObject}, weaponName: string) => {
-    let sound = audioPool.find(audio => audio.ended || audio.paused)
-    if (!sound){
-        if (audioPool.length < maxSounds){
-            sound = new Audio(audios[weaponName].audio.src)
-            audioPool.push(sound)
-        } else {
-            sound = audioPool[0]
-            sound.currentTime = 0
-        }
-    }
-    sound.play()
-}
-
-export const drawWeapon = (ctx: CanvasRenderingContext2D,
-                            weaponImg: ImageObject,
-                            flameImg: ImageObject,
-                            isFiring: boolean,
-                            mouseAccel: Vector2
+export const drawWeapon = (
+    ctx: CanvasRenderingContext2D,
+    weaponName: string,
+    isFiring: boolean,
+    mouseAccel: Vector2,
+    spraySettings: SpraySettings,
+    images: {[key: string]: ImageObject}
 ) => {
     const now = performance.now()
     timer.delta_time = (now - timer.last_update) / 1000
@@ -72,16 +59,15 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
         const currentFrameRate = Math.floor(weaponAnim.last_update * framesPerSecond)
 
         if (currentFrameRate > 0){
-            // weaponAnim.last_update = 0
-            // weaponAnim.current_frame += currentFrameRate
-            // if (weaponAnim.current_frame >= weaponAnim.frames_count - 1){
-            //     updateFiringState(false)
-            //     weaponAnim.current_frame = 0
-            // }
+            weaponAnim.last_update = 0
+            weaponAnim.current_frame += currentFrameRate
+            if (weaponAnim.current_frame >= spraySettings.current_weapon.frames_count - 1){
+                weaponAnim.current_frame = 0
+            }
         }
     }
 
-    const frame_width = weaponImg.img.width / weaponAnim.frames_count
+    const frame_width = images[weaponName].img.width / weaponAnim.frames_count
 
     const normalized_mouseaccel = {
         x: Math.floor(mouseAccel.x) < -60 ? -60 : Math.floor(mouseAccel.x) > 60 ? 60 : Math.floor(mouseAccel.x),
@@ -91,29 +77,16 @@ export const drawWeapon = (ctx: CanvasRenderingContext2D,
     weaponAnim.sway_offset.y += (normalized_mouseaccel.y - weaponAnim.sway_offset.y) * .02
 
     ctx.drawImage(
-        weaponImg.img,
+        images[weaponName].img,
         weaponAnim.current_frame * frame_width,
         0,
         frame_width,
-        weaponImg.img.height,
-        800 + weaponAnim.sway_offset.x,
-        160 + weaponAnim.sway_offset.y,
-        frame_width - 150,
-        weaponImg.img.height - 150
+        images[weaponName].img.height,
+        550 + weaponAnim.sway_offset.x,
+        420 + weaponAnim.sway_offset.y,
+        frame_width - 200,
+        images[weaponName].img.height - 150
     )
-    if (weaponAnim.current_frame == 2){
-        ctx.drawImage(
-            flameImg.img,
-            0,
-            0,
-            flameImg.img.width,
-            flameImg.img.height,
-            660,
-            320,
-            flameImg.img.width / 2,
-            flameImg.img.height / 2
-        )
-    }
 }
 
 export const drawScreenOffsets = (

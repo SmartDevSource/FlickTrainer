@@ -14,7 +14,7 @@ const sensitivityFactor: number = 1.2
 
 const CanvasRecoil = () => {
     const isFiring = useRef<boolean>(false)
-    const weaponName = useRef<string>('galil')
+    const weaponName = useRef<string>('ak47')
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const ctx = useRef<CanvasRenderingContext2D | null>(null)
@@ -252,7 +252,14 @@ const CanvasRecoil = () => {
                     audios
                 )
 
-                // drawWeapon(ctx.current, images.deagle, images.shotflame, isFiring.current, mouseAccel.current)
+                drawWeapon(
+                    ctx.current,
+                    weaponName.current,
+                    isFiring.current,
+                    mouseAccel.current,
+                    spraySettings,
+                    images
+                )
 
                 drawFixedPattern(
                     ctx.current,
@@ -261,6 +268,7 @@ const CanvasRecoil = () => {
                     spraySettings
                 )
 
+                ctx.current.drawImage(images.hud_terro.img, 350, 700, images.hud_terro.img.width / 1.4, images.hud_terro.img.height / 1.4)
                 drawCrosshair(ctx.current, crosshairData.current)
             } else {
                 drawPauseScreen(ctx.current, backgroundImage.current.image)

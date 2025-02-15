@@ -1,5 +1,25 @@
 import { AudioObject, ImageObject } from "@/types"
 
+const audioPool: HTMLAudioElement[] = []
+const maxInstanceSounds = 10
+
+export const playShotSound = (audios: {[key: string]: AudioObject}, weaponName: string) => {
+    let sound = audioPool.find(audio => audio.ended)
+    if (!sound){
+        if (audioPool.length < maxInstanceSounds){
+            sound = new Audio(audios[weaponName].audio.src)
+            audioPool.push(sound)
+        } else {
+            sound = audioPool[0]
+            sound.pause()
+            sound.currentTime = 0
+        }
+    }
+    sound.play()
+    console.log("audioPool.length", audioPool.length)
+}
+
+
 export const loadResources = async (
         images: { [key: string]: ImageObject }, 
         audios: { [key: string]: AudioObject }

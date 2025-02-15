@@ -1497,4 +1497,16 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/recoil_trainer/spread.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+
+    // MENU HUD //
+    hud_terro: {
+        path: `/gfx/hud/hud_terro.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+
+    // WEAPONS //
+    ak47: {
+        path: `/gfx/recoil_trainer/ak47.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    }
 }
