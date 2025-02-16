@@ -113,8 +113,8 @@ export interface MapStruct {
 
 export interface Weapon {
     fire_rate: number,
-    frames_count: number,
     offset: Vector2,
+    flame_offset: Vector2,
     spreads: Record<number, Vector2>,
 }
 

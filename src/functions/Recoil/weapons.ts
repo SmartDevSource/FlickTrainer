@@ -3,8 +3,8 @@ import { WeaponsStruct } from "@/types"
 export const weapons: WeaponsStruct = {
     ak47: {
         fire_rate: .035,
-        frames_count: 15,
-        offset: {x: 650, y: 350},
+        offset: {x: 720, y: 490},
+        flame_offset: {x: 720, y: 370},
         spreads: {
           1: {
             x: 0,
@@ -129,9 +129,9 @@ export const weapons: WeaponsStruct = {
         }
     },
     mac10: {
-        fire_rate: .0135,
-        frames_count: 15,
-        offset: {x: 650, y: 350},
+        fire_rate: .02,
+        offset: {x: 720, y: 490},
+        flame_offset: {x: 720, y: 350},
         spreads: {
           1: {
             x: 0,
@@ -257,8 +257,8 @@ export const weapons: WeaponsStruct = {
     },
     galil: {
       fire_rate: .028,
-      frames_count: 20,
       offset: {x: 0, y: 0},
+      flame_offset: {x: 0, y: 0},
       spreads: {
         1: {
           x: 0,
@@ -404,8 +404,8 @@ export const weapons: WeaponsStruct = {
     },
     m4a1s: {
       fire_rate: .052, // plus c'est élevé plus c'est lent
-      frames_count: 20,
       offset: {x: 0, y: 0},
+      flame_offset: {x: 0, y: 0},
       spreads: {
         1: {
           x: 0,

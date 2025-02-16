@@ -1,4 +1,3 @@
-import { spraySettings } from './recoil_manager';
 import { ImageObject, Vector2, Timer, Weapon, SpraySettings, AudioObject } from "@/types"
 import { weapons } from "./weapons"
 import { crosshairData } from "../crosshair_changer"
@@ -10,7 +9,6 @@ export const screenBoundaries = {left: 250, top: 250, right: -925, bottom: -545}
 export const screenScaleFactor = (fullscreenCanvasSize.w / fullscreenCanvasSize.h)
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
-const framesPerSecond: number = 100
 const crosshairScaleFactor: number = 2
 
 const sprayGapFactor: number = 1.5
@@ -20,8 +18,9 @@ const impactHelperSize: number = 5
 const spreadImageSize: number = 10
 const spreads: Vector2[] = []
 
+const weaponScaleFactor: number = .8
 let bulletsIntoTarget: number = 0
-let lastSpreadIndex: number = 0
+let lastSpreadIndex: number = 1
 let fireLatch: boolean = false
 let showPattern: boolean = true
 let lastPercentage: number = 0
@@ -36,7 +35,6 @@ export const weaponAnim: {
     sway_offset: Vector2,
     scale_recoil: number,
     max_scale_recoil: number,
-    step_scale_recoil: number
 } = {
     current_frame: 0,
     last_update: 0,
@@ -45,8 +43,21 @@ export const weaponAnim: {
     frames_count: 20,
     sway_offset: {x: 0, y: 0},
     scale_recoil: 0,
-    max_scale_recoil: 150,
-    step_scale_recoil: 50
+    max_scale_recoil: 120,
+}
+
+const drawShotFlame = (ctx: CanvasRenderingContext2D, flameImg: ImageObject, flameOffset: Vector2) => {
+    ctx.drawImage(
+        flameImg.img,
+        0,
+        0,
+        flameImg.img.width,
+        flameImg.img.height,
+        flameOffset.x,
+        flameOffset.y - (weaponAnim.scale_recoil / 2),
+        300,
+        300
+    )
 }
 
 export const drawWeapon = (
@@ -55,6 +66,7 @@ export const drawWeapon = (
     isFiring: boolean,
     mouseAccel: Vector2,
     spraySettings: SpraySettings,
+    fireTimer: number,
     images: {[key: string]: ImageObject}
 ) => {
     const now = performance.now()
@@ -67,30 +79,27 @@ export const drawWeapon = (
         }
     }
 
-    if (animateWeapon){
-        weaponAnim.last_update += timer.delta_time
-        const currentFrameRate = Math.floor(weaponAnim.last_update * framesPerSecond)
+    const timerTarget = spraySettings.current_weapon.fire_rate
+    const halfTimer = timerTarget / 2
 
-        if (currentFrameRate > 0){
-            weaponAnim.last_update = 0
-            if (weaponAnim.scale_recoil < weaponAnim.max_scale_recoil)
-                weaponAnim.scale_recoil += weaponAnim.step_scale_recoil * timer.delta_time
-            weaponAnim.current_frame += currentFrameRate
-            if (weaponAnim.current_frame >= spraySettings.current_weapon.frames_count - 1){
-                weaponAnim.current_frame = 0
-                animateWeapon = false
-            }
-        }
-    } else {
-        if (weaponAnim.scale_recoil > 0){
-            weaponAnim.scale_recoil -= timer.delta_time * 1000
-            if (weaponAnim.scale_recoil < 0){
+    if (animateWeapon) {
+        if (fireTimer >= 0 && fireTimer < halfTimer) {
+            const targetScale = weaponAnim.max_scale_recoil
+            const recoil = (spraySettings.index / 10) < .5 ? (spraySettings.index / 10) : .5
+            weaponAnim.scale_recoil += (targetScale - weaponAnim.scale_recoil) * recoil
+        } else if (fireTimer >= halfTimer) {
+            if (weaponAnim.scale_recoil > .1) {
+                weaponAnim.scale_recoil += (0 - weaponAnim.scale_recoil) * 0.1
+            } else {
                 weaponAnim.scale_recoil = 0
+                animateWeapon = false
             }
         }
     }
 
-    const frame_width = images[weaponName].img.width / spraySettings.current_weapon.frames_count
+    if (fireTimer >= 0 && fireTimer < halfTimer){
+        drawShotFlame(ctx, images.shotflame, spraySettings.current_weapon.flame_offset)
+    }
 
     const normalized_mouseaccel = {
         x: Math.floor(mouseAccel.x) < -60 ? -60 : Math.floor(mouseAccel.x) > 60 ? 60 : Math.floor(mouseAccel.x),
@@ -101,14 +110,14 @@ export const drawWeapon = (
 
     ctx.drawImage(
         images[weaponName].img,
-        weaponAnim.current_frame * frame_width,
         0,
-        frame_width,
+        0,
+        images[weaponName].img.width,
         images[weaponName].img.height,
-        spraySettings.current_weapon.offset.x + weaponAnim.sway_offset.x,
+        (spraySettings.current_weapon.offset.x + weaponAnim.sway_offset.x),
         (spraySettings.current_weapon.offset.y + weaponAnim.sway_offset.y) - weaponAnim.scale_recoil,
-        (frame_width - 200) + weaponAnim.scale_recoil,
-        (images[weaponName].img.height - 150) + weaponAnim.scale_recoil
+        (images[weaponName].img.width * weaponScaleFactor) + weaponAnim.scale_recoil,
+        (images[weaponName].img.height * weaponScaleFactor) + weaponAnim.scale_recoil
     )
 }
 
@@ -243,7 +252,7 @@ export const drawTrajectorySpreads = (
     screenOffsetAimPunch: Vector2,
     spraySettings: SpraySettings,
     spread_img: ImageObject,
-    slowPercentage: number,
+    speedShoot: number,
     audios: {[key: string]: AudioObject},
 ) => {
     const relative_spread_offset_x = ((fullscreenCanvasSize.w / 2) - screenOffsetAimPunch.x - (patternSpreadOffset.x)) - spreadImageSize / 2
@@ -251,20 +260,23 @@ export const drawTrajectorySpreads = (
 
     if (!spraySettings.is_spraying && spreads.length > 0 && !fireLatch){
         fireLatch = true
+        lastSpreadIndex = 1
     }
 
     if (spraySettings.is_spraying && fireLatch){
         fireLatch = false
         bulletsIntoTarget = 0
+        spreads.splice(0, spreads.length)
     }
 
     if (lastSpreadIndex != spraySettings.index && spraySettings.is_spraying){
         lastSpreadIndex = spraySettings.index
 
         playShotSound(audios, weaponName)
+        console.log("SHOT !")
 
-        let targetArea = (((1 / slowPercentage) * (spreadImageSize / 2)) * 10)
-        if (targetArea > 15) targetArea = 15
+        const targetArea = (speedShoot >= 0 && speedShoot < 5) ? 15 :
+                           (speedShoot >= 5 && speedShoot < 10) ? 10 : 5
 
         const isOnTarget = Math.abs(currentTargetSpreadPosition.x - (fullscreenCanvasSize.w / 2)) <= targetArea &&
                            Math.abs(currentTargetSpreadPosition.y - (fullscreenCanvasSize.h / 2)) <= targetArea
@@ -284,8 +296,7 @@ export const drawTrajectorySpreads = (
                 audios.beep.audio.play()
                 showPattern = true
                 bulletsIntoTarget = 0
-                spreads.splice(0, spreads.length)
-            }, 2000)
+            }, 1500)
         }
     }
     spreads.forEach(spread => {

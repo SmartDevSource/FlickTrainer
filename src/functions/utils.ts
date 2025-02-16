@@ -1,9 +1,10 @@
 import { AudioObject, ImageObject } from "@/types"
 
-const audioPool: HTMLAudioElement[] = []
+let audioPool: HTMLAudioElement[] = []
 const maxInstanceSounds = 10
 
 export const playShotSound = (audios: {[key: string]: AudioObject}, weaponName: string) => {
+    // audioPool = audioPool.filter(audio => !audio.ended)
     let sound = audioPool.find(audio => audio.ended)
     if (!sound){
         if (audioPool.length < maxInstanceSounds){
@@ -16,7 +17,6 @@ export const playShotSound = (audios: {[key: string]: AudioObject}, weaponName: 
         }
     }
     sound.play()
-    console.log("audioPool.length", audioPool.length)
 }
 
 

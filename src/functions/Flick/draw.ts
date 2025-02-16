@@ -80,17 +80,17 @@ export const drawWeapon = (
         frame_width - 150,
         weaponImg.img.height - 150
     )
-    if (weaponAnim.current_frame == 2){
+    if (weaponAnim.current_frame > 0 && weaponAnim.current_frame < 3){
         ctx.drawImage(
             flameImg.img,
             0,
             0,
             flameImg.img.width,
             flameImg.img.height,
-            660,
-            320,
-            flameImg.img.width / 2,
-            flameImg.img.height / 2
+            680,
+            330,
+            300,
+            300
         )
     }
 }

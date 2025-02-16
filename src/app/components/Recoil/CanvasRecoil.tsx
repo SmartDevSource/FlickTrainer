@@ -7,7 +7,7 @@ import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries,
     drawWeapon, drawPauseScreen, drawCrosshair, drawTrajectorySpreads,
     drawFixedPattern, screenScaleFactor }
 from '@/functions/Recoil/draw'
-import { updateRecoil, screenSprayOffset, spraySettings, slowPercentage } from '@/functions/Recoil/recoil_manager'
+import { updateRecoil, screenSprayOffset, spraySettings, fireTimer } from '@/functions/Recoil/recoil_manager'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
 
 const sensitivityFactor: number = 1.2
@@ -15,6 +15,7 @@ const sensitivityFactor: number = 1.2
 const CanvasRecoil = () => {
     const isFiring = useRef<boolean>(false)
     const weaponName = useRef<string>('mac10')
+    const speedShoot = useRef<number>(getNormalizedSpeed(100))
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const ctx = useRef<CanvasRenderingContext2D | null>(null)
@@ -38,6 +39,9 @@ const CanvasRecoil = () => {
     }
     const setCurrentSpread = (spread: Vector2) => {
         currentSpread.current = spread
+    }
+    function getNormalizedSpeed (value: number) {
+        return -.2 * value + 21
     }
 
     const updateBackground = (direction: string) => {
@@ -227,14 +231,6 @@ const CanvasRecoil = () => {
         if (ctx.current && canvasRef.current && backgroundImage.current){
             ctx.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
 
-            updateRecoil(
-                aimPunch.current,
-                weaponName.current,
-                isFiring.current,
-                updateFiringState,
-                setCurrentSpread,
-            )
-
             if (isFullScreen.current){
                 // MAP BACKGROUND //
                 const screenOffsetAimPunch = getScreenOffsetAimPunch()
@@ -248,7 +244,7 @@ const CanvasRecoil = () => {
                     screenOffsetAimPunch,
                     spraySettings,
                     images.spread,
-                    slowPercentage.value,
+                    speedShoot.current,
                     audios
                 )
 
@@ -258,6 +254,7 @@ const CanvasRecoil = () => {
                     isFiring.current,
                     mouseAccel.current,
                     spraySettings,
+                    fireTimer.elapsed,
                     images
                 )
 
@@ -273,6 +270,16 @@ const CanvasRecoil = () => {
             } else {
                 drawPauseScreen(ctx.current, backgroundImage.current.image)
             }
+            
+            updateRecoil(
+                aimPunch.current,
+                weaponName.current,
+                isFiring.current,
+                speedShoot.current,
+                updateFiringState,
+                setCurrentSpread,
+            )
+
             requestAnimationFrame(draw)
         }
     }
