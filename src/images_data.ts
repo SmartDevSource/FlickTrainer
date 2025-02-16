@@ -1512,5 +1512,13 @@ export const images: {[key: string]: ImageObject} = {
     mac10: {
         path: `/gfx/recoil_trainer/mac10.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    galil: {
+        path: `/gfx/recoil_trainer/galil.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    m4a1s: {
+        path: `/gfx/recoil_trainer/m4a1s.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     }
 }

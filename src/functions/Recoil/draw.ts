@@ -79,7 +79,7 @@ export const drawWeapon = (
         }
     }
 
-    const timerTarget = spraySettings.current_weapon.fire_rate
+    const timerTarget = weapons[weaponName].fire_rate
     const halfTimer = timerTarget / 2
 
     if (animateWeapon) {
@@ -98,7 +98,8 @@ export const drawWeapon = (
     }
 
     if (fireTimer >= 0 && fireTimer < halfTimer){
-        drawShotFlame(ctx, images.shotflame, spraySettings.current_weapon.flame_offset)
+        if (weaponName != 'm4a1s')
+            drawShotFlame(ctx, images.shotflame, weapons[weaponName].flame_offset)
     }
 
     const normalized_mouseaccel = {
@@ -114,8 +115,8 @@ export const drawWeapon = (
         0,
         images[weaponName].img.width,
         images[weaponName].img.height,
-        (spraySettings.current_weapon.offset.x + weaponAnim.sway_offset.x),
-        (spraySettings.current_weapon.offset.y + weaponAnim.sway_offset.y) - weaponAnim.scale_recoil,
+        (weapons[weaponName].offset.x + weaponAnim.sway_offset.x),
+        (weapons[weaponName].offset.y + weaponAnim.sway_offset.y) - weaponAnim.scale_recoil,
         (images[weaponName].img.width * weaponScaleFactor) + weaponAnim.scale_recoil,
         (images[weaponName].img.height * weaponScaleFactor) + weaponAnim.scale_recoil
     )

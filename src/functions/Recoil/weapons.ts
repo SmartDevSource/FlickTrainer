@@ -257,8 +257,8 @@ export const weapons: WeaponsStruct = {
     },
     galil: {
       fire_rate: .028,
-      offset: {x: 0, y: 0},
-      flame_offset: {x: 0, y: 0},
+      offset: {x: 570, y: 450},
+      flame_offset: {x: 720, y: 370},
       spreads: {
         1: {
           x: 0,
@@ -404,8 +404,8 @@ export const weapons: WeaponsStruct = {
     },
     m4a1s: {
       fire_rate: .052, // plus c'est élevé plus c'est lent
-      offset: {x: 0, y: 0},
-      flame_offset: {x: 0, y: 0},
+      offset: {x: 600, y: 450},
+      flame_offset: {x: 720, y: 370},
       spreads: {
         1: {
           x: 0,
