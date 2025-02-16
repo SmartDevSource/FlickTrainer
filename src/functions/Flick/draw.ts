@@ -33,13 +33,14 @@ const deathAnim: {
     update_delay: 5
 }
 
-export const drawWeapon = (ctx: CanvasRenderingContext2D,
-                            weaponImg: ImageObject,
-                            flameImg: ImageObject,
-                            isFiring: boolean,
-                            mouseAccel: Vector2,
-                            updateFiringState: (state: boolean) => void) =>
-{
+export const drawWeapon = (
+    ctx: CanvasRenderingContext2D,
+    weaponImg: ImageObject,
+    flameImg: ImageObject,
+    isFiring: boolean,
+    mouseAccel: Vector2,
+    updateFiringState: (state: boolean) => void
+) => {
     const now = performance.now()
     timer.delta_time = (now - timer.last_update) / 1000
     timer.last_update = now

@@ -25,6 +25,7 @@ let lastSpreadIndex: number = 0
 let fireLatch: boolean = false
 let showPattern: boolean = true
 let lastPercentage: number = 0
+let animateWeapon: boolean = false
 
 export const weaponAnim: {
     current_frame: number,
@@ -32,14 +33,20 @@ export const weaponAnim: {
     update_delay: number,
     speed_shot_animation: number,
     frames_count: number,
-    sway_offset: Vector2
+    sway_offset: Vector2,
+    scale_recoil: number,
+    max_scale_recoil: number,
+    step_scale_recoil: number
 } = {
     current_frame: 0,
     last_update: 0,
     update_delay: .01,
     speed_shot_animation: 7.4,
     frames_count: 20,
-    sway_offset: {x: 0, y: 0}
+    sway_offset: {x: 0, y: 0},
+    scale_recoil: 0,
+    max_scale_recoil: 150,
+    step_scale_recoil: 50
 }
 
 export const drawWeapon = (
@@ -55,19 +62,35 @@ export const drawWeapon = (
     timer.last_update = now
 
     if (isFiring){
+        if (!animateWeapon){
+            animateWeapon = true
+        }
+    }
+
+    if (animateWeapon){
         weaponAnim.last_update += timer.delta_time
         const currentFrameRate = Math.floor(weaponAnim.last_update * framesPerSecond)
 
         if (currentFrameRate > 0){
             weaponAnim.last_update = 0
+            if (weaponAnim.scale_recoil < weaponAnim.max_scale_recoil)
+                weaponAnim.scale_recoil += weaponAnim.step_scale_recoil * timer.delta_time
             weaponAnim.current_frame += currentFrameRate
             if (weaponAnim.current_frame >= spraySettings.current_weapon.frames_count - 1){
                 weaponAnim.current_frame = 0
+                animateWeapon = false
+            }
+        }
+    } else {
+        if (weaponAnim.scale_recoil > 0){
+            weaponAnim.scale_recoil -= timer.delta_time * 1000
+            if (weaponAnim.scale_recoil < 0){
+                weaponAnim.scale_recoil = 0
             }
         }
     }
 
-    const frame_width = images[weaponName].img.width / weaponAnim.frames_count
+    const frame_width = images[weaponName].img.width / spraySettings.current_weapon.frames_count
 
     const normalized_mouseaccel = {
         x: Math.floor(mouseAccel.x) < -60 ? -60 : Math.floor(mouseAccel.x) > 60 ? 60 : Math.floor(mouseAccel.x),
@@ -82,10 +105,10 @@ export const drawWeapon = (
         0,
         frame_width,
         images[weaponName].img.height,
-        550 + weaponAnim.sway_offset.x,
-        420 + weaponAnim.sway_offset.y,
-        frame_width - 200,
-        images[weaponName].img.height - 150
+        spraySettings.current_weapon.offset.x + weaponAnim.sway_offset.x,
+        (spraySettings.current_weapon.offset.y + weaponAnim.sway_offset.y) - weaponAnim.scale_recoil,
+        (frame_width - 200) + weaponAnim.scale_recoil,
+        (images[weaponName].img.height - 150) + weaponAnim.scale_recoil
     )
 }
 
@@ -231,7 +254,6 @@ export const drawTrajectorySpreads = (
     }
 
     if (spraySettings.is_spraying && fireLatch){
-        spreads.splice(0, spreads.length)
         fireLatch = false
         bulletsIntoTarget = 0
     }
@@ -262,6 +284,7 @@ export const drawTrajectorySpreads = (
                 audios.beep.audio.play()
                 showPattern = true
                 bulletsIntoTarget = 0
+                spreads.splice(0, spreads.length)
             }, 2000)
         }
     }

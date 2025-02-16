@@ -1508,5 +1508,9 @@ export const images: {[key: string]: ImageObject} = {
     ak47: {
         path: `/gfx/recoil_trainer/ak47.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mac10: {
+        path: `/gfx/recoil_trainer/mac10.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     }
 }

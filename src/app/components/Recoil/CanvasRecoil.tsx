@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
-import { Vector2, CrosshairData, RecoilBackground, Weapon } from '@/types'
+import { Vector2, CrosshairData, RecoilBackground } from '@/types'
 import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries, 
     drawWeapon, drawPauseScreen, drawCrosshair, drawTrajectorySpreads,
     drawFixedPattern, screenScaleFactor }
@@ -14,7 +14,7 @@ const sensitivityFactor: number = 1.2
 
 const CanvasRecoil = () => {
     const isFiring = useRef<boolean>(false)
-    const weaponName = useRef<string>('ak47')
+    const weaponName = useRef<string>('mac10')
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const ctx = useRef<CanvasRenderingContext2D | null>(null)
