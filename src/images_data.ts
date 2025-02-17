@@ -1478,19 +1478,19 @@ export const images: {[key: string]: ImageObject} = {
 
     // RECOIL TRAINER BACKGROUND //
     recoil_background_1: {
-        path: `/gfx/recoil_trainer/recoil_background_1.png`,
+        path: `/gfx/recoil_trainer/backgrounds/recoil_background_1.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     recoil_background_2: {
-        path: `/gfx/recoil_trainer/recoil_background_2.png`,
+        path: `/gfx/recoil_trainer/backgrounds/recoil_background_2.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     recoil_background_3: {
-        path: `/gfx/recoil_trainer/recoil_background_3.png`,
+        path: `/gfx/recoil_trainer/backgrounds/recoil_background_3.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     recoil_background_4: {
-        path: `/gfx/recoil_trainer/recoil_background_4.png`,
+        path: `/gfx/recoil_trainer/backgrounds/recoil_background_4.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     spread: {
@@ -1506,35 +1506,69 @@ export const images: {[key: string]: ImageObject} = {
 
     // WEAPONS //
     ak47: {
-        path: `/gfx/recoil_trainer/ak47.png`,
+        path: `/gfx/recoil_trainer/weapons/ak47.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mac10: {
-        path: `/gfx/recoil_trainer/mac10.png`,
+        path: `/gfx/recoil_trainer/weapons/mac10.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mp9: {
-        path: `/gfx/recoil_trainer/mp9.png`,
+        path: `/gfx/recoil_trainer/weapons/mp9.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     mp7: {
-        path: `/gfx/recoil_trainer/mp7.png`,
+        path: `/gfx/recoil_trainer/weapons/mp7.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     galil: {
-        path: `/gfx/recoil_trainer/galil.png`,
+        path: `/gfx/recoil_trainer/weapons/galil.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     m4a1s: {
-        path: `/gfx/recoil_trainer/m4a1s.png`,
+        path: `/gfx/recoil_trainer/weapons/m4a1s.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     m4a4: {
-        path: `/gfx/recoil_trainer/m4a4.png`,
+        path: `/gfx/recoil_trainer/weapons/m4a4.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     famas: {
-        path: `/gfx/recoil_trainer/famas.png`,
+        path: `/gfx/recoil_trainer/weapons/famas.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+
+    // WEAPONS PICTOS //
+    ak47_picto: {
+        path: `/gfx/recoil_trainer/weapons_pictos/ak47_picto.jpg`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mac10_picto: {
+        path: `/gfx/recoil_trainer/weapons_pictos/mac10_picto.jpg`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mp9_picto: {
+        path: `/gfx/recoil_trainer/weapons_pictos/mp9_picto.jpg`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mp7_picto: {
+        path: `/gfx/recoil_trainer/weapons_pictos/mp7_picto.jpg`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    galil_picto: {
+        path: `/gfx/recoil_trainer/weapons_pictos/galil_picto.jpg`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    m4a1s_picto: {
+        path: `/gfx/recoil_trainer/weapons_pictos/m4a1s_picto.jpg`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    m4a4_picto: {
+        path: `/gfx/recoil_trainer/weapons_pictos/m4a4_picto.jpg`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    famas_picto: {
+        path: `/gfx/recoil_trainer/weapons_pictos/famas_picto.jpg`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     }
 }

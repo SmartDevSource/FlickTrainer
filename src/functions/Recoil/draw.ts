@@ -1,4 +1,4 @@
-import { ImageObject, Vector2, Timer, Weapon, SpraySettings, AudioObject } from "@/types"
+import { ImageObject, Vector2, Timer, SpraySettings, AudioObject } from "@/types"
 import { weapons } from "./weapons"
 import { crosshairData } from "../crosshair_changer"
 import { playShotSound } from "../utils"
@@ -367,5 +367,50 @@ export const drawFixedPattern = (
         ctx.fill()
         ctx.stroke()
     }
+    ctx.restore()
+}
+
+export const drawSpeedSelector = (
+    ctx: CanvasRenderingContext2D,
+    screenOffsetAimPunch: Vector2,
+    normalizedSpeed: number
+) => {
+    ctx.save()
+    ctx.fillStyle = 'white'
+    ctx.font = 'bold 60px Digit'
+    ctx.lineWidth = 4
+
+    // ctx.strokeText(
+    //     `<`,
+    //     1150 + screenOffsetAimPunch.x,
+    //     400 + screenOffsetAimPunch.y,
+    // )
+    // ctx.fillText(
+    //     `<`,
+    //     1150 + screenOffsetAimPunch.x,
+    //     400 + screenOffsetAimPunch.y
+    // )
+
+    ctx.strokeText(
+        `${normalizedSpeed} %`,
+        1150 + screenOffsetAimPunch.x,
+        400 + screenOffsetAimPunch.y,
+    )
+    ctx.fillText(
+        `${normalizedSpeed} %`,
+        1150 + screenOffsetAimPunch.x,
+        400 + screenOffsetAimPunch.y
+    )
+
+    // ctx.strokeText(
+    //     `>`,
+    //     1150 + screenOffsetAimPunch.x,
+    //     400 + screenOffsetAimPunch.y,
+    // )
+    // ctx.fillText(
+    //     `>`,
+    //     1150 + screenOffsetAimPunch.x,
+    //     400 + screenOffsetAimPunch.y
+    // )
     ctx.restore()
 }

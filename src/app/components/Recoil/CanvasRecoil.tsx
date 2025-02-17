@@ -3,19 +3,21 @@ import React, { useEffect, useRef, useState } from 'react'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
 import { Vector2, CrosshairData, RecoilBackground } from '@/types'
-import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries, 
-    drawWeapon, drawPauseScreen, drawCrosshair, drawTrajectorySpreads,
-    drawFixedPattern, screenScaleFactor }
+import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries, screenScaleFactor,
+        drawWeapon, drawPauseScreen, drawCrosshair, drawTrajectorySpreads,
+        drawFixedPattern, drawSpeedSelector }
 from '@/functions/Recoil/draw'
 import { updateRecoil, screenSprayOffset, spraySettings, fireTimer } from '@/functions/Recoil/recoil_manager'
 import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
 
 const sensitivityFactor: number = 1.2
+const weaponNames: string[] = ['ak47', 'mac10', 'mp9', 'mp7', 'galil','m4a1s','m4a4','famas']
 
 const CanvasRecoil = () => {
     const isFiring = useRef<boolean>(false)
-    const weaponName = useRef<string>('m4a4')
-    const speedShoot = useRef<number>(getNormalizedSpeed(100))
+    const weaponIndex = useRef<number>(0)
+    const normalizedSpeed = useRef<number>(100)
+    const speedShoot = useRef<number>(getNormalizedSpeed(normalizedSpeed.current))
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const ctx = useRef<CanvasRenderingContext2D | null>(null)
@@ -180,12 +182,30 @@ const CanvasRecoil = () => {
                 }
             }
         }
+        const handleMouseScroll = (event: WheelEvent) => {
+            if (isFullScreen.current){
+                if (event.deltaY < 0){
+                    if (weaponIndex.current < weaponNames.length - 1){
+                        weaponIndex.current++
+                    } else {
+                        weaponIndex.current = 0
+                    }
+                } else {
+                    if (weaponIndex.current > 0){
+                        weaponIndex.current--
+                    } else {
+                        weaponIndex.current = weaponNames.length - 1
+                    }
+                }
+            }
+        }
 
         window.addEventListener('keydown', handleKeydown)
         window.addEventListener('fullscreenchange', handleFullscreenChange)
         window.addEventListener('mousemove', handleMouseMove)
         window.addEventListener('mousedown', handleMouseDown)
         window.addEventListener('mouseup', handleMouseUp)
+        window.addEventListener('wheel', handleMouseScroll)
 
         return () => {
             window.removeEventListener('keydown', handleKeydown)
@@ -193,6 +213,7 @@ const CanvasRecoil = () => {
             window.removeEventListener('mousemove', handleMouseMove)
             window.removeEventListener('mousedown', handleMouseDown)
             window.removeEventListener('mouseup', handleMouseUp)
+            window.removeEventListener('wheel', handleMouseScroll)
         }
     }, [])
 
@@ -239,7 +260,7 @@ const CanvasRecoil = () => {
                 const patternSpreadOffset = getPatternSpreadOffset()
                 drawTrajectorySpreads(
                     ctx.current,
-                    weaponName.current,
+                    weaponNames[weaponIndex.current],
                     patternSpreadOffset,
                     screenOffsetAimPunch,
                     spraySettings,
@@ -248,9 +269,16 @@ const CanvasRecoil = () => {
                     audios
                 )
 
+                drawFixedPattern(
+                    ctx.current,
+                    weaponNames[weaponIndex.current],
+                    screenOffsetAimPunch,
+                    spraySettings
+                )
+
                 drawWeapon(
                     ctx.current,
-                    weaponName.current,
+                    weaponNames[weaponIndex.current],
                     isFiring.current,
                     mouseAccel.current,
                     spraySettings,
@@ -258,11 +286,10 @@ const CanvasRecoil = () => {
                     images
                 )
 
-                drawFixedPattern(
+                drawSpeedSelector(
                     ctx.current,
-                    weaponName.current,
                     screenOffsetAimPunch,
-                    spraySettings
+                    normalizedSpeed.current
                 )
 
                 ctx.current.drawImage(images.hud_terro.img, 350, 700, images.hud_terro.img.width / 1.4, images.hud_terro.img.height / 1.4)
@@ -273,7 +300,7 @@ const CanvasRecoil = () => {
             
             updateRecoil(
                 aimPunch.current,
-                weaponName.current,
+                weaponNames[weaponIndex.current],
                 isFiring.current,
                 speedShoot.current,
                 updateFiringState,
