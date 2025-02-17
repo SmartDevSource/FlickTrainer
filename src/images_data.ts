@@ -1520,5 +1520,9 @@ export const images: {[key: string]: ImageObject} = {
     m4a1s: {
         path: `/gfx/recoil_trainer/m4a1s.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    famas: {
+        path: `/gfx/recoil_trainer/famas.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     }
 }

@@ -256,7 +256,7 @@ export const weapons: WeaponsStruct = {
         },
     },
     galil: {
-      fire_rate: .028,
+      fire_rate: .035,
       offset: {x: 570, y: 450},
       flame_offset: {x: 720, y: 370},
       spreads: {
@@ -403,7 +403,7 @@ export const weapons: WeaponsStruct = {
       }
     },
     m4a1s: {
-      fire_rate: .052, // plus c'est élevé plus c'est lent
+      fire_rate: .030,
       offset: {x: 600, y: 450},
       flame_offset: {x: 720, y: 370},
       spreads: {
@@ -486,6 +486,113 @@ export const weapons: WeaponsStruct = {
         20: {
           x: 4,
           y: 2
+        }
+      }
+    },
+    famas: {
+      fire_rate: .027, // plus c'est élevé plus c'est lent
+      offset: {x: 600, y: 450},
+      flame_offset: {x: 680, y: 400},
+      spreads: {
+        1: {
+          x: 0,
+          y: 0
+        },
+        2: {
+          x: -2,
+          y: 7
+        },
+        3: {
+          x: -4,
+          y: 10
+        },
+        4: {
+          x: -2,
+          y: 15
+        },
+        5: {
+          x: 1,
+          y: 17
+        },
+        6: {
+          x: 11,
+          y: 13
+        },
+        7: {
+          x: 11,
+          y: 7
+        },
+        8: {
+          x: -1,
+          y: 14
+        },
+        9: {
+          x: -18,
+          y: 3
+        },
+        10: {
+          x: -13,
+          y: 3
+        },
+        11: {
+          x: -11,
+          y: 0
+        },
+        12: {
+          x: 4,
+          y: 12
+        },
+        13: {
+          x: 17,
+          y: 0
+        },
+        14: {
+          x: 11,
+          y: 0
+        },
+        15: {
+          x: 15,
+          y: -2
+        },
+        16: {
+          x: 6,
+          y: 8
+        },
+        17: {
+          x: 11,
+          y: -3
+        },
+        18: {
+          x: -1,
+          y: 2
+        },
+        19: {
+          x: -5,
+          y: 0
+        },
+        20: {
+          x: -18,
+          y: 0
+        },
+        21: {
+          x: 2,
+          y: 5
+        },
+        22: {
+          x: 5,
+          y: -4
+        },
+        23: {
+          x: 12,
+          y: -4
+        },
+        24: {
+          x: 6,
+          y: -2
+        },
+        25: {
+          x: 9,
+          y: -7
         }
       }
     }

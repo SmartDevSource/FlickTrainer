@@ -46,5 +46,10 @@ export const audios: {[key: string]: AudioObject} = {
         volume: .6,
         audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
     },
+    famas: {
+        path: `/audio/famas.mp3`,
+        volume: .6,
+        audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
+    },
     
 }
