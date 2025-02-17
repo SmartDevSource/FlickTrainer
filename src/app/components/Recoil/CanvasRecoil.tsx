@@ -14,7 +14,7 @@ const sensitivityFactor: number = 1.2
 
 const CanvasRecoil = () => {
     const isFiring = useRef<boolean>(false)
-    const weaponName = useRef<string>('m4a1s')
+    const weaponName = useRef<string>('m4a4')
     const speedShoot = useRef<number>(getNormalizedSpeed(100))
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)

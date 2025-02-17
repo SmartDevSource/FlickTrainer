@@ -36,6 +36,16 @@ export const audios: {[key: string]: AudioObject} = {
         volume: .6,
         audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
     },
+    mp9: {
+        path: `/audio/mp9.mp3`,
+        volume: .6,
+        audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
+    },
+    mp7: {
+        path: `/audio/mp7.mp3`,
+        volume: .6,
+        audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
+    },
     ak47: {
         path: `/audio/ak47.mp3`,
         volume: .6,
@@ -46,10 +56,14 @@ export const audios: {[key: string]: AudioObject} = {
         volume: .6,
         audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
     },
+    m4a4: {
+        path: `/audio/m4a4.mp3`,
+        volume: .6,
+        audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
+    },
     famas: {
         path: `/audio/famas.mp3`,
         volume: .6,
         audio: typeof window !== 'undefined' ? new Audio() : ({} as HTMLAudioElement)
     },
-    
 }

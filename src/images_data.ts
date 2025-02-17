@@ -1513,12 +1513,24 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/recoil_trainer/mac10.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    mp9: {
+        path: `/gfx/recoil_trainer/mp9.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    mp7: {
+        path: `/gfx/recoil_trainer/mp7.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     galil: {
         path: `/gfx/recoil_trainer/galil.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     m4a1s: {
         path: `/gfx/recoil_trainer/m4a1s.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    m4a4: {
+        path: `/gfx/recoil_trainer/m4a4.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     famas: {
