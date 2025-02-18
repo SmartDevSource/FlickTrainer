@@ -4,7 +4,7 @@ interface NavbarSettings {
 
 export const Navbar: React.FC<NavbarSettings> = ({onLinkClick}) => {
     return (
-      <div className="w-full bg-gray-800 text-white py-4 shadow-md z-50 ">
+      <div className="w-full bg-gray-700 text-white py-4 shadow-md z-50 ">
             <div className="flex justify-between px-6">
                 <div className="text-xl font-semibold px-3">
                     <button 

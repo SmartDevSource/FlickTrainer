@@ -44,7 +44,7 @@ export const MapPeek: React.FC<MapPeekSettings> = ({onLaunchGame, onBack}) => {
                             key={`current_map_${index}`} 
                             className="bg-gray-300 rounded p-0.5
                                 shadow-[0px_0px_10px_1px_rgba(255,255,255,1)]
-                                hover:scale-125 transition duration-200
+                                hover:scale-110 transition duration-200
                                 cursor-pointer"
                             onClick={()=>setSelectedMap(current_map.logo.split('_')[0])}
                             >

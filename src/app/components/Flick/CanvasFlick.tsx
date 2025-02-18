@@ -606,7 +606,7 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
             )}
             <canvas
                 ref={canvasRef}
-                className='bg-slate-900 m-16 cursor-crosshair'
+                className='bg-slate-900 cursor-crosshair'
                 onClick={() => !isLoading && toggleFullScreen()}
             />
         </div>

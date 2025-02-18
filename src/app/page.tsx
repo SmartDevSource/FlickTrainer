@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 
 import { Home } from "./components/Home"
 import { Navbar } from "./components/Navbar"
+import { Footer } from "./components/Footer"
 
 import { SelectTraining } from "./components/SelectTraining"
 import { MapPeek } from "./components/MapPeek"
@@ -113,6 +114,9 @@ const MainPage = () => {
       <RecoilTrainingPage
         onBackMenu={() => setCurrentPage('select_training')}
       />
+    }
+    {currentPage !== 'home' &&
+      <Footer/>      
     }
     </>
   )
