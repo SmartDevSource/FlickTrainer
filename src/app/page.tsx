@@ -23,7 +23,7 @@ const gameSettingsTest: GameSettings = {
 }
 
 const MainPage = () => {
-  const [currentPage, setCurrentPage] = useState<string>('home') // home
+  const [currentPage, setCurrentPage] = useState<string>('home')
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
   const [messageAlert, setMessageAlert] = useState<AlertParams | null>(null)
   const [gameSettings, setGameSettings] = useState<GameSettings | null>(null)
@@ -75,7 +75,6 @@ const MainPage = () => {
   return (
     <>
     {currentPage === 'home' ?
-      // <Home onClick={() => setCurrentPage('map_peek')}/>
       <Home onClick={() => setCurrentPage('select_training')}/>
       :
       <Navbar onLinkClick={(navbar_data) => handleNavbarClick(navbar_data)}/>

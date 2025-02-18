@@ -598,18 +598,18 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
     }
 
     return (
-        <>
-            {isLoading &&
-                <h1 className='text-white text-2xl mt-6'>
-                    Loading resources ...
-                </h1>
-            }
+        <div className={`relative m-5`}>
+            {isLoading && (
+                <div className='absolute inset-0 flex items-center justify-center bg-slate-900 bg-opacity-75'>
+                    <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                </div>
+            )}
             <canvas
                 ref={canvasRef}
                 className='bg-slate-900 m-16 cursor-crosshair'
                 onClick={() => !isLoading && toggleFullScreen()}
             />
-        </>
+        </div>
     )
 }
 
