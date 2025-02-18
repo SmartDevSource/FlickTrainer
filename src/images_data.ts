@@ -1472,6 +1472,16 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/anubis/ct_circuit/ctside_a_main_to_water_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    /////// ANUBIS T SIDE ///////
+    anubis_tside_tspawn_to_b_main: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_tspawn_to_b_main.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_tspawn_to_b_main_layer: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_tspawn_to_b_main_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    
 
 
 

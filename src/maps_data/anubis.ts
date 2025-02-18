@@ -867,4 +867,76 @@ export const anubis: MapStruct = {
         circuit: 'ct_circuit'
     },
     ////////////////// T CIRCUIT //////////////////
+    tside_tspawn_to_b_main: {
+        targets: [
+            {
+                character: "ct_standup",
+                come_from: "down",
+                from: {x: 854, y: 578},
+                to: {x: 854, y: 560},
+                idle: false,
+                distance: 12.99999999999997,
+                speed: 58
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1096, y: 628},
+                to: {x: 1064, y: 628},
+                idle: false,
+                distance: 5.599999999999996,
+                speed: 134
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 938, y: 604},
+                to: {x: 960, y: 604},
+                idle: false,
+                distance: 9.99999999999998,
+                speed: 75
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1024, y: 598},
+                to: {x: 1012, y: 598},
+                idle: false,
+                distance: 12.99999999999997,
+                speed: 58
+            },
+            {
+                character: "ct_standup",
+                come_from: "down",
+                from: {x: 904, y: 570},
+                to: {x: 904, y: 564},
+                idle: false,
+                distance: 14.199999999999966,
+                speed: 53
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 582, y: 502},
+                to: {x: 546, y: 502},
+                idle: false,
+                distance: 3.8000000000000016,
+                speed: 197
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 732, y: 514},
+                to: {x: 766, y: 514},
+                idle: false,
+                distance: 6.199999999999994,
+                speed: 121
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
 }

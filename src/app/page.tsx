@@ -17,8 +17,8 @@ import { RecoilTrainingPage } from "./components/Recoil/RecoilTrainingPage"
 const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'anubis',
-  circuit: 'ct_circuit',
-  spot: 'ctside_a_main_to_water',
+  circuit: 'terrorist_circuit',
+  spot: 'tside_tspawn_to_b_main',
   difficulty: 'easy',
   spot_objective: 25
 }
@@ -27,7 +27,7 @@ const MainPage = () => {
   const [currentPage, setCurrentPage] = useState<string>('home')
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
   const [messageAlert, setMessageAlert] = useState<AlertParams | null>(null)
-  const [gameSettings, setGameSettings] = useState<GameSettings | null>(null)
+  const [gameSettings, setGameSettings] = useState<GameSettings | null>(gameSettingsTest)
 
   const handleNavbarClick = (navbar_data: string) => {
     switch(navbar_data){
