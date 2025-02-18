@@ -135,7 +135,7 @@ export const FlickTrainingPage: React.FC<TrainingParams> = ({game_settings, onBa
                 hover:text-white rounded duration-150"
                 onClick={() => onBackMenu()}
             >
-                Back to main menu
+                Back to map selection
             </button>
         </div>
     )

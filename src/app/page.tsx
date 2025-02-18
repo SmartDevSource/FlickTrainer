@@ -2,8 +2,10 @@
 import { useEffect, useState } from "react"
 
 import { Home } from "./components/Home"
-import { MapPeek } from "./components/MapPeek"
 import { Navbar } from "./components/Navbar"
+
+import { SelectTraining } from "./components/SelectTraining"
+import { MapPeek } from "./components/MapPeek"
 
 import { UserSettingsModal } from "./components/UserSettingsModal"
 import { Alert, AlertParams } from "./components/Alert"
@@ -21,7 +23,7 @@ const gameSettingsTest: GameSettings = {
 }
 
 const MainPage = () => {
-  const [currentPage, setCurrentPage] = useState<string>('recoil_training') // home
+  const [currentPage, setCurrentPage] = useState<string>('home') // home
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
   const [messageAlert, setMessageAlert] = useState<AlertParams | null>(null)
   const [gameSettings, setGameSettings] = useState<GameSettings | null>(null)
@@ -73,7 +75,8 @@ const MainPage = () => {
   return (
     <>
     {currentPage === 'home' ?
-      <Home onClick={() => setCurrentPage('map_peek')}/>
+      // <Home onClick={() => setCurrentPage('map_peek')}/>
+      <Home onClick={() => setCurrentPage('select_training')}/>
       :
       <Navbar onLinkClick={(navbar_data) => handleNavbarClick(navbar_data)}/>
     }
@@ -84,16 +87,21 @@ const MainPage = () => {
         type={messageAlert.type}
       />
     }
-
     {showUserSettings &&
       <UserSettingsModal
         onClose={() => setShowUserSettings(false)}
         onSave={() => handleUserSettingsSave()}
       />
     }
+    {currentPage === 'select_training' &&
+      <SelectTraining
+        onSelect={(selection) => setCurrentPage(selection)}
+      />
+    }
     {currentPage === 'map_peek' &&
       <MapPeek
         onLaunchGame={(game_settings) => prepareGame(game_settings)}
+        onBack={() => setCurrentPage('select_training')}
       />
     }
     {gameSettings && currentPage === 'flick_training' &&
@@ -104,7 +112,7 @@ const MainPage = () => {
     }
     {currentPage === 'recoil_training' &&
       <RecoilTrainingPage
-        onBackMenu={() => setCurrentPage('home')}
+        onBackMenu={() => setCurrentPage('select_training')}
       />
     }
     </>
