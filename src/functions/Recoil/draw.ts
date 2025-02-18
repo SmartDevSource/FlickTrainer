@@ -25,6 +25,7 @@ let fireLatch: boolean = false
 let showPattern: boolean = true
 let lastPercentage: number = 0
 let animateWeapon: boolean = false
+let speedUpdated: boolean = false
 
 export const weaponAnim: {
     current_frame: number,
@@ -274,7 +275,6 @@ export const drawTrajectorySpreads = (
         lastSpreadIndex = spraySettings.index
 
         playShotSound(audios, weaponName)
-        console.log("SHOT !")
 
         const targetArea = (speedShoot >= 0 && speedShoot < 5) ? 15 :
                            (speedShoot >= 5 && speedShoot < 10) ? 10 : 5
@@ -373,44 +373,131 @@ export const drawFixedPattern = (
 export const drawSpeedSelector = (
     ctx: CanvasRenderingContext2D,
     screenOffsetAimPunch: Vector2,
-    normalizedSpeed: number
+    normalizedSpeed: number,
+    isFiring: boolean,
+    setSpeed: (selection: string) => void
 ) => {
     ctx.save()
+
+    let xTextCenter = 0
+
+    switch(true){
+        case normalizedSpeed < 20: xTextCenter = 20; break
+        case normalizedSpeed >= 20 && normalizedSpeed < 100: xTextCenter = 30; break
+        case normalizedSpeed === 100: xTextCenter = 5; break
+    }
+
+    ctx.fillStyle = 'rgba(70, 70, 70, .5)'
+
+    ctx.fillRect(
+        1110 + screenOffsetAimPunch.x,
+        280 + screenOffsetAimPunch.y,
+        215,
+        130
+    )
+
+    ctx.strokeRect(
+        1110 + screenOffsetAimPunch.x,
+        280 + screenOffsetAimPunch.y,
+        215,
+        130
+    )
+
     ctx.fillStyle = 'white'
+
+    ctx.font = 'bold 40px Digit'
+    ctx.lineWidth = 4
+
+    ctx.strokeText(
+        `Speed`,
+        1155 + screenOffsetAimPunch.x,
+        330 + screenOffsetAimPunch.y,
+    )
+    ctx.fillText(
+        `Speed`,
+        1155 + screenOffsetAimPunch.x,
+        330 + screenOffsetAimPunch.y
+    )
+
     ctx.font = 'bold 60px Digit'
     ctx.lineWidth = 4
 
-    // ctx.strokeText(
-    //     `<`,
-    //     1150 + screenOffsetAimPunch.x,
-    //     400 + screenOffsetAimPunch.y,
-    // )
-    // ctx.fillText(
-    //     `<`,
-    //     1150 + screenOffsetAimPunch.x,
-    //     400 + screenOffsetAimPunch.y
-    // )
+    const isOnDecreaseArrow = Math.abs(1140 + screenOffsetAimPunch.x - (fullscreenCanvasSize.w / 2)) <= 30 &&
+                              Math.abs(375 + screenOffsetAimPunch.y - (fullscreenCanvasSize.h / 2)) <= 30
+
+    const isOnIncreaseArrow = Math.abs(1300 + screenOffsetAimPunch.x - (fullscreenCanvasSize.w / 2)) <= 30 &&
+                              Math.abs(375 + screenOffsetAimPunch.y - (fullscreenCanvasSize.h / 2)) <= 30
+
+    if (isOnDecreaseArrow){
+        ctx.save()
+        ctx.fillStyle = 'rgba(50, 50, 50, .5)'
+        ctx.fillRect(
+            1115 + screenOffsetAimPunch.x,
+            350 + screenOffsetAimPunch.y,
+            45,
+            50
+        )
+        ctx.restore()
+        if (isFiring && !speedUpdated){
+            setSpeed('-')
+            speedUpdated = true
+            setTimeout(() => {
+                speedUpdated = false
+            }, 100)
+        }
+    }
+    
+    ctx.strokeText(
+        `<`,
+        1120 + screenOffsetAimPunch.x,
+        395 + screenOffsetAimPunch.y,
+    )
+    ctx.fillText(
+        `<`,
+        1120 + screenOffsetAimPunch.x,
+        395 + screenOffsetAimPunch.y
+    )
 
     ctx.strokeText(
-        `${normalizedSpeed} %`,
-        1150 + screenOffsetAimPunch.x,
+        `${normalizedSpeed}`,
+        1145 + (xTextCenter) + screenOffsetAimPunch.x,
         400 + screenOffsetAimPunch.y,
     )
     ctx.fillText(
-        `${normalizedSpeed} %`,
-        1150 + screenOffsetAimPunch.x,
+        `${normalizedSpeed}`,
+        1145 + (xTextCenter) + screenOffsetAimPunch.x,
         400 + screenOffsetAimPunch.y
     )
 
-    // ctx.strokeText(
-    //     `>`,
-    //     1150 + screenOffsetAimPunch.x,
-    //     400 + screenOffsetAimPunch.y,
-    // )
-    // ctx.fillText(
-    //     `>`,
-    //     1150 + screenOffsetAimPunch.x,
-    //     400 + screenOffsetAimPunch.y
-    // )
+    if (isOnIncreaseArrow){
+        ctx.save()
+        ctx.fillStyle = 'rgba(50, 50, 50, .5)'
+        ctx.fillRect(
+            1275 + screenOffsetAimPunch.x,
+            350 + screenOffsetAimPunch.y,
+            45,
+            50
+        )
+        ctx.restore()
+        if (isFiring && !speedUpdated){
+            setSpeed('+')
+            speedUpdated = true
+            setTimeout(() => {
+                speedUpdated = false
+            }, 100)
+        }
+    }
+
+    ctx.strokeText(
+        `>`,
+        1280 + screenOffsetAimPunch.x,
+        395 + screenOffsetAimPunch.y,
+    )
+    ctx.fillText(
+        `>`,
+        1280 + screenOffsetAimPunch.x,
+        395 + screenOffsetAimPunch.y
+    )
+
     ctx.restore()
 }

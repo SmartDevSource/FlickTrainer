@@ -45,6 +45,21 @@ const CanvasRecoil = () => {
     function getNormalizedSpeed (value: number) {
         return -.2 * value + 21
     }
+    const setSpeed = (selection: string) => {
+        switch(selection){
+            case '-':
+                if (normalizedSpeed.current >= 20){
+                    normalizedSpeed.current -= 10
+                }
+            break
+            case '+':
+                if (normalizedSpeed.current < 100){
+                    normalizedSpeed.current += 10
+                }
+            break
+        }
+        speedShoot.current = getNormalizedSpeed(normalizedSpeed.current)
+    }
 
     const updateBackground = (direction: string) => {
         switch(direction){
@@ -289,7 +304,9 @@ const CanvasRecoil = () => {
                 drawSpeedSelector(
                     ctx.current,
                     screenOffsetAimPunch,
-                    normalizedSpeed.current
+                    normalizedSpeed.current,
+                    isFiring.current,
+                    setSpeed
                 )
 
                 ctx.current.drawImage(images.hud_terro.img, 350, 700, images.hud_terro.img.width / 1.4, images.hud_terro.img.height / 1.4)
