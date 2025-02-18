@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FlickTrainer",
+  title: "CSTrainer",
   description: "Counter Strike 2 interactive Flick Training system",
 };
 

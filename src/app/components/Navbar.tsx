@@ -11,7 +11,7 @@ export const Navbar: React.FC<NavbarSettings> = ({onLinkClick}) => {
                         className="hover:text-gray-400 transition-colors duration-300"
                         onClick={() => onLinkClick('back_to_home')}
                     >
-                        FlickTrainer
+                        CSTrainer
                     </button>
                 </div>
                 <div className="flex space-x-6">

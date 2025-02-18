@@ -16,7 +16,7 @@ export const Home: React.FC<HomeParams> = ({onClick}) => {
   
             <div className="relative z-10 flex flex-col items-center justify-center text-center min-h-screen px-4 sm:px-6 lg:px-8">
                 <h1 className="text-5xl font-extrabold text-white sm:text-6xl lg:text-7xl">
-                    FlickTrainer
+                    CSTrainer
                 </h1>
     
                 <p className="mt-4 text-lg text-gray-200 sm:text-xl lg:text-2xl max-w-3xl">
