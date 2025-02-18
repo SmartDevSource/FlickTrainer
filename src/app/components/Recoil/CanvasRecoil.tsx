@@ -31,7 +31,7 @@ const CanvasRecoil = () => {
     const crosshairData = useRef<CrosshairData>(getCrosshairStorage())
     const mouseSensitivity = useRef<number>(getSensitivityStorage())
 
-    const backgroundImage = useRef<RecoilBackground>({index: 1, image: {path:'', img: new Image()}})
+    // const backgroundImage = useRef<RecoilBackground>({index: 1, image: {path:'', img: new Image()}})
 
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const mouseAccel = useRef<Vector2>({x: 0, y: 0})
@@ -59,20 +59,6 @@ const CanvasRecoil = () => {
             break
         }
         speedShoot.current = getNormalizedSpeed(normalizedSpeed.current)
-    }
-
-    const updateBackground = (direction: string) => {
-        switch(direction){
-            case '+':
-                if (backgroundImage.current.index < 4)
-                    backgroundImage.current.index++
-            break
-            case '-':
-                if (backgroundImage.current.index > 1)
-                    backgroundImage.current.index--
-            break
-        }
-        backgroundImage.current.image.img = images[`recoil_background_${backgroundImage.current.index}`].img
     }
 
     const initGame = () => {
@@ -144,8 +130,6 @@ const CanvasRecoil = () => {
         }
         const handleKeydown = (event:KeyboardEvent) => {
             switch(event.key.toLowerCase()){
-                case 'z': case 'w': updateBackground('-'); break
-                case 's': updateBackground('+'); break
                 case 'Alt': case 'Meta': case 'F12': handleExitFullScreen(); break
             }
         }
@@ -237,7 +221,6 @@ const CanvasRecoil = () => {
             (async () => {
                 try {
                     await loadResources(images, audios)
-                    updateBackground('+')
                     setTimeout(() => {
                         setIsLoading(false)
                         draw()
@@ -264,13 +247,13 @@ const CanvasRecoil = () => {
     }
 
     const draw = () => {
-        if (ctx.current && canvasRef.current && backgroundImage.current){
+        if (ctx.current && canvasRef.current && images.recoil_background.img){
             ctx.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
 
             if (isFullScreen.current){
                 // MAP BACKGROUND //
                 const screenOffsetAimPunch = getScreenOffsetAimPunch()
-                ctx.current.drawImage(backgroundImage.current.image.img, screenOffsetAimPunch.x, screenOffsetAimPunch.y)
+                ctx.current.drawImage(images.recoil_background.img, screenOffsetAimPunch.x, screenOffsetAimPunch.y)
 
                 const patternSpreadOffset = getPatternSpreadOffset()
                 drawTrajectorySpreads(
@@ -312,7 +295,7 @@ const CanvasRecoil = () => {
                 ctx.current.drawImage(images.hud_terro.img, 350, 700, images.hud_terro.img.width / 1.4, images.hud_terro.img.height / 1.4)
                 drawCrosshair(ctx.current, crosshairData.current)
             } else {
-                drawPauseScreen(ctx.current, backgroundImage.current.image)
+                drawPauseScreen(ctx.current, images.recoil_background)
             }
             
             updateRecoil(
