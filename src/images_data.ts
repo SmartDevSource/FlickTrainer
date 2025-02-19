@@ -1481,6 +1481,62 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/anubis/terrorist_circuit/tside_tspawn_to_b_main_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    anubis_tside_b_main_to_b: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_b_main_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_b_main_to_b_layer: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_b_main_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_b_pizza: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_b_pizza.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_b_pizza_layer: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_b_pizza_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_b_to_ct: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_b_to_ct.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_b_to_ct_layer: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_b_to_ct_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_mid: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_mid_layer: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_mid_to_camera: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_mid_to_camera.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_mid_to_camera_layer: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_mid_to_camera_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_water_to_connector: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_water_to_connector.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_water_to_connector_layer: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_water_to_connector_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_connector_to_b: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_connector_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_connector_to_b_layer: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_connector_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     
 
 

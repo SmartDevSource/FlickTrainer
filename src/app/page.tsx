@@ -18,7 +18,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'anubis',
   circuit: 'terrorist_circuit',
-  spot: 'tside_tspawn_to_b_main',
+  spot: 'tside_connector_to_b',
   difficulty: 'easy',
   spot_objective: 25
 }

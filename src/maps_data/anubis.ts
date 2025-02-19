@@ -939,4 +939,437 @@ export const anubis: MapStruct = {
         },
         circuit: 'terrorist_circuit'
     },
+    tside_b_main_to_b: {
+        targets: [
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1094, y: 550},
+                to: {x: 1060, y: 550},
+                idle: false,
+                distance: 4.6,
+                speed: 163
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 982, y: 550},
+                to: {x: 954, y: 550},
+                idle: false,
+                distance: 7.39999999999999,
+                speed: 101
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 978, y: 528},
+                to: {x: 956, y: 528},
+                idle: false,
+                distance: 10.799999999999978,
+                speed: 69
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 798, y: 548},
+                to: {x: 847, y: 548},
+                idle: false,
+                distance: 7.999999999999988,
+                speed: 120
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 798, y: 548},
+                to: {x: 824, y: 548},
+                idle: false,
+                distance: 7.999999999999988,
+                speed: 94
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 664, y: 500},
+                to: {x: 700, y: 500},
+                idle: false,
+                distance: 5.399999999999997,
+                speed: 139
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    tside_b_pizza: {
+        targets: [
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 1336, y: 620},
+                to: {x: 1378, y: 620},
+                idle: false,
+                distance: 4.4,
+                speed: 170
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1274, y: 614},
+                to: {x: 1240, y: 614},
+                idle: false,
+                distance: 4.799999999999999,
+                speed: 156
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1192, y: 656},
+                to: {x: 1150, y: 656},
+                idle: false,
+                distance: 7.999999999999988,
+                speed: 94
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 876, y: 594},
+                to: {x: 908, y: 594},
+                idle: false,
+                distance: 5.799999999999995,
+                speed: 129
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 968, y: 554},
+                to: {x: 946, y: 554},
+                idle: false,
+                distance: 7.999999999999988,
+                speed: 94
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 890, y: 554},
+                to: {x: 908, y: 554},
+                idle: false,
+                distance: 7.999999999999988,
+                speed: 94
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 712, y: 560},
+                to: {x: 684, y: 560},
+                idle: false,
+                distance: 7.19999999999999,
+                speed: 104
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 706, y: 588},
+                to: {x: 676, y: 588},
+                idle: false,
+                distance: 4.6,
+                speed: 163
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 296, y: 590},
+                to: {x: 350, y: 590},
+                idle: false,
+                distance: 3.200000000000001,
+                speed: 234
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    tside_b_to_ct: {
+        targets: [
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1434, y: 522},
+                to: {x: 1232, y: 522},
+                idle: false,
+                distance: 2,
+                speed: 500
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1434, y: 522},
+                to: {x: 1340, y: 522},
+                idle: false,
+                distance: 2,
+                speed: 375
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1088, y: 556},
+                to: {x: 1060, y: 556},
+                idle: false,
+                distance: 4.999999999999998,
+                speed: 150
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1050, y: 574},
+                to: {x: 1040, y: 574},
+                idle: false,
+                distance: 10.399999999999979,
+                speed: 72
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1028, y: 537},
+                to: {x: 1010, y: 537},
+                idle: false,
+                distance: 13.5,
+                speed: 63
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1028, y: 537},
+                to: {x: 998, y: 537},
+                idle: false,
+                distance: 13.5,
+                speed: 90
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    tside_mid: {
+        targets: [
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 952, y: 534},
+                to: {x: 920, y: 534},
+                idle: false,
+                distance: 10.5,
+                speed: 110
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 952, y: 534},
+                to: {x: 938, y: 534},
+                idle: false,
+                distance: 10.5,
+                speed: 66
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1004, y: 536},
+                to: {x: 976, y: 536},
+                idle: false,
+                distance: 8.599999999999985,
+                speed: 87
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 858, y: 536},
+                to: {x: 890, y: 536},
+                idle: false,
+                distance: 6.199999999999994,
+                speed: 121
+            },
+
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    tside_mid_to_camera: {
+        targets: [
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 744, y: 592},
+                to: {x: 808, y: 592},
+                idle: false,
+                distance: 3.6000000000000014,
+                speed: 208
+            },
+            {
+                character: "ct_crouch_darken",
+                come_from: "right",
+                from: {x: 1082, y: 560},
+                to: {x: 1060, y: 560},
+                idle: false,
+                distance: 5.999999999999995,
+                speed: 83
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1084, y: 560},
+                to: {x: 1060, y: 560},
+                idle: false,
+                distance: 5.999999999999995,
+                speed: 125
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 736, y: 556},
+                to: {x: 804, y: 556},
+                idle: false,
+                distance: 7.599999999999989,
+                speed: 160
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 736, y: 556},
+                to: {x: 768, y: 556},
+                idle: false,
+                distance: 7.599999999999989,
+                speed: 99
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    tside_water_to_connector: {
+        targets: [
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1122, y: 586},
+                to: {x: 1090, y: 586},
+                idle: false,
+                distance: 4.200000000000001,
+                speed: 179
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1022, y: 478},
+                to: {x: 1004, y: 478},
+                idle: false,
+                distance: 9.799999999999981,
+                speed: 77
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 938, y: 478},
+                to: {x: 968, y: 478},
+                idle: false,
+                distance: 9.799999999999981,
+                speed: 90
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 942, y: 568},
+                to: {x: 918, y: 568},
+                idle: false,
+                distance: 11.999999999999973,
+                speed: 63
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 806, y: 586},
+                to: {x: 834, y: 586},
+                idle: false,
+                distance: 5.599999999999996,
+                speed: 134
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 664, y: 598},
+                to: {x: 626, y: 598},
+                idle: false,
+                distance: 3.6000000000000014,
+                speed: 208
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    tside_connector_to_b: {
+        targets: [
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 946, y: 498},
+                to: {x: 908, y: 498},
+                idle: false,
+                distance: 9.399999999999983,
+                speed: 120
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1124, y: 514},
+                to: {x: 1048, y: 514},
+                idle: false,
+                distance: 2.2,
+                speed: 341
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 790, y: 492},
+                to: {x: 836, y: 492},
+                idle: false,
+                distance: 4.000000000000002,
+                speed: 187
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 804, y: 464},
+                to: {x: 842, y: 464},
+                idle: false,
+                distance: 4.6,
+                speed: 163
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 950, y: 474},
+                to: {x: 928, y: 474},
+                idle: false,
+                distance: 6.5999999999999925,
+                speed: 114
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
 }
