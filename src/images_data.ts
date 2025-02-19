@@ -1537,10 +1537,42 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/anubis/terrorist_circuit/tside_connector_to_b_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
-    
+    anubis_tside_a_main: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_a_main.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_a_main_layer: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_a_main_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_a_site: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_a_site.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_a_site_layer: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_a_site_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_a_pilar: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_a_pilar.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    anubis_tside_a_pilar_layer: {
+        path: `/gfx/maps/anubis/terrorist_circuit/tside_a_pilar_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    /////// ANCIENT CT SIDE ///////
 
 
-
+    /////// ANCIENT T SIDE ///////
+    ancient_tside_b_ramp_to_heaven: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_b_ramp_to_heaven.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_b_ramp_to_heaven_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_b_ramp_to_heaven_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 
     // RECOIL TRAINER BACKGROUND //
     recoil_background: {

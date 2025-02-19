@@ -16,9 +16,9 @@ import { RecoilTrainingPage } from "./components/Recoil/RecoilTrainingPage"
 
 const gameSettingsTest: GameSettings = {
   mode: 'spot',
-  map_name: 'anubis',
+  map_name: 'ancient',
   circuit: 'terrorist_circuit',
-  spot: 'tside_connector_to_b',
+  spot: 'tside_b_ramp_to_heaven',
   difficulty: 'easy',
   spot_objective: 25
 }

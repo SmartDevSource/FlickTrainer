@@ -7,6 +7,7 @@ import { nuke } from "@/maps_data/nuke"
 import { mirage } from "@/maps_data/mirage"
 import { train } from "@/maps_data/train"
 import { anubis } from "@/maps_data/anubis"
+import { ancient } from "@/maps_data/ancient"
 
 type MapsData = {
     [mapName: string]: { 
@@ -35,5 +36,6 @@ export const mapsData: MapsData = {
     nuke,
     mirage,
     train,
-    anubis
+    anubis,
+    ancient
 }
