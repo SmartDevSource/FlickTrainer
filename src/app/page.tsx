@@ -18,7 +18,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'ancient',
   circuit: 'terrorist_circuit',
-  spot: 'tside_b_ramp_to_heaven',
+  spot: 'tside_b_ramp_to_site',
   difficulty: 'easy',
   spot_objective: 25
 }

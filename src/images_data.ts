@@ -1573,6 +1573,14 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/ancient/terrorist_circuit/tside_b_ramp_to_heaven_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    ancient_tside_b_ramp_to_site: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_b_ramp_to_site.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_b_ramp_to_site_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_b_ramp_to_site_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 
     // RECOIL TRAINER BACKGROUND //
     recoil_background: {
