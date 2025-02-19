@@ -1581,6 +1581,38 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/ancient/terrorist_circuit/tside_b_ramp_to_site_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    ancient_tside_b_site: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_b_site.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_b_site_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_b_site_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_b_to_long: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_b_to_long.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_b_to_long_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_b_to_long_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_b_cave: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_b_cave.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_b_cave_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_b_cave_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_cave_to_b: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_cave_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_cave_to_b_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_cave_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 
     // RECOIL TRAINER BACKGROUND //
     recoil_background: {
