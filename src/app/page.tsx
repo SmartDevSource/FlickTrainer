@@ -18,7 +18,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'ancient',
   circuit: 'terrorist_circuit',
-  spot: 'tside_mid_to_redroom',
+  spot: 'tside_donut_to_a',
   difficulty: 'easy',
   spot_objective: 25
 }

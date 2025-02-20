@@ -1637,6 +1637,30 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/ancient/terrorist_circuit/tside_mid_to_redroom_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    ancient_tside_redroom: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_redroom.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_redroom_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_redroom_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_mid_to_donut: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_mid_to_donut.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_mid_to_donut_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_mid_to_donut_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_donut_to_a: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_donut_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_donut_to_a_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_donut_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 
     // RECOIL TRAINER BACKGROUND //
     recoil_background: {
