@@ -257,6 +257,52 @@ export const ancient: MapStruct = {
         },
         circuit: 'terrorist_circuit'
     },
+    tside_heaven_to_redroom: {
+        targets: [
+
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1088, y: 646},
+                to: {x: 1028, y: 646},
+                idle: false,
+                distance: 6.199999999999994,
+                speed: 121
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1074, y: 530},
+                to: {x: 1035, y: 530},
+                idle: false,
+                distance: 11.199999999999976,
+                speed: 120
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 1074, y: 530},
+                to: {x: 1058, y: 530},
+                idle: false,
+                distance: 11.199999999999976,
+                speed: 67
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 612, y: 588},
+                to: {x: 640, y: 588},
+                idle: false,
+                distance: 7.799999999999988,
+                speed: 96
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
     tside_b_cave: {
         targets: [
             {
@@ -384,6 +430,150 @@ export const ancient: MapStruct = {
                 idle: false,
                 distance: 7.599999999999989,
                 speed: 99
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    tside_mid_to_heaven: {
+        targets: [
+            {
+                character: "ct_standup_darken",
+                come_from: "down",
+                from: {x: 1072, y: 492},
+                to: {x: 1072, y: 480},
+                idle: false,
+                distance: 11.999999999999973,
+                speed: 63
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "down",
+                from: {x: 1096, y: 492},
+                to: {x: 1096, y: 472},
+                idle: false,
+                distance: 11.999999999999973,
+                speed: 63
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 1036, y: 462},
+                to: {x: 1066, y: 462},
+                idle: false,
+                distance: 9.799999999999981,
+                speed: 77
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 500, y: 522},
+                to: {x: 570, y: 522},
+                idle: false,
+                distance: 5.1999999999999975,
+                speed: 180
+            },
+            {
+                character: "ct_standup",
+                come_from: "left",
+                from: {x: 488, y: 522},
+                to: {x: 542, y: 522},
+                idle: false,
+                distance: 4.000000000000002,
+                speed: 187
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 618, y: 520},
+                to: {x: 578, y: 520},
+                idle: false,
+                distance: 7.39999999999999,
+                speed: 140
+            },
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 622, y: 520},
+                to: {x: 600, y: 520},
+                idle: false,
+                distance: 7.39999999999999,
+                speed: 101
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'terrorist_circuit'
+    },
+    tside_mid_to_redroom: {
+        targets: [
+            {
+                character: "ct_standup",
+                come_from: "right",
+                from: {x: 1348, y: 534},
+                to: {x: 1318, y: 534},
+                idle: false,
+                distance: 4.999999999999998,
+                speed: 150
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "down",
+                from: {x: 946, y: 534},
+                to: {x: 946, y: 520},
+                idle: false,
+                distance: 13.399999999999968,
+                speed: 56
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "down",
+                from: {x: 922, y: 534},
+                to: {x: 922, y: 522},
+                idle: false,
+                distance: 13.399999999999968,
+                speed: 56
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 882, y: 490},
+                to: {x: 902, y: 490},
+                idle: false,
+                distance: 9.799999999999981,
+                speed: 77
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "right",
+                from: {x: 996, y: 490},
+                to: {x: 976, y: 490},
+                idle: false,
+                distance: 9.799999999999981,
+                speed: 77
+            },
+            {
+                character: "ct_crouch_darken",
+                come_from: "left",
+                from: {x: 550, y: 544},
+                to: {x: 588, y: 544},
+                idle: false,
+                distance: 5.1999999999999975,
+                speed: 96
+            },
+            {
+                character: "ct_standup_darken",
+                come_from: "left",
+                from: {x: 534, y: 532},
+                to: {x: 596, y: 532},
+                idle: false,
+                distance: 5.1999999999999975,
+                speed: 144
             },
         ] as Target[],
         initial_offset: {

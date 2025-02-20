@@ -1597,6 +1597,14 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/ancient/terrorist_circuit/tside_b_to_long_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    ancient_tside_heaven_to_redroom: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_heaven_to_redroom.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_heaven_to_redroom_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_heaven_to_redroom_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     ancient_tside_b_cave: {
         path: `/gfx/maps/ancient/terrorist_circuit/tside_b_cave.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
@@ -1611,6 +1619,22 @@ export const images: {[key: string]: ImageObject} = {
     },
     ancient_tside_cave_to_b_layer: {
         path: `/gfx/maps/ancient/terrorist_circuit/tside_cave_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_mid_to_heaven: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_mid_to_heaven.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_mid_to_heaven_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_mid_to_heaven_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_mid_to_redroom: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_mid_to_redroom.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_mid_to_redroom_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_mid_to_redroom_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
 
