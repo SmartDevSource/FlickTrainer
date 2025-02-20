@@ -18,7 +18,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'ancient',
   circuit: 'terrorist_circuit',
-  spot: 'tside_donut_to_a',
+  spot: 'tside_a_to_ctspawn',
   difficulty: 'easy',
   spot_objective: 25
 }

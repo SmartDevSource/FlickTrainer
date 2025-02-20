@@ -1661,6 +1661,38 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/ancient/terrorist_circuit/tside_donut_to_a_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    ancient_tside_a_site_to_main: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_a_site_to_main.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_a_site_to_main_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_a_site_to_main_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_a_main: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_a_main.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_a_main_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_a_main_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_a_main_to_temple: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_a_main_to_temple.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_a_main_to_temple_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_a_main_to_temple_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_a_to_ctspawn: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_a_to_ctspawn.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_tside_a_to_ctspawn_layer: {
+        path: `/gfx/maps/ancient/terrorist_circuit/tside_a_to_ctspawn_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
 
     // RECOIL TRAINER BACKGROUND //
     recoil_background: {
