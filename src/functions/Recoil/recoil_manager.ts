@@ -69,7 +69,7 @@ export const updateRecoil = (
             timeShot.value = now
         } else {
             if (spraySettings.current_weapon && fireTimer.elapsed >= spraySettings.current_weapon.fire_rate * speedShoot){
-                if (spraySettings.index < spraySettings.bullets_amount){
+                if (spraySettings.index <= spraySettings.bullets_amount){
                     const dx = spraySettings.next_spread.x - spraySettings.spray_offset.x
                     const dy = spraySettings.next_spread.y - spraySettings.spray_offset.y
 
@@ -91,7 +91,6 @@ export const updateRecoil = (
                     spraySettings.is_spraying = false
                     spraySettings.isRecovering = true
                     fireTimer.elapsed = 0
-                    // console.log("Shot length :", now - timeShot.value)
                     updateFiringState(false)
                 }
             }

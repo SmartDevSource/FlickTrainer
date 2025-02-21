@@ -17,14 +17,14 @@ import { RecoilTrainingPage } from "./components/Recoil/RecoilTrainingPage"
 const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'ancient',
-  circuit: 'terrorist_circuit',
+  circuit: 'ct_circuit',
   spot: 'tside_a_to_ctspawn',
   difficulty: 'easy',
   spot_objective: 25
 }
 
 const MainPage = () => {
-  const [currentPage, setCurrentPage] = useState<string>('home')
+  const [currentPage, setCurrentPage] = useState<string>('recoil_training')
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
   const [messageAlert, setMessageAlert] = useState<AlertParams | null>(null)
   const [gameSettings, setGameSettings] = useState<GameSettings | null>(null)

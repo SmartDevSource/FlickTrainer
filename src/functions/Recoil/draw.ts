@@ -5,7 +5,7 @@ import { playShotSound } from "../utils"
 
 export const minimizedCanvasSize = {w: 320, h: 240}
 export const fullscreenCanvasSize = {w: 1240, h: 768}
-export const screenBoundaries = {left: 250, top: 250, right: -925, bottom: -545}
+export const screenBoundaries = {left: 250, top: 250, right: -925, bottom: -545} // {left: 0, top: 0, right: -670, bottom: -315}
 export const screenScaleFactor = (fullscreenCanvasSize.w / fullscreenCanvasSize.h)
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
@@ -235,14 +235,41 @@ export const drawCrosshair = (ctx: CanvasRenderingContext2D, crosshairSettings: 
 }
 
 
-const showBulletsPercentage = (ctx: CanvasRenderingContext2D) => {
+const showBulletsPercentage = (ctx: CanvasRenderingContext2D, screenOffsetAimPunch: Vector2) => {
     if (lastPercentage){
         ctx.save()
+        ctx.fillStyle = 'rgba(70, 70, 70, .5)'
+
+        ctx.fillRect(
+            1110 + screenOffsetAimPunch.x,
+            410 + screenOffsetAimPunch.y,
+            215,
+            50
+        )
+    
+        ctx.strokeRect(
+            1110 + screenOffsetAimPunch.x,
+            410 + screenOffsetAimPunch.y,
+            215,
+            50
+        )
+
         ctx.fillStyle = 'white'
         ctx.strokeStyle = 'black'
-        ctx.font = '30px Play-Bold'
-        ctx.fillText(`Spray accuracy : ${lastPercentage.toFixed(2)} %`, 850, 50)
-        ctx.strokeText(`Spray accuracy : ${lastPercentage.toFixed(2)} %`, 850, 50)
+        ctx.font = '20px Play-Bold'
+        ctx.lineWidth = 3
+
+        ctx.strokeText(
+            `Accuracy : ${lastPercentage.toFixed(2)} %`,
+            1130 + screenOffsetAimPunch.x,
+            443 + screenOffsetAimPunch.y,
+        )
+        ctx.fillText(
+            `Accuracy : ${lastPercentage.toFixed(2)} %`,
+            1130 + screenOffsetAimPunch.x,
+            443 + screenOffsetAimPunch.y
+        )
+    
         ctx.restore()
     }
 }
@@ -276,8 +303,8 @@ export const drawTrajectorySpreads = (
 
         playShotSound(audios, weaponName)
 
-        const targetArea = (speedShoot >= 0 && speedShoot < 5) ? 15 :
-                           (speedShoot >= 5 && speedShoot < 10) ? 10 : 5
+        const targetArea = (speedShoot >= 0 && speedShoot < 5) ? 17 :
+                           (speedShoot >= 5 && speedShoot < 10) ? 12 : 7
 
         const isOnTarget = Math.abs(currentTargetSpreadPosition.x - (fullscreenCanvasSize.w / 2)) <= targetArea &&
                            Math.abs(currentTargetSpreadPosition.y - (fullscreenCanvasSize.h / 2)) <= targetArea
@@ -289,7 +316,8 @@ export const drawTrajectorySpreads = (
         } else {
             spreads.push({x: relative_spread_offset_x, y: relative_spread_offset_y})
         }
-        if (spraySettings.index === Object.keys(weapons[weaponName].spreads).length){
+
+        if (spraySettings.index === Object.keys(weapons[weaponName].spreads).length + 1){
             showPattern = false
             lastPercentage = (bulletsIntoTarget * 100) / Object.keys(spreads).length
             audios.beep.audio.currentTime = 0
@@ -310,7 +338,7 @@ export const drawTrajectorySpreads = (
         )
     })
 
-    showBulletsPercentage(ctx)
+    showBulletsPercentage(ctx, screenOffsetAimPunch)
 }
 
 export const drawFixedPattern = (
