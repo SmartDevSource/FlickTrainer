@@ -39,8 +39,6 @@ export const updateDeagleRecoil = (screenOffset: Vector2) => {
     if (recoilSettings.is_running){
         const x_step = recoilSettings.offset_step.x * timer.delta_time * recoilSettings.speed
         const y_step = recoilSettings.offset_step.y * timer.delta_time * recoilSettings.speed
-
-        console.log(timer.delta_time)
         
         if (!recoilSettings.reverse){
             if (recoilSettings.current_offset.y < recoilSettings.offset_max.y){

@@ -18,7 +18,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'ancient',
   circuit: 'ct_circuit',
-  spot: 'tside_a_to_ctspawn',
+  spot: 'ctside_b_ramp',
   difficulty: 'easy',
   spot_objective: 25
 }
@@ -27,7 +27,7 @@ const MainPage = () => {
   const [currentPage, setCurrentPage] = useState<string>('recoil_training')
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
   const [messageAlert, setMessageAlert] = useState<AlertParams | null>(null)
-  const [gameSettings, setGameSettings] = useState<GameSettings | null>(null)
+  const [gameSettings, setGameSettings] = useState<GameSettings | null>(gameSettingsTest)
 
   const handleNavbarClick = (navbar_data: string) => {
     switch(navbar_data){

@@ -1562,8 +1562,30 @@ export const images: {[key: string]: ImageObject} = {
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
     /////// ANCIENT CT SIDE ///////
-
-
+    ancient_ctside_ct_to_b: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_ct_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_ct_to_b_layer: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_ct_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_b_site: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_b_site.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_b_site_layer: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_b_site_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_b_ramp: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_b_ramp.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_b_ramp_layer: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_b_ramp_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
     /////// ANCIENT T SIDE ///////
     ancient_tside_b_ramp_to_heaven: {
         path: `/gfx/maps/ancient/terrorist_circuit/tside_b_ramp_to_heaven.png`,
