@@ -2,7 +2,7 @@ import { WeaponsStruct } from "@/types"
 
 export const weapons: WeaponsStruct = {
     ak47: {
-        fire_rate: .035,
+        fire_rate: .045,
         offset: {x: 720, y: 490},
         flame_offset: {x: 720, y: 370},
         spreads: {
@@ -129,7 +129,7 @@ export const weapons: WeaponsStruct = {
         }
     },
     mac10: {
-        fire_rate: .02,
+        fire_rate: .03,
         offset: {x: 720, y: 490},
         flame_offset: {x: 720, y: 350},
         spreads: {
@@ -256,7 +256,7 @@ export const weapons: WeaponsStruct = {
         },
     },
     mp9: {
-        fire_rate: .01,
+        fire_rate: .02,
         offset: {x: 720, y: 490},
         flame_offset: {x: 800, y: 380},
         spreads: {
@@ -383,7 +383,7 @@ export const weapons: WeaponsStruct = {
         }
     },
     mp7: {
-        fire_rate: .025,
+        fire_rate: .035,
         offset: {x: 720, y: 490},
         flame_offset: {x: 800, y: 420},
         spreads: {

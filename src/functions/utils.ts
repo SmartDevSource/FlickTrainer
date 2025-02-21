@@ -1,7 +1,7 @@
 import { AudioObject, ImageObject } from "@/types"
 
 let audioPool: HTMLAudioElement[] = []
-const maxInstanceSounds = 10
+const maxInstanceSounds = 15
 
 export const playShotSound = (audios: {[key: string]: AudioObject}, weaponName: string) => {
     audioPool = audioPool.filter(audio => !audio.ended)

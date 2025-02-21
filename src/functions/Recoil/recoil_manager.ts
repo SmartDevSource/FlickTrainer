@@ -1,4 +1,4 @@
-import { Vector2, Timer, SpraySettings, Weapon, AudioObject } from "@/types"
+import { Vector2, Timer, SpraySettings } from "@/types"
 import { weapons } from "./weapons"
 
 export const screenSprayOffset: Vector2 = {x: 35, y: 35} // plus j'augmente X, moins le spread horizontal est important
