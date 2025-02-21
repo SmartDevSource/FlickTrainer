@@ -2,7 +2,24 @@ import { MapStruct, Target } from "@/types"
 
 export const ancient: MapStruct = {
     ////////////////// CT CIRCUIT //////////////////
-
+    tside_test: {
+        targets: [
+            {
+                character: "terrorist_standup",
+                come_from: "down",
+                from: {x: 950, y: 556},
+                to: {x: 950, y: 544},
+                idle: false,
+                distance: 13.399999999999968,
+                speed: 65
+            },
+        ] as Target[],
+        initial_offset: {
+            x: -420,
+            y: -150
+        },
+        circuit: 'ct_circuit'
+    },
 
     ////////////////// TERRORIST CIRCUIT //////////////////
     tside_b_ramp_to_heaven: {

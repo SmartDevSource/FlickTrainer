@@ -42,7 +42,7 @@ export const drawWeapon = (
     updateFiringState: (state: boolean) => void
 ) => {
     const now = performance.now()
-    timer.delta_time = (now - timer.last_update) / 1000
+    timer.delta_time = Math.min((now - timer.last_update) / 1000, 0.016)
     timer.last_update = now
 
     if (isFiring){
@@ -69,17 +69,23 @@ export const drawWeapon = (
     weaponAnim.sway_offset.x += (normalized_mouseaccel.x - weaponAnim.sway_offset.x) * .02
     weaponAnim.sway_offset.y += (normalized_mouseaccel.y - weaponAnim.sway_offset.y) * .02
 
+    const weapon_position = {
+        x: 800 + weaponAnim.sway_offset.x,
+        y: 160 + weaponAnim.sway_offset.y >= 140 ? 160 + weaponAnim.sway_offset.y : 140
+    }
+
     ctx.drawImage(
         weaponImg.img,
         weaponAnim.current_frame * frame_width,
         0,
         frame_width,
         weaponImg.img.height,
-        800 + weaponAnim.sway_offset.x,
-        160 + weaponAnim.sway_offset.y,
+        weapon_position.x,
+        weapon_position.y,
         frame_width - 150,
         weaponImg.img.height - 150
     )
+    // console.log("weaponAnim.current_frame :", weaponAnim.current_frame)
     if (weaponAnim.current_frame > 0 && weaponAnim.current_frame < 3){
         ctx.drawImage(
             flameImg.img,

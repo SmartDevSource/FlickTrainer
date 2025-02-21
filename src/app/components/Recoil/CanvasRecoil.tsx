@@ -16,7 +16,7 @@ const weaponNames: string[] = ['ak47', 'mac10', 'mp9', 'mp7', 'galil','m4a1s','m
 const CanvasRecoil = () => {
     const isFiring = useRef<boolean>(false)
     const weaponIndex = useRef<number>(0)
-    const normalizedSpeed = useRef<number>(50)
+    const normalizedSpeed = useRef<number>(100)
     const speedShoot = useRef<number>(getNormalizedSpeed(normalizedSpeed.current))
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)

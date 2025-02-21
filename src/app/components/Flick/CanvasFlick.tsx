@@ -112,7 +112,7 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
     function getCircuitStates(){
         return {
             current_kills: 0,
-            kills_goal: 1,
+            kills_goal: 6,
             current_spot_index: 0,
             last_spot_index: Object.keys(circuits[game_settings.circuit as keyof CircuitTeams]).length,
             is_accomplished: false

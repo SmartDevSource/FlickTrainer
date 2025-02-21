@@ -71,7 +71,7 @@ export const drawWeapon = (
     images: {[key: string]: ImageObject}
 ) => {
     const now = performance.now()
-    timer.delta_time = (now - timer.last_update) / 1000
+    timer.delta_time = Math.min((now - timer.last_update) / 1000, 0.016)
     timer.last_update = now
 
     if (isFiring){

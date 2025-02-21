@@ -46,4 +46,5 @@ body {
   background: var(--background);
   font-family: 'Play-Bold', Helvetica, sans-serif;
   margin-bottom: 100px;
+  user-select: none;
 }

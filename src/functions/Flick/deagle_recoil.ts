@@ -24,6 +24,7 @@ export const initDeagleRecoil = (screenOffset: Vector2) => {
         x: screenOffset.x + recoilSettings.offset_max.x,
         y: screenOffset.y + recoilSettings.offset_max.y
     }
+    timer.last_update = performance.now()
     recoilSettings.is_running = true
     const rndDirection = Math.round(Math.random() * 1)
     recoilSettings.x_direction = rndDirection === 0 ? 'left': 'right'
@@ -32,12 +33,14 @@ export const initDeagleRecoil = (screenOffset: Vector2) => {
 
 export const updateDeagleRecoil = (screenOffset: Vector2) => {
     const now = performance.now()
-    timer.delta_time = (now - timer.last_update) / 1000
+    timer.delta_time = Math.min((now - timer.last_update) / 1000, 0.016)
     timer.last_update = now
 
     if (recoilSettings.is_running){
         const x_step = recoilSettings.offset_step.x * timer.delta_time * recoilSettings.speed
         const y_step = recoilSettings.offset_step.y * timer.delta_time * recoilSettings.speed
+
+        console.log(timer.delta_time)
         
         if (!recoilSettings.reverse){
             if (recoilSettings.current_offset.y < recoilSettings.offset_max.y){
