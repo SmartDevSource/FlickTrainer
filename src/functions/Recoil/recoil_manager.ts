@@ -4,7 +4,7 @@ import { weapons } from "./weapons"
 export const screenSprayOffset: Vector2 = {x: 35, y: 35} // plus j'augmente X, moins le spread horizontal est important
 
 const timer: Timer = {last_update: performance.now(), delta_time: 0}
-const spreadFactor: number = .01
+const spreadFactor: number = .011
 const sprayRecoveryDuration: number = 5
 export const fireTimer: {elapsed: number} = {elapsed: 0}
 const recoveryTimer: {elapsed: number} = {elapsed: 0}
