@@ -25,10 +25,10 @@ export const getRandomTarget = (targets: Target[]) => {
 
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
-        case 'easy': return 1200
-        case 'medium': return 1000
-        case 'hard': return 800
-        case 'faceit_peek': return 650
+        case 'easy': return 1500
+        case 'medium': return 1200
+        case 'hard': return 1000
+        case 'faceit_peek': return 750
     }
 }
 
