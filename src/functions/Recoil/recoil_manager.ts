@@ -76,8 +76,6 @@ export const updateRecoil = (
     timer.last_update = now
     const normalizedTime = (timer.delta_time * 60) / 100
 
-    console.log("normalizedTime", normalizedTime)
-
     const step = (normalizedTime / spreadFactor)
     fireTimer.elapsed += normalizedTime
 
@@ -92,8 +90,12 @@ export const updateRecoil = (
                     const dx = spraySettings.next_spread.x - spraySettings.spray_offset.x
                     const dy = spraySettings.next_spread.y - spraySettings.spray_offset.y
 
-                    spraySettings.spray_offset.x += (dx * step) * normalizedTime
-                    spraySettings.spray_offset.y += (dy * step) * normalizedTime
+                    // console.log("(dy * step) :", (dy * step))
+                    // console.log("(dy * step) * normalizedTime :", (dy * step))
+                    // console.log()
+
+                    spraySettings.spray_offset.x += (dx * step) * (normalizedTime * 100)
+                    spraySettings.spray_offset.y += (dy * step) * (normalizedTime * 100)
 
                     const distance_to_next_spread = Math.sqrt(dx * dx + dy * dy)
 
