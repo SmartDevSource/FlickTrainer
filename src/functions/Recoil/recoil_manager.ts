@@ -94,8 +94,8 @@ export const updateRecoil = (
                     // console.log("(dy * step) * normalizedTime :", (dy * step))
                     // console.log()
 
-                    spraySettings.spray_offset.x += (dx * step) + (normalizedTime )
-                    spraySettings.spray_offset.y += (dy * step) + (normalizedTime )
+                    spraySettings.spray_offset.x += (dx * (step + normalizedTime))
+                    spraySettings.spray_offset.y += (dy * (step + normalizedTime))
 
                     console.log((normalizedTime))
 
