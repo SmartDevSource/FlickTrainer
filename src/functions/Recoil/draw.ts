@@ -83,24 +83,28 @@ export const drawWeapon = (
     const timerTarget = weapons[weaponName].fire_rate
     const halfTimer = timerTarget / 2
 
-    if (animateWeapon) {
-        if (fireTimer >= 0 && fireTimer < halfTimer) {
-            const targetScale = weaponAnim.max_scale_recoil
-            const recoil = (spraySettings.index / 10) < .5 ? (spraySettings.index / 10) : .5
-            weaponAnim.scale_recoil += (targetScale - weaponAnim.scale_recoil) * recoil
-        } else if (fireTimer >= halfTimer) {
-            if (weaponAnim.scale_recoil > .1) {
-                weaponAnim.scale_recoil += (0 - weaponAnim.scale_recoil) * 0.1
-            } else {
-                weaponAnim.scale_recoil = 0
-                animateWeapon = false
+    if (spraySettings.is_spraying){
+        if (animateWeapon) {
+            if (fireTimer >= 0 && fireTimer < halfTimer) {
+                const targetScale = weaponAnim.max_scale_recoil
+                const recoil = (spraySettings.index / 10) < .5 ? (spraySettings.index / 10) : .5
+                weaponAnim.scale_recoil += (targetScale - weaponAnim.scale_recoil) * recoil
             }
         }
+    
+        if (fireTimer >= 0 && fireTimer < halfTimer){
+            if (weaponName != 'm4a1s')
+                drawShotFlame(ctx, images.shotflame, weapons[weaponName].flame_offset)
+        }    
     }
 
-    if (fireTimer >= 0 && fireTimer < halfTimer){
-        if (weaponName != 'm4a1s')
-            drawShotFlame(ctx, images.shotflame, weapons[weaponName].flame_offset)
+    if (fireTimer >= halfTimer) {
+        if (weaponAnim.scale_recoil > .1) {
+            weaponAnim.scale_recoil += (0 - weaponAnim.scale_recoil) * 0.1
+        } else {
+            weaponAnim.scale_recoil = 0
+            animateWeapon = false
+        }
     }
 
     const normalized_mouseaccel = {
@@ -328,6 +332,7 @@ export const drawTrajectorySpreads = (
             }, 1500)
         }
     }
+
     spreads.forEach(spread => {
         ctx.drawImage(
             spread_img.img,

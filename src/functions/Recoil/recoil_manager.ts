@@ -44,6 +44,22 @@ const updateSprayData = () => {
         spraySettings.angle = Math.atan2(dy, dx)
         spraySettings.distance = Math.sqrt(dx * dx + dy * dy)
         spraySettings.next_spread = next_spread
+    } else {
+        const current_spread = spraySettings.current_weapon.spreads[spraySettings.index - 1]
+        const next_spread = {
+            x: spraySettings.current_weapon.spreads[spraySettings.index - 1].x + 1,
+            y: spraySettings.current_weapon.spreads[spraySettings.index - 1].y + 1
+        }
+
+        spraySettings.spray_offset.x = current_spread.x
+        spraySettings.spray_offset.y = current_spread.y
+
+        const dx = next_spread.x - current_spread.x
+        const dy = next_spread.y - current_spread.y
+
+        spraySettings.angle = Math.atan2(dy, dx)
+        spraySettings.distance = Math.sqrt(dx * dx + dy * dy)
+        spraySettings.next_spread = next_spread
     }
 }
 
@@ -77,6 +93,8 @@ export const updateRecoil = (
                     spraySettings.spray_offset.y += dy * step
 
                     const distance_to_next_spread = Math.sqrt(dx * dx + dy * dy)
+
+                    console.log("distance :", distance_to_next_spread)
 
                     if (distance_to_next_spread < .1){
                         spraySettings.index++
