@@ -72,7 +72,7 @@ export const updateRecoil = (
     setCurrentSpread: (spread: Vector2) => void
 ) => {
     const now = performance.now()
-    timer.delta_time = Math.min((now - timer.last_update) / 1000, 0.016)
+    timer.delta_time = (now - timer.last_update) / 1000
     timer.last_update = now
     const normalizedTime = (timer.delta_time * 60) / 100
 
