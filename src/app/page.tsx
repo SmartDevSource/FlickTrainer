@@ -24,10 +24,10 @@ const gameSettingsTest: GameSettings = {
 }
 
 const MainPage = () => {
-  const [currentPage, setCurrentPage] = useState<string>('recoil_training')
+  const [currentPage, setCurrentPage] = useState<string>('home')
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
   const [messageAlert, setMessageAlert] = useState<AlertParams | null>(null)
-  const [gameSettings, setGameSettings] = useState<GameSettings | null>(gameSettingsTest)
+  const [gameSettings, setGameSettings] = useState<GameSettings | null>(null)
 
   const handleNavbarClick = (navbar_data: string) => {
     switch(navbar_data){

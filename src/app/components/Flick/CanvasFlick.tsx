@@ -36,9 +36,9 @@ import {
     drawCrosshair,
     weaponAnim
 } from '@/functions/Flick/draw'
-import { drawHelperData, drawTargetHelper, getHelperCoords } from '@/functions/Flick/target_helper'
+// import { drawHelperData, drawTargetHelper, getHelperCoords } from '@/functions/Flick/target_helper'
 import { initDeagleRecoil, updateDeagleRecoil } from '@/functions/Flick/deagle_recoil'
-import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
+import { getCrosshairStorage, getSensitivityStorage, loadResources, getCircuitSpotObjective } from '@/functions/utils'
 
 export interface Keys {
     left: boolean,
@@ -59,21 +59,21 @@ interface CanvasParams {
     ) => void,
 }
 
-const startTimerValue: number = 0
+const startTimerValue: number = 3
 const playerRespawnTimeout: number = 1000
 const generateTargetAfterNewSpotTimeout: number = 1000
 const resetGameWhenCircuitAccomplishedTimeout: number = 500
 const sensitivityFactor: number = 1.2
 
 const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplished, onSpotAccomplished}) => {
-    const testDistance = useRef<number>(2)
-    const testCharacter = useRef<number>(4)
-    const testSpeedPosition = useRef<number>(1)
-    const testSpeedScale = useRef<number>(0.1)
-    const testPosition = useRef<Vector2>({x: 700, y: 300})
-    const testStartPosition = useRef<Vector2>({x: 0, y: 0})
-    const testComeFrom = useRef<string>('left')
-    const testKeysPressed = useRef<Keys>({left: false, up: false, right: false, down: false, minus: false, plus: false})
+    // const testDistance = useRef<number>(2)
+    // const testCharacter = useRef<number>(4)
+    // const testSpeedPosition = useRef<number>(1)
+    // const testSpeedScale = useRef<number>(0.1)
+    // const testPosition = useRef<Vector2>({x: 700, y: 300})
+    // const testStartPosition = useRef<Vector2>({x: 0, y: 0})
+    // const testComeFrom = useRef<string>('left')
+    // const testKeysPressed = useRef<Keys>({left: false, up: false, right: false, down: false, minus: false, plus: false})
 
     const circuits: CircuitTeams = getMapCircuits(game_settings.map_name)
 
@@ -112,7 +112,7 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
     function getCircuitStates(){
         return {
             current_kills: 0,
-            kills_goal: 6,
+            kills_goal: getCircuitSpotObjective(game_settings.difficulty),
             current_spot_index: 0,
             last_spot_index: Object.keys(circuits[game_settings.circuit as keyof CircuitTeams]).length,
             is_accomplished: false
@@ -362,58 +362,58 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
         }
         const handleKeydown = (event:KeyboardEvent) => {
             switch(event.key.toLocaleLowerCase()){
-                case 'arrowleft': testKeysPressed.current.left = true; break
-                case 'arrowright': testKeysPressed.current.right = true; break
-                case 'arrowup': testKeysPressed.current.up = true; break
-                case 'arrowdown': testKeysPressed.current.down = true; break
-                case '+': testKeysPressed.current.plus = true; break
-                case '-': testKeysPressed.current.minus = true; break
+                // case 'arrowleft': testKeysPressed.current.left = true; break
+                // case 'arrowright': testKeysPressed.current.right = true; break
+                // case 'arrowup': testKeysPressed.current.up = true; break
+                // case 'arrowdown': testKeysPressed.current.down = true; break
+                // case '+': testKeysPressed.current.plus = true; break
+                // case '-': testKeysPressed.current.minus = true; break
                 case 'alt': case 'meta': case 'f12': handleExitFullScreen(); break
-                case 'a':
-                    testCharacter.current = testCharacter.current >= 9 ?
-                        2
-                        :
-                        testCharacter.current + 1
-                break
-                case 'z':
-                    testSpeedPosition.current *= 10
-                    if (testSpeedPosition.current > 100){
-                        testSpeedPosition.current = 1
-                    }
-                break
-                case 'e':
-                    testSpeedScale.current *= 10
-                    if (testSpeedScale.current > 1){
-                        testSpeedScale.current = .01
-                    }
-                break
-                case 'f':
-                    testComeFrom.current = testComeFrom.current === 'left' ? 'right' : 'left'
-                break
-                case 'g':
-                    testStartPosition.current = {...testPosition.current}
-                break
-                case 's':
-                    const helperCoords = getHelperCoords(
-                        Object.keys(images)[testCharacter.current],
-                        testComeFrom.current,
-                        testStartPosition.current,
-                        testPosition.current,
-                        testDistance.current
-                    )
-                    navigator.clipboard.writeText(helperCoords)
-                break
+                // case 'a':
+                //     testCharacter.current = testCharacter.current >= 9 ?
+                //         2
+                //         :
+                //         testCharacter.current + 1
+                // break
+                // case 'z':
+                //     testSpeedPosition.current *= 10
+                //     if (testSpeedPosition.current > 100){
+                //         testSpeedPosition.current = 1
+                //     }
+                // break
+                // case 'e':
+                //     testSpeedScale.current *= 10
+                //     if (testSpeedScale.current > 1){
+                //         testSpeedScale.current = .01
+                //     }
+                // break
+                // case 'f':
+                //     testComeFrom.current = testComeFrom.current === 'left' ? 'right' : 'left'
+                // break
+                // case 'g':
+                //     testStartPosition.current = {...testPosition.current}
+                // break
+                // case 's':
+                //     const helperCoords = getHelperCoords(
+                //         Object.keys(images)[testCharacter.current],
+                //         testComeFrom.current,
+                //         testStartPosition.current,
+                //         testPosition.current,
+                //         testDistance.current
+                //     )
+                //     navigator.clipboard.writeText(helperCoords)
+                // break
             }
         }
 
         const handleKeyUp = (event: KeyboardEvent) => {
             switch(event.key.toLowerCase()){
-                case 'arrowleft': testKeysPressed.current.left = false; break
-                case 'arrowright': testKeysPressed.current.right = false; break
-                case 'arrowup': testKeysPressed.current.up = false; break
-                case 'arrowdown': testKeysPressed.current.down = false; break
-                case '+': testKeysPressed.current.plus = false; break
-                case '-': testKeysPressed.current.minus = false; break
+                // case 'arrowleft': testKeysPressed.current.left = false; break
+                // case 'arrowright': testKeysPressed.current.right = false; break
+                // case 'arrowup': testKeysPressed.current.up = false; break
+                // case 'arrowdown': testKeysPressed.current.down = false; break
+                // case '+': testKeysPressed.current.plus = false; break
+                // case '-': testKeysPressed.current.minus = false; break
             }
         }
         
@@ -532,33 +532,33 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
         }
     }, [isAccomplished])
 
-    const updateTestValues = () => {
-        if (testKeysPressed.current.left){
-            testPosition.current.x -= testSpeedPosition.current
-        }
-        if (testKeysPressed.current.right){
-            testPosition.current.x += testSpeedPosition.current
-        }
-        if (testKeysPressed.current.up){
-            testPosition.current.y -= testSpeedPosition.current
-        }
-        if (testKeysPressed.current.down){
-            testPosition.current.y += testSpeedPosition.current
-        }
-        if (testKeysPressed.current.plus){
-            testDistance.current -= testSpeedScale.current;
-        }
-        if (testKeysPressed.current.minus){
-            testDistance.current += testSpeedScale.current;
-        }
-    }
+    // const updateTestValues = () => {
+    //     if (testKeysPressed.current.left){
+    //         testPosition.current.x -= testSpeedPosition.current
+    //     }
+    //     if (testKeysPressed.current.right){
+    //         testPosition.current.x += testSpeedPosition.current
+    //     }
+    //     if (testKeysPressed.current.up){
+    //         testPosition.current.y -= testSpeedPosition.current
+    //     }
+    //     if (testKeysPressed.current.down){
+    //         testPosition.current.y += testSpeedPosition.current
+    //     }
+    //     if (testKeysPressed.current.plus){
+    //         testDistance.current -= testSpeedScale.current;
+    //     }
+    //     if (testKeysPressed.current.minus){
+    //         testDistance.current += testSpeedScale.current;
+    //     }
+    // }
 
     const draw = () => {
         if (ctx.current && canvasRef.current){
             ctx.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
 
             updateTargetTimer()
-            updateTestValues()
+            // updateTestValues()
             updateDeagleRecoil(screenOffset.current)
 
             if (target.current)
@@ -573,7 +573,7 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
                     drawTarget(target.current, screenOffset.current, ctx.current, images[target.current.character], false)
 
                 // HELPER //
-                drawTargetHelper(ctx.current, images, screenOffset.current, testPosition.current, testDistance.current, testCharacter.current)
+                // drawTargetHelper(ctx.current, images, screenOffset.current, testPosition.current, testDistance.current, testCharacter.current)
 
                 // MAP BACKGROUND LAYER //
                 ctx.current.drawImage(mapSpotImages.current.layer.img, screenOffset.current.x, screenOffset.current.y)
@@ -583,7 +583,7 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
 
                 drawStatistics(ctx.current, statistics.current, circuitStates.current, spotStates.current, game_settings.mode)
                 // drawScreenOffsets(ctx.current, screenOffset.current)
-                drawHelperData(ctx.current, testDistance.current, testStartPosition.current, testPosition.current, testSpeedPosition.current, testSpeedScale.current, testComeFrom.current)
+                // drawHelperData(ctx.current, testDistance.current, testStartPosition.current, testPosition.current, testSpeedPosition.current, testSpeedScale.current, testComeFrom.current)
 
                 if (!isReady.current)
                     drawStartCounter(ctx.current, startTimer.current)

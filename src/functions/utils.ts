@@ -86,3 +86,13 @@ export const getSensitivityStorage = () => {
         return 1.2
     }
 }
+
+export const getCircuitSpotObjective = (difficulty: string) => {
+    switch(difficulty){
+        case 'easy': return 6
+        case 'medium': return 5
+        case 'hard': return 4
+        case 'faceit_peek': return 3
+        default: return 5
+    }
+}

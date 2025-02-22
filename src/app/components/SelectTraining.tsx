@@ -9,7 +9,7 @@ export const SelectTraining: React.FC<SelectTrainingParams> = ({onSelect}) => {
     return (
         <>
             <h1 className='text-center text-white text-4xl mb-3 mt-8'>
-                Training Selection
+                Choose your training
             </h1>
             <div className="flex flex-col justify-center items-center animate-fadeInPage gap-6 mt-28">
                 <button

@@ -3,6 +3,7 @@ import CanvasFlick from "./CanvasFlick"
 import { useEffect, useState } from "react"
 import { StatisticsModal } from "../StatisticsModal"
 import { Statistics, GameSettings } from "@/types"
+import { getCircuitSpotObjective } from "@/functions/utils"
 
 interface TrainingParams {
     game_settings: GameSettings,
@@ -56,38 +57,50 @@ export const FlickTrainingPage: React.FC<TrainingParams> = ({game_settings, onBa
                     onUpdateStatistics={() => getLastStatistics()}
                 />
             }
-            {lastBestStatistics &&
-                <div
-                    className="flex flex-col justify-center items-center 
-                        bg-gray-700 rounded-lg shadow mt-5 select-none min-w-[250px] py-1"
-                >
-                    <span className="border-b w-full text-white text-lg text-center pb-1">
-                        {game_settings.map_name.toUpperCase()}
+            <div
+                className="flex flex-col justify-center items-center 
+                    bg-gray-700 rounded-lg shadow mt-5 select-none min-w-[250px] py-1"
+            >
+                <span className="border-b w-full text-white text-lg text-center pb-1">
+                    {game_settings.map_name.toUpperCase()}
+                </span>
+                <div className="flex justify-between w-full px-2">
+                    <span className="text-white p-1">
+                        {game_settings.mode === 'circuit' ?
+                            'Circuit :'
+                            :
+                            'Spot :'
+                        }
                     </span>
-                    <div className="flex justify-between w-full px-2">
-                        <span className="text-white p-1">
-                            {game_settings.mode === 'circuit' ?
-                                'Circuit :'
-                                :
-                                'Spot :'
-                            }
-                        </span>
-                        <span className="text-white p-1">
-                            {game_settings.mode === 'circuit' ?
-                                game_settings.circuit.split('_').join(' ').toUpperCase()
-                                :
-                                game_settings.spot.split('_').join(' ').toUpperCase()
-                            }
-                        </span>
-                    </div>
-                    <div className="flex justify-between w-full px-2 border-b">
-                        <span className="text-white p-1">
-                            Difficulty :
-                        </span>
-                        <span className="text-white p-1">
-                            {game_settings.difficulty}
-                        </span>
-                    </div>
+                    <span className="text-white p-1">
+                        {game_settings.mode === 'circuit' ?
+                            game_settings.circuit.split('_').join(' ').toUpperCase()
+                            :
+                            game_settings.spot.split('_').join(' ').toUpperCase()
+                        }
+                    </span>
+                </div>
+                <div className={`flex justify-between w-full px-2`}>
+                    <span className="text-white p-1">
+                        Difficulty :
+                    </span>
+                    <span className="text-white p-1">
+                        {game_settings.difficulty.split('_').join(' ').toUpperCase()}
+                    </span>
+                </div>
+                <div className={`flex justify-between w-full px-2 ${lastBestStatistics && "border-b"}`}>
+                    <span className="text-white p-1">
+                        Objective :
+                    </span>
+                    <span className="text-white p-1">
+                        {game_settings.mode === 'circuit' ?
+                            `${getCircuitSpotObjective(game_settings.difficulty)} kills / spot`.toUpperCase() :
+                            `${game_settings.spot_objective} kills`.toUpperCase()
+                        }
+                    </span>
+                </div>
+                {lastBestStatistics &&
+                    <>
                     <div className="flex justify-between w-full px-2">
                         <span className="text-white p-1">
                             Top KD :
@@ -121,10 +134,10 @@ export const FlickTrainingPage: React.FC<TrainingParams> = ({game_settings, onBa
                             {lastBestStatistics.precision} %
                         </span>
                         }
-
                     </div>
-                </div>
-            }
+                    </>
+                }
+            </div>
             <CanvasFlick
                 game_settings={game_settings}
                 onCircuitAccomplished={(e)=> handleCircuitAccomplishment(e)}

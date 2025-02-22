@@ -8,27 +8,27 @@ let lastTargetIndex = -1
 export let shotTimeout: ReturnType<typeof setTimeout> | null = null
 
 export const getRandomTarget = (targets: Target[]) => {
-    // let rndIndex = Math.floor(Math.random() * targets.length)
+    let rndIndex = Math.floor(Math.random() * targets.length)
 
-    // while(rndIndex === lastTargetIndex){
-    //     rndIndex = Math.floor(Math.random() * targets.length)
-    // }
+    while(rndIndex === lastTargetIndex){
+        rndIndex = Math.floor(Math.random() * targets.length)
+    }
 
-    // lastTargetIndex = rndIndex
+    lastTargetIndex = rndIndex
     // console.log("Random index target :", rndIndex)
 
-    // if (shotTimeout){
-    //     clearTimeout(shotTimeout)
-    // }
-    return targets[0]
+    if (shotTimeout){
+        clearTimeout(shotTimeout)
+    }
+    return targets[rndIndex]
 }
 
 const getReactionTime = (difficulty: string) => {
     switch(difficulty){
-        case 'easy': return 100000
-        case 'medium': return 850
-        case 'hard': return 750
-        case 'faceit_peek': return 500
+        case 'easy': return 1200
+        case 'medium': return 1000
+        case 'hard': return 800
+        case 'faceit_peek': return 650
     }
 }
 
