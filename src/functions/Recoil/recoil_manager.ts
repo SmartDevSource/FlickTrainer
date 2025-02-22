@@ -72,8 +72,8 @@ export const updateRecoil = (
     setCurrentSpread: (spread: Vector2) => void
 ) => {
     const now = performance.now()
-    timer.delta_time = (now - timer.last_update) / 1000
-    timer.last_update = now 
+    timer.delta_time = Math.min((now - timer.last_update) / 1000, 0.016) 
+    timer.last_update = now
     const normalizedTime = (timer.delta_time * 60) / 100
 
     console.log("normalizedTime", normalizedTime)
@@ -92,8 +92,8 @@ export const updateRecoil = (
                     const dx = spraySettings.next_spread.x - spraySettings.spray_offset.x
                     const dy = spraySettings.next_spread.y - spraySettings.spray_offset.y
 
-                    spraySettings.spray_offset.x += dx * step
-                    spraySettings.spray_offset.y += dy * step
+                    spraySettings.spray_offset.x += (dx * step)
+                    spraySettings.spray_offset.y += (dy * step)
 
                     const distance_to_next_spread = Math.sqrt(dx * dx + dy * dy)
 
