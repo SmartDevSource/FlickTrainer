@@ -1586,6 +1586,63 @@ export const images: {[key: string]: ImageObject} = {
         path: `/gfx/maps/ancient/ct_circuit/ctside_b_ramp_layer.png`,
         img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
     },
+    ancient_ctside_cave_to_b: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_cave_to_b.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_cave_to_b_layer: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_cave_to_b_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_redroom_to_mid: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_redroom_to_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_redroom_to_mid_layer: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_redroom_to_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_mid: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_mid.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_mid_layer: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_mid_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_a_site_to_main: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_a_site_to_main.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_a_site_to_main_layer: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_a_site_to_main_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_ct_to_a: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_ct_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_ct_to_a_layer: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_ct_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_temple_to_a: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_temple_to_a.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_temple_to_a_layer: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_temple_to_a_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_a_to_main: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_a_to_main.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+    ancient_ctside_a_to_main_layer: {
+        path: `/gfx/maps/ancient/ct_circuit/ctside_a_to_main_layer.png`,
+        img: typeof window !== 'undefined' ? new Image() : ({} as HTMLImageElement),
+    },
+
     /////// ANCIENT T SIDE ///////
     ancient_tside_b_ramp_to_heaven: {
         path: `/gfx/maps/ancient/terrorist_circuit/tside_b_ramp_to_heaven.png`,

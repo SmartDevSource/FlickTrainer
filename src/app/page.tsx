@@ -18,7 +18,7 @@ const gameSettingsTest: GameSettings = {
   mode: 'spot',
   map_name: 'ancient',
   circuit: 'ct_circuit',
-  spot: 'ctside_b_ramp',
+  spot: 'ctside_a_to_main',
   difficulty: 'easy',
   spot_objective: 25
 }
