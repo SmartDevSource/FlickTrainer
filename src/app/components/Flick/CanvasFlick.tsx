@@ -31,7 +31,7 @@ import {
     drawStatistics,
     drawPlayerDeath,
     drawPauseScreen,
-    drawScreenOffsets,
+    // drawScreenOffsets,
     drawStartCounter,
     drawCrosshair,
     weaponAnim
@@ -85,8 +85,8 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
     const isReady = useRef<boolean>(false)
     const startTimer = useRef<number>(startTimerValue)
 
-    let startInterval = useRef<ReturnType<typeof setInterval>>(null)
-    let timeElapsedInterval = useRef<ReturnType<typeof setInterval>>(null)
+    const startInterval = useRef<ReturnType<typeof setInterval>>(null)
+    const timeElapsedInterval = useRef<ReturnType<typeof setInterval>>(null)
 
     const canvasRef = useRef<HTMLCanvasElement | null>(null)
     const ctx = useRef<CanvasRenderingContext2D | null>(null)

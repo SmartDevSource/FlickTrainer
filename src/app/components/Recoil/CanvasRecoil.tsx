@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { images } from '@/images_data'
 import { audios } from '@/audio_data'
-import { Vector2, CrosshairData, RecoilBackground } from '@/types'
+import { Vector2, CrosshairData } from '@/types'
 import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries, screenScaleFactor,
         drawWeapon, drawPauseScreen, drawCrosshair, drawTrajectorySpreads,
         drawFixedPattern, drawSpeedSelector }

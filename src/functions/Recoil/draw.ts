@@ -349,7 +349,7 @@ export const drawFixedPattern = (
 ) => {
     ctx.save()
     let last_spread = {x: 0, y: 0}
-    let current_spread_data = {offset_x: 0, offset_y: 0, index: 0}
+    const current_spread_data = {offset_x: 0, offset_y: 0, index: 0}
 
     for (let i = 1; i <= Object.keys(weapons[weaponName].spreads).length; i++){
         const offset_x = last_spread.x + weapons[weaponName].spreads[i].x

@@ -19,10 +19,10 @@ export const GameSettingsModal: React.FC<SettingsParams> = ({onClose, onValid, s
     const [selectedDifficulty, setSelectedDifficulty] = useState<string>('easy')
     const [spotObjective, setSpotObjective] = useState<number>(25)
 
-    const normalizeCircuitName = (circuit_name: string) => {
-        const firstWord = circuit_name.split('_')[0]
-        return firstWord.charAt(0).toUpperCase() + firstWord.slice(1)
-    }
+    // const normalizeCircuitName = (circuit_name: string) => {
+    //     const firstWord = circuit_name.split('_')[0]
+    //     return firstWord.charAt(0).toUpperCase() + firstWord.slice(1)
+    // }
 
     const normalizeSpotName = (spot_name: string) => {
         return spot_name.split('_').join(' ').toUpperCase()

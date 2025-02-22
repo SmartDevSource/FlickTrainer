@@ -14,14 +14,14 @@ import { GameSettings } from "@/types"
 import { FlickTrainingPage } from "./components/Flick/FlickTrainingPage"
 import { RecoilTrainingPage } from "./components/Recoil/RecoilTrainingPage"
 
-const gameSettingsTest: GameSettings = {
-  mode: 'spot',
-  map_name: 'ancient',
-  circuit: 'ct_circuit',
-  spot: 'ctside_a_to_main',
-  difficulty: 'easy',
-  spot_objective: 25
-}
+// const gameSettingsTest: GameSettings = {
+//   mode: 'spot',
+//   map_name: 'ancient',
+//   circuit: 'ct_circuit',
+//   spot: 'ctside_a_to_main',
+//   difficulty: 'easy',
+//   spot_objective: 25
+// }
 
 const MainPage = () => {
   const [currentPage, setCurrentPage] = useState<string>('home')
