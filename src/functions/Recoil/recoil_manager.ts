@@ -96,7 +96,8 @@ export const updateRecoil = (
 
                     if (distance_to_next_spread < .1){
                         spraySettings.index++
-                        console.log("spraySettings.index :", spraySettings.index)
+                        console.log("timer.delta_time :", timer.delta_time)
+                        console.log("fireTimer.elapsed :", fireTimer.elapsed)
                         fireTimer.elapsed = 0
                         updateSprayData()
                         setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
