@@ -92,8 +92,8 @@ export const updateRecoil = (
                     const dx = spraySettings.next_spread.x - spraySettings.spray_offset.x
                     const dy = spraySettings.next_spread.y - spraySettings.spray_offset.y
 
-                    spraySettings.spray_offset.x += (dx * step)
-                    spraySettings.spray_offset.y += (dy * step)
+                    spraySettings.spray_offset.x += (dx * step) * normalizedTime
+                    spraySettings.spray_offset.y += (dy * step) * normalizedTime
 
                     const distance_to_next_spread = Math.sqrt(dx * dx + dy * dy)
 
