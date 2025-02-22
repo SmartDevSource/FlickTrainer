@@ -69,10 +69,11 @@ export const updateRecoil = (
     isFiring: boolean,
     speedShoot: number,
     updateFiringState: (state: boolean) => void,
-    setCurrentSpread: (spread: Vector2) => void,
+    setCurrentSpread: (spread: Vector2) => void
 ) => {
     const now = performance.now()
     timer.delta_time = Math.min((now - timer.last_update) / 1000, 0.016)
+    timer.delta_time *= (60 / (1 / timer.delta_time))
     timer.last_update = now
 
     const step = (timer.delta_time / spreadFactor)

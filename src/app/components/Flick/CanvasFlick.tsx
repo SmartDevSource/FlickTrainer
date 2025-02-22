@@ -598,7 +598,7 @@ const CanvasFlick: React.FC<CanvasParams> = ({game_settings, onCircuitAccomplish
     }
 
     return (
-        <div className={`relative m-5 mt-20`}>
+        <div className={`relative m-5`}>
             {isLoading && (
                 <div className='absolute inset-0 flex items-center justify-center bg-slate-900 bg-opacity-75'>
                     <div className="w-12 h-12 border-4 border-white border-t-transparent rounded-full animate-spin"></div>

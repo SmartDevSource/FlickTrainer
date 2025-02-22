@@ -19,11 +19,10 @@ export const playShotSound = (audios: {[key: string]: AudioObject}, weaponName: 
     sound.play()
 }
 
-
 export const loadResources = async (
-        images: { [key: string]: ImageObject }, 
-        audios: { [key: string]: AudioObject }
-    ): Promise<void> => {
+    images: { [key: string]: ImageObject }, 
+    audios: { [key: string]: AudioObject }
+): Promise<void> => {
     const loadImage = (image_object: ImageObject): Promise<ImageObject> => {
         return new Promise((resolve, reject) => {
             image_object.img.src = `${image_object.path}`
@@ -96,3 +95,131 @@ export const getCircuitSpotObjective = (difficulty: string) => {
         default: return 5
     }
 }
+
+////////////////// THOR //////////////////
+
+// timer.delta_time : 0.004200000001117587
+// fireTimer.elapsed : 4.605999999999977
+// timer.delta_time : 0.004300000000745058
+// fireTimer.elapsed : 0.06989999999850988
+// timer.delta_time : 0.004200000001117587
+// fireTimer.elapsed : 0.06659999999962747
+// timer.delta_time : 0.004199999999254942
+// fireTimer.elapsed : 0.06259999999962747
+// timer.delta_time : 0.004200000001117587
+// fireTimer.elapsed : 0.07090000000037253
+// timer.delta_time : 0.004
+// fireTimer.elapsed : 0.0625
+// timer.delta_time : 0.004300000000745058
+// fireTimer.elapsed : 0.06699999999999999
+// timer.delta_time : 0.004200000001117587
+// fireTimer.elapsed : 0.07899999999999999
+// timer.delta_time : 0.004199999999254942
+// fireTimer.elapsed : 0.07509999999962746
+// timer.delta_time : 0.004199999999254942
+// fireTimer.elapsed : 0.07509999999962746
+// timer.delta_time : 0.004300000000745058
+// fireTimer.elapsed : 0.07930000000074507
+// timer.delta_time : 0.004
+// fireTimer.elapsed : 0.07490000000037253
+// timer.delta_time : 0.004199999999254942
+// fireTimer.elapsed : 0.07519999999925493
+// timer.delta_time : 0.004199999999254942
+// fireTimer.elapsed : 0.07919999999925494
+// timer.delta_time : 0.004099999999627471
+// fireTimer.elapsed : 0.07920000000111758
+// timer.delta_time : 0.004199999999254942
+// fireTimer.elapsed : 0.07519999999925493
+// timer.delta_time : 0.004199999999254942
+// fireTimer.elapsed : 0.06659999999962747
+// timer.delta_time : 0.004200000001117587
+// fireTimer.elapsed : 0.07520000000111758
+// timer.delta_time : 0.004199999999254942
+// fireTimer.elapsed : 0.06669999999925494
+// timer.delta_time : 0.004199999999254942
+// fireTimer.elapsed : 0.08340000000037252
+// timer.delta_time : 0.004099999999627471
+// fireTimer.elapsed : 0.07919999999925494
+// timer.delta_time : 0.004199999999254942
+// fireTimer.elapsed : 0.071
+// timer.delta_time : 0.004099999999627471
+// fireTimer.elapsed : 0.07080000000074506
+// timer.delta_time : 0.0041000000014901165
+// fireTimer.elapsed : 0.07930000000074505
+// timer.delta_time : 0.004099999999627471
+// fireTimer.elapsed : 0.07509999999962746
+// timer.delta_time : 0.002900000000372529
+// fireTimer.elapsed : 0.07519999999925495
+// timer.delta_time : 0.004199999999254942
+// fireTimer.elapsed : 0.07090000000037253
+// timer.delta_time : 0.004099999999627471
+// fireTimer.elapsed : 0.07909999999962747
+// timer.delta_time : 0.0041000000014901165
+// fireTimer.elapsed : 0.07920000000111758
+// timer.delta_time : 0.004199999999254942
+// fireTimer.elapsed : 0.05429999999888241
+
+
+
+////////////////// ME //////////////////
+
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 4.508999999999979
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.08399999999999999
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.107
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.093
+// timer.delta_time : 0.014
+// fireTimer.elapsed : 0.10699999999999998
+// timer.delta_time : 0.014
+// fireTimer.elapsed : 0.094
+// timer.delta_time : 0.014
+// fireTimer.elapsed : 0.093
+// timer.delta_time : 0.015
+// fireTimer.elapsed : 0.107
+// timer.delta_time : 0.012
+// fireTimer.elapsed : 0.105
+// timer.delta_time : 0.014
+// fireTimer.elapsed : 0.108
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.12
+// timer.delta_time : 0.014
+// fireTimer.elapsed : 0.107
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.106
+// timer.delta_time : 0.015
+// fireTimer.elapsed : 0.121
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.119
+// timer.delta_time : 0.014
+// fireTimer.elapsed : 0.107
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.093
+// timer.delta_time : 0.014
+// fireTimer.elapsed : 0.107
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.093
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.12
+// timer.delta_time : 0.014
+// fireTimer.elapsed : 0.121
+// timer.delta_time : 0.014
+// fireTimer.elapsed : 0.106
+// timer.delta_time : 0.014
+// fireTimer.elapsed : 0.094
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.119
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.107
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.12
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.107
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.106
+// timer.delta_time : 0.013
+// fireTimer.elapsed : 0.121
+// timer.delta_time : 0.014
+// fireTimer.elapsed : 0.08

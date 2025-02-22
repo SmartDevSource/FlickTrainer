@@ -10,7 +10,7 @@ export const SelectTraining: React.FC<SelectTrainingParams> = ({onSelect}) => {
             <h1 className='text-center text-white text-4xl mb-3 mt-8'>
                 Choose your training
             </h1>
-            <div className="flex flex-col justify-center items-center animate-fadeInPage gap-6 mt-28">
+            <div className="flex flex-col justify-center items-center animate-fadeInPage gap-6 mt-14">
                 <button
                     className="relative group cursor-pointer"
                     onClick={()=> onSelect('map_peek')}
