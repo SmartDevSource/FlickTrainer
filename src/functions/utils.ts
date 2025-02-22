@@ -47,7 +47,7 @@ export const loadResources = async (
     const imagePromises = Object.values(images).map(loadImage)
     const audioPromises = Object.values(audios).map(loadAudio)
 
-    return Promise.all([imagePromises, audioPromises])
+    return Promise.all([...imagePromises, ...audioPromises])
     .then(() => {
         console.log('All resources loaded')
     })
