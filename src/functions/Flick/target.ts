@@ -28,7 +28,7 @@ const getReactionTime = (difficulty: string) => {
         case 'easy': return 1500
         case 'medium': return 1200
         case 'hard': return 1000
-        case 'faceit_peek': return 750
+        case 'faceit_peek': return 700
     }
 }
 
