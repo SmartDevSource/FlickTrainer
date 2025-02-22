@@ -78,8 +78,8 @@ export const updateRecoil = (
 
     console.log("normalizedTime", normalizedTime)
 
-    const step = (timer.delta_time / spreadFactor)
-    fireTimer.elapsed += timer.delta_time
+    const step = (normalizedTime / spreadFactor)
+    fireTimer.elapsed += normalizedTime
 
     if (isFiring){
         if (!spraySettings.is_spraying){
@@ -99,8 +99,6 @@ export const updateRecoil = (
 
                     if (distance_to_next_spread < .1){
                         spraySettings.index++
-                        console.log("timer.delta_time :", timer.delta_time)
-                        console.log("fireTimer.elapsed :", fireTimer.elapsed)
                         fireTimer.elapsed = 0
                         updateSprayData()
                         setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
@@ -123,7 +121,7 @@ export const updateRecoil = (
         }
 
         if (spraySettings.index > 1){
-            recoveryTimer.elapsed += timer.delta_time
+            recoveryTimer.elapsed += normalizedTime
             if (recoveryTimer.elapsed >= spreadFactor){
                 spraySettings.index--
                 recoveryTimer.elapsed = 0
@@ -135,9 +133,9 @@ export const updateRecoil = (
             const abs_y = Math.abs(aimPunch.y)
 
             if (abs_x >= 1)
-                aimPunch.x += (-aimPunch.x) * sprayRecoveryDuration * timer.delta_time
+                aimPunch.x += (-aimPunch.x) * sprayRecoveryDuration * normalizedTime
             if (abs_y >= 1)
-                aimPunch.y += (-aimPunch.y) * sprayRecoveryDuration * timer.delta_time
+                aimPunch.y += (-aimPunch.y) * sprayRecoveryDuration * normalizedTime
 
             if (abs_x < 1 && abs_y < 1){
                 aimPunch.x = 0
