@@ -74,12 +74,14 @@ export const updateRecoil = (
     const now = performance.now()
     timer.delta_time = Math.min((now - timer.last_update) / 1000, 0.016)
     timer.last_update = now
+    const normalizedTime = timer.delta_time * 60
+
+    console.log("normalizedTime", normalizedTime)
 
     const step = (timer.delta_time / spreadFactor)
     fireTimer.elapsed += timer.delta_time
 
     if (isFiring){
-        console.log("shoot !")
         if (!spraySettings.is_spraying){
             initSprayParams(weaponName)
             setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
