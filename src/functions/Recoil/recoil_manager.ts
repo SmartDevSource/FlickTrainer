@@ -79,6 +79,7 @@ export const updateRecoil = (
     fireTimer.elapsed += timer.delta_time
 
     if (isFiring){
+        console.log("shoot !")
         if (!spraySettings.is_spraying){
             initSprayParams(weaponName)
             setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
