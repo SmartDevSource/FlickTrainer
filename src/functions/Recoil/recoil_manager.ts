@@ -72,12 +72,10 @@ export const updateRecoil = (
 ) => {
     const now = performance.now()
     timer.delta_time = Math.min((now - timer.last_update) / 1000, 0.016)
-    // console.log("timer.delta_time", timer.delta_time)
     timer.last_update = now
 
     const step = (timer.delta_time / spreadFactor)
     fireTimer.elapsed += timer.delta_time
-
 
     if (isFiring){
         if (!spraySettings.is_spraying){
