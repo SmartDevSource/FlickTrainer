@@ -304,7 +304,7 @@ const CanvasRecoil = () => {
                 isFiring.current,
                 speedShoot.current,
                 updateFiringState,
-                setCurrentSpread,
+                setCurrentSpread
             )
 
             requestAnimationFrame(draw)

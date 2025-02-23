@@ -31,10 +31,11 @@ export const SelectTraining: React.FC<SelectTrainingParams> = ({onSelect}) => {
                 <button
                     className="relative group cursor-pointer"
                     onClick={()=> onSelect('recoil_training')}
+                    disabled
                 >
                     <img
                         src={`/web/images/recoiltrainer_anim.gif`}
-                        className="max-h-[150px] object-contain rounded-md"
+                        className="max-h-[150px] object-contain rounded-md grayscale"
                         alt={`recoiltrainer gif anim`}
                     />
                     <span className="
@@ -43,6 +44,12 @@ export const SelectTraining: React.FC<SelectTrainingParams> = ({onSelect}) => {
                         hover:bg-black/30"
                     >
                         Recoil Trainer
+                    </span>
+                    <span className="
+                        absolute inset-0 flex justify-center items-center
+                        text-orange-400 text-xl font-bold mt-14"
+                    >
+                        Soon Available
                     </span>
                 </button>
             </div>
