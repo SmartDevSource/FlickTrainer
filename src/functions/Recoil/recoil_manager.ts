@@ -72,7 +72,10 @@ export const updateRecoil = (
 ) => {
     const now = performance.now()
     timer.delta_time = Math.min((now - timer.last_update) / 1000, 0.016)
-    console.log("timer.delta_time", timer.delta_time)
+    // console.log("timer.delta_time", timer.delta_time)
+    if (timer.delta_time < .008){
+        timer.delta_time = .008
+    }
     timer.last_update = now
 
     const step = (timer.delta_time / spreadFactor)
