@@ -256,7 +256,7 @@ export const weapons: WeaponsStruct = {
         },
     },
     mp9: {
-        fire_rate: .01,
+        fire_rate: .02,
         offset: {x: 720, y: 490},
         flame_offset: {x: 800, y: 380},
         spreads: {
