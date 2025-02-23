@@ -73,9 +73,6 @@ export const updateRecoil = (
     const now = performance.now()
     timer.delta_time = Math.min((now - timer.last_update) / 1000, 0.016)
     // console.log("timer.delta_time", timer.delta_time)
-    if (timer.delta_time < .008){
-        timer.delta_time = .008
-    }
     timer.last_update = now
 
     const step = (timer.delta_time / spreadFactor)
@@ -104,8 +101,8 @@ export const updateRecoil = (
                         setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
                     }
 
-                    aimPunch.x += spraySettings.spray_offset.x * step
-                    aimPunch.y += spraySettings.spray_offset.y * step
+                    aimPunch.x += spraySettings.spray_offset.x * step * timer.delta_time
+                    aimPunch.y += spraySettings.spray_offset.y * step * timer.delta_time
                 } else {
                     spraySettings.is_spraying = false
                     spraySettings.isRecovering = true
