@@ -101,8 +101,8 @@ export const updateRecoil = (
                         setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
                     }
 
-                    aimPunch.x += spraySettings.spray_offset.x * step * timer.delta_time
-                    aimPunch.y += spraySettings.spray_offset.y * step * timer.delta_time
+                    aimPunch.x += spraySettings.spray_offset.x * step
+                    aimPunch.y += spraySettings.spray_offset.y * step
                 } else {
                     spraySettings.is_spraying = false
                     spraySettings.isRecovering = true
