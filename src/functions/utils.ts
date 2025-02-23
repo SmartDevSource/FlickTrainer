@@ -1,7 +1,8 @@
 import { AudioObject, ImageObject } from "@/types"
 
 let audioPool: HTMLAudioElement[] = []
-const maxInstanceSounds = 12
+const maxInstanceSounds: number = 12
+let lastCanvasUpdate: number = 0
 
 export const playShotSound = (audios: {[key: string]: AudioObject}, weaponName: string) => {
     audioPool = audioPool.filter(audio => !audio.ended)
@@ -109,5 +110,22 @@ export const getCircuitSpotObjective = (difficulty: string) => {
         case 'hard': return 4
         case 'faceit_peek': return 3
         default: return 5
+    }
+}
+
+export const drawFps = (ctx: CanvasRenderingContext2D, timeStamp: number) => {
+    const delta_time = (timeStamp - lastCanvasUpdate) / 1000
+    lastCanvasUpdate = timeStamp
+
+    if (delta_time > 0){
+        const fps = Math.round(1/ delta_time)
+        ctx.save()
+        ctx.font = '40px Play-Bold'
+        ctx.fillStyle = 'white'
+        ctx.strokeStyle = 'black'
+        ctx.lineWidth = 1
+        ctx.fillText(`FPS : ${fps}`, 1000, 50)
+        ctx.strokeText(`FPS : ${fps}`, 1000, 50)
+        ctx.restore()
     }
 }

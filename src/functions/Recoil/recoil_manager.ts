@@ -82,8 +82,6 @@ export const updateRecoil = (
             initSprayParams(weaponName)
             setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
         } else {
-            console.log("fireTimer.elapsed :", fireTimer.elapsed)
-            console.log("spraySettings.current_weapon.fire_rate * speedShoot :", spraySettings.current_weapon.fire_rate * speedShoot)
             if (spraySettings.current_weapon && fireTimer.elapsed >= spraySettings.current_weapon.fire_rate * speedShoot){
                 if (spraySettings.index <= spraySettings.bullets_amount){
                     const dx = spraySettings.next_spread.x - spraySettings.spray_offset.x
@@ -101,8 +99,8 @@ export const updateRecoil = (
                         setCurrentSpread({x: spraySettings.spray_offset.x, y: spraySettings.spray_offset.y})
                     }
 
-                    aimPunch.x += spraySettings.spray_offset.x
-                    aimPunch.y += spraySettings.spray_offset.y
+                    aimPunch.x += spraySettings.spray_offset.x * step
+                    aimPunch.y += spraySettings.spray_offset.y * step
                 } else {
                     spraySettings.is_spraying = false
                     spraySettings.isRecovering = true

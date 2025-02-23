@@ -8,7 +8,7 @@ import { fullscreenCanvasSize, minimizedCanvasSize, screenBoundaries, screenScal
         drawFixedPattern, drawSpeedSelector }
 from '@/functions/Recoil/draw'
 import { updateRecoil, screenSprayOffset, spraySettings, fireTimer } from '@/functions/Recoil/recoil_manager'
-import { getCrosshairStorage, getSensitivityStorage, loadResources } from '@/functions/utils'
+import { getCrosshairStorage, getSensitivityStorage, loadResources, drawFps } from '@/functions/utils'
 
 const sensitivityFactor: number = 1.2
 const weaponNames: string[] = ['ak47', 'mac10', 'mp9', 'mp7', 'galil','m4a1s','m4a4','famas']
@@ -223,7 +223,7 @@ const CanvasRecoil = () => {
                     await loadResources(images, audios)
                     setTimeout(() => {
                         setIsLoading(false)
-                        draw()
+                        requestAnimationFrame(draw)
                     }, 1000)
                 } catch (err) {
                     console.error(`Error while loading all resources :`, err)
@@ -246,10 +246,9 @@ const CanvasRecoil = () => {
         }
     }
 
-    const draw = () => {
+    const draw = (timeStamp: number) => {
         if (ctx.current && canvasRef.current && images.recoil_background.img){
             ctx.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
-
             if (isFullScreen.current){
                 // MAP BACKGROUND //
                 const screenOffsetAimPunch = getScreenOffsetAimPunch()
@@ -294,6 +293,9 @@ const CanvasRecoil = () => {
 
                 ctx.current.drawImage(images.hud_terro.img, 350, 700, images.hud_terro.img.width / 1.4, images.hud_terro.img.height / 1.4)
                 drawCrosshair(ctx.current, crosshairData.current)
+
+                drawFps(ctx.current, timeStamp)
+
             } else {
                 drawPauseScreen(ctx.current, images.recoil_background)
             }

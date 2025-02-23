@@ -24,7 +24,7 @@ import { RecoilTrainingPage } from "./components/Recoil/RecoilTrainingPage"
 // }
 
 const MainPage = () => {
-  const [currentPage, setCurrentPage] = useState<string>('home')
+  const [currentPage, setCurrentPage] = useState<string>('recoil_training')
   const [showUserSettings, setShowUserSettings] = useState<boolean>(false)
   const [messageAlert, setMessageAlert] = useState<AlertParams | null>(null)
   const [gameSettings, setGameSettings] = useState<GameSettings | null>(null)
